@@ -2,7 +2,7 @@
 
 Owner of audit_2026-10-12/stage1_checks.json. Exit 1 if any HARD check fails.
 HARD checks:
-  * the frozen pre-registration is byte-identical to the freeze commit d562f19 outside
+  * the frozen pre-registration is byte-identical to the freeze commit 7dcc2fe outside
     s.9 (Amendments), where amendment A1 is appended;
   * the build log has no undefined reference or citation and no LaTeX error;
   * title <= 15 words, abstract <= 200 words with no citation (Nature Communications);
@@ -22,7 +22,7 @@ import subprocess
 import sys
 
 TEX, LOG = "paper2/stage1.tex", "paper2/stage1.log"
-PREREG, FREEZE = "PREREG_P2_discoverability.md", "d562f195ac7e30f0b7abe039946f4f2bd8b3ad6d"
+PREREG, FREEZE = "PREREG_P2_discoverability.md", "7dcc2fe90c09601040fa831f110f6fb68715a0a4"
 OUT = "audit_2026-10-12/stage1_checks.json"
 BS = chr(92)
 

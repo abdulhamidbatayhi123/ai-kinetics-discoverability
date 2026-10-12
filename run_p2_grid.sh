@@ -9,7 +9,9 @@
 #   bash run_p2_grid.sh            # run what is missing (log: p2_grid_chain.log)
 #   bash run_p2_grid.sh status     # show which steps are done
 cd "$(dirname "$0")" || exit 1
-PY="C:/Users/abdulhamid batayhi/Desktop/ai-mof-cof-dynamics/.venv/Scripts/python.exe"
+# Python environment: requirements_p2_venv.txt. Set P2_PY to use another; the default is
+# the environment the grid was started with on the author's machine.
+PY="${P2_PY:-C:/Users/abdulhamid batayhi/Desktop/ai-mof-cof-dynamics/.venv/Scripts/python.exe}"
 export PYTHONIOENCODING=utf-8 OMP_NUM_THREADS=2
 MARK=results/.p2_grid_done
 mkdir -p "$MARK"

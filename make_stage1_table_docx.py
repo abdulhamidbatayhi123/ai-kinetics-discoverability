@@ -4,7 +4,7 @@ Columns as in the journal's template (nature.com/documents/updated_ncomms-regist
 report-table.docx, read 2026-10-12): Question | Hypotheses | Outcome Measures | Sampling
 Plan (N, power analyses) | Analysis Plan | Interpretation given to different outcomes.
 The rows restate Table 1 of paper2/stage1.tex, which restates the frozen PREREG_P2
-(commit d562f19, as amended by A1); power figures from results/p2_operating_characteristics.json (n = 45). A fresh document is
+(commit 7dcc2fe, as amended by A1); power figures from results/p2_operating_characteristics.json (n = 45). A fresh document is
 built here; the publisher's file is not copied.
 
     python make_stage1_table_docx.py   -> paper2/submission/stage1_design_table.docx
@@ -94,7 +94,7 @@ for side in ("left_margin", "right_margin", "top_margin", "bottom_margin"):
 doc.add_paragraph().add_run(
     "Study design table: When can AI discover adsorption kinetics? A discoverability map "
     "(Registered Report, Stage 1). Every entry restates the frozen pre-registration "
-    "(PREREG_P2, commit d562f19, as amended by A1).").bold = True
+    "(PREREG_P2, commit 7dcc2fe, as amended by A1).").bold = True
 t = doc.add_table(rows=1 + len(ROWS), cols=len(HEAD))
 t.style = "Table Grid"
 for j, h in enumerate(HEAD):

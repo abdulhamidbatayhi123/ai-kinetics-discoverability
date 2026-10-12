@@ -1,6 +1,6 @@
 """Operating characteristics of Paper 2's FROZEN decision rules, by simulation.
 
-The verdicts of PREREG_P2 (frozen at d562f19) are threshold rules on point estimates of
+The verdicts of PREREG_P2 (frozen at 7dcc2fe) are threshold rules on point estimates of
 logistic 50 % crossings, not significance tests. A reviewer's power question is therefore
 answered by how often each rule returns each verdict when the truth is known. This script
 simulates exactly that, with the frozen ingredients only:

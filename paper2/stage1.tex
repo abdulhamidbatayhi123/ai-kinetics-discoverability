@@ -2,7 +2,7 @@
 % Paper 2 -- Registered Report, STAGE 1, prepared for Nature Communications.
 % Written BEFORE any confirmatory result exists; no discovery method has run on a grid cell.
 % Source of truth for every design element: PREREG_P2_discoverability.md, FROZEN at commit
-% d562f195ac7e30f0b7abe039946f4f2bd8b3ad6d ("FREEZE PREREG_P2", 2026-10-11). Nothing the
+% 7dcc2fe90c09601040fa831f110f6fb68715a0a4 ("FREEZE PREREG_P2", 2026-10-11). Nothing the
 % frozen pre-registration fixes is changed here; where this text and the prereg could
 % differ, the prereg governs.
 % Journal rules applied (read live 2026-10-12, Istanbul):
@@ -328,7 +328,7 @@ rests on H2d. Its success criterion is fixed in Methods (\S\ref{sec:metrics}).
 \begin{table}
 \centering
 \caption{\textbf{Study design table.} Every entry restates the frozen pre-registration
-(PREREG\_P2, commit d562f19, as amended by A1); the power figures are simulated operating
+(PREREG\_P2, commit 7dcc2fe, as amended by A1); the power figures are simulated operating
 characteristics of the rules (pilot P8, \texttt{p2\_operating\_characteristics.py}). The
 decision threshold is 0.25 decade; MDE in the verdict words means it. $\Da^{*}$, 50\,\% crossing
 of a logistic fit in $\log_{10}\Da$.}
@@ -1119,7 +1119,7 @@ demonstration.
 \item O2 and O3 identifiability: a full column solve per profile point, 3 replicates on
 the subgrid.
 \end{itemize}
-The pre-registration was frozen on 11 October 2026 (commit d562f19), before any
+The pre-registration was frozen on 11 October 2026 (commit 7dcc2fe), before any
 discovery method touched a grid cell. The confirmatory grid will start only after
 in-principle acceptance. We expect to complete it within three months of acceptance and
 propose to resubmit the Stage-2 manuscript within six months of acceptance. If no journal
@@ -1331,7 +1331,7 @@ full list is \S10 of the pre-registration.
 \paragraph{The freeze.}
 The two items that remained have reported: the ODR-BINDy port is reported as ``port,
 accuracy below the reference'', and M7 passes its inclusion gate. Both rules were written
-before the runs that decided them. The pre-registration was frozen by commit d562f19 on
+before the runs that decided them. The pre-registration was frozen by commit 7dcc2fe on
 11 October 2026, and amended twice (A1 and A2, 12 October 2026, each under a new freeze
 commit) before any grid run (\S\ref{sec:amend}); the grid drivers check the latest freeze commit before
 they will run, and no discovery method has touched a grid cell. Any later change will be a dated, reasoned amendment,
@@ -1360,7 +1360,7 @@ deterministic function of (cell, replicate, $\sigma$, $\varepsilon$, observation
 so every number can be reproduced from the code. The pilot results files
 (\texttt{results/p2\_*.json}, \texttt{results/odr\_bindy\_*.json}) and the ground-truth
 generation log are public in the study repository,
-\url{https://github.com/abdulhamidbatayhi123/ai-mof-cof-dynamics}. At Stage 2 the
+\url{https://github.com/abdulhamidbatayhi123/ai-kinetics-discoverability}. At Stage 2 the
 confirmatory results files, the laboratory log of run dates and the data will be deposited
 in a public archive with a DOI (Zenodo), time-stamped to show that they were produced
 after in-principle acceptance.
@@ -1369,7 +1369,7 @@ after in-principle acceptance.
 \begin{sloppypar}
 The solver, the harness (\texttt{p2/}), the observation model, the grid drivers, the
 pilots and the tests (\texttt{tests/test\_p2.py}) are public in the study repository,
-\url{https://github.com/abdulhamidbatayhi123/ai-mof-cof-dynamics}, under the licence
+\url{https://github.com/abdulhamidbatayhi123/ai-kinetics-discoverability}, under the licence
 given there (MIT). Third-party software used: PySR 2.6.1 \citep{cranmer2023} (run from an
 isolated Julia environment) and pykan 0.2.8 \citep{liu2024}; exact versions are pinned in
 \texttt{requirements\_p2\_venv.txt}. The code state at Stage 2 will be archived on Zenodo
@@ -1378,13 +1378,18 @@ with a DOI.
 
 \section*{Protocol registration}
 The pre-registration (\texttt{PREREG\_P2\_discoverability.md}) is public in the study
-repository and frozen at commit \texttt{d562f195ac7e30f0b7abe039946f4f2bd8b3ad6d}
+repository and frozen at commit \texttt{7dcc2fe90c09601040fa831f110f6fb68715a0a4}
 (11 October 2026), before any discovery method was run on any grid cell, and amended twice,
 by A1 and A2 (its \S9), under commits whose messages begin ``FREEZE PREREG\_P2 amendment
-A1'' and ``\ldots A2'' (12 October 2026, commit 41eac1d for A1), still before any grid run. The file's header still reads
+A1'' and ``\ldots A2'' (12 October 2026, commit ef3ade8 for A1), still before any grid run. The file's header still reads
 ``Status: DRAFT, NOT FROZEN'', followed by the statement that it is frozen by a commit; it
 was written before the freeze and left unedited, as A1 records. The freeze is the commit,
-which the grid drivers verify. After in-principle
+which the grid drivers verify. The study began in the repository of the author's
+previous paper (\url{https://github.com/abdulhamidbatayhi123/ai-mof-cof-dynamics}, archived as
+doi:10.5281/zenodo.23323685) and was moved to its own repository with its full
+history; the original commits remain public there (the freeze is d562f19), and
+\texttt{COMMIT\_MAP.tsv} maps every original commit to its copy, with
+dates, authors and contents unchanged. After in-principle
 acceptance, the approved Stage-1 protocol will be registered in a recognised repository
 (the journal's figshare space, or OSF), and the Stage-2 manuscript will link to it.
 
