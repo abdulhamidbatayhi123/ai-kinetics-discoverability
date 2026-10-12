@@ -1,0 +1,29 @@
+# Ground-truth fields: regenerable with p2_generate.py (seeds in data/p2/manifest.json)
+data/p2/*
+!data/p2/manifest.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# LaTeX build products (the PDF is tracked)
+paper2/*.aux
+paper2/*.log
+paper2/*.out
+
+# Run-time logs of the grid chain (the results files are the record)
+p2_grid_chain.log
+paper2/stage1.log
+
+# Personal, never public
+outreach/
+USER_ACTIONS.md
+
+# Packaging and scratch
+submission/
+*.zip
+results/tmp*.tmp
+Thumbs.db
+.DS_Store

@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: >-
+  Code, results and pre-registration for: When can AI discover adsorption kinetics?
+message: If you use this software or its results, please cite it.
+type: software
+authors:
+  - given-names: Abdulhamid
+    family-names: Batayhi
+    email: abdulhamid.batayhi@std.yildiz.edu.tr
+    orcid: "https://orcid.org/0009-0007-0374-6755"
+    affiliation: >-
+      Yıldız Technical University, Faculty of Mechanical Engineering, Department of Mechatronics Engineering, Istanbul, Türkiye
+repository-code: "https://github.com/abdulhamidbatayhi123/ai-kinetics-discoverability"
+abstract: >-
+  A pre-registered computational study of when equation-discovery methods recover the kinetic law of an adsorption column from its outlet and profile data. Ground truth comes from a verified finite-difference solver (imported from the Paper 1 archive, doi:10.5281/zenodo.23323685). Nine methods, three observation models and a grid of noise, Damkoehler and Peclet numbers are compared against profile-likelihood identifiability. The pre-registration (PREREG_P2_discoverability.md) and its amendments A1 to A4 were each committed before the runs they govern; the commit history is kept here.
+keywords:
+  - equation discovery
+  - adsorption kinetics
+  - identifiability
+  - sparse regression
+  - symbolic regression
+  - universal differential equations
+  - metal-organic frameworks
+  - pre-registration
+license: MIT
+references:
+  - type: software
+    title: >-
+      Code, results and pre-registrations for: The coefficient map, not the basis
+    authors:
+      - given-names: Abdulhamid
+        family-names: Batayhi
+    doi: "10.5281/zenodo.23323685"
