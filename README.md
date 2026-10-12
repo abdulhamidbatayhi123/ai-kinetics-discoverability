@@ -4,6 +4,10 @@ Code, pre-registration and results for Paper 2 of an AI-for-adsorption research 
 Abdulhamid Batayhi (Yıldız Technical University, ORCID
 [0009-0007-0374-6755](https://orcid.org/0009-0007-0374-6755)).
 
+Archived on Zenodo: [doi:10.5281/zenodo.23325994](https://doi.org/10.5281/zenodo.23325994)
+(all versions); release v0.1-prereg, the state before the confirmatory grid, is
+[doi:10.5281/zenodo.23325995](https://doi.org/10.5281/zenodo.23325995).
+
 The study asks when equation-discovery methods recover the kinetic law of a fixed-bed
 adsorption column from its data, and whether that boundary is set by the methods or by
 identifiability. Nine methods (sparse regression, best-subset BIC, errors-in-variables,
