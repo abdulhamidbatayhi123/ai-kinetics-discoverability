@@ -28,7 +28,7 @@ from p2.metric import k_accuracy, success_L1
 from p2.run_o1 import SOLVERS, discover_o2
 from p2_grid_o1 import EPSS, FORMS, N_REP, SIGMAS, frozen
 from p2_observe import load_cell, observe, physics_for
-from v2_common import write_atomic
+from p2.io_utils import write_atomic
 
 
 def run_o2(man):

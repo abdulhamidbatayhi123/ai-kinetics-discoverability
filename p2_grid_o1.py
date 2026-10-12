@@ -22,7 +22,7 @@ import time
 from p2.metric import k_accuracy, success_L1
 from p2.run_o1 import SOLVERS, discover_o1
 from p2_observe import observe
-from v2_common import write_atomic
+from p2.io_utils import write_atomic
 
 SIGMAS = (0.0, 0.005, 0.02, 0.05)
 EPSS = (0.0, 0.005, 0.02, 0.05)

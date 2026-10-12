@@ -44,7 +44,7 @@ from p2.metric import success_L1, success_L2, success_M6, success_manifold
 from p2.run_o1 import SOLVERS, discover_o1
 from p2_grid_o1 import EPSS, FORMS, N_REP, SIGMAS, frozen
 from p2_observe import observe
-from v2_common import write_atomic
+from p2.io_utils import write_atomic
 
 SUB_SIGMAS, SUB_EPSS, SUB_REP = (0.005, 0.02), (0.0, 0.02), 3
 M1_NZ, M1_MAXITER, M1_BUDGET_S = 50, 50, 7200    # PREREG_P2 s.3 M1: L-BFGS, <= 50 steps, 2 h budget
