@@ -34,3 +34,11 @@ pre-registered rule, estimand or verdict.
   tolerance against a 0.3 % bias).
 - Coverage falls as eps grows at every sigma (0.5 %: 23 % to 0.9 %): isotherm error shifts the
   estimate while the interval stays narrow. Rerun p2_e3_coverage.py after O3 completes.
+
+## Before E2 runs (check, 2026-10-29)
+
+- The E2 smoke fit (langmuir_L1_pe1_da1, sigma = eps = 2 %, rep 0) took 157 s, not the
+  pilot's 1144 s, and its training loss stayed at 3.75e-01 for all 100 steps. The KAN may not
+  be training on grid-scale data even though `test_kan_symbolic_recovers_ldf_at_zero_noise`
+  passes. Find out why before the 216 fits: if it is a wiring fault, fix and record it; if it
+  is M8's documented behaviour, say so. E2 must run M8 in its declared configuration.
