@@ -21,3 +21,16 @@ pre-registered rule, estimand or verdict.
 
 - B85: the O2/O3 driver verifies the freeze but writes no `freeze_commit`; the chain log is the
   record and is committed at the end of the grid.
+
+## E3 first pass (2026-10-29, O3 incomplete at 197/216)
+
+- Of the rows the [k/2, 2k] criterion calls identifiable, the interval misses the true k in
+  87 % on O1 (33,021 of 37,991) and O2 (137 of 157), and 69 % on O3 so far.
+- At sigma = eps = 0 on O1 no interval contains k (0 of 3,240): the intervals are a fraction of a
+  percent wide and sit about 0.3 % off the truth, the sampling-resolution bias PREREG_P2 §9
+  item 6 already records (+0.61 % on its probe). So the gap is mostly a small systematic bias
+  meeting a near-zero-width interval, not the criterion misbehaving. Say this before reading
+  E3 as a statement about the criterion. It cannot move any [k/2, 2k] verdict (a factor 2
+  tolerance against a 0.3 % bias).
+- Coverage falls as eps grows at every sigma (0.5 %: 23 % to 0.9 %): isotherm error shifts the
+  estimate while the interval stays narrow. Rerun p2_e3_coverage.py after O3 completes.
