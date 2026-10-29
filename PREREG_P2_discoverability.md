@@ -558,6 +558,32 @@ with at most 50 steps. No grid driver existed for it; it is now `p2_grid_extra.p
 M1 enters no confirmatory test (§3), so none of this touches a hypothesis. A smoke test on a
 fresh column that is not a grid cell checks the wiring (`tests/test_p2.py`).
 
+### A5 — 2026-10-29, during the grid: a wall cap per column solve in the O2/O3 profile
+
+**What happened.** O3 identifiability stopped making progress at row 198 of 216
+(`step_L1_pe1_da31.6|0.005|0.02|2`) and ran on it for six days until the machine restarted;
+two O2 rows of the same cell had taken 39 h and 42 h. **Cause, found by reproduction:** the
+measured isotherm at ε > 0 (`p2_observe.observe`, `qstar_meas`) evaluates its smooth error
+function at c/c_in clipped to [0, 1]. At large trial k the column is stiff, the solver's c
+crosses 0 and c_in at about 5 % of right-hand-side evaluations, and every crossing meets the
+clip's kink, so the BDF solver takes ever smaller steps. Measured on this row at k = 0.056
+(true k = 1.02e-3): ε = 0, 14 s; ε = 0.02 without the clip, 13 s; ε = 0.02 with the clip, not
+finished in 300 s (twice). Every finished row is unaffected: the long rows did finish.
+
+**What changes.** The O2 and O3 profiles (`p2/identifiability.py`, `p2_grid_o23.py`) cap each
+column solve at **600 s** of wall time (about 20 times the slowest solve measured without the
+kink). A capped solve is a failed solve and scores log-likelihood −∞, as a solver error
+already did. Each row records the capped k values (`capped_k`, `n_capped`) and whether one lies
+within one coarse-grid step (a factor 10^(6/24)) of the reported interval (`capped_adjacent`).
+A row with `capped_adjacent` true is reported as such. Nothing else changes: not the
+observation model, its clip, the grid, the interval rule or the [k/2, 2k] criterion, and not
+any row already computed (rows 1 to 197 of O3 and all of O2 identifiability keep their values).
+
+**Why this does not touch a verdict.** O2 and O3 identifiability are descriptive (§2, H2b), with
+no verdict word; the confirmatory O1 identifiability uses no column solve. The clip itself is
+kept because every discovery method already ran with it; removing it would make the
+observation model differ between methods. Recorded in RETRACTIONS_P2 B86.
+
 ## 10. Pre-freeze revisions, 2026-10-04 (before any discovery method has run on any grid cell)
 Found by drafting the Registered-Report Stage-1 manuscript against this document and
 the code; each fixed here, in the open, rather than silently:

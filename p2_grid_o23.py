@@ -30,6 +30,18 @@ from p2_grid_o1 import EPSS, FORMS, N_REP, SIGMAS, frozen
 from p2_observe import load_cell, observe, physics_for
 from p2.io_utils import write_atomic
 
+# PREREG_P2 amendment A5: per-solve wall cap of the O2/O3 profile; a capped solve is a failed
+# solve (log-likelihood -inf). Rows record the capped k values and whether one neighbours the
+# reported interval (within one coarse-grid step, a factor 10^(6/24)).
+SOLVE_CAP_S = 600
+COARSE_STEP = 10 ** (6 / 24)
+
+
+def _cap_record(stats, lo, hi):
+    capped = sorted(stats["capped"])
+    return {"n_capped": len(capped), "capped_k": capped,
+            "capped_adjacent": any(lo / COARSE_STEP <= k <= hi * COARSE_STEP for k in capped)}
+
 
 def run_o2(man):
     out = "results/p2_o2.json"
@@ -79,13 +91,15 @@ def run_o3(man):
             import copy
             phys_obs = copy.copy(phys)
             phys_obs.qstar_fn = obs["qstar_meas"]
+            stats = {"capped": []}
             try:
                 lo, hi = profile_interval_outlet(phys_obs, rec["c_in"], obs["t"], obs["channels"]["c"][0],
                                                  obs["channels"]["T"][0], sigma_c=max(sigma, 1e-4) * rng_c,
-                                                 sigma_T=max(sigma, 1e-4) * rng_T, n_z=100)
+                                                 sigma_T=max(sigma, 1e-4) * rng_T, n_z=100,
+                                                 cap_s=SOLVE_CAP_S, stats=stats)
                 res["rows"][key] = {"lo": lo, "hi": hi, "k": rec["k_LDF"],
                                     "identifiable": bool(identifiable(lo, hi, rec["k_LDF"])),
-                                    "sec": time.time() - t0}
+                                    "sec": time.time() - t0, **_cap_record(stats, lo, hi)}
             except Exception as ex:   # recorded as not identifiable, never dropped (A2.4, B84)
                 res["rows"][key] = {"identifiable": False, "error": f"{type(ex).__name__}: {ex}",
                                     "k": rec["k_LDF"], "sec": time.time() - t0}
@@ -116,14 +130,16 @@ def run_o2_ident(man):
             t0 = time.time()
             phys_obs = copy.copy(phys)
             phys_obs.qstar_fn = obs["qstar_meas"]       # information parity, as on O3
+            stats = {"capped": []}
             try:
                 lo, hi = profile_interval_probes(phys_obs, rec["c_in"], obs["t"], obs["z"],
                                                  obs["channels"]["c"], obs["channels"]["T"],
                                                  sigma_c=max(sigma, 1e-4) * rng_c,
-                                                 sigma_T=max(sigma, 1e-4) * rng_T, n_z=100)
+                                                 sigma_T=max(sigma, 1e-4) * rng_T, n_z=100,
+                                                 cap_s=SOLVE_CAP_S, stats=stats)
                 res["rows"][key] = {"lo": lo, "hi": hi, "k": rec["k_LDF"],
                                     "identifiable": bool(identifiable(lo, hi, rec["k_LDF"])),
-                                    "sec": time.time() - t0}
+                                    "sec": time.time() - t0, **_cap_record(stats, lo, hi)}
             except Exception as ex:   # recorded as not identifiable, never dropped (A2.4, B84)
                 res["rows"][key] = {"identifiable": False, "error": f"{type(ex).__name__}: {ex}",
                                     "k": rec["k_LDF"], "sec": time.time() - t0}

@@ -101,35 +101,72 @@ def profile_interval_o1(t, cs, qs_obs, qstar_fn, sigma, Ts=None, k_grid=None):
     return _profile(f, np.logspace(-5, 1, 61) if k_grid is None else k_grid, vectorised=True)
 
 
-def _loglik_outlet(k, phys, c_in, t, c_obs, T_obs, sigma_c, sigma_T, n_z):
-    """Refit the WHOLE column at rate k and score its outlet c(t), T(t) (observation O3)."""
-    import copy
+class SolveCapped(RuntimeError):
+    """A column solve ran past its wall cap (PREREG_P2 amendment A5)."""
+
+
+def _with_cap(p, cap_s):
+    """Make p's isotherm raise SolveCapped once the solve has run cap_s seconds. Amendment A5:
+    the measured isotherm clips c/c_in to [0, 1]; at large trial k the stiff solver crosses
+    that kink constantly and a single solve can run for days. The cap only stops the solve;
+    the isotherm's values are unchanged. p must be a copy: the caller's physics is untouched."""
+    import time
+    from isotherm import q_star_np
+    inner = getattr(p, "qstar_fn", None) or (lambda c, T, _p=p: q_star_np(c, T, _p))
+    deadline = time.time() + cap_s
+
+    def qstar_fn(c, T):
+        if time.time() > deadline:
+            raise SolveCapped(f"solve exceeded {cap_s} s")
+        return inner(c, T)
+    p.qstar_fn = qstar_fn
+
+
+def _solve_scored(p, k, n_z, t, c_in, cap_s, stats):
+    """The column at rate k, or None for a failed solve; a capped solve is a failed solve
+    (as a solver RuntimeError always was) and its k is recorded in stats['capped']."""
     from solver_fd import generate_breakthrough_data
+    if cap_s is not None:
+        _with_cap(p, cap_s)
+    try:
+        return generate_breakthrough_data(p, N_z=n_z, t_final=float(t[-1]), c_in=c_in,
+                                          n_snapshots=len(t), verbose=False)
+    except SolveCapped:
+        if stats is not None:
+            stats["capped"].append(float(k))
+        return None
+    except RuntimeError:
+        return None
+
+
+def _loglik_outlet(k, phys, c_in, t, c_obs, T_obs, sigma_c, sigma_T, n_z, cap_s=None, stats=None):
+    """Refit the WHOLE column at rate k and score its outlet c(t), T(t) (observation O3).
+    cap_s: per-solve wall cap in seconds (A5); None, the default, means no cap."""
+    import copy
     p = copy.copy(phys)
     p.k_LDF = float(k)
-    try:
-        _, tt, y = generate_breakthrough_data(p, N_z=n_z, t_final=float(t[-1]), c_in=c_in,
-                                              n_snapshots=len(t), verbose=False)
-    except RuntimeError:
+    sol = _solve_scored(p, k, n_z, t, c_in, cap_s, stats)
+    if sol is None:
         return -np.inf
+    _, tt, y = sol
     c_mod = np.interp(t, tt, y[n_z - 1])
     T_mod = np.interp(t, tt, y[3 * n_z - 1])
     return (-0.5 * np.sum((c_mod - c_obs) ** 2) / sigma_c ** 2
             - 0.5 * np.sum((T_mod - T_obs) ** 2) / sigma_T ** 2)
 
 
-def _loglik_probes(k, phys, c_in, t, z_obs, c_obs, T_obs, sigma_c, sigma_T, n_z):
+def _loglik_probes(k, phys, c_in, t, z_obs, c_obs, T_obs, sigma_c, sigma_T, n_z, cap_s=None,
+                   stats=None):
     """Refit the WHOLE column at rate k and score c, T at the interior probes (O2).
-    c_obs, T_obs: (n_probes, n_t); z_obs in metres, interpolated on the model's cells."""
+    c_obs, T_obs: (n_probes, n_t); z_obs in metres, interpolated on the model's cells.
+    cap_s: per-solve wall cap in seconds (A5); None, the default, means no cap."""
     import copy
-    from solver_fd import generate_breakthrough_data
     p = copy.copy(phys)
     p.k_LDF = float(k)
-    try:
-        zz, tt, y = generate_breakthrough_data(p, N_z=n_z, t_final=float(t[-1]), c_in=c_in,
-                                               n_snapshots=len(t), verbose=False)
-    except RuntimeError:
+    sol = _solve_scored(p, k, n_z, t, c_in, cap_s, stats)
+    if sol is None:
         return -np.inf
+    zz, tt, y = sol
     c_f, T_f = y[:n_z], y[2 * n_z:3 * n_z]
     ll = 0.0
     for j, zj in enumerate(np.asarray(z_obs, float)):
@@ -141,20 +178,22 @@ def _loglik_probes(k, phys, c_in, t, z_obs, c_obs, T_obs, sigma_c, sigma_T, n_z)
 
 
 def profile_interval_probes(phys, c_in, t, z_obs, c_obs, T_obs, sigma_c, sigma_T, n_z=100,
-                            k_grid=None):
+                            k_grid=None, cap_s=None, stats=None):
     """Profile likelihood of k from INTERIOR c, T probes (observation O2, q latent):
     the identifiability side of H2b on O2. Same grid and refinement as the outlet
-    version; only the scored positions differ."""
-    f = lambda k: _loglik_probes(k, phys, c_in, t, z_obs, c_obs, T_obs, sigma_c, sigma_T, n_z)
+    version; only the scored positions differ. cap_s, stats: amendment A5."""
+    f = lambda k: _loglik_probes(k, phys, c_in, t, z_obs, c_obs, T_obs, sigma_c, sigma_T, n_z,
+                                 cap_s, stats)
     return _profile(f, k_grid)
 
 
 def profile_interval_outlet(phys, c_in, t, c_obs, T_obs, sigma_c, sigma_T, n_z=100,
-                            k_grid=None):
+                            k_grid=None, cap_s=None, stats=None):
     """Profile likelihood of k from OUTLET data only. Coarse 25-point log grid, then
     the same fine refinement as the ODE version -- each point is a full column solve,
-    so the grid is coarser than the ODE's (PREREG_P2 §3 applicability matrix)."""
-    f = lambda k: _loglik_outlet(k, phys, c_in, t, c_obs, T_obs, sigma_c, sigma_T, n_z)
+    so the grid is coarser than the ODE's (PREREG_P2 §3 applicability matrix).
+    cap_s, stats: amendment A5."""
+    f = lambda k: _loglik_outlet(k, phys, c_in, t, c_obs, T_obs, sigma_c, sigma_T, n_z, cap_s, stats)
     return _profile(f, k_grid)
 
 
