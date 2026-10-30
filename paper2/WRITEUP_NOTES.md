@@ -42,3 +42,10 @@ pre-registered rule, estimand or verdict.
   be training on grid-scale data even though `test_kan_symbolic_recovers_ldf_at_zero_noise`
   passes. Find out why before the 216 fits: if it is a wiring fault, fix and record it; if it
   is M8's documented behaviour, say so. E2 must run M8 in its declared configuration.
+
+## A5 outcome (O3 finished 2026-10-30 03:07)
+
+- O3 identifiability: 216 rows, 0 errors. The 19 rows run after A5 took 4 h in all. Two rows
+  had capped solves, both in `step_L1_pe1_da31.6` at eps = 0.02 replicate 2 (6 capped k values
+  each, all far above the interval: `capped_adjacent` false in both). The cap changed no
+  reported interval's neighbourhood. Report this in Methods in one sentence.
