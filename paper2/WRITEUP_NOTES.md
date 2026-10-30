@@ -49,3 +49,11 @@ pre-registered rule, estimand or verdict.
   had capped solves, both in `step_L1_pe1_da31.6` at eps = 0.02 replicate 2 (6 capped k values
   each, all far above the interval: `capped_adjacent` false in both). The cap changed no
   reported interval's neighbourhood. Report this in Methods in one sentence.
+
+**Resolved 2026-10-30 (`p2_e2_diag.py`):** the KAN does train. The "flat" 3.75e-01 was pykan's
+progress-bar text, which only refreshes every `log` steps (log = steps + 1). The recorded
+per-step training RMSE (standardised units) falls 0.375 -> 0.365 -> 0.360 and settles at 0.360
+by step 50; the true law k(q* - q) fitted by least squares to the same noisy Savitzky-Golay
+dq/dt explains R^2 = 0.80 (RMSE about 0.45). So the network fits the data at least as well as
+the true law; M8's failure is in the symbolic snapping step (support {1, T, c, q}), its
+documented behaviour, not a wiring fault. E2 runs as declared.
