@@ -1,0 +1,239 @@
+% =====================================================================
+% Paper 2, full article (pre-registered study), Nature-family Article format:
+% main text <= 3,500 words, abstract <= 150 words, <= 6 display items, ~50 references
+% (nature.com/natcomputsci and /natchemeng content types, read live 2026-10-20).
+% Status: METHODS drafted 2026-11-01 while the A6 rerun ran; Introduction, Results and
+% Discussion are written only after the corrected verdicts exist. No result appears below.
+% Source of truth: PREREG_P2_discoverability.md (frozen 7dcc2fe; amendments A1-A6 in its s.9).
+% Number provenance: every number is quoted from the prereg, a results/test/log file or the
+% code, named in a comment beside it. Writing rules: plain prose, at most five em dashes in
+% the whole paper, no claim beyond the data.
+% =====================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{lineno}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\onehalfspacing
+\linenumbers
+
+\newcommand{\Da}{\mathrm{Da}}
+\newcommand{\Pe}{\mathrm{Pe}}
+\newcommand{\qs}{q^{*}}
+\newcommand{\qsm}{q^{*}_{\mathrm{meas}}}
+\newcommand{\verdict}[1]{``\textit{#1}''}
+
+\title{When can AI discover adsorption kinetics?}
+\author{Abdulhamid Batayhi\\[4pt]
+\small Department of Mechatronics Engineering, Faculty of Mechanical Engineering,\\
+\small Y\i{}ld\i{}z Technical University, Istanbul, T\"urkiye\\[4pt]
+\small ORCID 0009-0007-0374-6755}
+\date{}
+
+\begin{document}
+\maketitle
+
+% Abstract, Introduction, Results and Discussion: written after the corrected verdicts.
+
+\section*{Methods}
+
+\subsection*{Ground truth}
+Ground truth came from the finite-difference reference solver of the companion
+study \citep{paper1}: a one-dimensional, axially dispersed, non-isothermal model of a
+packed column, verified there against closed-form solutions. Uptake followed one of two
+laws,
+\begin{align}
+\text{L1:}\quad & \frac{\partial q}{\partial t} = k\,\bigl(\qs(c,T) - q\bigr),\\
+\text{L2:}\quad & \frac{\partial q}{\partial t} = k(q)\,\bigl(\qs(c,T) - q\bigr),\qquad
+k(q) = k_0\Bigl[1 - 0.8\,s\!\Bigl(\frac{q/q_{\max}-\theta}{0.05}\Bigr)\Bigr],
+\end{align}
+where $s$ is the logistic function and $\theta$ is the fractional loading at the
+isotherm's step midpoint, so that under L2 the rate falls to 20\,\% of $k_0$ across the step.
+% PREREG_P2 s.4.1; p2_generate.py (L2_DROP 0.8, L2_WIDTH 0.05, step_midpoint_fraction).
+Two adsorbents were simulated with the same column geometry and flow (Supplementary
+Table~1): the companion study's favourable Langmuir sorbent, and water on a MOF-303-like
+framework, a cooperative (Type V) isotherm with its step at $P/P_0 = 0.15$, fed at 30\,\%
+relative humidity and 30\,$^\circ$C. The Damk\"ohler number $\Da = k\,t_{\mathrm{stoich}}$
+counts kinetic time constants per passage of the adsorption front, with
+$t_{\mathrm{stoich}}$ the stoichiometric time of the column (7200\,s for Langmuir and
+31\,050\,s for the step isotherm). Nine levels from $10^{-1}$ to $10^{3}$ at half-decade
+spacing therefore span $k$ from $1.39\times10^{-5}$ to $0.139$\,s$^{-1}$ for Langmuir and
+from $3.22\times10^{-6}$ to $0.0322$\,s$^{-1}$ for the step isotherm. Three axial-dispersion
+levels ($\times 0.2$, $\times 1$, $\times 5$ of the default, written $\Pe$) completed the
+grid: 81 solves at 400 cells and 400 stored times, each run until the outlet reached 95\,\%
+breakthrough, plus 9 isothermal solves for a control described below. The manifest that
+records every parameter is public.
+% data/p2/manifest.json (t_stoich_s 7200.4 and 31050.4; k_LDF 1.3888e-05..0.13888 and
+% 3.2206e-06..0.032206); p2_generate.py N_Z = 400, N_SNAP = 400, 95 % breakthrough rule;
+% p2_generate.log "done: 81 cells; without 95 % breakthrough: none".
+
+\subsection*{Observation models, noise and isotherm error}
+Every method and every identifiability calculation read the data through one function,
+so all saw the same corrupted observations. Three observation models were used: interior
+probes of $c$, $q$ and $T$ (O1), interior probes of $c$ and $T$ with $q$ hidden (O2), and the
+outlet $c(t)$ and $T(t)$ only (O3). O1 and O2 used 20 equally spaced probes; all models
+used 200 times spread evenly over the solved horizon. Noise was independent Gaussian with
+standard deviation $\sigma \in \{0, 0.5, 2, 5\}\,\%$ of each channel's range. Methods were
+never given the true isotherm. They were given a measured one,
+$\qsm(c,T) = \qs(c,T)\,[1 + \varepsilon\, g(c/c_{\mathrm{in}})]$ with
+$\varepsilon \in \{0, 0.5, 2, 5\}\,\%$, where $g$ is a smooth random function of four
+Fourier modes on $[0, 1]$, scaled to unit root-mean-square and drawn once per replicate.
+Every random draw was seeded by a hash of (cell, replicate, $\sigma$, $\varepsilon$,
+observation model), so each observation can be regenerated on its own. A replicate, one
+such observation of one cell, was the unit of analysis; each cell had 60.
+% p2_observe.py (N_PROBE 20, N_T 200, N_MODES 4, SHA-256 seeding, isotherm_error_fn);
+% PREREG_P2 s.4.2 and A1 (60 replicates).
+
+\subsection*{Discovery methods}
+Each method ran in the strongest configuration we could verify on known-answer systems
+before the pre-registration was frozen, and a method that could not be run that way was
+reported as such rather than replaced by a weaker one. The candidate library was
+$\{1, c, q, T, cq, q^2, c^2, \qsm\}$; under L1 the true law is $k(\qsm - q)$. The methods
+were sparse regression on a Savitzky--Golay estimate of $\mathrm{d}q/\mathrm{d}t$ (strong
+form) and on its weak, integral form with compactly supported test functions
+\citep{messenger2021ode,messenger2021pde}, each with three solvers: sequentially thresholded
+least squares \citep{brunton2016}, a bagged ensemble with an inclusion threshold of 0.6
+\citep{fasel2022}, and exact best-subset selection by enumeration with the Bayesian
+information criterion (M4, the objective of \citep{bertsimas2022}); errors-in-variables
+best-subset regression given the true error levels (M5, an oracle); implicit sparse
+regression without any isotherm on an isothermal control (M6, SINDy-PI \citep{kaheman2020});
+symbolic regression (M7, PySR \citep{cranmer2023}); a universal differential equation with a
+neural network in the uptake term, trained through the column model and read out by sparse
+and symbolic regression (M1, the pipeline of \citep{santana2023}); and regression of the state
+on $q$-free features, which returns the isotherm where uptake is at equilibrium (M9
+\citep{delgado2025}). On O2, uptake was first recovered from the gas-phase mass balance,
+and every O1 method was then run on it. M1 could be trained for at most 50 L-BFGS steps or
+2\,h per fit on the machine available, so it ran as a declared demonstration: Langmuir,
+$\Pe \times 1$, $\sigma = 2\,\%$, $\varepsilon = 0$, O3, the nine $\Da$ levels, one
+replicate. A Kolmogorov--Arnold network \citep{liu2024} failed its known-answer test and its
+cost gate before the freeze and was not run on the grid. Method settings, solver thresholds
+and their known-answer tests are listed in Supplementary Note~1.
+% PREREG_P2 s.3 and A4; p2/methods.py, p2/weak.py, p2/eiv.py, p2/pysr_method.py,
+% p2_grid_extra.py (fit_m1: M1_MAXITER 50, M1_BUDGET_S 7200); results/p2_cost_gates.json.
+
+\subsection*{Success}
+Discovery succeeded when the selected terms were exactly those of the true law, every sign
+was correct and, for L1, the ratio of the $\qsm$ and $q$ coefficients was $-1$ within
+10\,\%. The value of $k$ itself was not required. A method that raised an error counted as
+a failure; no replicate, cell or output was excluded.
+% p2/metric.py success_L1; PREREG_P2 s.4.3 and A2 (errors as failures).
+
+\subsection*{Identifiability}
+Practical identifiability of $k$ was judged by profile likelihood \citep{raue2009} with the
+true law known, on the same observations and with the same measured isotherm as the
+discovery methods: $k$ was practically identifiable when the 95\,\% profile interval
+(likelihood-ratio threshold 3.84) lay within $[k/2, 2k]$. On O1 the likelihood summed over
+all probes the fit of the known law, integrated exactly for piecewise-linear $\qs(t)$ along
+the observed $c$ and $T$. On O2 and O3 every point of the profile was a full column solve.
+The profile searched a coarse logarithmic grid of $k$ and refined it around the interval.
+Two corrections were made during the study and are reported in full (Supplementary
+Note~2). First, on O2 and O3 a measured isotherm with $\varepsilon > 0$ could stall the stiff
+solver at large trial $k$ for days; each solve was therefore capped at 600\,s and a capped
+solve was scored as a failed solve (amendment A5; two O3 rows had capped solves, none next to
+its interval). Second, the O1 grid first spanned $10^{-5}$ to $10$\,s$^{-1}$, which excluded the
+step cells at $\Da = 0.1$; it was widened to $10^{-7}$ to $10$\,s$^{-1}$, a peak on the grid
+edge was made an error, and all O1 rows were recomputed (amendment A6).
+% PREREG_P2 s.4.3; p2/identifiability.py (profile_interval_o1, O1_K_GRID, _profile,
+% SOLVE cap); p2_grid_o23.py SOLVE_CAP_S 600; results/p2_o3_ident.json (n_capped);
+% RETRACTIONS_P2 B86, B87.
+
+\subsection*{Boundaries and verdicts}
+For each slice the boundary $\Da^{*}$ was the 50\,\% crossing of an unpenalised logistic
+regression of replicate outcomes on $\log_{10}\Da$, with a percentile bootstrap interval
+(2000 resamples within each $\Da$ level). No boundary was reported, and no verdict issued,
+when the outcomes did not cross 50\,\% inside the tested range; the range was reported
+instead. Before the freeze the estimator's coverage on planted boundaries was 0.94 for a
+nominal 0.95, with a bias of $+0.012$ decade. The best discovery method of each slice was
+chosen on replicates 0--14 and its boundary estimated on replicates 15--59, which removes the
+inflation that choosing and estimating on the same replicates causes (0.07 decade in
+simulation); the identifiability boundary was estimated on the same 45 replicates. M5, which
+knows the true error levels, took no part in this choice.
+% p2/analysis.py boundary (n_boot 2000), select_best; p2_analyze.py N_SEL = 15;
+% tests/test_p2.py::test_boundary_ci_has_nominal_coverage_and_no_bias (0.94, +0.012);
+% results/p2_operating_characteristics.json selection bias_same 0.0708; PREREG_P2 A1, A2.
+
+Three hypotheses were confirmatory, each with verdict words fixed in advance. H2a: success
+collapses onto one curve in $R = \delta/\varepsilon_{\mathrm{eff}}$, the driving force
+relative to the combined error, with the spread of $R^{*}$ across conditions under half a
+decade. H2b: on O1, for each slice ($\sigma$, $\varepsilon$, isotherm, $\Pe$; 96 in all),
+the gap $\log_{10}\Da^{*}_{\mathrm{disc}} - \log_{10}\Da^{*}_{\mathrm{ident}}$ was called
+\verdict{discovery fails before identifiability} at $-0.25$ decade or less,
+\verdict{discovery outlives identifiability} at $+0.25$ or more, and
+\verdict{discovery fails with identifiability} in between; the hypothesis-level verdict was
+the word held by at least two thirds of the slices with a verdict. H2c: errors-in-variables
+regression moves the discovery boundary upwards by at least 0.25 decade in at least two thirds
+of the slices at a given $\varepsilon > 0$. With 45 estimation replicates the H2b rule
+returned a wrong directional verdict with probability 0.001 when there was no gap, and the
+correct one with probability 0.965 at a gap of 0.40 decade, the smallest effect of interest.
+A positive control guarded every verdict: in each isotherm's easiest cells (lowest $\Da$,
+$\sigma = \varepsilon = 0$, O1) the best method had to succeed and $k$ had to be identifiable
+in at least 90\,\% of replicates, or that isotherm's verdicts were withheld. O2 and O3 were
+reported descriptively, and H2d, whether the loading-dependent rate of L2 can be discovered,
+was exploratory.
+% PREREG_P2 s.2 as amended by A1, A2; p2/analysis.py disc_vs_ident (0.25), aggregate_h2b,
+% positive_control (need 0.9); results/p2_operating_characteristics.json h2b n45
+% (gap 0: 0.001; gap 0.40: 0.965).
+
+\subsection*{Pre-registration and amendments}
+The design was frozen on 11 October 2026 (commit \texttt{7dcc2fe}) before any discovery method
+ran on any grid cell, and every confirmatory driver refused to run unless the pre-registration
+matched its latest freeze commit. Six dated amendments are appended to it. A1 to A4 were made
+before the grid ran: 60 replicates split into selection and estimation sets, the smallest
+effect of interest, the oracle kept out of the pooled verdicts, $\Pe$ as a slicing axis,
+errors counted as failures, the decision to run the grid before peer review, and the M1
+demonstration. A5 (the solve cap) was made while the grid ran, and A6 (the O1 grid range)
+after the verdicts were first computed. Both as-run and corrected verdicts are public, and
+the paper reports both (Supplementary Note~2).
+% PREREG_P2 s.9 (A1 ef3ade8, A2 397d9ea, A3 d892ab9, A4 ffc8d88, A5 97150f6, A6 375552b);
+% p2_grid_o1.py frozen(); results/p2_verdicts_asrun.json.
+
+\subsection*{Exploratory analyses}
+Three analyses were declared in writing before they ran and are reported as exploratory:
+M1 trained at the scale a universal differential equation needs (E1), the Kolmogorov--Arnold
+network on its declared subgrid once the machine was free (E2), and how often an interval
+that meets $[k/2, 2k]$ misses the true $k$ (E3).
+% EXPLORATORY_P2.md (committed 787bb29 before any of them ran).
+
+\subsection*{Software and computation}
+The grid ran on a single computer without a graphics processor, one job at a time, from
+12 October to 1 November 2026. Package versions are pinned in the repository.
+% p2_grid_chain.log (start 2026-10-12 17:59:58, P2_GRID_CHAIN_DONE 2026-11-01 03:07:21);
+% requirements_p2_venv.txt.
+
+\subsection*{Use of AI tools}
+During the preparation of this work the author used a generative AI assistant (Claude,
+Anthropic) as a tool to assist with drafting and language editing, with writing and checking
+code, and with checking bibliographic records. The author designed the study, made every
+scientific decision, reviewed and edited all content, and takes full responsibility for the
+content of the published article.
+
+\section*{Data availability}
+The ground-truth manifest, every results file, the run log and the as-run and corrected
+verdicts are public in the study repository and archived on Zenodo
+(doi:10.5281/zenodo.23325994). The ground-truth fields are regenerated from the manifest by
+\texttt{p2\_generate.py}.
+
+\section*{Code availability}
+All code is public at \url{https://github.com/abdulhamidbatayhi123/ai-kinetics-discoverability}
+under the MIT licence and archived with the data. The solver is imported unchanged from the
+companion study's archive (doi:10.5281/zenodo.23323685).
+
+\section*{Author contributions}
+A.B. is the sole author and conceived and designed the study. The use of AI tools is
+described in Methods.
+
+\section*{Competing interests}
+The author declares no competing interests.
+
+\input{bib_p2.tex}
+\end{document}
