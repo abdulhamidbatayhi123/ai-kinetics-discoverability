@@ -106,8 +106,9 @@ def profile_interval_o1(t, cs, qs_obs, qstar_fn, sigma, Ts=None, k_grid=None):
     if i == 0 or i == len(k_grid) - 1:
         raise ValueError(f"O1 profile peaks on the edge of its k grid (k = {k_grid[i]:.3g}); "
                          "the search range does not contain the maximum")
-    # _profile starts by evaluating the same coarse grid: hand it the values already computed
-    return _profile(lambda ks: ll if ks is k_grid else f(ks), k_grid, vectorised=True)
+    # _profile starts by evaluating the same coarse grid: hand it the values already computed.
+    # B89: the ODE profile refines with 41 points per pass (PREREG_P2 s.3 Phase A (ii)); as run it used 21.
+    return _profile(lambda ks: ll if ks is k_grid else f(ks), k_grid, vectorised=True, n_fine=41)
 
 
 O1_K_GRID = np.logspace(-7, 1, 81)
@@ -209,9 +210,10 @@ def profile_interval_outlet(phys, c_in, t, c_obs, T_obs, sigma_c, sigma_T, n_z=1
     return _profile(f, k_grid)
 
 
-def _profile(f, k_grid=None, vectorised=False):
+def _profile(f, k_grid=None, vectorised=False, n_fine=21):
     """The shared coarse-then-adaptive 95 % profile interval for a log-likelihood f(k);
-    vectorised=True: f takes the whole k array at once."""
+    vectorised=True: f takes the whole k array at once. n_fine points per refinement pass:
+    21 for the outlet/PDE profiles, 41 for the ODE (O1) profile (PREREG_P2 s.3 Phase A)."""
     k_grid = np.logspace(-6, 0, 25) if k_grid is None else k_grid
     ev = (lambda ks: np.asarray(f(np.asarray(ks)), float)) if vectorised else (lambda ks: np.array([f(k) for k in ks]))
     ll = ev(k_grid)
@@ -222,7 +224,7 @@ def _profile(f, k_grid=None, vectorised=False):
     # A single fixed refinement collapsed onto one point just below the truth on the
     # known-answer test -- the interval was narrower than the fine step.
     for _ in range(6):
-        fine = np.logspace(np.log10(lo_k), np.log10(hi_k), 21)
+        fine = np.logspace(np.log10(lo_k), np.log10(hi_k), n_fine)
         llf = ev(fine)
         m = max(m, llf.max())
         okf = np.where(2.0 * (m - llf) <= 3.84)[0]

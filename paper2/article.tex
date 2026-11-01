@@ -141,14 +141,17 @@ discovery methods: $k$ was practically identifiable when the 95\,\% profile inte
 (likelihood-ratio threshold 3.84) lay within $[k/2, 2k]$. On O1 the likelihood summed over
 all probes the fit of the known law, integrated exactly for piecewise-linear $\qs(t)$ along
 the observed $c$ and $T$. On O2 and O3 every point of the profile was a full column solve.
-The profile searched a coarse logarithmic grid of $k$ and refined it around the interval.
-Two corrections were made during the study and are reported in full (Supplementary
-Note~2). First, on O2 and O3 a measured isotherm with $\varepsilon > 0$ could stall the stiff
+The profile searched a coarse logarithmic grid of $k$ and refined it around the interval
+(41 points per pass on O1, 21 on O2 and O3, as pre-registered).
+Two corrections to the identifiability profiles were made during the study and are reported
+in full (Supplementary Note~2). First, on O2 and O3 a measured isotherm with $\varepsilon > 0$ could stall the stiff
 solver at large trial $k$ for days; each solve was therefore capped at 600\,s and a capped
 solve was scored as a failed solve (amendment A5; two O3 rows had capped solves, none next to
 its interval). Second, the O1 grid first spanned $10^{-5}$ to $10$\,s$^{-1}$, which excluded the
 step cells at $\Da = 0.1$; it was widened to $10^{-7}$ to $10$\,s$^{-1}$, a peak on the grid
-edge was made an error, and all O1 rows were recomputed (amendment A6).
+edge was made an error, and all O1 rows were recomputed (amendment A6). Before that
+recomputation, the O1 refinement was found to use 21 points per pass instead of the
+pre-registered 41 and was set to 41, so every corrected O1 row uses the declared settings.
 % PREREG_P2 s.4.3; p2/identifiability.py (profile_interval_o1, O1_K_GRID, _profile,
 % SOLVE cap); p2_grid_o23.py SOLVE_CAP_S 600; results/p2_o3_ident.json (n_capped);
 % RETRACTIONS_P2 B86, B87.

@@ -424,15 +424,14 @@ bottom bin. A fit that raised an error counts as a failure.
 Identifiability is judged with the true law known and with the same measured isotherm the
 methods receive. $k$ is practically identifiable when the 95\,\% profile interval, the set
 where $2(\max\ell - \ell) \le 3.84$, lies within $[k/2, 2k]$. All profiles refine the same
-way: after the coarse grid, a pass of 21 log-spaced points is placed between the outside
-neighbours of the current interval, for at most 6 passes, stopping when at least 5 points
-lie inside or the step ratio falls below 1.001. The reported ends are the outside neighbours,
-so the interval is conservative.
-% source: p2/identifiability.py:_profile (21 points, 6 passes, okf.size >= 5, fine[1]/fine[0] < 1.001),
-% identifiable; PREREG_P2 s.4.3.
-% DIFF: PREREG_P2 s.3 (Phase A item ii) says the ODE profile refines with passes of 41 points and the
-% outlet/PDE profile with 21. The O1 grid profile (profile_interval_o1) calls the shared _profile, so it
-% uses 21 points per pass. Only the older single-probe profile_interval, used by tests, uses 41.
+way: after the coarse grid, a pass of log-spaced points (41 on O1, 21 on O2 and O3) is placed
+between the outside neighbours of the current interval, for at most 6 passes, stopping when at
+least 5 points lie inside or the step ratio falls below 1.001. The reported ends are the outside
+neighbours, so the interval is conservative. As first run, the O1 profile used 21 points per
+pass; it was corrected to the pre-registered 41 before the corrected O1 rows were computed
+(Supplementary Note~2).
+% source: p2/identifiability.py:_profile (n_fine; 6 passes, okf.size >= 5, fine[1]/fine[0] < 1.001),
+% profile_interval_o1 (n_fine = 41), identifiable; PREREG_P2 s.3 Phase A (ii), s.4.3; RETRACTIONS_P2 B89.
 
 \paragraph{O1.} The log-likelihood is the Gaussian sum over all 20 probes. For each probe,
 $\qs(t)$ is built by PCHIP interpolation of the observed $c$ and $T$ on a grid 4 times finer

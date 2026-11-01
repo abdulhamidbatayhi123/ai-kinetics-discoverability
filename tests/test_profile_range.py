@@ -35,3 +35,19 @@ def test_o1_profile_refuses_a_peak_on_the_grid_edge():
     t, cs, qs, Ts, qstar = _probes(k)
     with pytest.raises(ValueError, match="edge"):
         profile_interval_o1(t, cs, qs, qstar, 1e-3, Ts=Ts, k_grid=np.logspace(-5, 1, 61))
+
+
+def test_o1_profile_refines_with_41_points_as_preregistered(monkeypatch):
+    """B89: PREREG_P2 s.3 Phase A (ii): the ODE (O1) profile refines with up to 6 passes of
+    41 points, the outlet/PDE (O2/O3) profile with 21. As run, O1 used 21."""
+    import p2.identifiability as ident
+    sizes = []
+    real = ident.np.logspace
+
+    def spy(a, b, n, *args, **kw):
+        sizes.append(n)
+        return real(a, b, n, *args, **kw)
+    t, cs, qs, Ts, qstar = _probes(1.3888e-05)
+    monkeypatch.setattr(ident.np, "logspace", spy)
+    ident.profile_interval_o1(t, cs, qs, qstar, 1e-3, Ts=Ts)
+    assert sizes and set(sizes) == {41}, sizes
