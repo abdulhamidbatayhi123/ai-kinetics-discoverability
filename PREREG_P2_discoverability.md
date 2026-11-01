@@ -584,6 +584,41 @@ no verdict word; the confirmatory O1 identifiability uses no column solve. The c
 kept because every discovery method already ran with it; removing it would make the
 observation model differ between methods. Recorded in RETRACTIONS_P2 B86.
 
+### A6 — 2026-11-01, after the grid and after the verdicts were computed: the O1 profile's k range
+
+**What happened.** The confirmatory chain finished on 2026-11-01 (03:07) and `p2_analyze.py`
+wrote `results/p2_verdicts.json`. The step positive control (§4.4: lowest Da, σ = ε = 0, O1;
+discovery and identifiability must both succeed) **failed**: discovery succeeded in 135 of 135
+estimation replicates, identifiability in 0. By the declared rule the step isotherm was withheld
+from every verdict. **Cause, found by diagnosis:** `profile_interval_o1` searched k only over
+10⁻⁵ to 10 (61 log-spaced points). That range was taken from §6 item 6 ("Da 10⁻¹–10³
+corresponds to k ≈ 10⁻⁵–10⁻¹ s⁻¹ at default"), which holds for the Langmuir column; the step
+column has a longer stoichiometric time, and its Da = 0.1 cells have k = 3.2 × 10⁻⁶, below the
+range. The likelihood peak was cut at the range's edge (10⁻⁵ = 3.105 k), so the reported interval
+sat on the edge and failed [k/2, 2k]. The stored fields obey the LDF law exactly there (implied
+k / k = 1.000 at every probe) and the likelihood computed on the same data peaks at the true k;
+with a range that contains it, the interval is [1.0034, 1.0038] k. Affected: the three step
+cells at Da = 0.1 (2,880 of 51,840 O1 identifiability rows). The O2/O3 profiles search 10⁻⁶ to 1,
+which contains every k of the design, and are not affected.
+
+**What changes.** The O1 profile searches **10⁻⁷ to 10 at 10 points per decade** (81 points; the
+same density as before), more than a decade beyond the smallest and largest k of the design
+(3.2 × 10⁻⁶ and 0.139). If the coarse likelihood peaks on either edge of its grid, the profile now
+raises an error, which the driver records as a failure (A2), instead of returning an interval on
+the edge. **All 51,840 O1 identifiability rows are recomputed** with this code so that every row
+comes from the same profile; then `p2_analyze.py` is rerun unchanged. Nothing else changes: not the
+[k/2, 2k] criterion, the positive-control rule, any estimand, threshold or verdict word, and no
+discovery result.
+
+**How it is reported.** Both sets of verdicts are public: the as-run files are kept as
+`results/p2_extra_o1ident_asrun.json` and `results/p2_verdicts_asrun.json`, and the paper reports
+the as-run outcome (positive control failed for the step isotherm, step withheld) beside the
+corrected one, with this amendment. The corrected verdicts are the primary result because the
+as-run profile did not compute the pre-registered estimand (the 95 % profile interval of k) for
+the affected cells. This amendment is written after the verdicts were seen; it changes the range
+of a numerical search, chosen to contain every k of the design, and nothing a result could steer.
+Recorded in RETRACTIONS_P2 B87; tests in `tests/test_profile_range.py`.
+
 ## 10. Pre-freeze revisions, 2026-10-04 (before any discovery method has run on any grid cell)
 Found by drafting the Registered-Report Stage-1 manuscript against this document and
 the code; each fixed here, in the open, rather than silently:
