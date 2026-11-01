@@ -100,13 +100,14 @@ def profile_interval_o1(t, cs, qs_obs, qstar_fn, sigma, Ts=None, k_grid=None):
     f = lambda ks: loglik_o1(ks, t, cs, qs_obs, qstar_fn, sigma, Ts)     # whole grid at once
     # Amendment A6 (B87): 1e-7..10 at 10 points per decade, more than a decade beyond every k
     # of the design (3.2e-6 to 0.139). The frozen 1e-5..10 excluded the step cells at Da = 0.1.
-    k_grid = O1_K_GRID if k_grid is None else k_grid
-    ll = np.asarray(f(np.asarray(k_grid)), float)
+    k_grid = np.asarray(O1_K_GRID if k_grid is None else k_grid, float)
+    ll = np.asarray(f(k_grid), float)
     i = int(np.argmax(ll))
     if i == 0 or i == len(k_grid) - 1:
         raise ValueError(f"O1 profile peaks on the edge of its k grid (k = {k_grid[i]:.3g}); "
                          "the search range does not contain the maximum")
-    return _profile(f, k_grid, vectorised=True)
+    # _profile starts by evaluating the same coarse grid: hand it the values already computed
+    return _profile(lambda ks: ll if ks is k_grid else f(ks), k_grid, vectorised=True)
 
 
 O1_K_GRID = np.logspace(-7, 1, 81)
