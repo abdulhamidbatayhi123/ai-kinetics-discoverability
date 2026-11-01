@@ -7,7 +7,7 @@ doi:10.5281/zenodo.23323685), while both papers shared one repository. They are 
 verbatim with their original numbers; new Paper 2 entries continue from B85. Commit IDs inside
 the copied entries are the original ones: `COMMIT_MAP.tsv` maps each to its commit here.
 
-All of them were caught before any grid result existed, so none reached a reported result.
+B76 to B85 were caught before any grid result existed, so none reached a reported result. B86 to B88 were found while the grid ran or after its first verdicts; each is corrected by a dated amendment or a code fix, and the as-run results are kept and reported beside the corrected ones.
 
 | # | Defect | How it was caught |
 |---|---|---|
