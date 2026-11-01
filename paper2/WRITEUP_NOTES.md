@@ -57,3 +57,21 @@ by step 50; the true law k(q* - q) fitted by least squares to the same noisy Sav
 dq/dt explains R^2 = 0.80 (RMSE about 0.45). So the network fits the data at least as well as
 the true law; M8's failure is in the symbolic snapping step (support {1, T, c, q}), its
 documented behaviour, not a wiring fault. E2 runs as declared.
+
+## As-run verdicts (2026-11-01, before A6; kept in results/p2_verdicts_asrun.json)
+
+- Positive control: Langmuir passed (discovery 135/135, identifiable 135/135); step failed
+  (identifiable 0/135) because of B87, so step was withheld from every verdict (48 of 96 H2b slices).
+- H2b, Langmuir: 20 slices "discovery fails before identifiability", 0 "with", 0 "outlives";
+  28 slices have no boundary for one of the two on the grid. At Pe x1 the gaps are -1.7 to -2.5
+  decades (Da*_disc 0.14 to 7.8; Da*_ident 43 to 562).
+- Where eps >= 2 % the best method never reaches 50 % success at any Da, so Da*_disc does not
+  exist on the grid while identifiability still holds up to Da of about 35 to 100: isotherm error
+  alone puts discovery out of reach. This is the paper's clearest physical message; check it
+  survives A6 (it should: Langmuir rows were inside the old k range).
+- Some Da*_ident intervals have zero width (e.g. [561.8, 561.8]): P(identifiable) goes from all
+  to none between two adjacent Da levels, perfect separation for the logistic. Report such a
+  boundary as "between levels a and b", and say why the interval is degenerate.
+- H2a: no verdict (no Langmuir condition crosses 50 % in R; step withheld). H2c: no verdict (no
+  slice with a verdict). Both must be reported in their declared words, with the reason.
+
