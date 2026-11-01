@@ -1,0 +1,197 @@
+{
+ "freeze_commit": "97150f64cecc2fab82d7af36709a7ae51e1f82ce",
+ "rows": {
+  "langmuir_L1_pe1_da0.1|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "sec": 1802.6350240707397,
+   "support": [
+    "T",
+    "c",
+    "c*q",
+    "q"
+   ],
+   "k_hat": 0.00018528688407451737,
+   "m1": {
+    "loss_first": 1.705439394799593,
+    "loss_best": 0.0008813010923002314,
+    "n_evals": 61,
+    "stopped": "maxiter",
+    "readout_sparse": {
+     "c": -0.0009241920354567605,
+     "q": -0.00018528688407451737,
+     "T": 3.3797573926325094e-06,
+     "c*q": 0.00018158000981001763
+    },
+    "success_sparse": false,
+    "success_symbolic": false,
+    "readout_symbolic": {
+     "c": -0.00090298126,
+     "q": 0.0,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": -1.7048715e-06,
+     "c^2": 0.0,
+     "qstar": 0.0,
+     "0.000980945400000000": 0.0009809454
+    }
+   }
+  },
+  "langmuir_L1_pe1_da0.316|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "sec": 3592.641217470169,
+   "support": [
+    "T",
+    "c*q",
+    "c^2",
+    "q"
+   ],
+   "k_hat": 0.00013056620405450846,
+   "m1": {
+    "loss_first": 0.5535374327574465,
+    "loss_best": 0.0008380671173910574,
+    "n_evals": 61,
+    "stopped": "maxiter",
+    "readout_sparse": {
+     "q": -0.00013056620405450846,
+     "T": -8.586717702056744e-07,
+     "c*q": 6.966492431197936e-05,
+     "c^2": 0.0008711536915986949
+    },
+    "success_sparse": false,
+    "success_symbolic": false,
+    "readout_symbolic": {
+     "c": 0.0,
+     "q": 0.0,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": 0.0,
+     "c^2": 0.0,
+     "qstar": 0.0,
+     "qstar**2": 5.4272587e-06,
+     "q*qstar": -5.4272587e-06
+    }
+   }
+  },
+  "langmuir_L1_pe1_da1|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "sec": 7378.859316825867,
+   "support": [
+    "T",
+    "c",
+    "c^2",
+    "q"
+   ],
+   "k_hat": 0.00023443361515908872,
+   "m1": {
+    "loss_first": 0.25539587683904735,
+    "loss_best": 0.0007869464008490767,
+    "n_evals": 58,
+    "stopped": "budget",
+    "readout_sparse": {
+     "c": -0.002399990648504271,
+     "q": -0.00023443361515908872,
+     "T": 1.4760310605228099e-06,
+     "c^2": 0.004288417725728804
+    },
+    "success_sparse": false,
+    "success_symbolic": false,
+    "readout_symbolic": {
+     "c": 0.0,
+     "q": -0.0002365916,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": 0.0,
+     "c^2": 0.0,
+     "qstar": 0.0,
+     "c*qstar": 0.0002365916
+    }
+   }
+  },
+  "langmuir_L1_pe1_da10|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "sec": 12524.6195166111,
+   "support": [
+    "1",
+    "T",
+    "c",
+    "q"
+   ],
+   "k_hat": 0.0009158235044980373,
+   "m1": {
+    "loss_first": 0.3233622190094083,
+    "loss_best": 0.10688900643647489,
+    "n_evals": 10,
+    "stopped": "budget",
+    "readout_sparse": {
+     "1": 0.247552352734393,
+     "c": 0.007077198904922286,
+     "q": -0.0009158235044980373,
+     "T": -0.0008266177064280931
+    },
+    "success_sparse": false,
+    "success_symbolic": false,
+    "readout_symbolic": {
+     "c": 0.0,
+     "q": -0.0012795053,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": 0.0,
+     "c^2": 0.0,
+     "qstar": 0.0,
+     "q**2": -0.00012729107,
+     "c^2*q": 0.0024231027
+    }
+   }
+  },
+  "langmuir_L1_pe1_da100|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "error": "ValueError: INTERNAL: CpuCallback error calling callback: Traceback (most recent call last):\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 816, in _wrapped_callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 226, in _callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 96, in pure_callback_impl\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 71, in __call__\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\equinox\\_errors.py\", line 88, in raises\n_EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.\n\n\n--------------------\nAn error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n"
+  },
+  "langmuir_L1_pe1_da1e+03|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "error": "ValueError: INTERNAL: CpuCallback error calling callback: Traceback (most recent call last):\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 816, in _wrapped_callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 226, in _callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 96, in pure_callback_impl\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 71, in __call__\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\equinox\\_errors.py\", line 88, in raises\n_EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.\n\n\n--------------------\nAn error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n"
+  },
+  "langmuir_L1_pe1_da3.16|0.02|0.0|0|m1_ude|o3": {
+   "success": true,
+   "sec": 7602.482829332352,
+   "support": [
+    "1",
+    "c",
+    "c^2",
+    "q"
+   ],
+   "k_hat": 0.000765542756151837,
+   "m1": {
+    "loss_first": 0.3870015164441061,
+    "loss_best": 0.0008939677010721463,
+    "n_evals": 36,
+    "stopped": "budget",
+    "readout_sparse": {
+     "1": 0.0015760056886118898,
+     "c": -0.0053968977182865955,
+     "q": -0.000765542756151837,
+     "c^2": 0.011471948677546636
+    },
+    "success_sparse": false,
+    "success_symbolic": true,
+    "readout_symbolic": {
+     "c": 0.0,
+     "q": -0.00050144334,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": 0.0,
+     "c^2": 0.0,
+     "qstar": 0.00050144334
+    }
+   }
+  },
+  "langmuir_L1_pe1_da31.6|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "error": "ValueError: INTERNAL: CpuCallback error calling callback: Traceback (most recent call last):\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 816, in _wrapped_callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 226, in _callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 96, in pure_callback_impl\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 71, in __call__\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\equinox\\_errors.py\", line 88, in raises\n_EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.\n\n\n--------------------\nAn error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n"
+  },
+  "langmuir_L1_pe1_da316|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "error": "ValueError: INTERNAL: CpuCallback error calling callback: Traceback (most recent call last):\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 816, in _wrapped_callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 226, in _callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 96, in pure_callback_impl\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 71, in __call__\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\equinox\\_errors.py\", line 88, in raises\n_EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.\n\n\n--------------------\nAn error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n"
+  }
+ }
+}

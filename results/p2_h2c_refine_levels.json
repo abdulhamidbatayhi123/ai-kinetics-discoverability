@@ -1,0 +1,44 @@
+{
+ "langmuir|pe=0.2": {
+  "iso": "langmuir",
+  "pe": 0.2,
+  "best_strong_method": "best_subset|strong",
+  "da_disc": null,
+  "levels": []
+ },
+ "langmuir|pe=1.0": {
+  "iso": "langmuir",
+  "pe": 1.0,
+  "best_strong_method": "m7|strong",
+  "da_disc": null,
+  "levels": []
+ },
+ "langmuir|pe=5.0": {
+  "iso": "langmuir",
+  "pe": 5.0,
+  "best_strong_method": "best_subset|strong",
+  "da_disc": null,
+  "levels": []
+ },
+ "step|pe=0.2": {
+  "iso": "step",
+  "pe": 0.2,
+  "best_strong_method": "best_subset|strong",
+  "da_disc": null,
+  "levels": []
+ },
+ "step|pe=1.0": {
+  "iso": "step",
+  "pe": 1.0,
+  "best_strong_method": "m7|strong",
+  "da_disc": null,
+  "levels": []
+ },
+ "step|pe=5.0": {
+  "iso": "step",
+  "pe": 5.0,
+  "best_strong_method": "best_subset|strong",
+  "da_disc": null,
+  "levels": []
+ }
+}
