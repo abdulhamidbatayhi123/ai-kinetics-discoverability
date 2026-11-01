@@ -86,6 +86,39 @@ def _m1_rate(c, q, T, qs, args):
     return (h @ args["W3"])[..., 0] * args["scale"]
 
 
+def _train_lbfgs(vg, x0, maxiter, budget_s):
+    """M1's optimiser (PREREG_P2 A4): SciPy L-BFGS-B, at most `maxiter` iterations or `budget_s`
+    seconds, keeping the best parameters seen. A column solve that exhausts its step budget
+    stops training and keeps the best so far (B88); on the first evaluation there is no best,
+    so the error propagates and is recorded. Returns (best, loss history, stop reason)."""
+    from scipy.optimize import minimize
+    t0, best, hist = time.time(), {"f": np.inf, "x": np.asarray(x0)}, []
+
+    class _Budget(Exception):
+        pass
+
+    def fun(x):
+        if time.time() - t0 > budget_s:
+            raise _Budget
+        v, g = vg(x)
+        v, g = float(v), np.asarray(g, float)
+        hist.append(v)
+        if v < best["f"]:
+            best.update(f=v, x=np.array(x))
+        return v, g
+    stopped = "maxiter"
+    try:
+        minimize(fun, np.asarray(x0, float), jac=True, method="L-BFGS-B",
+                 options={"maxiter": maxiter, "maxfun": maxiter + 10})
+    except _Budget:
+        stopped = "budget"
+    except (ValueError, RuntimeError) as e:
+        if not hist or "maximum number of solver steps" not in str(e):
+            raise
+        stopped, best["error"] = "solver", f"{type(e).__name__}: {str(e)[-300:]}"
+    return best, hist, stopped
+
+
 def fit_m1(rec, obs, seed=0, maxiter=M1_MAXITER, budget_s=M1_BUDGET_S, n_z=M1_NZ, symbolic=True):
     """M1, the S1 pipeline as a labelled demonstration (PREREG_P2 s.3): a UDE with a network
     in the uptake term, trained THROUGH the column model (p2.jaxcol, the differentiable
@@ -97,7 +130,6 @@ def fit_m1(rec, obs, seed=0, maxiter=M1_MAXITER, budget_s=M1_BUDGET_S, n_z=M1_NZ
     import jax
     import jax.numpy as jnp
     from jax.flatten_util import ravel_pytree
-    from scipy.optimize import minimize
 
     from p2.jaxcol import solve
     from p2.pysr_method import pysr_sr
@@ -122,26 +154,7 @@ def fit_m1(rec, obs, seed=0, maxiter=M1_MAXITER, budget_s=M1_BUDGET_S, n_z=M1_NZ
         return (jnp.mean(((y[:, n_z - 1] - c_obs) / rc) ** 2)
                 + jnp.mean(((y[:, 3 * n_z - 1] - T_obs) / rT) ** 2))
     vg = jax.jit(jax.value_and_grad(loss))
-    t0, best, hist = time.time(), {"f": np.inf, "x": np.asarray(x0)}, []
-
-    class _Budget(Exception):
-        pass
-
-    def fun(x):
-        if time.time() - t0 > budget_s:
-            raise _Budget
-        v, g = vg(jnp.asarray(x))
-        v, g = float(v), np.asarray(g, float)
-        hist.append(v)
-        if v < best["f"]:
-            best.update(f=v, x=np.array(x))
-        return v, g
-    stopped = "maxiter"
-    try:
-        minimize(fun, np.asarray(x0, float), jac=True, method="L-BFGS-B",
-                 options={"maxiter": maxiter, "maxfun": maxiter + 10})
-    except _Budget:
-        stopped = "budget"
+    best, hist, stopped = _train_lbfgs(lambda x: vg(jnp.asarray(x)), x0, maxiter, budget_s)
     prm = {**unravel(jnp.asarray(best["x"])), **fixed}
     y = np.asarray(solve(phys, n_z, rec["c_in"], float(ts[-1]), ts, rate=_m1_rate, args=prm))
     c, q, T = y[:, :n_z].ravel(), y[:, n_z:2 * n_z].ravel(), y[:, 2 * n_z:].ravel()
@@ -159,6 +172,7 @@ def fit_m1(rec, obs, seed=0, maxiter=M1_MAXITER, budget_s=M1_BUDGET_S, n_z=M1_NZ
         co_sr, ok_sr = {"error": f"{type(e).__name__}: {e}"}, False
     return co, ok_sparse or ok_sr, {"loss_first": hist[0] if hist else None, "loss_best": best["f"],
                                      "n_evals": len(hist), "stopped": stopped,
+                                     "solver_error": best.get("error"),
                                      "readout_sparse": {k: float(v) for k, v in co.items()},
                                      "success_sparse": ok_sparse, "success_symbolic": ok_sr,
                                      "readout_symbolic": {k: (float(v) if not isinstance(v, str) else v)
