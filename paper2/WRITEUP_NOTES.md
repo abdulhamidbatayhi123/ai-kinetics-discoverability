@@ -75,3 +75,18 @@ documented behaviour, not a wiring fault. E2 runs as declared.
 - H2a: no verdict (no Langmuir condition crosses 50 % in R; step withheld). H2c: no verdict (no
   slice with a verdict). Both must be reported in their declared words, with the reason.
 
+
+## Code-versus-prereg differences found while drafting Supplementary Note 1 (2026-11-01)
+To be judged in the code-versus-prereg review round; each needs either a ledger entry or a
+stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/supplementary.tex.
+1. Pe labels: `pe_mult` multiplies D_L, so "pe0.2" is the HIGHEST Pe (about 470; ×1 about 94; ×5 about 19).
+   Fixed in the text (levels named by Pe) and in fig_p2_results.py (pe_label). Check every table too.
+2. O1 profile refinement uses 21 points per pass; prereg §3 Phase A says 41 for the ODE profile.
+3. M7 receives Lib-B without the constant column; prereg says identical features for every method.
+4. M1 temperature input scaled as (T - T_in)/10 K; A4 says "scaled by T_in".
+5. M5 per-row error SDs collapsed to column means before TLS; channel ranges from noisy data.
+6. M2 weak form fallbacks (support 31 if none admissible, 61 if no held-out probe) not stated in prereg.
+7. O2 discovery drops edge probes (18 of 20).
+8. weak.py / methods.py docstrings swap the M2/M2b names (labels only).
+9. A1 text cites the freeze as d562f19 (old ID; 7dcc2fe here via COMMIT_MAP) - fine but say so.
+10. H2c refinement grid never solved: no slice had a discovery crossing, so refine levels are empty (as designed).

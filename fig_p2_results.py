@@ -73,6 +73,16 @@ METHOD_SHORT = {"stlsq|weak": "M2", "stlsq|strong": "M2b", "ensemble|weak": "M3 
 SOLVER_COLOUR = {"stlsq": OI["blue"], "ensemble": OI["green"], "best_subset": OI["purple"],
                  "eiv_best_subset": OI["black"], "m7": OI["orange"], "slow_manifold": OI["grey"]}
 ISO_LABEL = {"langmuir": "Langmuir", "step": "MOF-303-like step"}
+
+# The code labels the dispersion levels by the D_L multiplier; the paper names them by the
+# column Peclet number u L / D_L (Supplementary Table 1), so "x0.2" is the HIGHEST Pe.
+PE_NUMBER = {0.2: 470, 1.0: 94, 5.0: 19}
+
+
+def pe_label(pe):
+    return f"Pe ≈ {PE_NUMBER[float(pe)]}"
+
+
 ISO_MARKER = {"langmuir": "o", "step": "s"}
 PE_MARKER = {0.2: "v", 1.0: "o", 5.0: "^"}
 OBS_COLOUR = {"O1": OI["blue"], "O2": OI["verm"]}
@@ -225,7 +235,7 @@ def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
     leg = ax.legend(handles=kind, loc="upper right", fontsize=6.3, handlelength=1.8)
     ax.add_artist(leg)
     ax.legend(handles=handles, loc="lower left", fontsize=6.3, handlelength=0.8,
-              title=f"{ISO_LABEL.get(iso, iso)}, Pe ×{pe:g}", title_fontsize=6.6)
+              title=f"{ISO_LABEL.get(iso, iso)}, {pe_label(pe)}", title_fontsize=6.6)
     if not have_fd:
         ax.text(0.02, 0.98, "per-level fractions not available\n(run p2_figdata.py)",
                 transform=ax.transAxes, fontsize=6, va="top", color=figstyle.C["grey"])
@@ -284,7 +294,7 @@ def _h2b_wordmap(ax, V):
     ax.set_xlim(0, len(cols))
     ax.set_ylim(len(rows), 0)
     ax.set_xticks(np.arange(len(cols)) + 0.5)
-    ax.set_xticklabels([f"{ISO_LABEL.get(i, i).replace('MOF-303-like ', '')}\nPe ×{p:g}" for i, p in cols],
+    ax.set_xticklabels([f"{ISO_LABEL.get(i, i).replace('MOF-303-like ', '')}\n{pe_label(p)}" for i, p in cols],
                        fontsize=6.3)
     ax.set_yticks(np.arange(len(rows)) + 0.5)
     ax.set_yticklabels([f"{_pct(s)}, {_pct(e)}" for s, e in rows], fontsize=6.0)
@@ -333,7 +343,7 @@ def fig2(V, FD, da_levels, stem, noise=DISPLAY_NOISE, pe=DISPLAY_PE):
 # ---- Figure 3: H2a collapse ------------------------------------------------------------
 def _cond_label(cond):
     obs, iso, pe, m = _parse_cond(cond)
-    return f"{obs}, {ISO_LABEL.get(iso, iso).replace('MOF-303-like ', '')}, Pe ×{pe:g}, {METHOD_SHORT.get(m, m)}"
+    return f"{obs}, {ISO_LABEL.get(iso, iso).replace('MOF-303-like ', '')}, {pe_label(pe)}, {METHOD_SHORT.get(m, m)}"
 
 
 def _cond_style(cond):
@@ -384,7 +394,7 @@ def fig3(V, FD, stem):
     hd = [Line2D([], [], color=OBS_COLOUR[o], label=o) for o in ("O1", "O2")]
     hd += [Line2D([], [], color=figstyle.C["dark"], ls=ls, label=ISO_LABEL[i])
            for i, ls in (("langmuir", "-"), ("step", "--"))]
-    hd += [Line2D([], [], color=figstyle.C["dark"], lw=0, marker=m, ms=3.5, label=f"Pe ×{p:g}")
+    hd += [Line2D([], [], color=figstyle.C["dark"], lw=0, marker=m, ms=3.5, label=f"{pe_label(p)}")
            for p, m in PE_MARKER.items()]
     a.legend(handles=hd, loc="upper left", fontsize=6.0, handlelength=1.6)
     # b: R* per condition
@@ -451,7 +461,7 @@ def _methods_panel(ax, FD, iso, s, e, pe, da_levels):
             x, p = _frac(d[m])
             ax.plot(x, p, ls=_method_style(m), color=_method_colour(m), marker="o", ms=2.4,
                     lw=1.6 if m.startswith("eiv") else 1.1, label=METHOD_LABEL.get(m, m))
-        ax.text(0.98, 0.98, f"{ISO_LABEL.get(iso, iso)}, Pe ×{pe:g}\n$\\sigma$ = {_pct(s)}, "
+        ax.text(0.98, 0.98, f"{ISO_LABEL.get(iso, iso)}, {pe_label(pe)}\n$\\sigma$ = {_pct(s)}, "
                 f"$\\varepsilon$ = {_pct(e)}", transform=ax.transAxes, ha="right", va="top", fontsize=6.5)
     _da_axis(ax, da_levels)
     ax.set_ylim(-0.03, 1.03)
@@ -536,7 +546,7 @@ def _h2c_panel(ax, V):
     ax.set_ylabel(r"EIV shift, $\Delta\log_{10} Da^{*}_{disc}$" + "\n(M5 minus best non-EIV, decade)")
     hd = [Line2D([], [], lw=0, marker="o", color=OI["blue"], label="Langmuir"),
           Line2D([], [], lw=0, marker="o", color=OI["orange"], label="MOF-303-like step")]
-    hd += [Line2D([], [], lw=0, marker=m, color=figstyle.C["dark"], ms=3.5, label=f"Pe ×{p:g}")
+    hd += [Line2D([], [], lw=0, marker=m, color=figstyle.C["dark"], ms=3.5, label=f"{pe_label(p)}")
            for p, m in PE_MARKER.items()]
     hd += [Line2D([], [], color=figstyle.C["dark"], lw=1.6, label="median over slices")]
     if n_none:
