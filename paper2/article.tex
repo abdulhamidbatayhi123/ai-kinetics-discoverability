@@ -115,11 +115,15 @@ on $q$-free features, which returns the isotherm where uptake is at equilibrium 
 and every O1 method was then run on it. M1 could be trained for at most 50 L-BFGS steps or
 2\,h per fit on the machine available, so it ran as a declared demonstration: Langmuir,
 $\Pe \times 1$, $\sigma = 2\,\%$, $\varepsilon = 0$, O3, the nine $\Da$ levels, one
-replicate. A Kolmogorov--Arnold network \citep{liu2024} failed its known-answer test and its
+replicate. The best parameters seen during training were kept. As first run, a column solve
+that exhausted its step budget during training ended the fit with no readout (four of the
+nine fits); the corrected code keeps the best parameters in that case, and both runs are
+reported (Supplementary Note~2). A Kolmogorov--Arnold network \citep{liu2024} failed its known-answer test and its
 cost gate before the freeze and was not run on the grid. Method settings, solver thresholds
 and their known-answer tests are listed in Supplementary Note~1.
 % PREREG_P2 s.3 and A4; p2/methods.py, p2/weak.py, p2/eiv.py, p2/pysr_method.py,
-% p2_grid_extra.py (fit_m1: M1_MAXITER 50, M1_BUDGET_S 7200); results/p2_cost_gates.json.
+% p2_grid_extra.py (fit_m1: M1_MAXITER 50, M1_BUDGET_S 7200; _train_lbfgs, B88);
+% results/p2_extra_m1_asrun.json; results/p2_cost_gates.json.
 
 \subsection*{Success}
 Discovery succeeded when the selected terms were exactly those of the true law, every sign
