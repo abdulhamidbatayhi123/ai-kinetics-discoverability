@@ -69,8 +69,10 @@ $t_{\mathrm{stoich}}$ the stoichiometric time of the column (7200\,s for Langmui
 31\,050\,s for the step isotherm). Nine levels from $10^{-1}$ to $10^{3}$ at half-decade
 spacing therefore span $k$ from $1.39\times10^{-5}$ to $0.139$\,s$^{-1}$ for Langmuir and
 from $3.22\times10^{-6}$ to $0.0322$\,s$^{-1}$ for the step isotherm. Three axial-dispersion
-levels ($\times 0.2$, $\times 1$, $\times 5$ of the default, written $\Pe$) completed the
-grid: 81 solves at 400 cells and 400 stored times, each run until the outlet reached 95\,\%
+coefficients, $D_L \times 0.2$, $\times 1$ and $\times 5$ of the default, completed the grid.
+They give column P\'eclet numbers $\Pe = uL/D_L$ of about 470, 94 and 19, and the levels are
+named by these values below (the code and the pre-registration label them by the $D_L$
+multiplier, so its ``$\times 0.2$'' level is the highest $\Pe$). The grid has 81 solves at 400 cells and 400 stored times, each run until the outlet reached 95\,\%
 breakthrough, plus 9 isothermal solves for a control described below. The manifest that
 records every parameter is public.
 % data/p2/manifest.json (t_stoich_s 7200.4 and 31050.4; k_LDF 1.3888e-05..0.13888 and
@@ -114,7 +116,7 @@ on $q$-free features, which returns the isotherm where uptake is at equilibrium 
 \citep{delgado2025}). On O2, uptake was first recovered from the gas-phase mass balance,
 and every O1 method was then run on it. M1 could be trained for at most 50 L-BFGS steps or
 2\,h per fit on the machine available, so it ran as a declared demonstration: Langmuir,
-$\Pe \times 1$, $\sigma = 2\,\%$, $\varepsilon = 0$, O3, the nine $\Da$ levels, one
+$\Pe \approx 94$, $\sigma = 2\,\%$, $\varepsilon = 0$, O3, the nine $\Da$ levels, one
 replicate. The best parameters seen during training were kept. As first run, a column solve
 that exhausted its step budget during training ended the fit with no readout (four of the
 nine fits); the corrected code keeps the best parameters in that case, and both runs are

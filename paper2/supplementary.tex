@@ -1,0 +1,481 @@
+% Supplementary material for "When can AI discover adsorption kinetics?"
+% A fragment to be \input into paper2/article.tex (uses \Da, \Pe, \qs, \qsm and booktabs).
+% Every number carries a "% source:" comment. "% DIFF:" marks a place where the code and
+% PREREG_P2_discoverability.md differ; the text reports the code.
+
+\section*{Supplementary Table 1: column, flow and physical parameters}
+
+Both adsorbents were solved in the same column geometry, particle size and superficial
+velocity. The step case also changes the bed porosity, particle density, heat of adsorption,
+feed and temperature, as recorded in erratum (b) of amendment A1. All values below are read
+from the code that built each solve, and the per-cell values from the ground-truth manifest.
+% source: p2_generate.py:make_physics; solver_fd.py:AdsorptionPhysicsConfig.__init__;
+% fetch_real_mof_data.py:get_mof303_physics; PREREG_P2 s.9 A1 errata (b).
+
+\begin{table}[htbp]
+\centering
+\small
+\textbf{Supplementary Table 1.} Parameters of the two simulated columns. ``Langmuir'' is the
+default physics; ``step'' is water on a MOF-303-like framework with a Type V isotherm.
+\par\medskip
+\begin{tabular}{@{}llll@{}}
+\toprule
+Quantity & Langmuir & Step & Unit \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Geometry and flow}}\\
+Column length $L$ & 0.10 & 0.10 & m \\
+Inner diameter $D_{\mathrm{in}}$ & 0.05 & 0.05 & m \\
+Particle diameter $d_p$ & 0.002 & 0.002 & m \\
+Superficial velocity $v$ & 0.10 & 0.10 & m\,s$^{-1}$ \\
+Interstitial velocity $u = v/\varepsilon_t$ & 0.25 & 0.2857 & m\,s$^{-1}$ \\
+Residence time $L/u$ & 0.40 & 0.35 & s \\
+% source: solver_fd.py:AdsorptionPhysicsConfig.__init__ (L, D_in, d_p, v);
+% fetch_real_mof_data.py:get_mof303_physics (L, v, d_p reset to the same values);
+% u and L/u computed from these by p2_generate.py:make_physics (python one-liner, read only).
+\midrule
+\multicolumn{4}{@{}l}{\textit{Bed and solid}}\\
+Total porosity $\varepsilon_t$ & 0.40 & 0.35 & -- \\
+Particle density $\rho_p$ & 1200 & 1100 & kg\,m$^{-3}$ \\
+Solid heat capacity $C_{ps}$ & 1000 & 1000 & J\,kg$^{-1}$\,K$^{-1}$ \\
+Axial thermal conductivity $k_z$ & 0.10 & 0.10 & W\,m$^{-1}$\,K$^{-1}$ \\
+% source: solver_fd.py:AdsorptionPhysicsConfig.__init__; fetch_real_mof_data.py:get_mof303_physics
+% (rho_p and eps_t are marked UNCITED packing values there).
+\midrule
+\multicolumn{4}{@{}l}{\textit{Gas and thermal boundary}}\\
+Gas density $\rho_g$ & 1.2 & 1.2 & kg\,m$^{-3}$ \\
+Gas heat capacity $C_{pg}$ & 1000 & 1000 & J\,kg$^{-1}$\,K$^{-1}$ \\
+Wall heat transfer coefficient $h_w$ & 10 & 10 & W\,m$^{-2}$\,K$^{-1}$ \\
+Feed and wall temperature $T_{\mathrm{in}} = T_w$ & 298.0 & 303.15 & K \\
+% source: solver_fd.py:AdsorptionPhysicsConfig.__init__; fetch_real_mof_data.py:get_mof303_physics
+% (T_in = T_w = 303.15); data/p2/manifest.json key T_in (298.0 and 303.15).
+\midrule
+\multicolumn{4}{@{}l}{\textit{Equilibrium}}\\
+Saturation capacity $q_{\max}$ & 20.0 & 25.0 & mol\,kg$^{-1}$ \\
+Heat of adsorption $\Delta H$ & $-50.0$ & $-50.5$ & kJ\,mol$^{-1}$ \\
+Cooperativity exponent $n$ & 1 & 4.0 & -- \\
+Henry-site fraction $f_H$ & 1 & 0.06 & -- \\
+Cluster affinity $b_{C0}$ & $1.720\times10^{-9}$ & $7.422\times10^{-9}$ & m$^3$\,mol$^{-1}$ \\
+Primary-site affinity $b_{H0}$ & $1.720\times10^{-9}$ & $3.711\times10^{-10}$ & m$^3$\,mol$^{-1}$ \\
+$b_C$ at $T_{\mathrm{in}}$ & 1.000 & 3.735 & m$^3$\,mol$^{-1}$ \\
+$b_H$ at $T_{\mathrm{in}}$ & 1.000 & 0.1868 & m$^3$\,mol$^{-1}$ \\
+Step position (cluster half saturation) & -- & $P/P_0 = 0.15$ at 298.15\,K & -- \\
+Feed concentration $c_{\mathrm{in}}$ & 1.0 & 0.5043 (30\,\% RH) & mol\,m$^{-3}$ \\
+$\qs(c_{\mathrm{in}}, T_{\mathrm{in}})$ & 10.00 & 21.90 & mol\,kg$^{-1}$ \\
+$\qs(c_{\mathrm{in}}, T_{\mathrm{in}})/q_{\max}$ & 0.500 & 0.876 & -- \\
+Step midpoint loading $\theta$ (L2 only) & -- & 0.3552 & -- \\
+% source: isotherm.py:q_star_np (dual-term form; pure Langmuir when n = f_H = 1);
+% solver_fd.py:AdsorptionPhysicsConfig.__init__ (b0 = 1/exp(50000/(R*298)), b_H0 = b0);
+% fetch_real_mof_data.py:get_mof303_physics (n 4.0, f_H 0.06, b0 = calibrate_step at
+% rh_to_conc(0.15, 298.15), b_H0 = b0/20, delta_H -50500, q_max 25);
+% fetch_real_mof_data.py:rh_to_conc (c_in at 0.30 RH, 303.15 K);
+% q* at feed, b at T_in and theta computed by isotherm.py:q_star_np and
+% p2_generate.py:step_midpoint_fraction (python one-liner, read only);
+% data/p2/manifest.json keys c_in (1.0, 0.5042852611085497), q_max, theta_step (0.35522387404378003).
+\midrule
+\multicolumn{4}{@{}l}{\textit{Kinetics, dispersion and design}}\\
+Stoichiometric time $t_{\mathrm{stoich}}$ & 7200.4 & 31\,050.4 & s \\
+$\Da = k\,t_{\mathrm{stoich}}$, 9 levels & \multicolumn{2}{l}{$10^{-1}$ to $10^{3}$, half-decade spacing} & -- \\
+LDF coefficient $k$ & $1.389\times10^{-5}$ to $0.1389$ & $3.221\times10^{-6}$ to $0.03221$ & s$^{-1}$ \\
+Residence-time form $k L/u$ & $5.56\times10^{-6}$ to $0.0556$ & $1.13\times10^{-6}$ to $0.0113$ & -- \\
+Default $D_L = 0.7 D_m + 0.5\,d_p u$, $D_m = 2.5\times10^{-5}$\,m$^2$\,s$^{-1}$ & $2.675\times10^{-4}$ & $3.032\times10^{-4}$ & m$^2$\,s$^{-1}$ \\
+$D_L$ multiplier (``$\Pe$'' level) & \multicolumn{2}{l}{$\times 0.2$, $\times 1$, $\times 5$} & -- \\
+$D_L$ at the three levels & $5.35\times10^{-5}$, $2.675\times10^{-4}$, $1.338\times10^{-3}$ & $6.06\times10^{-5}$, $3.032\times10^{-4}$, $1.516\times10^{-3}$ & m$^2$\,s$^{-1}$ \\
+$\Pe = uL/D_L$ at the three levels & 467, 93.5, 18.7 & 471, 94.2, 18.8 & -- \\
+L2 rate drop and width & -- & 0.8, 0.05 & -- \\
+% source: data/p2/manifest.json keys t_stoich_s (7200.4 and 31050.41), k_LDF (min, max per iso),
+% Da_res (= k L/(v/eps_t), min, max per iso), D_L (three values per iso);
+% p2_generate.py DA_LEVELS = logspace(-1, 3, 9), PE_MULT = (0.2, 1.0, 5.0), L2_DROP 0.8, L2_WIDTH 0.05;
+% solver_fd.py:AdsorptionPhysicsConfig.stoichiometric_time and axial_dispersion (D_m 2.5e-5).
+% Pe = u L / D_L is NOT stored anywhere in the code; computed here from u, L and the manifest D_L.
+% DIFF: pe_mult multiplies D_L, so the cell labelled "pe0.2" has the LARGEST Peclet number
+% (D_L x 0.2, Pe x 5) and "pe5" the smallest. article.tex writes the levels as "x0.2, x1, x5 of the
+% default, written Pe"; the author should check that every figure and slice label reads the
+% multiplier as a D_L multiplier, not a Pe multiplier.
+% DIFF (already an erratum): PREREG_P2 s.4.1 says the step case changes only the isotherm;
+% get_mof303_physics also sets eps_t, rho_p, delta_H, T_in and the feed (A1 errata (b)).
+\midrule
+\multicolumn{4}{@{}l}{\textit{Solves}}\\
+Grid cells $N_z$, stored times & 400, 400 & 400, 400 & -- \\
+Horizon (until outlet $c/c_{\mathrm{in}} > 0.95$) & 4 or 8 $t_{\mathrm{stoich}}$ & 4 or 8 $t_{\mathrm{stoich}}$ & -- \\
+Time integrator & \multicolumn{2}{l}{BDF, rtol $10^{-6}$, atol $10^{-10}$, upwind advection} & -- \\
+Cells (L1, L2, isothermal control) & 27, 0, 9 & 27, 27, 0 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+% source: p2_generate.py N_Z = 400, N_SNAP = 400, HORIZON = 4.0, solve_cell (horizon doubled up to
+% 4 times until c[-1,-1]/c_in > 0.95), cells(); solver_fd.py:generate_breakthrough_data defaults
+% (rtol 1e-6, atol 1e-10, scheme "upwind", method "BDF"); data/p2/manifest.json:
+% 90 cells (27 langmuir, 54 step, 9 langmuir_iso), horizon_t_stoich in {4, 8}, breakthrough_95 true
+% for all 90, refined = 0 cells (the H2c refinement levels in results/p2_h2c_refine_levels.json
+% are empty because no slice had a crossing, so no refined cell was solved).
+
+The isothermal control uses the Langmuir column at $\Pe \times 1$ with no heat of adsorption.
+The feed-temperature van't Hoff factor is folded into $b_{C0}$ and $b_{H0}$ first, so the
+isotherm at $T_{\mathrm{in}}$ is the same as in the Langmuir cells and the bed stays at
+$T_{\mathrm{in}}$.
+% source: p2_generate.py:make_physics branch "langmuir_iso"; cells() (9 Da levels, Pe x1, L1).
+
+\section*{Supplementary Note 1: methods, settings and known-answer tests}
+
+\subsection*{Observation models}
+Every method and every profile likelihood read data only through one function. O1 gives
+$c$, $q$ and $T$ at 20 equally spaced probe positions. O2 gives $c$ and $T$ at the same
+positions, with $q$ hidden. O3 gives the outlet $c(t)$ and $T(t)$ only. All three take 200
+times, evenly spaced over the solved horizon. The probe and time indices are rounded from
+a linear spacing of the stored 400 cells and 400 times.
+% source: p2_observe.py:observe (N_PROBE = 20, N_T = 200; iz, it by linspace().round(); O3 iz = last cell).
+
+\subsection*{Noise $\sigma$ and isotherm error $\varepsilon$}
+Noise perturbs the observed channels only. Each observed channel gets independent Gaussian
+noise with standard deviation $\sigma$ times that channel's range over the whole
+ground-truth field of the cell, not over the observed points. The levels were
+$\sigma \in \{0, 0.005, 0.02, 0.05\}$.
+% source: p2_observe.py:observe (rng_ch = f[ch].max() - f[ch].min()); p2_grid_o1.py SIGMAS.
+
+The isotherm error perturbs only the equilibrium the method is given. It does not touch the
+data. The method receives $\qsm(c,T) = \qs(c,T)\,[1 + \varepsilon\,g(c/c_{\mathrm{in}})]$,
+where $g(x) = \sum_{j=1}^{4} a_j \sin(j\pi x + \phi_j)$ divided by its root-mean-square on
+2001 points of $[0,1]$, with $a_j$ standard normal and $\phi_j$ uniform on $[0, 2\pi)$. The
+argument $c/c_{\mathrm{in}}$ is clipped to $[0,1]$. The function $g$ is drawn once per
+(cell, replicate) and does not depend on $\sigma$ or on the observation model. The levels
+were $\varepsilon \in \{0, 0.005, 0.02, 0.05\}$.
+% source: p2_observe.py:isotherm_error_fn (N_MODES = 4, xs = linspace(0, 1, 2001), clip),
+% _rng(name, rep, "iso"); p2_grid_o1.py EPSS.
+
+Every draw is seeded by the first 16 hexadecimal digits of a SHA-256 hash of its keys. The
+noise keys are (cell, replicate, $\sigma$, observation model); the isotherm-error keys are
+(cell, replicate). So the same inputs always give the same observation. A self-test checks
+that $\sigma = 0$ returns the stored field exactly, $\varepsilon = 0$ returns the true
+isotherm, the noise standard deviation is within 5\,\% of $\sigma$ times the range, the
+isotherm error has root-mean-square $\varepsilon$ to $10^{-3}$, draws repeat, O2 hides $q$
+and O3 is outlet only.
+% source: p2_observe.py:_rng, observe (r = _rng(name, rep, sigma, obs, "noise")), selftest.
+
+Each cell had 60 replicates for every method run at the full count. Replicates 0 to 14
+choose the best method of a slice; replicates 15 to 59 estimate every boundary.
+% source: p2_grid_o1.py N_REP = 60; PREREG_P2 s.9 A1.1.
+
+\subsection*{Known-answer system}
+Most method tests use one synthetic system that is never a grid cell:
+$\mathrm{d}q/\mathrm{d}t = k(\qs(c) - q)$ with $k = 0.02$\,s$^{-1}$, a Langmuir
+$\qs(c) = 5 \cdot 3c/(1 + 3c)$, a logistic inlet ramp
+$c(t) = 1/(1 + \exp(-(t - 0.4\,t_{\mathrm{end}})/(0.05\,t_{\mathrm{end}})))$,
+$t_{\mathrm{end}} = 600$\,s, constant $T = 298$\,K, and 400 samples unless a test says
+otherwise. It is solved with rtol $10^{-10}$ and atol $10^{-12}$.
+% source: p2/synthetic.py:ldf_series (defaults n = 400, t_end = 600, qmax = 5, b = 3).
+
+\subsection*{Shared settings: library, derivative and selection floor}
+Lib-B is $\{1, c, q, T, cq, q^2, c^2, \qsm\}$, with $\qsm$ evaluated at the observed $c$ and
+$T$. Lib-A is Lib-B without $\qsm$. Under L1 the true law in Lib-B is the support
+$\{\qsm, q\}$. The strong-form target $\mathrm{d}q/\mathrm{d}t$ is a Savitzky--Golay
+derivative with window 21 and polynomial order 3 on the uniform time grid. Rows from all
+probes are stacked, so one law is fitted for the whole column.
+% source: p2/features.py:lib_b, derivative (window = 21, order = 3, SciPy savgol_filter, deriv = 1);
+% p2/run_o1.py:discover_o1 (rows stacked over probes).
+
+Every sparse solver works on columns divided by their standard deviation (a constant column
+keeps scale 1). Coefficients are mapped back to the original units before scoring.
+% source: p2/methods.py:_standardise.
+
+\subsection*{M2 and M2b: sparse regression in the weak and strong forms}
+The strong form (M2b) regresses the Savitzky--Golay derivative on Lib-B. The weak form (M2)
+multiplies the law by test functions $\phi(t) = ((t-a)(b-t))^{8}$ on windows of
+\emph{support} samples, with a stride of support$/4$ (integer division), and integrates by
+parts with trapezoid weights, so the target needs no derivative of the data. Each $\phi$ is
+scaled to a maximum of 1. The support is swept over $\{31, 61, 121\}$ samples. For each
+support the system is fitted on the probes not held out and scored by
+$\|G\theta - b\|/\|b\|$ on the held-out probes, which are every fifth probe (indices 2, 7,
+12 and 17 of 20). A support is admissible only if its training system has at least 3
+equations per library term. The chosen support is then refitted on all probes. Both forms
+run all three solvers below.
+% source: p2/weak.py:weak_system (power = 8, stride = support // 4, _trapz_weights);
+% p2/run_o1.py WEAK_SUPPORTS = (31, 61, 121), HOLDOUT_EVERY = 5 (held = j % 5 == 2),
+% MIN_ROWS_PER_TERM = 3, choose_support, discover_o1; p2_grid_o1.py FORMS = ("strong", "weak").
+% DIFF: not in PREREG_P2 s.3: if no support is admissible the code falls back to 31 samples, and if
+% no probe is held out it uses 61 (p2/run_o1.py:choose_support).
+% DIFF (labels only): p2/weak.py's docstring calls the weak form "M2b" and p2/methods.py's docstring
+% calls STLSQ "M2"; PREREG_P2 s.3 names the weak form M2 and the strong form M2b. Results are keyed
+% by solver|form, so no result depends on the label.
+
+\paragraph{Solvers.} Sequentially thresholded least squares (STLSQ) uses ridge parameter
+$10^{-6}$ and drops a term when its standardised coefficient falls below 0.05 of the largest,
+for at most 20 iterations. The ensemble (M3) fits STLSQ with the same threshold on 100
+bootstrap samples of 60\,\% of the rows, drawn with replacement from a fixed seed 0, keeps a
+term when it appears in at least 60\,\% of the fits, and reports its median coefficient.
+Exact best-subset selection (M4) enumerates every support of 1 to 4 terms, fits each by least
+squares, and picks the smallest
+$\mathrm{BIC} = n \ln \max(\mathrm{RSS}/n,\ (2\times10^{-3}\,\mathrm{sd}(y))^2) + m \ln n$,
+with $m$ the number of terms. M4 has no sign constraints.
+% source: p2/methods.py:stlsq (threshold = 0.05, alpha = 1e-6, 20 iterations),
+% ensemble (n_models = 100, frac = 0.6, replace = True, inclusion = 0.6, seed = 0),
+% best_subset (max_terms = 4, floor = 2e-3); PREREG_P2 s.3 table (M3, M4) and Phase A.
+
+\paragraph{Known-answer tests.} On the known-answer system at zero noise, M4 recovers L1 with
+$|\hat k - k|/k < 0.02$, and STLSQ and the ensemble both recover L1. The weak form with M4
+recovers L1 at $\sigma = 0$ and at $\sigma = 2\,\%$ with $|\hat k - k|/k < 0.05$, and at
+$\sigma = 2\,\%$ its $k$ error is smaller than the strong form's. On a five-probe, 200-sample
+version, every solver recovers L1 in both forms through the grid's own pipeline. The
+residual floor $2\times10^{-3}$ was the smallest of $\{1, 2, 5\}\times10^{-3}$ that passed at
+200 samples; the derivative's error there is $8\times10^{-4}$ of $\mathrm{sd}(\mathrm{d}q/\mathrm{d}t)$.
+% source: tests/test_p2.py:test_best_subset_recovers_ldf_at_zero_noise,
+% test_stlsq_and_ensemble_recover_ldf_at_zero_noise, test_weak_form_recovers_ldf_at_zero_and_under_noise,
+% test_strong_form_fails_where_weak_form_succeeds_under_noise,
+% test_discover_o1_recovers_law_in_both_forms_and_all_solvers; p2/methods.py:best_subset docstring;
+% PREREG_P2 s.3 Phase A item (i).
+
+\subsection*{M1b: uptake from the gas balance (O2)}
+On O2, $q$ is recovered from the gas-phase balance of the solver,
+$\partial q/\partial t = (D_L c_{zz} - u c_z - c_t)/S$ with $u = v/\varepsilon_t$ and
+$S = (1-\varepsilon_t)\rho_p/\varepsilon_t$, then integrated in time from $q = 0$ by the
+trapezoid rule. $c_t$ is the Savitzky--Golay derivative above; $c_z$ and $c_{zz}$ are centred
+finite differences over the probe positions. The material and flow constants are taken as
+known. The two edge probes are dropped, so the O1 pipeline then runs on the inner 18 probes.
+% source: p2/massbal.py:invert_uptake (solver_fd.gas_coefficients, np.gradient, cumulative_trapezoid);
+% p2/run_o1.py:discover_o2 (sel = slice(1, n - 1)).
+% DIFF: dropping the two edge probes on O2 is not stated in PREREG_P2 s.3 (M1b paragraph).
+
+\paragraph{Known-answer tests.} On a fresh solver run (default physics, $k = 0.002$\,s$^{-1}$,
+$N_z = 200$, horizon 3 $t_{\mathrm{stoich}}$, 300 times), the inversion recovers $q$ to within
+3\,\% of $\max q$ over the inner cells. Fed the true $q$, the O2 pipeline recovers L1 with
+$|\hat k - k|/k < 0.02$ (weak form, M4). With the inverted $q$ it does not recover the law at
+this $\Da$, which the pre-registration declared as a pilot fact.
+% source: tests/test_p2.py:test_mass_balance_inversion_recovers_q_from_dense_concentration,
+% test_discover_o2_recovers_law_from_concentration_only; PREREG_P2 s.6 item 5.
+
+\subsection*{M5: errors-in-variables best-subset (an oracle)}
+M5 runs M4's enumeration of 1 to 4 terms on Lib-B in the strong form, but fits each support
+by mixed least squares and total least squares. The constant column is treated as exact and
+projected out by least squares. The other columns and the target are scaled by their error
+standard deviations and solved by total least squares through the SVD. The selection uses
+the same floored BIC as M4. The error standard deviations are the declared ones: $\sigma$
+times the observed channel range for $c$, $q$ and $T$; for $\qsm$,
+$\sqrt{(\varepsilon\,\qsm)^2 + (\partial\qsm/\partial c\ \sigma_c)^2}$, with the derivative
+taken by a forward difference of step $10^{-6}$ times the range of $c$; first-order
+propagation for $cq$, $q^2$ and $c^2$; and for the target, the $q$-channel standard
+deviation times the norm of the Savitzky--Golay derivative coefficients (window 21, order 3).
+At $\sigma = 0$ the target standard deviation is set to $10^{-12}$. Because M5 is given the
+true error levels, it takes no part in choosing the best method for H2a, H2b or the positive
+control, and is used in H2c only.
+% source: p2/eiv.py:mixed_ls_tls, eiv_best_subset (max_terms = 4, floor = 2e-3);
+% p2_grid_extra.py:fit_m5 (h = 1e-6 * ptp(c), savgol_coeffs(21, 3, deriv = 1), sd_y = 1e-12 at sigma 0);
+% PREREG_P2 s.3 (M5) and s.9 A2.1.
+% DIFF: fit_m5 builds a per-row error SD for each column, but eiv_best_subset reduces each to its
+% MEAN over rows before the TLS fit (s = mean(sd_cols[n])). So the weighting is one scalar per
+% column, not per observation. PREREG_P2 s.3 says "every column weighted by its DECLARED error SD",
+% which this meets only in the per-column sense.
+% DIFF (minor): the channel ranges in fit_m5 are taken from the OBSERVED (noisy, probe-sampled)
+% data (np.ptp(ch[k])), whereas the noise SD was set from the full ground-truth field range
+% (p2_observe.py:observe).
+
+\paragraph{Known-answer tests.} With $y = 2x + 1$ and noise of standard deviation 0.15 on
+$x$ (20\,000 points), ordinary least squares is attenuated by more than 0.2 in the slope and
+mixed least squares and total least squares recovers slope and intercept within 0.05. At
+near-zero declared error ($10^{-6}$ of each column's standard deviation) on the known-answer
+system, M5 recovers L1 and selects the same support as M4. Through the grid wrapper at zero
+noise on the five-probe system, M5 recovers L1 and agrees with M4.
+% source: tests/test_p2.py:test_mixed_ls_tls_removes_the_attenuation_bias_ols_suffers,
+% test_eiv_best_subset_recovers_ldf_and_matches_m4_at_zero_error,
+% test_grid_extra_m5_matches_m4_at_zero_noise_through_the_grid_wrapper.
+
+ODR-BINDy and WENDy were not run on the grid. The ODR-BINDy port recovered the exact
+7-term support on its authors' Lorenz example in 1 of 5 noise seeds, with a mean relative
+coefficient error of 0.166 against about $2.2\times10^{-3}$ reported, and is reported as
+``port, accuracy below the reference''.
+% source: PREREG_P2 s.3 (M5 row), s.11 (ODR-BINDy five-seed check); results/odr_bindy_seeds.json
+% summary (support_rate 0.2, rel_err_mean 0.1656, reported_rel_err 0.00224).
+
+\subsection*{M6: SINDy-PI on the isothermal control}
+M6 is given no isotherm and no temperature. It runs only on the 9 isothermal-control cells,
+at every $\sigma$ and at $\varepsilon = 0$, with 60 replicates, in the strong form. The
+library is $\{1, c, q, cq, q^2, c^2\}$, augmented with $\mathrm{d}q/\mathrm{d}t$,
+$c\,\mathrm{d}q/\mathrm{d}t$ and $q\,\mathrm{d}q/\mathrm{d}t$. Each of the three
+$\mathrm{d}q$ terms is tried as the left-hand side and fitted on the rest by M4's
+enumeration with up to 5 terms. The candidate with the smallest relative residual wins, and
+the relation is normalised so the $\mathrm{d}q/\mathrm{d}t$ coefficient is 1. Success
+requires the support $\{\mathrm{d}q, c\,\mathrm{d}q, c, q, cq\}$ exactly, with
+$c\,\mathrm{d}q > 0$, $c < 0$, $q > 0$ and $cq > 0$.
+% source: p2/methods.py:sindy_pi (max_terms = 5); p2_grid_extra.py:fit_m6, run (cmd m6:
+% SIGMAS x (0.0,) x N_REP, strong); p2/metric.py:success_M6.
+
+\paragraph{Known-answer test.} On the known-answer system, M6 returns exactly the support
+above, and every coefficient is within 5\,\% of its true value ($c\,\mathrm{d}q = 3$,
+$c = -0.3$, $q = 0.02$, $cq = 0.06$). The errors measured on 2026-10-04 were 0.02\,\% and
+0.07\,\% for $b$ and $k$. Through the grid wrapper on the five-probe system, M6 succeeds.
+% source: tests/test_p2.py:test_sindy_pi_finds_implicit_langmuir_ldf_without_an_isotherm,
+% test_grid_extra_m6_recovers_the_implicit_law_on_the_isothermal_system; PREREG_P2 s.10 item 10.
+
+\subsection*{M7: symbolic regression (PySR)}
+M7 runs PySR with binary operators $+$, $-$ and $\times$, no unary operators, 40 iterations,
+maximum expression size 12, a fixed random state equal to the replicate index, deterministic
+serial search, PySR's ``best'' model selection and a time limit of 1800\,s per search. The
+features are Lib-B without the constant, since PySR fits constants itself, and the target is
+the strong-form derivative. Feature names are passed as placeholders $f_0, f_1, \dots$ and
+mapped back. The chosen expression is expanded by SymPy. A monomial that is a single feature
+to the first power counts under that feature; any other monomial is recorded as extra
+support, so a spurious term makes the fit fail. M7 runs on the subgrid of all $\Da$,
+$\sigma \in \{0.5, 2\}\,\%$, $\varepsilon \in \{0, 2\}\,\%$, both isotherms, $\Pe \times 1$,
+O1, with 60 replicates.
+% source: p2/pysr_method.py:pysr_sr (niterations = 40, maxsize = 12, timeout_s = 1800,
+% deterministic = True, parallelism = "serial", model_selection = "best"), safe_names;
+% p2_grid_extra.py:run (cmd m7: SUB_SIGMAS = (0.005, 0.02), SUB_EPSS = (0.0, 0.02), N_REP, Pe x1,
+% features without "1", seed = rep); PREREG_P2 s.3 (M7) and s.9 A1.1.
+% DIFF: PREREG_P2 s.3 says "the prereg gives every method the same features"; M7 is given Lib-B
+% minus the constant column "1" (p2_grid_extra.py and p2_pilot_m7.py). PySR can still form a
+% constant, which then counts as extra support.
+% NOTE: pysr_sr takes an argument procs = 2 that is never used.
+
+\paragraph{Inclusion gate.} Before any M7 search on the grid, PySR with these settings ran on
+the known-answer system with 0.5\,\% relative noise on $q$ and on $\qsm$, for 3 seeds. The
+rule was to include M7 if L1 was recovered in at least 2 of 3 seeds, every search finished
+within 1800\,s and peak memory stayed under 3\,GB. All three seeds returned $k(\qsm - q)$ with
+$\hat k = 0.019994$, $0.019992$ and $0.019943$ (relative errors $3.1\times10^{-4}$,
+$4.2\times10^{-4}$ and $2.9\times10^{-3}$), in 35, 5 and 5\,s, at a peak of 0.97\,GB. M7 was
+included.
+% source: results/p2_pilot_m7.json (k_true 0.02, noise 0.005, limits wall_s 1800 and peak_gb 3.0,
+% rows seeds 0-2, decision "INCLUDE M7 on its declared subgrid"); p2_pilot_m7.py (noise applied as
+% q * (1 + 0.005 N(0,1)) and qstar * (1 + 0.005 N(0,1))); PREREG_P2 s.11.
+% NOTE: the gate's noise is relative to the local value, while the grid's noise is relative to the
+% channel range (p2_observe.py). PREREG_P2 s.3 only says "0.5 % noise on q AND on the measured q*".
+
+\subsection*{M8: Kolmogorov--Arnold network (not run on the grid)}
+M8 uses pykan 0.2.8 following Liu et al.'s procedure. It fits a KAN of width $[n, 1]$
+(grid 5, spline order 3) on standardised raw variables $\{c, q, T, \qsm\}$ with L-BFGS for
+100 steps and sparsity penalty $10^{-3}$, snaps every edge to $\{x, x^2, 0\}$, and reads the
+formula back in the original variables. It is not a reimplementation of KANDy.
+% source: p2/methods.py:kan_symbolic (width = [len(names), 1], grid = 5, k = 3, steps = 100,
+% lamb = 1e-3, lib = ["x", "x^2", "0"]); PREREG_P2 s.3 (M8).
+
+\paragraph{Known-answer test and cost gate.} M8 failed its known-answer test at zero noise in
+every configuration tried: a polynomial library at three sparsity penalties
+($10^{-3}$, $10^{-2}$, $10^{-1}$), and raw variables on one and on three trajectories. It routed
+the law through $q^2$, used $q$ alone, or returned $\{1, \qsm, \qsm^2\}$. The test is kept as an
+expected failure. Its grid run was gated on one fit at the grid's size (20 probes, 200 times)
+taking at most 300\,s. The measured fit took 1144\,s, which projects to 68.7\,h for the 216
+subgrid fits, and returned only a constant. M8 was therefore not run on the grid.
+% source: tests/test_p2.py:test_kan_symbolic_recovers_ldf_at_zero_noise (xfail, strict = True);
+% results/p2_cost_gates.json (limit_s 300.0, sec_per_fit 1144.44, projected_h 68.67,
+% fits_on_subgrid 216, support_on_known_answer ["1"]); p2_pilot_costs.py (N_PROBE 20, N_T 200);
+% PREREG_P2 s.3 (M8) and s.10.
+
+\subsection*{M9: slow-manifold discovery}
+M9 regresses the state $q$, not its rate, on the $q$-free features $\{1, c, T, c^2, \qsm\}$ by
+M4's enumeration with up to 3 terms and the same floored BIC. It runs on every
+non-isothermal L1 cell, O1, every $(\sigma, \varepsilon)$, 60 replicates. Success is the
+support $\{\qsm\}$ with coefficient 1 within 5\,\%.
+% source: p2/methods.py:slow_manifold (max_terms = 3); p2_grid_extra.py:fit_m9, run (cmd m9);
+% p2/metric.py:success_manifold (tol = 0.05); PREREG_P2 s.4.3.
+
+\paragraph{Known-answer tests.} On the known-answer system, M9 recovers $q = \qsm$ at
+$k = 100$\,s$^{-1}$ and correctly does not at $k = 0.002$\,s$^{-1}$. Through the grid wrapper
+on the five-probe system at $k = 20$\,s$^{-1}$, it succeeds.
+% source: tests/test_p2.py:test_slow_manifold_finds_equilibrium_when_fast_and_not_when_slow,
+% test_grid_extra_m9_recovers_the_slow_manifold_near_equilibrium.
+
+\subsection*{M1: universal differential equation (demonstration)}
+M1 places a network in the uptake term of the column model. The network has two hidden layers
+of 32 tanh units. Its inputs are $c/c_{\mathrm{in}}$, $q/q_{\max}$, $(T - T_{\mathrm{in}})/10$\,K
+and $\qsm/q_{\max}$, and its output is multiplied by $q_{\max}/t_{\mathrm{stoich}}$, which needs
+no knowledge of $k$. Weights start as $0.3$ times standard normal draws from a seed equal to
+the replicate index, and biases start at zero. The network is trained through a
+differentiable column ($N_z = 50$, Kvaerno5, PID step control with rtol $10^{-6}$ and atol
+$10^{-9}$, initial step $10^{-3}$\,s, at most 200\,000 steps). The loss is the mean squared
+error of the outlet $c(t)$ and $T(t)$, each divided by its observed range. The optimiser is
+SciPy's L-BFGS-B with at most 50 iterations, 60 function evaluations and 7200\,s, keeping the
+best parameters seen. If a column solve exhausts its step budget after the first evaluation,
+training stops and keeps the best parameters (correction B88). The trained rate over all
+solved states is read out by M4 on Lib-B and by PySR with M7's settings; success on either
+counts. M1 ran once: Langmuir, $\Pe \times 1$, $\sigma = 2\,\%$, $\varepsilon = 0$, O3, the 9
+$\Da$ levels, one replicate.
+% source: p2_grid_extra.py:_m1_rate, fit_m1 (M1_NZ = 50, M1_MAXITER = 50, M1_BUDGET_S = 7200,
+% 0.3 * jax.random.normal, PRNGKey(seed)), _train_lbfgs (maxfun = maxiter + 10), run (cmd m1);
+% p2/jaxcol.py:solve (Kvaerno5, PIDController rtol 1e-6 atol 1e-9, dt0 1e-3, max_steps 200_000);
+% PREREG_P2 s.9 A4.
+% DIFF: A4 says the inputs are "scaled by c_in, q_max and T_in"; the code feeds (T - T_in)/10,
+% a shift by T_in and a fixed 10 K scale, not a division by T_in.
+
+\paragraph{Pilot and tests.} The JAX column matches the reference solver to better than
+$5\times10^{-3}$ on the exit curve, and $N_z = 50$ differs from $N_z = 400$ by 0.55\,\%. One
+gradient with respect to a $2\times32$ network took 145\,s, about 50 steps in 2\,h, so M1
+could not run at the declared scale and was reduced to the demonstration above. A smoke test
+on a fresh column ($k = 0.002$\,s$^{-1}$) runs two L-BFGS steps and checks that the loss is
+finite and the readout returns; it does not test recovery. Three tests check the B88 rule:
+training keeps the best parameters when the solver fails, and a failure on the first
+evaluation is still an error. M1 has no known-answer recovery test.
+% source: results/p2_pilot_m1.json (exit_change_50_vs_400 0.00552, grad_nn_s 145.2,
+% epochs_in_2h_at_grad_nn 49.6); tests/test_p2.py:test_jax_column_matches_verified_solver,
+% test_m1_demo_trains_and_reads_out_on_a_fresh_known_answer_column; tests/test_m1_train.py;
+% PREREG_P2 s.3 (M1 feasibility RESOLVED).
+% NOTE: the smoke test was added with A4 (after the freeze) and the B88 tests after the grid ran,
+% so "passed before the freeze" does not apply to M1's tests.
+
+\subsection*{Success metrics}
+L1 succeeds when the selected support is exactly $\{\qsm, q\}$, the $\qsm$ coefficient is
+positive, the $q$ coefficient is negative, and their ratio is $-1$ within 10\,\%. The fitted
+rate constant is $\hat k = -\text{coef}(q)$. For L2, with $\qsm$ fixed, the implied rate
+$\hat k(q) = -(\text{coef}(q) + \text{coef}(cq)\,c + 2\,\text{coef}(q^2)\,q)$ is averaged in 10
+equal bins of $q/q_{\max}$; the state dependence is found when $\{\qsm, q\}$ are selected,
+the Spearman correlation over the bins is below $-0.8$, and the top bin is at most 0.6 of the
+bottom bin. A fit that raised an error counts as a failure.
+% source: p2/metric.py:success_L1 (ratio_tol = 0.10), k_accuracy, success_L2 (n_bins = 10,
+% rho_max = -0.8, drop_max = 0.6); p2_grid_o1.py, p2_grid_extra.py (error rows success False);
+% PREREG_P2 s.4.3 and s.9 A2.4.
+
+\subsection*{Profile-likelihood identifiability}
+Identifiability is judged with the true law known and with the same measured isotherm the
+methods receive. $k$ is practically identifiable when the 95\,\% profile interval, the set
+where $2(\max\ell - \ell) \le 3.84$, lies within $[k/2, 2k]$. All profiles refine the same
+way: after the coarse grid, a pass of 21 log-spaced points is placed between the outside
+neighbours of the current interval, for at most 6 passes, stopping when at least 5 points
+lie inside or the step ratio falls below 1.001. The reported ends are the outside neighbours,
+so the interval is conservative.
+% source: p2/identifiability.py:_profile (21 points, 6 passes, okf.size >= 5, fine[1]/fine[0] < 1.001),
+% identifiable; PREREG_P2 s.4.3.
+% DIFF: PREREG_P2 s.3 (Phase A item ii) says the ODE profile refines with passes of 41 points and the
+% outlet/PDE profile with 21. The O1 grid profile (profile_interval_o1) calls the shared _profile, so it
+% uses 21 points per pass. Only the older single-probe profile_interval, used by tests, uses 41.
+
+\paragraph{O1.} The log-likelihood is the Gaussian sum over all 20 probes. For each probe,
+$\qs(t)$ is built by PCHIP interpolation of the observed $c$ and $T$ on a grid 4 times finer
+than the observations, and the LDF law is integrated by its exact update for a piecewise-linear
+$\qs$, vectorised over $k$. The coarse grid is $k = $ \texttt{logspace(-7, 1, 81)}, 10 points
+per decade, more than a decade beyond the smallest and largest $k$ of the design. If the
+coarse likelihood peaks at either end of that grid, the profile raises an error, which counts
+as not identifiable. The noise standard deviation in the likelihood is
+$\max(\sigma, 10^{-4})$ times the range of the observed $q$. O1 identifiability runs on every
+non-isothermal L1 cell, every $(\sigma, \varepsilon)$, 60 replicates.
+% source: p2/identifiability.py:loglik_o1, _qstar_path (UPSAMPLE = 4, PchipInterpolator), _ldf_exact,
+% profile_interval_o1 (edge ValueError), O1_K_GRID = np.logspace(-7, 1, 81);
+% p2_grid_extra.py:run (cmd o1ident, sq = max(sigma, 1e-4) * ptp(q)); PREREG_P2 s.9 A6.
+% NOTE: the likelihood SD uses the range of the OBSERVED probe q (noisy), while the noise was drawn
+% with SD sigma x the full-field range (p2_observe.py). PREREG_P2 does not fix this choice.
+
+\paragraph{O2 and O3.} Each point of the profile is a full column solve at $N_z = 100$ with
+the measured isotherm, scored on the interior $c$ and $T$ probes (O2) or the outlet $c$ and
+$T$ (O3). The coarse grid is $k = $ \texttt{logspace(-6, 0, 25)}. The noise standard deviations
+are $\max(\sigma, 10^{-4})$ times the ground-truth range of $c$ and of $T$. Each solve is capped
+at 600\,s of wall time; a capped solve scores $-\infty$, and each row records the capped $k$
+values and whether one lies within one coarse step ($10^{6/24}$) of the interval. These run on
+the subgrid of all $\Da$, both isotherms, $\Pe \times 1$, L1, $\sigma \in \{0.5, 2\}\,\%$,
+$\varepsilon \in \{0, 2\}\,\%$, with 3 replicates (216 rows per observation model).
+% source: p2/identifiability.py:_profile (default k_grid = np.logspace(-6, 0, 25)),
+% profile_interval_probes, profile_interval_outlet, _loglik_probes, _loglik_outlet, _with_cap,
+% _solve_scored; p2_grid_o23.py SOLVE_CAP_S = 600, COARSE_STEP = 10 ** (6 / 24), run_o3, run_o2_ident
+% (n_z = 100, product((0.005, 0.02), (0.0, 0.02), range(3))); PREREG_P2 s.9 A5.
+
+\paragraph{Known-answer tests.} The exact O1 update agrees with the ODE-solver likelihood
+within $2\times10^{-3}$ relative (plus 0.2) at $k \in \{0.005, 0.02, 0.05\}$. The O1 profile over 20
+noisy probes ($\sigma = 2\,\%$) contains $k = 0.02$ and is identifiable. After A6, it contains $k$
+at $3.22\times10^{-6}$, $1.39\times10^{-5}$ and $0.139$\,s$^{-1}$, and it raises an error on a
+grid whose edge holds the peak. The single-probe profile on a fresh non-isothermal run
+($k = 2\times10^{-4}$\,s$^{-1}$, $\sigma = 0.5\,\%$) lies within 2\,\% of $k$. The outlet and probe
+profiles on a fresh low-$\Da$ run ($k = 2\times10^{-4}$\,s$^{-1}$) contain $k$ with
+$\mathrm{hi}/\mathrm{lo} < 2$. The solve cap scores a capped solve as $-\infty$, records it, and
+leaves an uncapped solve unchanged.
+% source: tests/test_p2.py:test_o1_exact_ldf_likelihood_matches_the_ode_reference,
+% test_o1_profile_over_all_probes_brackets_k, test_ode_profile_with_temperature_brackets_k_on_nonisothermal_probe,
+% test_outlet_profile_likelihood_brackets_k_in_kinetic_regime, test_probe_profile_likelihood_brackets_k_in_kinetic_regime,
+% test_profile_interval_brackets_truth_and_is_narrow_at_low_noise; tests/test_profile_range.py (A6);
+% tests/test_solve_cap.py (A5).
+% NOTE: the A5 and A6 tests were written during and after the grid, not before the freeze.
+% \textbf{[CHECK]} the test suite was not re-run while drafting this note (machine busy); the pass
+% statements follow the assertions in the test files and the outcomes recorded in PREREG_P2.
