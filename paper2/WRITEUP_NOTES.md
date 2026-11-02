@@ -90,3 +90,19 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
 8. weak.py / methods.py docstrings swap the M2/M2b names (labels only).
 9. A1 text cites the freeze as d562f19 (old ID; 7dcc2fe here via COMMIT_MAP) - fine but say so.
 10. H2c refinement grid never solved: no slice had a discovery crossing, so refine levels are empty (as designed).
+
+### Resolutions (2026-11-02)
+- 1 Pe labels: fixed in text and figures (179faa2, 1fcde6b).
+- 2 O1 refinement 21 vs 41: a real deviation -> B89, fixed, A6 rerun restarted from zero (9e74dc1).
+- 3 M7 without the constant column: PySR fits its own constants, so a constant feature is redundant;
+  state it in Supp. Note 1 as the reason. Not a deviation of substance.
+- 4 M1 temperature input (T - T_in)/10 K: identical to the M1 pilot that A4 points to ("as in the
+  M1 pilot"); A4's "scaled by T_in" means centred on T_in. Wording only.
+- 5 M5 per-row SDs averaged per column: classical mixed LS-TLS (Golub-Hoffman-Stewart) scales each
+  column by ONE SD; eiv.py has done this since its pre-freeze commit fecb31b, and the prereg says
+  "every column weighted by its declared error SD". Consistent; describe it exactly. The channel
+  ranges come from the observed (noisy, probe) channels rather than the full field used to set the
+  noise: a small mis-weighting of an oracle method that enters H2c only. Disclose in Supp. Note 1.
+- 6 M2 fallbacks: pre-freeze code (1bb9a75); trigger only if no probe is held out or no support is
+  admissible, neither expected with 20 probes x 200 times. Disclose; optionally count triggers later.
+- 7 O2 drops the two edge probes: centred z-differences need neighbours (run_o1.py docstring). State it.
