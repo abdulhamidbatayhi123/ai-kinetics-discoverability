@@ -478,3 +478,81 @@ leaves an uncapped solve unchanged.
 % NOTE: the A5 and A6 tests were written during and after the grid, not before the freeze.
 % \textbf{[CHECK]} the test suite was not re-run while drafting this note (machine busy); the pass
 % statements follow the assertions in the test files and the outcomes recorded in PREREG_P2.
+
+\section*{Supplementary Note 2: corrections made during the study}
+Every defect found in the design, code or text after it was written is recorded in a public
+ledger (\texttt{RETRACTIONS\_P2.md}) with its cause, its fix and how it was found. Entries
+B76 and B79 to B85 were found before any grid result existed and reached no result; they
+corrected the analysis code, one method's inclusion gate, cost statements, citations, a
+provenance field and descriptions of the ground truth. Four entries were found while the grid ran or after
+its first verdicts. Each is described here with what it changed.
+% source: RETRACTIONS_P2.md (B76, B79-B89); PREREG_P2 s.9 (A5 97150f6, A6 375552b).
+
+\subsection*{A5: a cap on each column solve (B86)}
+On O2 and O3, every point of the identifiability profile is a full column solve. With an
+isotherm error $\varepsilon > 0$, the measured isotherm evaluates its error term at
+$c/c_{\mathrm{in}}$ clipped to $[0, 1]$, and at large trial $k$ the stiff solver kept crossing
+that kink: one O3 row made no progress for six days, and two O2 rows of the same cell took 39
+and 42 hours. Amendment A5, made while the grid ran, capped each solve at 600\,s and scored a
+capped solve as a failed solve. Every capped $k$ is recorded with whether it lies next to the
+reported interval. In the finished O3 run, two rows had capped solves (six trial values of $k$
+each, all far above the interval, none adjacent to it). No reported interval depends on a
+capped solve.
+% source: PREREG_P2 A5; p2/identifiability.py (SolveCapped, _with_cap, _solve_scored);
+% p2_grid_o23.py (SOLVE_CAP_S = 600, _cap_record); results/p2_o3_ident.json (n_capped,
+% capped_adjacent); paper2/WRITEUP_NOTES.md "A5 outcome".
+
+\subsection*{A6: the range of the O1 profile (B87)}
+The pre-registered positive control requires discovery and identifiability to succeed at the
+lowest $\Da$ with no noise and no isotherm error; an isotherm that fails it is withheld from
+every verdict. As first run, the step isotherm failed: discovery succeeded in 135 of 135
+estimation replicates and identifiability in none. The cause was the O1 profile's search range,
+$10^{-5}$ to $10$\,s$^{-1}$, taken from a statement that holds for the Langmuir column only.
+The step cells at $\Da = 0.1$ have $k = 3.2\times10^{-6}$\,s$^{-1}$, below the range, so their
+likelihood peak was cut at the range's edge and every interval sat at $3.1\,k$. The stored
+fields obey the LDF law exactly there, and with a range that contains $k$ the interval is
+$[1.0034, 1.0038]\,k$. Amendment A6, made after the first verdicts were seen, widened the range
+to $10^{-7}$ to $10$\,s$^{-1}$ at the same density, made a peak on either edge an error, and
+recomputed all 51\,840 O1 identifiability rows; the analysis was then rerun unchanged. A6
+changes the range of a numerical search, chosen to contain every $k$ of the design, and no
+criterion, threshold, estimand or verdict word.
+% source: PREREG_P2 A6; RETRACTIONS_P2 B87; results/p2_verdicts_asrun.json positive_control;
+% p2_diag_step_profile.py; tests/test_profile_range.py.
+
+\subsection*{Refinement points of the O1 profile (B89)}
+While drafting Supplementary Note~1, the O1 profile was found to refine with 21 points per pass,
+where the pre-registration declares 41 for this profile (21 is declared for the O2 and O3
+profiles). Because the reported ends are the outside neighbours of the last points inside the
+interval, fewer points can widen an interval by up to one fine step, about 10\,\% instead of
+about 5\,\% for an interval of 0.6 decade. In the first run, 1\,464 of the 13\,849
+non-identifiable O1 rows lay within 15\,\% of the $[k/2, 2k]$ limits with the other end
+inside. The A6 recomputation was 12 of 54 cells in when this was found; it was stopped, the
+refinement was set to 41, and the recomputation was restarted from the beginning, so every
+corrected O1 row uses the declared settings.
+% source: RETRACTIONS_P2 B89; p2/identifiability.py (_profile n_fine; profile_interval_o1 n_fine = 41);
+% results/p2_extra_o1ident_asrun.json (count of rows near the limits, computed 2026-11-01).
+
+\subsection*{M1 kept its best parameters (B88)}
+Amendment A4 says the M1 demonstration keeps the best parameters seen during training. In four
+of its nine fits ($\Da = 31.6$, 100, 316 and 1000), a solve of the differentiable column
+exhausted its step budget after one to two hours of training; only the time budget was handled,
+so the error ended the fit with no readout, and it was recorded as a failure. The training loop
+now stops on such a failure and keeps the best parameters seen; a failure on the first
+evaluation is still recorded as an error. The four fits were rerun with this code
+	extbf{[PENDING: their outcome]}. M1 enters
+no confirmatory test, so no verdict depends on it.
+% source: PREREG_P2 A4; RETRACTIONS_P2 B88; p2_grid_extra.py (_train_lbfgs);
+% results/p2_extra_m1_asrun.json; results/p2_extra_m1.json; tests/test_m1_train.py.
+
+\subsection*{As-run and corrected verdicts}
+Both sets of verdicts are public (\texttt{results/p2\_verdicts\_asrun.json} and
+\texttt{results/p2\_verdicts.json}). As first run, the Langmuir positive control passed
+(discovery and identifiability 135 of 135) and the step control failed, so the step isotherm was
+withheld from all 48 of its H2b slices. Among the 48 Langmuir slices, 20 had a verdict, and in
+all 20 discovery failed before identifiability; 28 had no boundary on the grid for discovery or
+identifiability. H2a and H2c had no verdict. The corrected verdicts are the primary result,
+because the first run did not compute the pre-registered estimand, the 95\,\% profile interval,
+for the affected cells.
+\textbf{[PENDING: corrected verdicts and a side-by-side table, filled in when the A6
+recomputation finishes.]}
+% source: results/p2_verdicts_asrun.json (positive_control, H2b, H2a, H2c); paper2/WRITEUP_NOTES.md.
