@@ -43,7 +43,59 @@
 \begin{document}
 \maketitle
 
-% Abstract, Introduction, Results and Discussion: written after the corrected verdicts.
+% Abstract, Results and Discussion: written after the corrected verdicts. The Introduction's
+% last paragraph states the findings and is completed then; the rest does not depend on them.
+
+% ---- Introduction (no heading in the Article format; target about 550 words) ----
+A fixed-bed adsorption experiment reports concentrations and temperatures over time, most
+often at the column outlet. What an engineer needs from it is the uptake rate law, usually
+written as the linear driving force (LDF), $\partial q/\partial t = k\,(\qs(c,T) - q)$.
+Equation-discovery methods offer to find the law itself, not only its coefficient: sparse
+regression over a library of candidate terms \citep{brunton2016,rudy2016} and its weak-form
+\citep{messenger2021ode,reinbold2020}, ensemble \citep{fasel2022} and exact best-subset
+\citep{bertsimas2022} variants, symbolic regression \citep{cranmer2023,udrescu2020}, and
+neural networks embedded in the governing equations \citep{santana2023}. For adsorption, one
+study has done this from column data: Santana et al.\ trained a neural uptake term on noisy
+outlet breakthrough curves and read the LDF form back out, with the isotherm given exactly and
+at one rate and one noise level \citep{santana2023}. Repeated database searches found no other
+study that discovers an adsorption rate law from column data. Where such a result holds, and
+where it stops holding, is not known.
+
+Part of the answer is classical. Near local equilibrium the mass-transfer coefficient is
+poorly determined by column data \citep{valocchi1985}: finite rates then act only through an
+apparent dispersion \citep{katsoulas2023}, the LDF coefficient can be extracted wrongly from outlet
+breakthrough \citep{knox2016}, and most of the output variability belongs to the isotherm
+\citep{ward2022,taylor2026}. Yet in the constant-pattern regime a lumped rate coefficient is
+recovered from breakthrough consistently with theory \citep{miyabe2000}, so any limit must be
+conditioned on dispersion, isotherm shape, noise and isotherm error. Equation discovery has its
+own limits. On a single transient trajectory that settles onto a slow manifold, as a
+breakthrough run does, the candidate terms become nearly collinear and the data barely
+distinguish them \citep{stanhope2014,gallo2026,delgado2025}; noise induces phase transitions
+in what can be recovered \citep{klishin2024,fajardo2023,messenger2024}; and unique recovery
+needs conditions that non-chaotic dynamics generally lack \citep{shumaylov2025}. These results
+say that discovery must fail somewhere for column data. None says where, for which methods, or
+whether it fails where the rate constant itself stops being identifiable.
+
+The question matters most where the law is not the textbook one. In the water-harvesting
+framework MOF-303 the water diffusion rate passes through a minimum at the steep
+step of the isotherm, and the LDF approximation is least accurate there
+\citep{lassitter2024,hastings2024}; a loading-dependent rate has been fitted by hand
+\citep{abuelmaaty2024}. A method that could discover such a law from column data would be
+useful. Whether one can, at the noise and isotherm accuracy of a real experiment, is what
+this study tests.
+
+We asked, in a pre-registered computational study, for which regimes the adsorption rate law
+can be discovered from data a column experiment can produce, and whether discovery fails at the
+same boundary as the practical identifiability of the rate constant \citep{raue2009}, or
+earlier. Ground truth came from a validated non-isothermal column model \citep{paper1}, for a
+Langmuir sorbent and a MOF-303-like step isotherm, over four decades of Damk\"ohler number,
+three P\'eclet numbers, four noise levels and four levels of isotherm error, observed through
+interior probes of concentration, uptake and temperature, through probes without uptake, or at
+the outlet alone. Methods from each family above were run in their strongest available
+configuration, and identifiability was judged by profile likelihood
+on the same observations. The design, thresholds and verdict words were frozen before any
+method ran on the grid.
+\textbf{[PENDING: one or two sentences stating the corrected verdicts.]}
 
 \section*{Methods}
 
