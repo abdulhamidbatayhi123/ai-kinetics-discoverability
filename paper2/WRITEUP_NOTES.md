@@ -106,3 +106,25 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
 - 6 M2 fallbacks: pre-freeze code (1bb9a75); trigger only if no probe is held out or no support is
   admissible, neither expected with 20 probes x 200 times. Disclose; optionally count triggers later.
 - 7 O2 drops the two edge probes: centred z-differences need neighbours (run_o1.py docstring). State it.
+
+## Corrected verdicts (2026-11-04 10:28; A6 + B89; results/p2_verdicts.json, commit dfdd2fd)
+- O1 identifiability: 51,840 rows; identifiable 40,891 (as run 37,991). 339 rows raise the edge
+  guard at the UPPER limit (k = 10): the likelihood rises monotonically as k grows, i.e. the data fit
+  best with instant equilibrium and bound k from below only. All at Da 316/1000 (plus 2 at Da 100),
+  sigma <= 0.5 %, mostly eps > 0. All 339 were non-identifiable as run (interval at the edge).
+  Report them as "likelihood maximal at the upper search limit: not identifiable", NOT as code errors.
+- Flips vs as run: step +2,900 identifiable (the B87 cells and neighbours), step -7; Langmuir +24 / -17
+  (the B89 refinement). Langmuir H2b gaps change by <= 0.04 decade.
+- Positive control: both pass (135/135 discovery and identifiability each).
+- H2b overall: "discovery fails before identifiability"; 30 of 96 slices have a verdict, all 30 say
+  "fails before" (Langmuir 20, step 10); 66 slices: "no boundary on the grid for one of the two".
+  Gaps -1.60 to -3.43 decades. Da*_disc 0.11 to 7.24; Da*_ident 42.7 to 562. Best method in every
+  verdict slice: best_subset|weak (M4 exact best-subset, weak form).
+  Step slices with verdicts: sigma 2 % (eps 0, 0.5 %) and sigma 5 % (eps 0, 0.5 %; Pe 470 and 19 only).
+  Langmuir eps 2 % appears only at (sigma 2 %, Pe 19) and (sigma 5 %, Pe 94 / 19).
+- Zero-width Da*_ident intervals are common (562, 172, 56.6): perfect separation between adjacent
+  Da levels. Report as "between levels a and b" and explain in Methods.
+- H2a: no verdict (only O1|step|Pe 19|ensemble weak crosses; R* = 123 [113, 135]).
+- H2c: no verdict in every slice (no slice has a discovery boundary for both EIV and the best strong
+  method at eps > 0); h2c_holds false, falsified false.
+- H2d descriptive (step L2, k(q)): to be summarised from H2d_descriptive.
