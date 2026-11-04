@@ -33,7 +33,10 @@
 \newcommand{\qsm}{q^{*}_{\mathrm{meas}}}
 \newcommand{\verdict}[1]{``\textit{#1}''}
 
-\title{When can AI discover adsorption kinetics?}
+% Title chosen after the verdicts (ARTICLE_PLAN.md: <= 15 words, nothing the results do not
+% support). Working title was "When can AI discover adsorption kinetics?".
+\title{Discovering adsorption rate laws from column data fails long before the rate constant is
+lost}
 \author{Abdulhamid Batayhi\\[4pt]
 \small Department of Mechatronics Engineering, Faculty of Mechanical Engineering,\\
 \small Y\i{}ld\i{}z Technical University, Istanbul, T\"urkiye\\[4pt]
@@ -42,6 +45,22 @@
 
 \begin{document}
 \maketitle
+
+\begin{abstract}
+Equation-discovery methods promise to learn the uptake rate law of an adsorption column from
+its data, but where they can is not known. In a pre-registered computational study spanning
+four decades of Damk\"ohler number (Da), three P\'eclet numbers, noise and isotherm error, we
+compared the Da at which the best discovery method stopped recovering the linear-driving-force
+law with the Da at which its rate constant stopped being practically identifiable. In all 30
+conditions where both boundaries existed, discovery failed first, by 1.6 to 3.4 decades. An
+isotherm error of 5\,\% prevented discovery at every rate, while the rate constant remained
+identifiable, even from outlet breakthrough alone. Weak-form sparse regression worked at low Da
+and symbolic regression in a window near Da of 1 to 10; neither reached the range where the
+rate constant stayed identifiable. Column data carry information about the rate long after its
+law can no longer be discovered from them.
+\end{abstract}
+% <= 150 words (Nature Computational Science / Nature Chemical Engineering Article format).
+% Numbers: results/p2_verdicts.json H2b; results/p2_ident_robustness.json; H2b_O2_O3_descriptive.
 
 % Abstract, Results and Discussion: written after the corrected verdicts. The Introduction's
 % last paragraph states the findings and is completed then; the rest does not depend on them.
@@ -280,6 +299,77 @@ recovered at $\Da = 1$ and not at its neighbours was not resolved here.
 % results/p2_verdicts.json H2d_descriptive: best over methods and Pe per (sigma, eps, Da);
 % Da = 1: 0.77 to 1.00 for every (sigma, eps); max elsewhere 0.58 (sigma 0.5 %, Da 1000);
 % Da 0.1 and 0.316 at sigma 0: 0.00. NOTE: "best over methods and Pe" selects upward; say so.
+
+\section*{Discussion}
+The rate law of a fixed-bed column could be discovered only over a narrow part of the range in
+which its rate constant could be measured. In every slice of the design where both boundaries
+existed, discovery failed between 1.6 and 3.4 decades of Damk\"ohler number before
+identifiability did, and with an isotherm error of a few per cent it barely worked at all. For
+practice this sets an order of operations. Where the isotherm is known to better than about
+0.5\,\% and the uptake is slow compared with the passage of the front ($\Da$ of order one or
+below), sparse regression in the weak form can propose the law. Beyond that, the law has to be
+assumed or chosen among a few candidates by model comparison, and the data are then good for
+its coefficient over a further one and a half to three decades of $\Da$ from interior probes,
+and, at the noise levels tested, over one to two decades from the outlet alone.
+
+Why is discovery so much more fragile? The two tasks ask different things of the same data.
+Identifiability asks whether a known law with one free coefficient fits well only near the true
+value. Discovery asks the data to choose that law among many, and, in the success rule used
+here, to return the coefficients of $\qsm$ and $q$ in the ratio $-1$ within 10\,\%. An isotherm
+error enters discovery as an error in a regressor, which biases exactly that ratio. In the
+identifiability fit the same error is absorbed into $k$, and the estimate stays within a factor of
+two of the truth. The observation that an isotherm error of 0.5\,\% moved the discovery boundary
+by more than a decade, while it moved the identifiability boundary by about 0.2 decade, is
+consistent with this reading, although the study was not designed to separate the mechanisms.
+A second effect is classical: as $\Da$ grows, uptake approaches equilibrium, the driving force
+$\qs - q$ shrinks and the candidate terms become nearly collinear on the slow manifold
+\citep{delgado2025,gallo2026}, so the selection step loses contrast before the fit of a single
+coefficient does.
+
+The discovery methods were not interchangeable. Exact best-subset selection in the weak form was
+the most reliable, and strong-form sparse methods, which differentiate noisy data, never produced
+a boundary. Symbolic regression failed where weak-form regression did best, at the lowest rates,
+and succeeded in a window of intermediate $\Da$, including with 2\,\% isotherm error. A
+combination of the two families might widen the range, but it was not tested, and neither family
+reached the range where $k$ stayed identifiable. The errors-in-variables estimator could not be
+judged, because its strong-form comparator never had a boundary at the noise levels where it was
+tested; whether errors-in-variables fitting helps a weak-form search remains open.
+
+The closest prior work recovered the LDF law from noisy outlet curves with a neural network in
+the governing equations, with the isotherm given exactly, at one rate \citep{santana2023}. Our
+results place that success at one end of a wider map: with an exact isotherm, discovery from
+interior probes survives noise of 2 to 5\,\% at low $\Da$, but outside that corner it fails,
+and from probes without uptake no method reached 50\,\% at any rate. From the outlet, only
+our demonstration of the same neural pipeline (M1) was run; limited by computation to one
+noise level, one replicate per rate and fifty optimisation steps, it recovered the law in one
+of nine fits. For water in MOF-303, where the rate
+depends on loading at the isotherm step \citep{lassitter2024,hastings2024}, a loading-dependent
+law was recovered almost only at $\Da = 1$; such a law can be found, but not yet reliably.
+
+The study has limits that bound these conclusions. All data were simulated by one validated
+column model with the LDF law as the truth, so the boundaries hold for that model, the two
+isotherms and the error models used; real columns add errors in geometry, dispersion and heat
+transfer that were held exact here. Observation through interior probes of uptake (O1) is a
+ceiling that experiments rarely reach. The identifiability criterion asks whether the 95\,\%
+profile interval lies within a factor of two of $k$; it is a criterion of precision and accuracy,
+not of calibration. In an exploratory check the intervals contained the true $k$ in only about
+10\,\% of rows, because they are narrower than the small biases from time resolution and from
+errors in the inputs to $\qsm$. At the two highest $\Da$ levels the time resolution also biased
+the estimate itself, by factors of 0.6 to 24, so identifiability there is partly a property of
+the sampling; H2b does not depend on those levels. Symbolic regression ran on a subgrid, the
+neural pipeline only as a demonstration, and a Kolmogorov--Arnold network not at all, each for
+reasons of cost declared before the grid ran. Finally, four defects in our own pipeline were
+found and corrected during the study; the corrections, and the verdicts as first computed, are public
+(Supplementary Note~2), and none changed the main verdict.
+
+Two directions follow. Discovery would gain most from better isotherms: the boundaries moved
+more with isotherm error than with noise, so an isotherm measured to a fraction of a per cent is
+worth more to discovery than quieter sensors. And the map should be tested where it is most
+uncertain, on experimental breakthrough data with interior probes at moderate $\Da$, where it
+predicts that discovery should first become possible.
+% Numbers: see Results source comments; E3 coverage results/p2_e3_coverage.json per_model O1
+% coverage 0.099; accuracy results/p2_ident_robustness.json. The isotherm-error effect on ident:
+% (0.005, 0) 562 -> (0.005, 0.005) 350-374 = about 0.2 decade.
 
 % ---- Display items (Article format: up to 6) ----
 \begin{figure}[p]
