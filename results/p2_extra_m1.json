@@ -143,14 +143,6 @@
     }
    }
   },
-  "langmuir_L1_pe1_da100|0.02|0.0|0|m1_ude|o3": {
-   "success": false,
-   "error": "ValueError: INTERNAL: CpuCallback error calling callback: Traceback (most recent call last):\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 816, in _wrapped_callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 226, in _callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 96, in pure_callback_impl\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 71, in __call__\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\equinox\\_errors.py\", line 88, in raises\n_EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.\n\n\n--------------------\nAn error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n"
-  },
-  "langmuir_L1_pe1_da1e+03|0.02|0.0|0|m1_ude|o3": {
-   "success": false,
-   "error": "ValueError: INTERNAL: CpuCallback error calling callback: Traceback (most recent call last):\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 816, in _wrapped_callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 226, in _callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 96, in pure_callback_impl\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 71, in __call__\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\equinox\\_errors.py\", line 88, in raises\n_EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.\n\n\n--------------------\nAn error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n"
-  },
   "langmuir_L1_pe1_da3.16|0.02|0.0|0|m1_ude|o3": {
    "success": true,
    "sec": 7602.482829332352,
@@ -185,13 +177,150 @@
     }
    }
   },
+  "langmuir_L1_pe1_da100|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "sec": 5427.797061681747,
+   "support": [
+    "1",
+    "T",
+    "c",
+    "q"
+   ],
+   "k_hat": 0.0013541004902744623,
+   "m1": {
+    "loss_first": 0.32663899129813917,
+    "loss_best": 0.10329492071407528,
+    "n_evals": 9,
+    "stopped": "solver",
+    "solver_error": "ValueError: pear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n",
+    "readout_sparse": {
+     "1": 0.20058347730848683,
+     "c": 0.0070416074840700775,
+     "q": -0.0013541004902744623,
+     "T": -0.0006683056225376578
+    },
+    "success_sparse": false,
+    "success_symbolic": false,
+    "readout_symbolic": {
+     "c": 0.0,
+     "q": 0.0,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": -9.687731e-06,
+     "c^2": 0.0,
+     "qstar": 0.0,
+     "0.000439070220000000": 0.00043907022
+    }
+   }
+  },
+  "langmuir_L1_pe1_da1e+03|0.02|0.0|0|m1_ude|o3": {
+   "success": false,
+   "sec": 5089.012014627457,
+   "support": [
+    "1",
+    "T",
+    "c",
+    "q"
+   ],
+   "k_hat": 0.001413274283576784,
+   "m1": {
+    "loss_first": 0.33173376269645777,
+    "loss_best": 0.10463291997631095,
+    "n_evals": 9,
+    "stopped": "solver",
+    "solver_error": "ValueError: pear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n",
+    "readout_sparse": {
+     "1": 0.19556009215975823,
+     "c": 0.007052644003735607,
+     "q": -0.001413274283576784,
+     "T": -0.0006513425426626209
+    },
+    "success_sparse": false,
+    "success_symbolic": false,
+    "readout_symbolic": {
+     "c": 0.0,
+     "q": 0.0,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": -1.1208771e-05,
+     "c^2": 0.0,
+     "qstar": 0.0,
+     "0.000464556330000000": 0.00046455633
+    }
+   }
+  },
   "langmuir_L1_pe1_da31.6|0.02|0.0|0|m1_ude|o3": {
    "success": false,
-   "error": "ValueError: INTERNAL: CpuCallback error calling callback: Traceback (most recent call last):\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 816, in _wrapped_callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 226, in _callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 96, in pure_callback_impl\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 71, in __call__\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\equinox\\_errors.py\", line 88, in raises\n_EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.\n\n\n--------------------\nAn error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n"
+   "sec": 6053.491592884064,
+   "support": [
+    "1",
+    "T",
+    "c",
+    "q"
+   ],
+   "k_hat": 0.0012177102833222583,
+   "m1": {
+    "loss_first": 0.3592774612475709,
+    "loss_best": 0.11502770601768843,
+    "n_evals": 9,
+    "stopped": "solver",
+    "solver_error": "ValueError: pear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n",
+    "readout_sparse": {
+     "1": 0.2160717347912186,
+     "c": 0.006969976539039425,
+     "q": -0.0012177102833222583,
+     "T": -0.0007202690852552685
+    },
+    "success_sparse": false,
+    "success_symbolic": false,
+    "readout_symbolic": {
+     "c": 0.0,
+     "q": 0.0,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": -6.9689254e-06,
+     "c^2": 0.0,
+     "qstar": 0.0,
+     "0.000412639750000000": 0.00041263975
+    }
+   }
   },
   "langmuir_L1_pe1_da316|0.02|0.0|0|m1_ude|o3": {
    "success": false,
-   "error": "ValueError: INTERNAL: CpuCallback error calling callback: Traceback (most recent call last):\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 816, in _wrapped_callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 226, in _callback\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 96, in pure_callback_impl\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\jax\\_src\\callback.py\", line 71, in __call__\n  File \"C:\\Users\\abdulhamid batayhi\\Desktop\\ai-mof-cof-dynamics\\.venv\\Lib\\site-packages\\equinox\\_errors.py\", line 88, in raises\n_EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.\n\n\n--------------------\nAn error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n"
+   "sec": 7704.868821144104,
+   "support": [
+    "1",
+    "T",
+    "c",
+    "q"
+   ],
+   "k_hat": 0.0014014402720952414,
+   "m1": {
+    "loss_first": 0.33264821199572303,
+    "loss_best": 0.10507113385158587,
+    "n_evals": 9,
+    "stopped": "solver",
+    "solver_error": "ValueError: pear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.\n--------------------\n",
+    "readout_sparse": {
+     "1": 0.19772708604138195,
+     "c": 0.007009949425859391,
+     "q": -0.0014014402720952414,
+     "T": -0.0006583990932654146
+    },
+    "success_sparse": false,
+    "success_symbolic": false,
+    "readout_symbolic": {
+     "c": 0.0,
+     "q": 0.0,
+     "T": 0.0,
+     "c*q": 0.0,
+     "q^2": 0.0,
+     "c^2": 0.0,
+     "qstar": -0.00025788124,
+     "qstar**2": 4.9339396e-05,
+     "q^2*qstar": -6.4259325e-06
+    }
+   }
   }
  }
 }
