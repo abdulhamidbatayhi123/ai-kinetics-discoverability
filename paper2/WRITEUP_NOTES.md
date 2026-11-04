@@ -128,3 +128,20 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
 - H2c: no verdict in every slice (no slice has a discovery boundary for both EIV and the best strong
   method at eps > 0); h2c_holds false, falsified false.
 - H2d descriptive (step L2, k(q)): to be summarised from H2d_descriptive.
+
+## E3 on the corrected rows (2026-11-04, results/p2_e3_coverage.json)
+- O1: 51,840 rows; identifiable 40,891; covers k 5,158 (coverage 0.099); identifiable but missing k
+  35,740 (0.874). O2: coverage 0.093, identifiable-missing 0.873. O3: coverage 0.231, 0.700.
+- O1 by Da: coverage 0.07-0.26 for Da <= 31.6, 0.036 at 100, 0.028 at 316, 0.001 at 1000.
+- Reading: the 95 % profile intervals are far narrower than the estimator's bias (time resolution;
+  errors in c, T and the isotherm enter q*, which the likelihood treats as exact). The pre-registered
+  "identifiable" = precise AND within a factor 2 of k; it is not a calibrated interval. Discussion:
+  state this; H2b compares discovery with this criterion, and the estimate itself is within 2x.
+- Stored-vs-recomputed mismatches: 0.
+
+## Discovery findings beyond the verdicts (2026-11-04)
+- M7 (PySR, strong form, subgrid Pe 94) succeeds in a window Da 1-10 (peaks 0.82-0.96), 0 at Da 0.1/0.316
+  in all 8 subgrid slices, where M4 weak works best (0.53-0.96 without isotherm error).
+- Strong-form sparse methods: no crossing in any slice; at sigma 2 % zero success everywhere.
+- O2 discovery: best method <= 0.20 at any level.
+- Identifiability estimator with exact data: within 10 % up to Da 100; 0.6-24 k at Da 316/1000.
