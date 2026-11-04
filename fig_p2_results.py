@@ -46,7 +46,7 @@ _RC = inspect.signature(r_collapse).parameters
 SPREAD_OK, SPREAD_FAIL = _RC["spread_ok"].default, _RC["spread_fail"].default
 FACTOR2 = float(np.log10(2.0))        # H2c's predicted factor 2 (p2.analysis.h2c_verdict)
 
-DISPLAY_NOISE = ((0.005, 0.005), (0.02, 0.02), (0.05, 0.05))   # (sigma, eps) in Fig 2a, b
+DISPLAY_NOISE = ((0.005, 0.0), (0.02, 0.0), (0.05, 0.0))   # (sigma, eps) in Fig 2a, b: exact isotherm
 DISPLAY_PE = 1.0
 DISPLAY_METHODS_NOISE = (0.02, 0.02)
 R_BIN = 0.25                          # display bin of log10 R in Fig 3a (decade)
@@ -57,6 +57,7 @@ OI = {"orange": "#E69F00", "sky": "#56B4E9", "green": "#009E73", "yellow": "#F0E
 WORD_COLOUR = dict(zip(H2B_WORDS, (OI["verm"], OI["blue"], OI["green"])))
 WORD_SHORT = dict(zip(H2B_WORDS, ("fails before", "fails with", "outlives")))
 NO_BOUNDARY, WITHHELD_FACE = "#dddddd", "#ffffff"
+NO_BOUNDARY_WORDS = "no boundary on the grid for one of the two"   # p2_analyze's own words
 DISC_SHADES = ("#9ecae1", "#3b7fc4", "#08306b")    # discovery: light to dark = low to high noise
 IDENT_SHADES = ("#fdd0a2", "#e6750a", "#7f2704")   # identifiability
 
@@ -199,14 +200,14 @@ def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
         if fd.get("disc"):
             x, p = _frac(fd["disc"])
             ax.plot(x, p, "o", color=cd, ms=3.2, zorder=3)
-            if fd.get("disc_fit"):
+            if fd.get("disc_fit") and v.get("da_disc") is not None:   # the logistic only where it crosses
                 ax.plot(*_curve(fd["disc_fit"], x0, x1), "-", color=cd, lw=1.3)
             else:
                 ax.plot(x, p, "-", color=cd, lw=0.8)
         if fd.get("ident"):
             x, p = _frac(fd["ident"])
             ax.plot(x, p, "s", mfc="white", mec=ci, ms=3.2, zorder=3)
-            if fd.get("ident_fit"):
+            if fd.get("ident_fit") and v.get("da_ident") is not None:
                 ax.plot(*_curve(fd["ident_fit"], x0, x1), "--", color=ci, lw=1.3)
             else:
                 ax.plot(x, p, "--", color=ci, lw=0.8)
@@ -218,7 +219,7 @@ def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
             ax.errorbar(_log(v["da_ident"]), y, xerr=_xerr(v["da_ident"], *v["da_ident_ci"]), fmt="D",
                         mfc="white", mec=ci, ecolor=ci, ms=4, capsize=2, lw=1, zorder=4)
         wc = _word_class(v)
-        word = WORD_SHORT.get(wc, "withheld" if wc == "withheld" else "no boundary for both")
+        word = WORD_SHORT.get(wc, "withheld" if wc == "withheld" else "no verdict")
         handles.append(Line2D([], [], color=figstyle.C["dark"], lw=0, marker="o",
                               mfc=DISC_SHADES[i % 3], mec=IDENT_SHADES[i % 3], mew=1.4, ms=5,
                               label=f"$\\sigma$ = {_pct(s)}, $\\varepsilon$ = {_pct(e)}: {word}"))
@@ -232,10 +233,10 @@ def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
                    label="$k$ identifiable"),
             Line2D([], [], color=figstyle.C["dark"], lw=0, marker="D", ms=4,
                    label="50 % crossing, 95 % interval")]
-    leg = ax.legend(handles=kind, loc="upper right", fontsize=6.3, handlelength=1.8)
-    ax.add_artist(leg)
-    ax.legend(handles=handles, loc="lower left", fontsize=6.3, handlelength=0.8,
-              title=f"{ISO_LABEL.get(iso, iso)}, {pe_label(pe)}", title_fontsize=6.6)
+    # legends below the axes, never on the data
+    ax.set_title(f"{ISO_LABEL.get(iso, iso)}, {pe_label(pe)}", fontsize=7)
+    ax.legend(handles=kind + handles, loc="upper center", bbox_to_anchor=(0.5, -0.24), ncol=2,
+              fontsize=6.0, handlelength=1.6, frameon=False)
     if not have_fd:
         ax.text(0.02, 0.98, "per-level fractions not available\n(run p2_figdata.py)",
                 transform=ax.transAxes, fontsize=6, va="top", color=figstyle.C["grey"])
@@ -265,14 +266,14 @@ def _h2b_scatter(ax, V, da_levels):
     ax.set_aspect("equal", adjustable="box")
     ax.set_xlabel(r"$\log_{10} Da^{*}_{ident}$ (dimensionless)")
     ax.set_ylabel(r"$\log_{10} Da^{*}_{disc}$, best method (dimensionless)")
-    ax.text(0.97, 0.03, f"{n_missing} of {len(V['H2b'])} slices lack\na boundary for one or both",
-            transform=ax.transAxes, ha="right", va="bottom", fontsize=6.3)
+    ax.text(0.03, 0.90, f"not shown: {n_missing} of {len(V['H2b'])} slices\nwith no boundary for one of the two",
+            transform=ax.transAxes, ha="left", va="top", fontsize=6.0, color=figstyle.C["dark"])
     ax.text(0.03, 0.97, f"band: $\\pm${MDE} decade (MDE)", transform=ax.transAxes, ha="left",
             va="top", fontsize=6.3, color=figstyle.C["dark"])
     isos = sorted({_parse_slice(k)[2] for k in V["H2b"]})
     ax.legend(handles=[Line2D([], [], lw=0, marker=ISO_MARKER.get(i, "o"), mfc="white",
                               mec=figstyle.C["dark"], ms=4, label=ISO_LABEL.get(i, i)) for i in isos],
-              loc="lower right", bbox_to_anchor=(1.0, 0.12), fontsize=6.3)
+              loc="upper left", bbox_to_anchor=(0.0, 0.78), fontsize=6.3)
 
 
 def _h2b_wordmap(ax, V):
@@ -295,18 +296,18 @@ def _h2b_wordmap(ax, V):
     ax.set_ylim(len(rows), 0)
     ax.set_xticks(np.arange(len(cols)) + 0.5)
     ax.set_xticklabels([f"{ISO_LABEL.get(i, i).replace('MOF-303-like ', '')}\n{pe_label(p)}" for i, p in cols],
-                       fontsize=6.3)
+                       fontsize=5.6)
     ax.set_yticks(np.arange(len(rows)) + 0.5)
     ax.set_yticklabels([f"{_pct(s)}, {_pct(e)}" for s, e in rows], fontsize=6.0)
     ax.tick_params(length=0)
     ax.grid(False)
     for sp in ax.spines.values():
         sp.set_visible(False)
-    ax.set_xlabel("isotherm, Péclet multiplier (dimensionless)")
+    ax.set_xlabel("isotherm, Péclet number (dimensionless)")
     ax.set_ylabel(r"noise $\sigma$, isotherm error $\varepsilon$ (% of range)")
     patches = [Patch(facecolor=WORD_COLOUR[w], label=f"discovery {WORD_SHORT[w]} identifiability")
                for w in H2B_WORDS]
-    patches += [Patch(facecolor=NO_BOUNDARY, label="no boundary for both"),
+    patches += [Patch(facecolor=NO_BOUNDARY, label=NO_BOUNDARY_WORDS),
                 Patch(facecolor=WITHHELD_FACE, edgecolor=figstyle.C["dark"], hatch="////",
                       label="withheld (positive control failed)")]
     ov = V.get("H2b_overall", {}).get("words")
@@ -439,7 +440,9 @@ def fig3(V, FD, stem):
         err = None if ci[0] is None else [[sp - ci[0]], [ci[1] - sp]]
         c.errorbar(0.3, sp, yerr=err, fmt="o", color=figstyle.C["dark"], ms=4.5, capsize=2.5)
     else:
-        c.text(0.5, 0.5 * top, "no spread\n(< 2 crossings)", ha="center", fontsize=6)
+        # between the region labels, so it never sits on one of them
+        c.text(0.5, (SPREAD_OK + SPREAD_FAIL) / 2 - 0.16, "H2a: no verdict\n(fewer than\n2 crossings)",
+               ha="center", va="top", fontsize=6, fontweight="bold", color=figstyle.C["dark"])
     c.set_xlim(0, 1)
     c.set_ylim(0, top)
     c.set_xticks([])
@@ -554,6 +557,10 @@ def _h2c_panel(ax, V):
     lo, hi = ax.get_ylim()
     ax.set_ylim(lo, hi + 0.5 * (hi - lo))                    # head room for the legend
     ax.legend(handles=hd, loc="upper left", fontsize=5.9, ncol=3)
+    if n_none == len(sl):   # say plainly why the panel is empty
+        ax.text(0.5, 0.5, f"H2c: no verdict\nnone of the {len(sl)} slices has a discovery\nboundary "
+                "for both M5 and its comparator", transform=ax.transAxes, ha="center", va="center",
+                fontsize=6.5, fontweight="bold", color=figstyle.C["dark"])
 
 
 def fig4(V, FD, da_levels, stem, noise=DISPLAY_METHODS_NOISE, pe=DISPLAY_PE):
