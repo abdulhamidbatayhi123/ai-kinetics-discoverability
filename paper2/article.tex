@@ -97,6 +97,58 @@ on the same observations. The design, thresholds and verdict words were frozen b
 method ran on the grid.
 \textbf{[PENDING: one or two sentences stating the corrected verdicts.]}
 
+\section*{Results}
+
+\subsection*{Both isotherms pass the positive control}
+At the lowest Damk\"ohler number, with no noise and no isotherm error, discovery and
+identifiability must both succeed in at least 90\,\% of the estimation replicates, or that
+isotherm is withheld from every verdict. Both isotherms passed: the best method recovered the
+LDF law in 135 of 135 replicates, and $k$ was identifiable in 135 of 135, for the Langmuir and
+for the step isotherm alike. (As first run, the step isotherm failed this check because of a
+search-range error in the identifiability code; the correction and both sets of verdicts are
+given in Supplementary Note~2.)
+% results/p2_verdicts.json positive_control (langmuir, step: success_fraction 1.0,
+% identifiable_fraction 1.0, n 135, need 0.9); results/p2_verdicts_asrun.json (step failed).
+
+\subsection*{Discovery fails long before identifiability}
+H2b compares, in each slice of the design (one isotherm, one P\'eclet number, one noise level
+and one isotherm error), the Damk\"ohler number at which the best discovery method falls to
+50\,\% success, $\Da^{*}_{\mathrm{disc}}$, with the number at which $k$ stops being
+identifiable in half the replicates, $\Da^{*}_{\mathrm{ident}}$. Of the 96 slices, 30 had both
+boundaries on the grid. In all 30 the verdict was \verdict{discovery fails before
+identifiability}, so H2b's pre-registered overall word is the same (Fig.~2, Table~1). The gap
+was large everywhere: from 1.6 to 3.4 decades of $\Da$, with a median of 2.3 decades for the
+Langmuir sorbent (20 slices) and 2.5 for the step isotherm (10 slices). Discovery failed between
+$\Da = 0.11$ and $7.2$, while $k$ stayed identifiable up to $\Da$ between 43 and 562. In every
+one of the 30 slices the best discovery method was the same, exact best-subset selection in the
+weak form.
+% results/p2_verdicts.json H2b, H2b_overall (counts: 30 fails before, 0 with, 0 outlives);
+% gaps -1.60 to -3.43; medians -2.26 (langmuir, n 20), -2.54 (step, n 10); da_disc 0.110 to 7.24;
+% da_ident 42.7 to 562; best_method best_subset|weak in all 30.
+
+Noise moved both boundaries, but not equally. With 0.5\,\% noise and an exact isotherm, discovery
+held to $\Da \approx 5$ to 7 and identifiability to between the two highest levels ($\Da = 316$
+and 1000). At 2\,\% noise the
+discovery boundary fell to $\Da \approx 1$, and at 5\,\% to $\Da \approx 0.1$ to 0.3, near the
+bottom of the grid, while the identifiability boundary stayed between $\Da \approx 43$ and 172.
+A small error in the isotherm hurt discovery more than noise did: at 0.5\,\% noise, an isotherm
+error of 0.5\,\% moved $\Da^{*}_{\mathrm{disc}}$ from about 6 to about 0.2, more than a decade,
+while $\Da^{*}_{\mathrm{ident}}$ moved from 562 to about 360.
+% results/p2_verdicts.json H2b by (sigma, eps): (0.005, 0) disc 5.17-7.24, ident 562;
+% (0.005, 0.005) disc 0.13-0.23, ident 350-374; (0.02, 0) disc 0.85-1.41, ident 57-172;
+% (0.05, 0) disc 0.12-0.30, ident 57-70.
+
+The 66 slices without a verdict are not missing data. In each, one of the two probabilities did
+not cross 50\,\% anywhere on the grid, and the pre-registered words for that case are
+\verdict{no boundary on the grid for one of the two}.
+\textbf{[PENDING from the figure data: how many of these never reach 50\,\% discovery at any
+$\Da$ (expected at isotherm error $\ge 2\,\%$) and how many never fail (expected without noise).]}
+Many identifiability boundaries fell exactly between two adjacent levels of $\Da$, where every
+replicate was identifiable at one level and none at the next; such a boundary is reported as
+lying between those levels (Methods).
+\textbf{[VERIFY from the figure data: all-to-none between adjacent levels for every zero-width
+interval.]}
+
 \section*{Methods}
 
 \subsection*{Ground truth}
