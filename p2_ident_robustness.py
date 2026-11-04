@@ -66,10 +66,13 @@ def classify_no_verdict(verdicts, fig):
         if max(fr) < 0.5:
             return "always < 50 %"
         return "straddles 50 %"
+    # classify by the boundary that is MISSING (the verdict file's da_disc / da_ident is None)
     cnt = collections.Counter()
     for key, s in verdicts.items():
         if s["gap_decades"] is None:
-            cnt[f"discovery {kind(fig[key]['disc'])} | identifiability {kind(fig[key]['ident'])}"] += 1
+            d = f"discovery missing, {kind(fig[key]['disc'])}" if s["da_disc"] is None else "discovery present"
+            i = f"identifiability missing, {kind(fig[key]['ident'])}" if s["da_ident"] is None else "identifiability present"
+            cnt[f"{d} | {i}"] += 1
     return dict(cnt)
 
 

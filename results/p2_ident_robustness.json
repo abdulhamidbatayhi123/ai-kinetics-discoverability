@@ -213,11 +213,15 @@
   "min_gap_lower_bound_decades": 1.1400419811231342
  },
  "h2b_no_verdict_classes": {
-  "discovery always >= 50 % | identifiability always >= 50 %": 2,
-  "discovery always >= 50 % | identifiability straddles 50 %": 6,
-  "discovery straddles 50 % | identifiability always >= 50 %": 6,
-  "discovery straddles 50 % | identifiability straddles 50 %": 12,
-  "discovery always < 50 % | identifiability always >= 50 %": 5,
-  "discovery always < 50 % | identifiability straddles 50 %": 35
+  "discovery missing, always >= 50 % | identifiability missing, always >= 50 %": 2,
+  "discovery missing, always >= 50 % | identifiability missing, straddles 50 %": 6,
+  "discovery present | identifiability missing, always >= 50 %": 4,
+  "discovery present | identifiability missing, straddles 50 %": 3,
+  "discovery missing, straddles 50 % | identifiability missing, straddles 50 %": 2,
+  "discovery missing, always < 50 % | identifiability missing, always >= 50 %": 4,
+  "discovery missing, always < 50 % | identifiability missing, straddles 50 %": 2,
+  "discovery missing, always < 50 % | identifiability present": 34,
+  "discovery missing, straddles 50 % | identifiability missing, always >= 50 %": 2,
+  "discovery missing, straddles 50 % | identifiability present": 7
  }
 }
