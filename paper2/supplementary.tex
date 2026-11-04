@@ -1,4 +1,4 @@
-% Supplementary material for "When can AI discover adsorption kinetics?"
+% Supplementary material for "Discovering adsorption rate laws from column data fails long before the rate constant is lost"
 % A fragment to be \input into paper2/article.tex (uses \Da, \Pe, \qs, \qsm and booktabs).
 % Every number carries a "% source:" comment. "% DIFF:" marks a place where the code and
 % PREREG_P2_discoverability.md differ; the text reports the code.
@@ -348,7 +348,7 @@ formula back in the original variables. It is not a reimplementation of KANDy.
 \paragraph{Known-answer test and cost gate.} M8 failed its known-answer test at zero noise in
 every configuration tried: a polynomial library at three sparsity penalties
 ($10^{-3}$, $10^{-2}$, $10^{-1}$), and raw variables on one and on three trajectories. It routed
-the law through $q^2$, used $q$ alone, or returned $\{1, \qsm, \qsm^2\}$. The test is kept as an
+the law through $q^2$, used $q$ alone, or returned $\{1, \qsm, (\qsm)^2\}$. The test is kept as an
 expected failure. Its grid run was gated on one fit at the grid's size (20 probes, 200 times)
 taking at most 300\,s. The measured fit took 1144\,s, which projects to 68.7\,h for the 216
 subgrid fits, and returned only a constant. M8 was therefore not run on the grid.
@@ -482,10 +482,12 @@ leaves an uncapped solve unchanged.
 \section*{Supplementary Note 2: corrections made during the study}
 Every defect found in the design, code or text after it was written is recorded in a public
 ledger (\texttt{RETRACTIONS\_P2.md}) with its cause, its fix and how it was found. Entries
-B76 and B79 to B85 were found before any grid result existed and reached no result; they
-corrected the analysis code, one method's inclusion gate, cost statements, citations, a
-provenance field and descriptions of the ground truth. Four entries were found while the grid ran or after
-its first verdicts. Each is described here with what it changed.
+B76 and B79 to B84 were found before any grid result existed and reached no result; they
+corrected the analysis code, one method's inclusion gate, cost statements, citations and
+descriptions of the ground truth. B85, a provenance field missing from three results files, was
+found while the grid ran and affects no result. Four entries were found while the grid ran or
+after its first verdicts and changed what was computed. Each is described here with what it
+changed.
 % source: RETRACTIONS_P2.md (B76, B79-B89); PREREG_P2 s.9 (A5 97150f6, A6 375552b).
 
 \subsection*{A5: a cap on each column solve (B86)}
@@ -557,6 +559,95 @@ all 20 discovery failed before identifiability; 28 had no boundary on the grid f
 identifiability. H2a and H2c had no verdict. The corrected verdicts are the primary result,
 because the first run did not compute the pre-registered estimand, the 95\,\% profile interval,
 for the affected cells.
-\textbf{[PENDING: corrected verdicts and a side-by-side table, filled in when the A6
-recomputation finishes.]}
-% source: results/p2_verdicts_asrun.json (positive_control, H2b, H2a, H2c); paper2/WRITEUP_NOTES.md.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+& As first run & Corrected (primary) \\
+\midrule
+Positive control, Langmuir & passed (135/135, 135/135) & passed (135/135, 135/135) \\
+Positive control, step & failed (135/135, 0/135) & passed (135/135, 135/135) \\
+O1 rows identifiable & 37\,991 of 51\,840 & 40\,891 of 51\,840 \\
+H2b slices with a verdict & 20 (Langmuir only) & 30 (20 Langmuir, 10 step) \\
+H2b overall & \verdict{discovery fails before identifiability} & \verdict{discovery fails before identifiability} \\
+H2b gap, Langmuir (decade) & $-1.60$ to $-3.43$ & $-1.60$ to $-3.43$ \\
+H2a & no verdict & no verdict \\
+H2c & no verdict & no verdict \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent The corrections changed which isotherm could be judged, not what was found. The 2\,900
+O1 rows that became identifiable are step rows, nearly all in the cells A6 corrected; among the
+Langmuir rows, the 41-point refinement (B89) turned 24 rows identifiable and 17 non-identifiable,
+and the Langmuir H2b gaps moved by at most 0.11 decade (in one slice, where the identifiability
+boundary moved from $\Da \approx 57$ to 74), with every verdict unchanged.
+% Langmuir gap changes: sigma 2 % eps 0 Pe 94: -0.114 (da_ident 56.6 -> 73.5); two others 0.02-0.03;
+% all others < 0.02.
+% source: results/p2_verdicts_asrun.json and results/p2_verdicts.json (positive_control, H2b,
+% H2b_overall, H2a, H2c); results/p2_extra_o1ident_asrun.json vs results/p2_extra_o1ident.json
+% (row flips: step +2900 / -7, langmuir +24 / -17); p2_compare_verdicts.py.
+
+\section*{Supplementary Note 3: exploratory analyses E2 and E3}
+Both analyses were declared in writing before they ran (\texttt{EXPLORATORY\_P2.md}) and enter no
+confirmatory test.
+
+\subsection*{E2: the Kolmogorov--Arnold network on its declared subgrid}
+M8 ran in exactly the configuration declared before the freeze (raw variables $c$, $q$, $T$, $\qs$;
+sparsity weight $10^{-3}$; default training steps; pykan 0.2.8) on all nine $\Da$ levels,
+$\sigma \in \{0.5, 2\}\,\%$, $\varepsilon \in \{0, 2\}\,\%$, both isotherms, $\Pe \approx 94$, O1, three
+replicates: 216 fits. It recovered the law in none of them, at every $\Da$ (0 of 24 at each level)
+and in every condition (0 of 27 in each). In 62 fits the extracted law contained both $q$ and $\qs$,
+always with additional terms, most often a constant.
+\begin{center}
+\small
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Isotherm & $\sigma$, $\varepsilon$ & fits & law recovered & $q$ and $\qs$ selected \\
+\midrule
+Langmuir & 0.5\,\%, 0 & 27 & 0 & 9 \\
+Langmuir & 0.5\,\%, 2\,\% & 27 & 0 & 8 \\
+Langmuir & 2\,\%, 0 & 27 & 0 & 4 \\
+Langmuir & 2\,\%, 2\,\% & 27 & 0 & 3 \\
+step & 0.5\,\%, 0 & 27 & 0 & 13 \\
+step & 0.5\,\%, 2\,\% & 27 & 0 & 12 \\
+step & 2\,\%, 0 & 27 & 0 & 7 \\
+step & 2\,\%, 2\,\% & 27 & 0 & 6 \\
+\bottomrule
+\end{tabular}
+\end{center}
+One fit stopped with an error inside the library (a failed least-squares step in its spline
+refit, \texttt{kan/spline.py}, \texttt{curve2coef}); it is counted as a failure.
+% source: results/p2_e2_m8.json (216 rows; success 0; support contains q and qstar in 62; error row
+% langmuir_L1_pe1_da10|0.005|0.0|0, UnboundLocalError from pykan curve2coef); p2_e2_m8.py.
+
+\subsection*{E3: precision against coverage of the identifiability criterion}
+The pre-registered criterion calls $k$ practically identifiable when the 95\,\% profile interval lies
+inside $[k/2, 2k]$. It measures precision and accuracy within a factor of two, not whether the
+interval contains the true value. On O1, 40\,891 of 51\,840 rows met the criterion, but only
+5\,158 intervals (10\,\%) contained the true $k$; 87\,\% of the rows called identifiable had an
+interval that missed it. The same held on O2 (coverage 9\,\%; 157 of 216 rows identifiable) and,
+less strongly, on O3 (coverage 23\,\%; 150 of 216). The intervals are narrow because the
+likelihood treats the measured isotherm and the observed $c$ and $T$ that enter $\qsm$ as exact,
+while the estimate carries small biases from them and from the time resolution.
+\begin{center}
+\small
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+$\Da$ & identifiable (of 5\,760) & interval contains $k$ & identifiable but misses $k$ \\
+\midrule
+0.1 & 5\,760 & 425 & 92.6\,\% \\
+0.316 & 5\,760 & 454 & 92.1\,\% \\
+1 & 5\,760 & 646 & 88.8\,\% \\
+3.16 & 5\,760 & 1\,042 & 81.9\,\% \\
+10 & 5\,760 & 1\,511 & 73.8\,\% \\
+31.6 & 5\,558 & 709 & 87.2\,\% \\
+100 & 3\,308 & 205 & 93.8\,\% \\
+316 & 1\,467 & 159 & 89.6\,\% \\
+1000 & 1\,758 & 7 & 99.7\,\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+% source: results/p2_e3_coverage.json (per_model O1/O2/O3; per_model_da O1); p2_e3_coverage.py.
+% Stored-vs-recomputed mismatches: 0.

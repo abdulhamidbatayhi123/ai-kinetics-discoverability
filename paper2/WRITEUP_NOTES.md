@@ -114,7 +114,7 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
   sigma <= 0.5 %, mostly eps > 0. All 339 were non-identifiable as run (interval at the edge).
   Report them as "likelihood maximal at the upper search limit: not identifiable", NOT as code errors.
 - Flips vs as run: step +2,900 identifiable (the B87 cells and neighbours), step -7; Langmuir +24 / -17
-  (the B89 refinement). Langmuir H2b gaps change by <= 0.04 decade.
+  (the B89 refinement). Langmuir H2b gaps change by at most 0.114 decade (sigma 2 %, eps 0, Pe 94: da_ident 56.6 -> 73.5); an earlier note here said 0.04, which was wrong.
 - Positive control: both pass (135/135 discovery and identifiability each).
 - H2b overall: "discovery fails before identifiability"; 30 of 96 slices have a verdict, all 30 say
   "fails before" (Langmuir 20, step 10); 66 slices: "no boundary on the grid for one of the two".
