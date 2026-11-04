@@ -145,3 +145,11 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
 - Strong-form sparse methods: no crossing in any slice; at sigma 2 % zero success everywhere.
 - O2 discovery: best method <= 0.20 at any level.
 - Identifiability estimator with exact data: within 10 % up to Da 100; 0.6-24 k at Da 316/1000.
+
+## E2 outcome (2026-11-05 02:08; results/p2_e2_m8.json)
+- M8 (KAN, pykan 0.2.8, declared configuration) on its declared subgrid: 216 fits, 0 successes,
+  1 error. 62 fits selected both q and qstar but with extra terms (most often the constant);
+  the commonest supports were {1, q} (52), {1, T, q} (30), {1, c, q} (30).
+- The error (langmuir_L1_pe1_da10|0.005|0.0|0) is pykan's own: kan/spline.py curve2coef catches a
+  failed torch.linalg.lstsq with a bare except, prints 'lstsq failed', then returns an unset local
+  'coef' (UnboundLocalError). Counted as a failure (A2). Not our code; report the library version.
