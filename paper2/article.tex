@@ -357,8 +357,10 @@ not of calibration. In an exploratory check the intervals contained the true $k$
 errors in the inputs to $\qsm$. At the two highest $\Da$ levels the time resolution also biased
 the estimate itself, by factors of 0.6 to 24, so identifiability there is partly a property of
 the sampling; H2b does not depend on those levels. Symbolic regression ran on a subgrid, the
-neural pipeline only as a demonstration, and a Kolmogorov--Arnold network not at all, each for
-reasons of cost declared before the grid ran. Finally, four defects in our own pipeline were
+neural pipeline only as a demonstration, and a Kolmogorov--Arnold network only in an exploratory
+run on its declared subgrid, where it recovered the law in none of 216 fits; each limit was set
+by cost rules declared before the grid ran.
+% results/p2_e2_m8.json (216 rows, 0 success, 1 pykan-internal error counted as a failure). Finally, four defects in our own pipeline were
 found and corrected during the study; the corrections, and the verdicts as first computed, are public
 (Supplementary Note~2), and none changed the main verdict.
 
@@ -628,8 +630,24 @@ the paper reports both (Supplementary Note~2).
 Three analyses were declared in writing before they ran and are reported as exploratory:
 M1 trained at the scale a universal differential equation needs (E1), the Kolmogorov--Arnold
 network on its declared subgrid once the machine was free (E2), and how often an interval
-that meets $[k/2, 2k]$ misses the true $k$ (E3).
-% EXPLORATORY_P2.md (committed 787bb29 before any of them ran).
+that meets $[k/2, 2k]$ misses the true $k$ (E3). E2 and E3 ran on the corrected results. E1
+needs a graphics processor and has not run; it is not reported here. Three further descriptive
+checks were made after the verdicts were seen and are labelled so: the accuracy of the O1
+profile with exact data at each $\Da$, H2b recomputed without the two highest $\Da$ levels, and
+a classification of the slices without a verdict by which boundary is missing.
+% EXPLORATORY_P2.md (committed 787bb29 before any of them ran); results/p2_e2_m8.json,
+% results/p2_e3_coverage.json; p2_ident_robustness.py -> results/p2_ident_robustness.json.
+
+\subsection*{Boundaries with perfect separation}
+Where every replicate is identifiable at one level of $\Da$ and none at the next, the
+unpenalised logistic fit has no finite maximum-likelihood slope: the optimiser stops at a
+steep curve whose crossing lies between the two levels, near their geometric midpoint. Every
+bootstrap resample reproduces the same data, so the interval has zero width. Such a boundary
+is reported as lying between those two levels; the gap used by H2b is computed from it exactly
+as from any other crossing.
+% p2/analysis.py _fit (sklearn LogisticRegression, penalty=None, max_iter=1000; crossing -c/w)
+% and boundary_draws (resampling within each level). Checked on results/p2_figdata.json: every
+% zero-width da_ident_ci is all-to-none between the two adjacent levels (e.g. 562 between 316 and 1000).
 
 \subsection*{Software and computation}
 The grid ran on a single computer without a graphics processor, one job at a time, from
