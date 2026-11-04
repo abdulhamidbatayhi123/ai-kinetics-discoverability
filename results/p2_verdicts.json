@@ -90,7 +90,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -113,7 +113,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -136,7 +136,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.005|langmuir|pe=0.2": {
       "best_method": "ensemble|weak",
@@ -228,7 +228,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.005|step|pe=1.0": {
       "best_method": "ensemble|weak",
@@ -251,7 +251,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.005|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -274,7 +274,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.02|langmuir|pe=0.2": {
       "best_method": "ensemble|weak",
@@ -366,7 +366,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.02|step|pe=1.0": {
       "best_method": "ensemble|weak",
@@ -389,7 +389,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.02|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -398,10 +398,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 716.565435546488,
       "da_ident_ci": [
-        null,
-        null
+        476.4155523236251,
+        977.9913320142779
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -412,7 +412,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.05|langmuir|pe=0.2": {
       "best_method": "stlsq|weak",
@@ -490,10 +490,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 547.7545107447655,
       "da_ident_ci": [
-        null,
-        null
+        347.5453894786497,
+        881.8971063417414
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -504,7 +504,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.05|step|pe=1.0": {
       "best_method": "stlsq|strong",
@@ -513,10 +513,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 710.1092819206326,
       "da_ident_ci": [
-        null,
-        null
+        389.23829838922705,
+        973.3185980249676
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -527,7 +527,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.05|step|pe=5.0": {
       "best_method": "ensemble|strong",
@@ -536,10 +536,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 281.58449710726336,
       "da_ident_ci": [
-        null,
-        null
+        180.90549989294507,
+        481.6962381613122
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -550,7 +550,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.0|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -643,7 +643,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -667,7 +667,7 @@
         "m7|strong": 0.3901850237357794
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -690,7 +690,7 @@
         "ensemble|weak": 0.3207580215303655
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -699,10 +699,10 @@
         0.14826383328495027,
         0.3223798245846494
       ],
-      "da_ident": 384.63536602948943,
+      "da_ident": 373.7443969037765,
       "da_ident_ci": [
-        351.5876702472134,
-        409.59767852248825
+        350.25733099575706,
+        409.5976785224845
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -712,7 +712,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -3.2263521906784387,
+      "gap_decades": -3.213877667439924,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
@@ -782,7 +782,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.005|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -805,7 +805,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.005|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -828,7 +828,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.02|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -884,10 +884,10 @@
         null,
         null
       ],
-      "da_ident": 291.15354290967116,
+      "da_ident": 297.9375275417087,
       "da_ident_ci": [
-        244.01390187677404,
-        342.7617155843884
+        249.70882199658394,
+        357.62431002009924
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -921,7 +921,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.02|step|pe=1.0": {
       "best_method": "m7|strong",
@@ -945,7 +945,7 @@
         "m7|strong": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.02|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -954,10 +954,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 514.6089137273225,
       "da_ident_ci": [
-        null,
-        null
+        370.0429826639445,
+        773.9286181929376
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -968,7 +968,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.05|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -1000,10 +1000,10 @@
         null,
         null
       ],
-      "da_ident": 180.53809133717718,
+      "da_ident": 187.9564763153218,
       "da_ident_ci": [
-        126.06326676257365,
-        277.0547870013733
+        129.23117851535653,
+        290.70049997080264
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1046,10 +1046,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 557.0303932746493,
       "da_ident_ci": [
-        null,
-        null
+        356.72960667619776,
+        885.597980424364
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1060,7 +1060,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.05|step|pe=1.0": {
       "best_method": "stlsq|strong",
@@ -1069,10 +1069,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 479.51651659187365,
       "da_ident_ci": [
-        null,
-        null
+        283.2734323703887,
+        829.7934388951661
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1083,7 +1083,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.05|step|pe=5.0": {
       "best_method": "ensemble|strong",
@@ -1092,10 +1092,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 173.37253517471405,
       "da_ident_ci": [
-        null,
-        null
+        121.24184178387014,
+        262.6468748051694
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1106,7 +1106,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.0|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -1115,10 +1115,10 @@
         0.9740203433274193,
         1.8478528187090228
       ],
-      "da_ident": 76.47488931823082,
+      "da_ident": 76.47488931823074,
       "da_ident_ci": [
         69.91908633462467,
-        82.09400908526176
+        82.0940090852618
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1128,7 +1128,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -1.748097451991107,
+      "gap_decades": -1.7480974519911066,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
@@ -1138,10 +1138,10 @@
         0.6855131328849727,
         1.5154288571723946
       ],
-      "da_ident": 56.586806562463394,
+      "da_ident": 73.5387181779407,
       "da_ident_ci": [
         56.586806562463394,
-        56.586806562463394
+        79.78735911257814
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1152,7 +1152,7 @@
         "ensemble|weak": null,
         "m7|strong": null
       },
-      "gap_decades": -1.7306064641663292,
+      "gap_decades": -1.8444073342468188,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|langmuir|pe=5.0": {
@@ -1185,10 +1185,10 @@
         0.6503074761347613,
         1.3530526902811137
       ],
-      "da_ident": 386.71569374315703,
+      "da_ident": 171.62900428612906,
       "da_ident_ci": [
-        386.71569374315703,
-        386.71569374315703
+        171.62900428612906,
+        171.62900428612906
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1198,8 +1198,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.6066551406704432,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.2538540265608877,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -1208,10 +1208,10 @@
         0.5423994455092338,
         1.2472257183248812
       ],
-      "da_ident": 386.71569374315703,
+      "da_ident": 171.62900428612906,
       "da_ident_ci": [
-        386.71569374315703,
-        386.71569374315703
+        171.62900428612906,
+        171.62900428612906
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1222,8 +1222,8 @@
         "ensemble|weak": null,
         "m7|strong": null
       },
-      "gap_decades": -2.6572094800223978,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.3044083659128423,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -1232,10 +1232,10 @@
         0.6939058755574801,
         1.4595889697144573
       ],
-      "da_ident": 386.71569374315703,
+      "da_ident": 171.62900428612906,
       "da_ident_ci": [
-        386.71569374315703,
-        386.71569374315703
+        171.62900428612906,
+        171.62900428612906
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1245,8 +1245,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.578175791995196,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.2253746778856405,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -1255,10 +1255,10 @@
         0.6070957428207723,
         1.229470163279661
       ],
-      "da_ident": 89.55891551876147,
+      "da_ident": 89.29915475899381,
       "da_ident_ci": [
-        82.09400908526185,
-        96.33191223046238
+        81.28876273541472,
+        95.37140733091253
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1268,7 +1268,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.011855096524751,
+      "gap_decades": -2.0105936187091396,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
@@ -1278,10 +1278,10 @@
         0.30562215093649436,
         0.7453196201391237
       ],
-      "da_ident": 86.85758848698325,
+      "da_ident": 89.00305956239214,
       "da_ident_ci": [
-        80.12139808030577,
-        93.61654769235321
+        80.12139808030605,
+        94.18882908619646
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1291,7 +1291,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.248930408478403,
+      "gap_decades": -2.2595275772069883,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
@@ -1301,10 +1301,10 @@
         0.6948227152851978,
         1.3609274331387489
       ],
-      "da_ident": 73.53871817793626,
+      "da_ident": 69.91908633462488,
       "da_ident_ci": [
         56.586806562463394,
-        79.78735911257795
+        74.55472523020907
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1314,7 +1314,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -1.874159081211586,
+      "gap_decades": -1.852238770149322,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|step|pe=0.2": {
@@ -1324,10 +1324,10 @@
         0.33173278087700214,
         0.8206040647929917
       ],
-      "da_ident": 386.71569374315703,
+      "da_ident": 171.62900428612906,
       "da_ident_ci": [
-        386.71569374315703,
-        386.71569374315703
+        171.62900428612906,
+        171.62900428612906
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1337,8 +1337,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.8573818981800914,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.504580784070536,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -1347,10 +1347,10 @@
         0.32348109586391655,
         0.8598099798185329
       ],
-      "da_ident": 386.71569374315703,
+      "da_ident": 171.62900428612906,
       "da_ident_ci": [
-        386.71569374315703,
-        386.71569374315703
+        171.62900428612906,
+        171.62900428612906
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1360,8 +1360,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.8465585299557516,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.493757415846196,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -1370,10 +1370,10 @@
         0.3021317959350984,
         0.7017903353018077
       ],
-      "da_ident": 386.71569374315703,
+      "da_ident": 171.62900428612906,
       "da_ident_ci": [
-        386.71569374315703,
-        386.71569374315703
+        171.62900428612906,
+        171.62900428612906
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1383,8 +1383,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.9204475137545285,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.567646399644973,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.02|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -1393,10 +1393,10 @@
         null,
         null
       ],
-      "da_ident": 103.00190501394218,
+      "da_ident": 101.76473764966407,
       "da_ident_ci": [
-        95.34166268932034,
-        109.30704937263096
+        93.61654769235408,
+        109.3070493726305
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1416,10 +1416,10 @@
         null,
         null
       ],
-      "da_ident": 101.76473764966386,
+      "da_ident": 100.68345164867964,
       "da_ident_ci": [
-        93.61654769235331,
-        109.30704937263017
+        92.09070451735869,
+        107.8637185161609
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1440,10 +1440,10 @@
         0.1067825387663321,
         0.24530248781894495
       ],
-      "da_ident": 83.49211089043133,
+      "da_ident": 89.55891551876134,
       "da_ident_ci": [
-        76.47488931823086,
-        89.55891551876157
+        82.09400908526155,
+        96.33191223046238
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1453,7 +1453,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.725396675764711,
+      "gap_decades": -2.7558600605232018,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.02|step|pe=0.2": {
@@ -1463,10 +1463,10 @@
         null,
         null
       ],
-      "da_ident": 888.8333053693817,
+      "da_ident": 261.5474287525634,
       "da_ident_ci": [
-        442.1373456137539,
-        888.8333053693826
+        228.12467456375387,
+        282.0553790612401
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1477,7 +1477,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.02|step|pe=1.0": {
       "best_method": "m7|strong",
@@ -1486,10 +1486,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 273.9845757621856,
       "da_ident_ci": [
-        null,
-        null
+        251.68773840800898,
+        298.37332302573463
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1501,7 +1501,7 @@
         "m7|strong": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.02|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -1510,10 +1510,10 @@
         null,
         null
       ],
-      "da_ident": 177.50028461945277,
+      "da_ident": 115.12981570654756,
       "da_ident_ci": [
-        114.31901948479285,
-        268.2754600771201
+        108.55094638123236,
+        133.91980788813405
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1524,7 +1524,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.05|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -1579,9 +1579,9 @@
         null,
         null
       ],
-      "da_ident": 75.20565672553569,
+      "da_ident": 74.99585195820232,
       "da_ident_ci": [
-        62.5234009959531,
+        62.330321828489154,
         91.81973210229363
       ],
       "da_disc_by_method": {
@@ -1602,10 +1602,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 192.81025357018092,
       "da_ident_ci": [
-        null,
-        null
+        155.95966238349226,
+        238.04031751871995
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1616,7 +1616,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.05|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -1625,10 +1625,10 @@
         null,
         null
       ],
-      "da_ident": 470.0780062119087,
+      "da_ident": 170.7315319563877,
       "da_ident_ci": [
-        165.98050153255934,
-        931.2947209589116
+        134.28930564079045,
+        216.22676465911584
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1639,7 +1639,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.05|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -1648,10 +1648,10 @@
         null,
         null
       ],
-      "da_ident": 98.88332740847618,
+      "da_ident": 109.46254839931551,
       "da_ident_ci": [
-        56.73149644782264,
-        194.78720253557805
+        87.2683854650941,
+        134.73552105132694
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1662,7 +1662,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.0|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -1740,10 +1740,10 @@
         0.101934041542475,
         0.2148263172931897
       ],
-      "da_ident": 22.821682842457243,
+      "da_ident": 69.91908633462495,
       "da_ident_ci": [
-        22.821682842457243,
-        22.821682842457243
+        56.586806562463394,
+        74.55472523020919
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1753,8 +1753,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.2620948887751027,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.748342967712643,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -1763,10 +1763,10 @@
         null,
         null
       ],
-      "da_ident": 22.821682842457243,
+      "da_ident": 56.586806562463394,
       "da_ident_ci": [
-        22.821682842457243,
-        22.821682842457243
+        56.586806562463394,
+        56.586806562463394
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1777,7 +1777,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -1786,10 +1786,10 @@
         0.10560170547188837,
         0.22461770926984226
       ],
-      "da_ident": 22.821682842457243,
+      "da_ident": 56.586806562463394,
       "da_ident_ci": [
-        22.821682842457243,
-        22.821682842457243
+        56.586806562463394,
+        56.586806562463394
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1799,8 +1799,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.187298743642201,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.5816662635615413,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.005|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -1878,10 +1878,10 @@
         0.10139131047159303,
         0.19653445881150755
       ],
-      "da_ident": 25.975118337503133,
+      "da_ident": 74.55472523020896,
       "da_ident_ci": [
-        22.821682842457243,
-        31.140504288806344
+        56.586806562463394,
+        81.28876273541444
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1891,8 +1891,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.371816718481037,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.8297343576518914,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.005|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -1901,10 +1901,10 @@
         null,
         null
       ],
-      "da_ident": 22.821682842457243,
+      "da_ident": 56.586806562463394,
       "da_ident_ci": [
-        22.821682842457243,
-        22.821682842457243
+        56.586806562463394,
+        56.586806562463394
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1915,7 +1915,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.005|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -1924,10 +1924,10 @@
         0.10231441902147835,
         0.21166190871718002
       ],
-      "da_ident": 22.821682842457243,
+      "da_ident": 56.586806562463394,
       "da_ident_ci": [
-        22.821682842457243,
-        22.821682842457243
+        56.586806562463394,
+        56.586806562463394
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1937,8 +1937,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.222857314929254,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.6172248348485945,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.02|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2016,10 +2016,10 @@
         null,
         null
       ],
-      "da_ident": 29.730650727365628,
+      "da_ident": 80.12139808030601,
       "da_ident_ci": [
-        24.863290260065895,
-        37.745620799599905
+        73.53871817793446,
+        86.85758848698306
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -2030,7 +2030,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.02|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2039,10 +2039,10 @@
         null,
         null
       ],
-      "da_ident": 24.86329026006588,
+      "da_ident": 73.53871817794118,
       "da_ident_ci": [
-        22.821682842457243,
-        28.403632224595018
+        56.586806562463394,
+        79.78735911257965
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -2053,7 +2053,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.02|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2062,10 +2062,10 @@
         null,
         null
       ],
-      "da_ident": 22.821682842457243,
+      "da_ident": 56.586806562463394,
       "da_ident_ci": [
-        22.821682842457243,
-        22.821682842457243
+        56.586806562463394,
+        56.586806562463394
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -2076,7 +2076,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.05|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2085,10 +2085,10 @@
         null,
         null
       ],
-      "da_ident": 33.09440131919594,
+      "da_ident": 33.680393543605625,
       "da_ident_ci": [
-        30.956903417851194,
-        35.98871511081319
+        31.397005568194448,
+        36.42924072773744
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -2154,10 +2154,10 @@
         null,
         null
       ],
-      "da_ident": 36.12821856847294,
+      "da_ident": 76.85476583614276,
       "da_ident_ci": [
-        27.367071260367396,
-        49.19527442997112
+        64.6387129076043,
+        92.3656023921198
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -2168,7 +2168,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.05|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2177,10 +2177,10 @@
         null,
         null
       ],
-      "da_ident": 26.070755057578918,
+      "da_ident": 64.47215990293124,
       "da_ident_ci": [
-        22.010265702733374,
-        31.604275944523067
+        52.90108803793287,
+        81.28876273541472
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -2191,7 +2191,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.05|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2200,10 +2200,10 @@
         null,
         null
       ],
-      "da_ident": 20.426014465102643,
+      "da_ident": 50.36174284745427,
       "da_ident_ci": [
-        16.80778584218548,
-        24.951704940775393
+        38.408195610871694,
+        60.85763127134845
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -2214,7 +2214,7 @@
         "ensemble|weak": null
       },
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     }
   },
   "H2b_k_sensitivity": {
@@ -2256,7 +2256,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2266,7 +2266,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2276,7 +2276,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.005|langmuir|pe=0.2": {
       "best_method": "ensemble|weak",
@@ -2316,7 +2316,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.005|step|pe=1.0": {
       "best_method": "stlsq|weak",
@@ -2326,7 +2326,7 @@
         600.8850703024224
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.005|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -2336,7 +2336,7 @@
         786.2625581041644
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.02|langmuir|pe=0.2": {
       "best_method": "ensemble|weak",
@@ -2376,7 +2376,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.02|step|pe=1.0": {
       "best_method": "ensemble|weak",
@@ -2386,7 +2386,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.02|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -2396,7 +2396,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.05|langmuir|pe=0.2": {
       "best_method": "stlsq|weak",
@@ -2436,7 +2436,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.05|step|pe=1.0": {
       "best_method": "stlsq|strong",
@@ -2446,7 +2446,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.0|eps=0.05|step|pe=5.0": {
       "best_method": "ensemble|strong",
@@ -2456,7 +2456,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.0|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2496,7 +2496,7 @@
         7.0104184693231595
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2506,7 +2506,7 @@
         5.729766023308466
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2516,7 +2516,7 @@
         6.060267323549236
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2525,7 +2525,7 @@
         0.14826383328495027,
         0.3223798245846494
       ],
-      "gap_decades": -3.2263521906784387,
+      "gap_decades": -3.213877667439924,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
@@ -2556,7 +2556,7 @@
         0.22135770787944958
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.005|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2566,7 +2566,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.005|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -2576,7 +2576,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.02|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2616,7 +2616,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.02|step|pe=1.0": {
       "best_method": "m7|strong",
@@ -2626,7 +2626,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.02|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -2636,7 +2636,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.05|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2676,7 +2676,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.05|step|pe=1.0": {
       "best_method": "stlsq|strong",
@@ -2686,7 +2686,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.005|eps=0.05|step|pe=5.0": {
       "best_method": "stlsq|strong",
@@ -2696,7 +2696,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.0|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2705,7 +2705,7 @@
         0.9740203433274193,
         1.8478528187090228
       ],
-      "gap_decades": -1.748097451991107,
+      "gap_decades": -1.7480974519911066,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
@@ -2715,7 +2715,7 @@
         0.6855131328849727,
         1.5154288571723946
       ],
-      "gap_decades": -1.7306064641663292,
+      "gap_decades": -1.8444073342468188,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|langmuir|pe=5.0": {
@@ -2735,8 +2735,8 @@
         0.6503074761347613,
         1.3530526902811137
       ],
-      "gap_decades": -2.6066551406704432,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.2538540265608877,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2745,8 +2745,8 @@
         0.5423994455092338,
         1.2472257183248812
       ],
-      "gap_decades": -2.6572094800223978,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.3044083659128423,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2755,8 +2755,8 @@
         0.6939058755574801,
         1.4595889697144573
       ],
-      "gap_decades": -2.578175791995196,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.2253746778856405,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2765,7 +2765,7 @@
         0.6070957428207723,
         1.229470163279661
       ],
-      "gap_decades": -2.011855096524751,
+      "gap_decades": -2.0105936187091396,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
@@ -2775,7 +2775,7 @@
         0.30562215093649436,
         0.7453196201391237
       ],
-      "gap_decades": -2.248930408478403,
+      "gap_decades": -2.2595275772069883,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
@@ -2785,7 +2785,7 @@
         0.6948227152851978,
         1.3609274331387489
       ],
-      "gap_decades": -1.874159081211586,
+      "gap_decades": -1.852238770149322,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|step|pe=0.2": {
@@ -2795,8 +2795,8 @@
         0.33173278087700214,
         0.8206040647929917
       ],
-      "gap_decades": -2.8573818981800914,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.504580784070536,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2805,8 +2805,8 @@
         0.32348109586391655,
         0.8598099798185329
       ],
-      "gap_decades": -2.8465585299557516,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.493757415846196,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2815,8 +2815,8 @@
         0.3021317959350984,
         0.7017903353018077
       ],
-      "gap_decades": -2.9204475137545285,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.567646399644973,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.02|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2845,7 +2845,7 @@
         0.1067825387663321,
         0.24530248781894495
       ],
-      "gap_decades": -2.725396675764711,
+      "gap_decades": -2.7558600605232018,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.02|step|pe=0.2": {
@@ -2856,7 +2856,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.02|step|pe=1.0": {
       "best_method": "m7|strong",
@@ -2866,7 +2866,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.02|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2876,7 +2876,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.05|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2916,7 +2916,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.05|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2926,7 +2926,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.02|eps=0.05|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2936,7 +2936,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.0|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2975,8 +2975,8 @@
         0.101934041542475,
         0.2148263172931897
       ],
-      "gap_decades": -2.2620948887751027,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.748342967712643,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2986,7 +2986,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2995,8 +2995,8 @@
         0.10560170547188837,
         0.22461770926984226
       ],
-      "gap_decades": -2.187298743642201,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.5816662635615413,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.005|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -3035,8 +3035,8 @@
         0.10139131047159303,
         0.19653445881150755
       ],
-      "gap_decades": -2.371816718481037,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.8297343576518914,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.005|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -3046,7 +3046,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.005|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -3055,8 +3055,8 @@
         0.10231441902147835,
         0.21166190871718002
       ],
-      "gap_decades": -2.222857314929254,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "gap_decades": -2.6172248348485945,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.02|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -3096,7 +3096,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.02|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -3106,7 +3106,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.02|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -3116,7 +3116,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.05|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -3156,7 +3156,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.05|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -3166,7 +3166,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     },
     "sigma=0.05|eps=0.05|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -3176,7 +3176,7 @@
         null
       ],
       "gap_decades": null,
-      "words": "withheld: the positive control failed for this isotherm (A1)"
+      "words": "no boundary on the grid for one of the two; reported as the range tested"
     }
   },
   "H2b_O2_descriptive": {
@@ -3950,24 +3950,32 @@
     }
   },
   "H2a": {
-    "rstar": {},
+    "rstar": {
+      "O1|step|pe=5.0|ensemble|weak": [
+        122.85273282908908,
+        112.59546936059148,
+        135.09488127661362
+      ]
+    },
     "no_crossing": [
       "O1|langmuir|pe=0.2|best_subset|weak",
       "O1|langmuir|pe=1.0|best_subset|weak",
       "O1|langmuir|pe=5.0|best_subset|weak",
+      "O1|step|pe=0.2|best_subset|weak",
+      "O1|step|pe=1.0|best_subset|weak",
       "O2|langmuir|pe=0.2|best_subset|weak",
       "O2|langmuir|pe=1.0|best_subset|weak",
-      "O2|langmuir|pe=5.0|best_subset|weak"
+      "O2|langmuir|pe=5.0|best_subset|weak",
+      "O2|step|pe=0.2|best_subset|weak",
+      "O2|step|pe=1.0|best_subset|weak",
+      "O2|step|pe=5.0|best_subset|strong"
     ],
     "spread_decades": null,
     "spread_ci": [
       null,
       null
     ],
-    "words": "no verdict: fewer than two conditions have a crossing",
-    "isotherms_withheld": [
-      "step"
-    ]
+    "words": "no verdict: fewer than two conditions have a crossing"
   },
   "positive_control": {
     "langmuir": {
@@ -3980,10 +3988,10 @@
       "need": 0.9
     },
     "step": {
-      "passed": false,
+      "passed": true,
       "best_method": "best_subset|weak",
       "success_fraction": 1.0,
-      "identifiable_fraction": 0.0,
+      "identifiable_fraction": 1.0,
       "n_success": 135,
       "n_ident": 135,
       "need": 0.9
@@ -3992,7 +4000,7 @@
   "H2b_overall": {
     "words": "discovery fails before identifiability",
     "counts": {
-      "discovery fails before identifiability": 20,
+      "discovery fails before identifiability": 30,
       "discovery fails with identifiability": 0,
       "discovery outlives identifiability": 0
     },
@@ -4003,7 +4011,7 @@
         "discovery outlives identifiability": 0
       },
       "eps=0.0": {
-        "discovery fails before identifiability": 9,
+        "discovery fails before identifiability": 14,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
@@ -4013,27 +4021,32 @@
         "discovery outlives identifiability": 0
       },
       "pe=0.2": {
-        "discovery fails before identifiability": 6,
+        "discovery fails before identifiability": 10,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "pe=1.0": {
-        "discovery fails before identifiability": 6,
+        "discovery fails before identifiability": 8,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "pe=5.0": {
-        "discovery fails before identifiability": 8,
+        "discovery fails before identifiability": 12,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "eps=0.005": {
-        "discovery fails before identifiability": 8,
+        "discovery fails before identifiability": 13,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "sigma=0.02": {
-        "discovery fails before identifiability": 7,
+        "discovery fails before identifiability": 13,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "step": {
+        "discovery fails before identifiability": 10,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
@@ -4043,50 +4056,86 @@
         "discovery outlives identifiability": 0
       },
       "sigma=0.05": {
-        "discovery fails before identifiability": 8,
+        "discovery fails before identifiability": 12,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       }
     },
-    "n_with_verdict": 20,
+    "n_with_verdict": 30,
     "no_verdict": [
       "sigma=0.0|eps=0.0|langmuir|pe=0.2",
       "sigma=0.0|eps=0.0|langmuir|pe=1.0",
       "sigma=0.0|eps=0.0|langmuir|pe=5.0",
+      "sigma=0.0|eps=0.0|step|pe=0.2",
+      "sigma=0.0|eps=0.0|step|pe=1.0",
+      "sigma=0.0|eps=0.0|step|pe=5.0",
       "sigma=0.0|eps=0.005|langmuir|pe=0.2",
       "sigma=0.0|eps=0.005|langmuir|pe=1.0",
       "sigma=0.0|eps=0.005|langmuir|pe=5.0",
+      "sigma=0.0|eps=0.005|step|pe=0.2",
+      "sigma=0.0|eps=0.005|step|pe=1.0",
+      "sigma=0.0|eps=0.005|step|pe=5.0",
       "sigma=0.0|eps=0.02|langmuir|pe=0.2",
       "sigma=0.0|eps=0.02|langmuir|pe=1.0",
       "sigma=0.0|eps=0.02|langmuir|pe=5.0",
+      "sigma=0.0|eps=0.02|step|pe=0.2",
+      "sigma=0.0|eps=0.02|step|pe=1.0",
+      "sigma=0.0|eps=0.02|step|pe=5.0",
       "sigma=0.0|eps=0.05|langmuir|pe=0.2",
       "sigma=0.0|eps=0.05|langmuir|pe=1.0",
       "sigma=0.0|eps=0.05|langmuir|pe=5.0",
+      "sigma=0.0|eps=0.05|step|pe=0.2",
+      "sigma=0.0|eps=0.05|step|pe=1.0",
+      "sigma=0.0|eps=0.05|step|pe=5.0",
+      "sigma=0.005|eps=0.0|step|pe=0.2",
+      "sigma=0.005|eps=0.0|step|pe=1.0",
+      "sigma=0.005|eps=0.0|step|pe=5.0",
       "sigma=0.005|eps=0.005|langmuir|pe=1.0",
+      "sigma=0.005|eps=0.005|step|pe=0.2",
+      "sigma=0.005|eps=0.005|step|pe=1.0",
+      "sigma=0.005|eps=0.005|step|pe=5.0",
       "sigma=0.005|eps=0.02|langmuir|pe=0.2",
       "sigma=0.005|eps=0.02|langmuir|pe=1.0",
       "sigma=0.005|eps=0.02|langmuir|pe=5.0",
+      "sigma=0.005|eps=0.02|step|pe=0.2",
+      "sigma=0.005|eps=0.02|step|pe=1.0",
+      "sigma=0.005|eps=0.02|step|pe=5.0",
       "sigma=0.005|eps=0.05|langmuir|pe=0.2",
       "sigma=0.005|eps=0.05|langmuir|pe=1.0",
       "sigma=0.005|eps=0.05|langmuir|pe=5.0",
+      "sigma=0.005|eps=0.05|step|pe=0.2",
+      "sigma=0.005|eps=0.05|step|pe=1.0",
+      "sigma=0.005|eps=0.05|step|pe=5.0",
       "sigma=0.02|eps=0.02|langmuir|pe=0.2",
       "sigma=0.02|eps=0.02|langmuir|pe=1.0",
+      "sigma=0.02|eps=0.02|step|pe=0.2",
+      "sigma=0.02|eps=0.02|step|pe=1.0",
+      "sigma=0.02|eps=0.02|step|pe=5.0",
       "sigma=0.02|eps=0.05|langmuir|pe=0.2",
       "sigma=0.02|eps=0.05|langmuir|pe=1.0",
       "sigma=0.02|eps=0.05|langmuir|pe=5.0",
+      "sigma=0.02|eps=0.05|step|pe=0.2",
+      "sigma=0.02|eps=0.05|step|pe=1.0",
+      "sigma=0.02|eps=0.05|step|pe=5.0",
+      "sigma=0.05|eps=0.0|step|pe=1.0",
+      "sigma=0.05|eps=0.005|step|pe=1.0",
       "sigma=0.05|eps=0.02|langmuir|pe=0.2",
+      "sigma=0.05|eps=0.02|step|pe=0.2",
+      "sigma=0.05|eps=0.02|step|pe=1.0",
+      "sigma=0.05|eps=0.02|step|pe=5.0",
       "sigma=0.05|eps=0.05|langmuir|pe=0.2",
       "sigma=0.05|eps=0.05|langmuir|pe=1.0",
-      "sigma=0.05|eps=0.05|langmuir|pe=5.0"
+      "sigma=0.05|eps=0.05|langmuir|pe=5.0",
+      "sigma=0.05|eps=0.05|step|pe=0.2",
+      "sigma=0.05|eps=0.05|step|pe=1.0",
+      "sigma=0.05|eps=0.05|step|pe=5.0"
     ],
-    "isotherms_withheld": [
-      "step"
-    ]
+    "isotherms_withheld": []
   },
   "H2b_k_sensitivity_overall": {
     "words": "discovery fails before identifiability",
     "counts": {
-      "discovery fails before identifiability": 20,
+      "discovery fails before identifiability": 30,
       "discovery fails with identifiability": 0,
       "discovery outlives identifiability": 0
     },
@@ -4097,7 +4146,7 @@
         "discovery outlives identifiability": 0
       },
       "eps=0.0": {
-        "discovery fails before identifiability": 9,
+        "discovery fails before identifiability": 14,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
@@ -4107,27 +4156,32 @@
         "discovery outlives identifiability": 0
       },
       "pe=0.2": {
-        "discovery fails before identifiability": 6,
+        "discovery fails before identifiability": 10,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "pe=1.0": {
-        "discovery fails before identifiability": 6,
+        "discovery fails before identifiability": 8,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "pe=5.0": {
-        "discovery fails before identifiability": 8,
+        "discovery fails before identifiability": 12,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "eps=0.005": {
-        "discovery fails before identifiability": 8,
+        "discovery fails before identifiability": 13,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "sigma=0.02": {
-        "discovery fails before identifiability": 7,
+        "discovery fails before identifiability": 13,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "step": {
+        "discovery fails before identifiability": 10,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
@@ -4137,45 +4191,81 @@
         "discovery outlives identifiability": 0
       },
       "sigma=0.05": {
-        "discovery fails before identifiability": 8,
+        "discovery fails before identifiability": 12,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       }
     },
-    "n_with_verdict": 20,
+    "n_with_verdict": 30,
     "no_verdict": [
       "sigma=0.0|eps=0.0|langmuir|pe=0.2",
       "sigma=0.0|eps=0.0|langmuir|pe=1.0",
       "sigma=0.0|eps=0.0|langmuir|pe=5.0",
+      "sigma=0.0|eps=0.0|step|pe=0.2",
+      "sigma=0.0|eps=0.0|step|pe=1.0",
+      "sigma=0.0|eps=0.0|step|pe=5.0",
       "sigma=0.0|eps=0.005|langmuir|pe=0.2",
       "sigma=0.0|eps=0.005|langmuir|pe=1.0",
       "sigma=0.0|eps=0.005|langmuir|pe=5.0",
+      "sigma=0.0|eps=0.005|step|pe=0.2",
+      "sigma=0.0|eps=0.005|step|pe=1.0",
+      "sigma=0.0|eps=0.005|step|pe=5.0",
       "sigma=0.0|eps=0.02|langmuir|pe=0.2",
       "sigma=0.0|eps=0.02|langmuir|pe=1.0",
       "sigma=0.0|eps=0.02|langmuir|pe=5.0",
+      "sigma=0.0|eps=0.02|step|pe=0.2",
+      "sigma=0.0|eps=0.02|step|pe=1.0",
+      "sigma=0.0|eps=0.02|step|pe=5.0",
       "sigma=0.0|eps=0.05|langmuir|pe=0.2",
       "sigma=0.0|eps=0.05|langmuir|pe=1.0",
       "sigma=0.0|eps=0.05|langmuir|pe=5.0",
+      "sigma=0.0|eps=0.05|step|pe=0.2",
+      "sigma=0.0|eps=0.05|step|pe=1.0",
+      "sigma=0.0|eps=0.05|step|pe=5.0",
+      "sigma=0.005|eps=0.0|step|pe=0.2",
+      "sigma=0.005|eps=0.0|step|pe=1.0",
+      "sigma=0.005|eps=0.0|step|pe=5.0",
       "sigma=0.005|eps=0.005|langmuir|pe=1.0",
+      "sigma=0.005|eps=0.005|step|pe=0.2",
+      "sigma=0.005|eps=0.005|step|pe=1.0",
+      "sigma=0.005|eps=0.005|step|pe=5.0",
       "sigma=0.005|eps=0.02|langmuir|pe=0.2",
       "sigma=0.005|eps=0.02|langmuir|pe=1.0",
       "sigma=0.005|eps=0.02|langmuir|pe=5.0",
+      "sigma=0.005|eps=0.02|step|pe=0.2",
+      "sigma=0.005|eps=0.02|step|pe=1.0",
+      "sigma=0.005|eps=0.02|step|pe=5.0",
       "sigma=0.005|eps=0.05|langmuir|pe=0.2",
       "sigma=0.005|eps=0.05|langmuir|pe=1.0",
       "sigma=0.005|eps=0.05|langmuir|pe=5.0",
+      "sigma=0.005|eps=0.05|step|pe=0.2",
+      "sigma=0.005|eps=0.05|step|pe=1.0",
+      "sigma=0.005|eps=0.05|step|pe=5.0",
       "sigma=0.02|eps=0.02|langmuir|pe=0.2",
       "sigma=0.02|eps=0.02|langmuir|pe=1.0",
+      "sigma=0.02|eps=0.02|step|pe=0.2",
+      "sigma=0.02|eps=0.02|step|pe=1.0",
+      "sigma=0.02|eps=0.02|step|pe=5.0",
       "sigma=0.02|eps=0.05|langmuir|pe=0.2",
       "sigma=0.02|eps=0.05|langmuir|pe=1.0",
       "sigma=0.02|eps=0.05|langmuir|pe=5.0",
+      "sigma=0.02|eps=0.05|step|pe=0.2",
+      "sigma=0.02|eps=0.05|step|pe=1.0",
+      "sigma=0.02|eps=0.05|step|pe=5.0",
+      "sigma=0.05|eps=0.0|step|pe=1.0",
+      "sigma=0.05|eps=0.005|step|pe=1.0",
       "sigma=0.05|eps=0.02|langmuir|pe=0.2",
+      "sigma=0.05|eps=0.02|step|pe=0.2",
+      "sigma=0.05|eps=0.02|step|pe=1.0",
+      "sigma=0.05|eps=0.02|step|pe=5.0",
       "sigma=0.05|eps=0.05|langmuir|pe=0.2",
       "sigma=0.05|eps=0.05|langmuir|pe=1.0",
-      "sigma=0.05|eps=0.05|langmuir|pe=5.0"
+      "sigma=0.05|eps=0.05|langmuir|pe=5.0",
+      "sigma=0.05|eps=0.05|step|pe=0.2",
+      "sigma=0.05|eps=0.05|step|pe=1.0",
+      "sigma=0.05|eps=0.05|step|pe=5.0"
     ],
-    "isotherms_withheld": [
-      "step"
-    ]
+    "isotherms_withheld": []
   },
   "H2c": {
     "slices": {
@@ -4277,6 +4367,105 @@
         "best_any_form_method": "best_subset|weak",
         "shift_vs_best_any_form": null,
         "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=0.2|eps=0.005": {
+        "best_strong_method": "best_subset|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "best_subset|weak",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=0.2|eps=0.02": {
+        "best_strong_method": "best_subset|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "best_subset|weak",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=0.2|eps=0.05": {
+        "best_strong_method": "best_subset|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "best_subset|weak",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=1.0|eps=0.005": {
+        "best_strong_method": "best_subset|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "best_subset|weak",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=1.0|eps=0.02": {
+        "best_strong_method": "m7|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "m7|strong",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=1.0|eps=0.05": {
+        "best_strong_method": "best_subset|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "best_subset|weak",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=5.0|eps=0.005": {
+        "best_strong_method": "best_subset|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "best_subset|weak",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=5.0|eps=0.02": {
+        "best_strong_method": "best_subset|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "best_subset|weak",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
+      },
+      "step|pe=5.0|eps=0.05": {
+        "best_strong_method": "best_subset|strong",
+        "shift": null,
+        "shift_ci": [
+          null,
+          null
+        ],
+        "best_any_form_method": "best_subset|weak",
+        "shift_vs_best_any_form": null,
+        "words": "no verdict: no boundary on the grid for one of the two"
       }
     },
     "per_eps": {
@@ -4304,9 +4493,7 @@
     },
     "h2c_holds": false,
     "h2c_falsified": false,
-    "isotherms_withheld": [
-      "step"
-    ]
+    "isotherms_withheld": []
   },
   "H2b_O2_O3_descriptive": {
     "sigma=0.005|eps=0.0|langmuir|pe=1.0": {
