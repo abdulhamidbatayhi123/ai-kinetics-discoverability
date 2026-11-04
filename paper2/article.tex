@@ -149,6 +149,70 @@ lying between those levels (Methods).
 \textbf{[VERIFY from the figure data: all-to-none between adjacent levels for every zero-width
 interval.]}
 
+The verdict does not depend on how success is scored. When success also required the fitted
+$k$ to lie within a factor of two of the truth (a pre-registered sensitivity analysis), the
+overall word and all 30 slice verdicts were unchanged.
+% results/p2_verdicts.json H2b_k_sensitivity_overall (words "discovery fails before
+% identifiability"; counts 30/0/0). PREREG_P2 A1 (k-aware sensitivity).
+
+\subsection*{No single error ratio predicts the boundary, and errors-in-variables could not be tested}
+H2a asked whether one dimensionless ratio, the realised driving force against the combined
+error of the observations and of the isotherm ($R = \delta/\varepsilon_{\mathrm{eff}}$), places
+the discovery boundary at the same value $R^{*}$ in every condition. A verdict needs at least
+two conditions whose success crosses 50\,\% in $R$. Only one did (the step isotherm at
+$\Pe \approx 19$, observed through all probes, with $R^{*} = 123$, 95\,\% interval 113 to 135),
+so H2a has \verdict{no verdict}. In the other eleven conditions, success did not cross 50\,\%
+anywhere in the range of $R$ the grid produced.
+\textbf{[PENDING from the figure data: whether those stay above or below 50\,\%.]}
+% results/p2_verdicts.json H2a (rstar: one condition, O1|step|pe=5.0|ensemble|weak,
+% 122.85 [112.60, 135.09]; no_crossing: 11 conditions; words "no verdict: fewer than two
+% conditions have a crossing"). pe=5.0 is the D_L x 5 level, Pe about 19.
+
+H2c asked whether an errors-in-variables estimator, which treats the measured isotherm as a
+regressor with error, moves the discovery boundary by at least a factor of two at a given
+isotherm error. It needs a discovery boundary on the grid for both that estimator and the best
+ordinary method in the same slice, at isotherm errors of 0.5 to 5\,\%. No slice had both, so
+H2c has \verdict{no verdict} at every isotherm error, and it is neither supported nor falsified.
+The reason is the one behind most of the 66 H2b slices without a verdict: at these isotherm
+errors and 2\,\% noise, the best methods rarely reached 50\,\% success at any $\Da$.
+\textbf{[VERIFY with the figure data.]}
+% results/p2_verdicts.json H2c (per_eps 0.005, 0.02, 0.05: n_slices_with_verdict 0;
+% h2c_holds false, h2c_falsified false). The H2c refinement grid was not solved, because it is
+% placed around discovery boundaries and there were none (results/p2_h2c_refine_levels.json).
+
+\subsection*{From the outlet alone, $k$ stays identifiable; the law is not discovered}
+Real columns are rarely fitted with probes inside the bed. With concentration and temperature
+probes but no uptake (O2), uptake must first be reconstructed from the gas-phase mass balance.
+No discovery method reached a 50\,\% boundary on O2 in any of the 96 slices.
+\textbf{[PENDING from the figure data: whether O2 discovery fails everywhere or succeeds
+everywhere; expected to fail, because the reconstruction error concentrates at the front.]}
+Identifiability, computed on the subgrid where every point of the profile is a full column
+solve ($\Pe \approx 94$, noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%), held to
+$\Da \approx 57$ to 286 from probes without uptake, and to $\Da \approx 38$ to 172 from the
+outlet alone (O3). At the same noise and isotherm error, discovery from probes of $c$, $q$
+and $T$, a far richer observation, fell below 50\,\% success at $\Da \approx 1$ to 7 without
+isotherm error and \textbf{[VERIFY: never reached it]} with 2\,\% isotherm error. An outlet
+breakthrough curve therefore still determines $k$ one to two decades of $\Da$ beyond the point
+where the law stops being discovered from probes.
+% O1 H2b at pe=1.0: (0.005, 0) da_disc 7.24, (0.02, 0) 1.05; (0.005/0.02, 0.02) no boundary.
+% results/p2_verdicts.json H2b_O2_descriptive (96 slices, da_disc null in all);
+% H2b_O2_O3_descriptive (O2_da_ident 56.6 to 286, O3_da_ident 38.3 to 172 over the 8 subgrid slices).
+
+\subsection*{A loading-dependent rate is found only where the front crosses the step}
+For the step isotherm the study also simulated a rate that falls to 20\,\% of its value across
+the isotherm step (L2), a form motivated by the measurements in MOF-303. This part is
+exploratory. The
+state dependence was discovered, by the pre-registered rule, almost only at $\Da = 1$: there
+the best method succeeded in 77 to 100\,\% of replicates at every noise level and isotherm
+error, against at most 58\,\% at any other level and none at $\Da \le 0.32$ without noise.
+\textbf{[PENDING: interpretation check. Expected reason: at low $\Da$ the loading never reaches
+the step, and at high $\Da$ uptake is at equilibrium, so the $q$ dependence is only visible
+when the front passes the step at intermediate rate. Confirm from the loading ranges before
+stating it.]}
+% results/p2_verdicts.json H2d_descriptive: best over methods and Pe per (sigma, eps, Da);
+% Da = 1: 0.77 to 1.00 for every (sigma, eps); max elsewhere 0.58 (sigma 0.5 %, Da 1000);
+% Da 0.1 and 0.316 at sigma 0: 0.00. NOTE: "best over methods and Pe" selects upward; say so.
+
 \section*{Methods}
 
 \subsection*{Ground truth}
