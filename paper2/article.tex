@@ -223,6 +223,25 @@ did succeed at 2\,\% noise, but it ran only on a subgrid and enters no H2c compa
 % h2c_holds false, h2c_falsified false). The H2c refinement grid was not solved, because it is
 % placed around discovery boundaries and there were none (results/p2_h2c_refine_levels.json).
 
+\subsection*{Which methods discover the law, and where}
+Exact best-subset selection in the weak form (M4) was the most reliable method: its success
+crossed 50\,\% within the grid in 36 of the 96 slices, against 8 for weak-form sequential
+thresholding (M2) and 7 for the weak-form ensemble (M3) (Fig.~4c). No strong-form sparse
+method had a crossing in any slice. Symbolic
+regression (M7), run only at $\Pe \approx 94$ with noise of 0.5 or 2\,\% and isotherm error
+of 0 or 2\,\%, behaved differently from all the sparse methods. It failed at the lowest rates,
+where weak-form sparse regression worked best, and succeeded in a window between $\Da = 1$ and
+10, including with 2\,\% isotherm error, where no sparse method reached 50\,\% (Fig.~4a,b). The
+two families therefore cover different ranges of $\Da$, and neither covers the range in which
+$k$ remains identifiable. The neural-network pipeline of the closest prior work (M1), run as a
+declared demonstration at one noise level, recovered the law in one of its nine fits, at
+$\Da = 3.16$. Slow-manifold discovery (M9), which targets the isotherm rather than the rate law,
+is reported against its own target in Supplementary Note~1.
+% results/p2_figdata.json methods (O1 slices with a crossing: M4 weak 96-60 = 36, M2 weak 96-88 = 8,
+% M3 weak 96-89 = 7, strong forms 0; M7 2 of its 8 subgrid slices); M7 vs M4 weak per Da:
+% fig_p2_methods panels a, b and the per-slice listing in paper2/WRITEUP_NOTES.md;
+% results/p2_extra_m1.json (1 of 9, Da 3.16). [CHECK in review: M9 own-target summary in Supp. Note 1.]
+
 \subsection*{From the outlet alone, $k$ stays identifiable; the law is not discovered}
 Real columns are rarely fitted with probes inside the bed. With concentration and temperature
 probes but no uptake (O2), uptake must first be reconstructed from the gas-phase mass balance.
@@ -261,6 +280,98 @@ recovered at $\Da = 1$ and not at its neighbours was not resolved here.
 % results/p2_verdicts.json H2d_descriptive: best over methods and Pe per (sigma, eps, Da);
 % Da = 1: 0.77 to 1.00 for every (sigma, eps); max elsewhere 0.58 (sigma 0.5 %, Da 1000);
 % Da 0.1 and 0.316 at sigma 0: 0.00. NOTE: "best over methods and Pe" selects upward; say so.
+
+% ---- Display items (Article format: up to 6) ----
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{fig_design.pdf}
+\caption{\textbf{Study design.} \textbf{a}, The simulated column and the three observation
+models: interior probes of $c$, $q$ and $T$ (O1), interior probes of $c$ and $T$ with uptake
+reconstructed from the gas-phase mass balance (O2), and the outlet $c(t)$ and $T(t)$ only (O3).
+\textbf{b}, What H2b compares in each slice: the Damk\"ohler number at which the best discovery
+method falls to 50\,\% success ($\Da^{*}_{\mathrm{disc}}$) and the one at which $k$ stops being
+practically identifiable in half the replicates ($\Da^{*}_{\mathrm{ident}}$), with the
+pre-registered verdict words for the gap. The curves in \textbf{b} are illustrative.}
+\label{fig:design}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{fig_p2_map.pdf}
+\caption{\textbf{Discovery fails long before identifiability.} \textbf{a},\textbf{b}, Fraction
+of the 45 estimation replicates in which the best discovery method recovered the LDF law
+(filled circles, blue) and in which $k$ was practically identifiable (open squares, orange),
+against $\Da$, for an exact isotherm and noise of 0.5, 2 and 5\,\% (light to dark), at
+$\Pe \approx 94$; \textbf{a}, Langmuir sorbent; \textbf{b}, MOF-303-like step isotherm.
+Curves are the logistic fits that define the boundaries, drawn only where a 50\,\% crossing
+exists; otherwise the measured fractions are joined. Diamonds mark the crossings with 95\,\%
+bootstrap intervals. \textbf{c}, $\Da^{*}_{\mathrm{disc}}$ against $\Da^{*}_{\mathrm{ident}}$
+for the 30 slices with both boundaries; the grey band is the pre-registered smallest effect of
+interest ($\pm 0.25$ decade) around equality. \textbf{d}, The H2b verdict of every slice (rows:
+noise and isotherm error; columns: isotherm and P\'eclet number) with the gap
+$\log_{10}\Da^{*}_{\mathrm{disc}} - \log_{10}\Da^{*}_{\mathrm{ident}}$ in decades. Grey cells
+have no boundary on the grid for one of the two.}
+\label{fig:map}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{fig_p2_collapse.pdf}
+\caption{\textbf{No single error ratio places the discovery boundary (H2a).} \textbf{a},
+Success of the best method in each condition against $R = \delta/\varepsilon_{\mathrm{eff}}$,
+the realised driving force over the combined observation and isotherm error, on probes with
+uptake (O1, blue) and without (O2, orange). \textbf{b}, The 50\,\% crossing $R^{*}$ of each
+condition with its 95\,\% interval; only one of the twelve conditions crosses. \textbf{c}, The
+pre-registered decision regions for the spread of $\log_{10}R^{*}$ across conditions; with fewer
+than two crossings, H2a has no verdict.}
+\label{fig:collapse}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{fig_p2_methods.pdf}
+\caption{\textbf{Methods compared.} \textbf{a},\textbf{b}, Success of every method against
+$\Da$ at 2\,\% noise and 2\,\% isotherm error, $\Pe \approx 94$; \textbf{a}, Langmuir;
+\textbf{b}, step isotherm. Symbolic regression (M7, orange) succeeds only in a window of
+intermediate $\Da$, where every sparse method stays below 50\,\%. \textbf{c},
+$\log_{10}\Da^{*}_{\mathrm{disc}}$ of each method in every slice where it crosses 50\,\%; the
+grey numbers count the slices without a crossing. \textbf{d}, H2c, the shift of the discovery
+boundary by the errors-in-variables estimator (M5) relative to the best strong-form comparator;
+no slice has a boundary for both, so H2c has no verdict.}
+\label{fig:methods}
+\end{figure}
+
+\begin{table}[p]
+\centering
+\small
+\caption{\textbf{Pre-registered hypotheses and their verdicts.} Words in quotation marks are
+the pre-registered verdict words. Intervals are 95\,\% bootstrap intervals over the estimation
+replicates.}
+\label{tab:verdicts}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+& Question & Result & Verdict \\
+\midrule
+Positive control & Do discovery and identifiability both succeed at the lowest $\Da$, without
+noise or isotherm error ($\ge 90\,\%$)? & Langmuir 135/135 and 135/135; step 135/135 and
+135/135 & Both isotherms enter every verdict \\
+H2b & Does discovery fail before, with, or after identifiability ($\pm 0.25$ decade)? & 30 of 96
+slices with both boundaries; gap $-1.60$ to $-3.43$ decades (median $-2.26$ Langmuir, $-2.54$
+step) & \verdict{discovery fails before identifiability} (30 of 30 slices) \\
+H2b, $k$-aware & As H2b, with success also requiring $\hat{k}$ within a factor of 2 &
+Unchanged & \verdict{discovery fails before identifiability} \\
+H2a & Is the boundary at one value of $R = \delta/\varepsilon_{\mathrm{eff}}$ (spread
+$< 0.5$ decade)? & One of 12 conditions crosses ($R^{*} = 123$, 113 to 135) &
+\verdict{no verdict: fewer than two conditions have a crossing} \\
+H2c & Does errors-in-variables fitting move the boundary by $\ge 2\times$ at $\varepsilon > 0$? &
+No slice with a boundary for both estimators & \verdict{no verdict} at every $\varepsilon$ \\
+H2d (exploratory) & Is a loading-dependent rate discovered for the step isotherm? & At
+$\Da = 1$ in 77 to 100\,\% of replicates (best method); at most 58\,\% elsewhere & Descriptive \\
+\bottomrule
+\end{tabularx}
+% results/p2_verdicts.json (positive_control, H2b_overall, H2b_k_sensitivity_overall, H2a, H2c,
+% H2d_descriptive); medians from p2_compare / WRITEUP_NOTES "Corrected verdicts".
+\end{table}
 
 \section*{Methods}
 
