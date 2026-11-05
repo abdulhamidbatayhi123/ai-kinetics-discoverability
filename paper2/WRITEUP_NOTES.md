@@ -164,3 +164,15 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
   Chemistry/Engineering excluded (fully OA; Springer Nature TUBITAK quota exhausted 2026).
 - Digital Discovery: JCR Q2 per EKUAL; Paper 1 already going there.
 - Open: SJR (Scopus) quartiles blocked by Cloudflare; check with library access if needed.
+
+## Practical Da (literature agent, 2026-11-05; numbers partly read from figures, +-30-50 %)
+- Lassitter et al. 2024, Chem. Eng. Sci. 285, 119430 (doi:10.1016/j.ces.2023.119430): MOF-303/water;
+  frequency-response D/r^2 ~ 4e-4 1/s at the step (~12 % RH) to ~1.4e-2 at 30-40 % RH (figure);
+  k = 15 D/r^2 = 6e-3 to 0.21 1/s; packed bed 3.11 g in a 1.5 in tube, ~32 % RH; t_stoich ~ 1.5-1.8e4 s
+  (from breakthrough, figure) -> Da ~ 90 to 3,800. The paper defines the same group k rho n* L/(v C0)
+  and says it is very large in all cases it examined; breakthrough shape set by the isotherm.
+- Dantas et al. 2011, Braz. J. Chem. Eng. 28, 533-544 (doi:10.1590/S0104-66322011000300018): 13X/CO2;
+  k reported 0.065-0.226 1/s; t_stoich computed 2.4e3-2.4e4 s -> Da ~ 200 to 5,400.
+- Coated layers (Lassitter, 0.21 mm coating): Da ~ 100 or lower (macropore-limited; rough).
+- Not found below Da ~ 10 for any real system. Abu-El-Maaty 2024 is Energy Convers. Manag. X 24,
+  100694 (doi:10.1016/j.ecmx.2024.100694) -- the bib entry abuelmaaty2024 must be checked against this.

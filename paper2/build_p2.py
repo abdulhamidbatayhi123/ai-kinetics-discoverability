@@ -44,6 +44,18 @@ def norm(s):
     return re.sub(r"\s+", " ", s)
 
 
+def rendered_words(t):
+    """Words a reader sees: citations removed, each inline math expression one word, LaTeX command
+    names dropped (their braced text kept), '~' a space, '\\,' and braces removed."""
+    t = re.sub(re.escape(BS) + r"cite[pt]?\{[^}]*\}", "", t)
+    t = re.sub(r"\$[^$]*\$", " X ", t)
+    t = re.sub(re.escape(BS) + r"(sub)*section\*?", " ", t)
+    t = re.sub(re.escape(BS) + r"[A-Za-z]+\*?", " ", t)
+    t = t.replace(BS + ",", "").replace("~", " ").replace("{", " ").replace("}", " ")
+    t = re.sub(re.escape(BS) + r"[^A-Za-z\s]", "", t)
+    return len([w for w in t.split() if re.search(r"[A-Za-z0-9]", w)])
+
+
 def words_between(tex, a, b):
     t = tex[tex.index(a):tex.index(b)]
     t = re.sub(re.escape(BS) + r"cite[pt]?\{[^}]*\}", "", t)
@@ -151,7 +163,7 @@ def main():
     # main text as the journal counts it: Introduction + Results + Discussion (the display items,
     # their legends, Methods, references and the abstract are excluded); comments already stripped
     a, b = tex.index("---- Introduction"), tex.index("% ---- Display items")
-    main_words = len(re.sub(re.escape(BS) + r"cite[pt]?\{[^}]*\}", "", strip_comments(tex[a:b])).split())
+    main_words = rendered_words(strip_comments(tex[a:b]))
     main_part = body.split(BS + "section*{Extended Data}")[0]   # Extended Data are not display items
     disp = len(re.findall(re.escape(BS) + r"begin\{(figure|table)\}", main_part))
     if main_words > 3500:

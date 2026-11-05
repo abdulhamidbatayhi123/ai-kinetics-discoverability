@@ -358,15 +358,22 @@ noise and isotherm error soon exceed the shrinking direction that distinguishes 
 % results/p2_e5_conditioning.json (q_qstar_min_over_max_sv 0.71-0.79 at Da 0.1; 0.00065-0.00125 at Da 1000);
 % p2_e5_conditioning.py (EXPLORATORY_P2 E5).
 
-The discovery methods were not interchangeable. Exact best-subset selection in the weak form was
-the most reliable, and strong-form sparse methods, which differentiate noisy data, never produced
-a boundary. Symbolic regression failed where weak-form regression did best, at the lowest rates,
-and succeeded at intermediate $\Da$, up to 32 at 0.5\,\% noise and an exact isotherm, and between 1 and 10
-with 2\,\% isotherm error. A
-combination of the two families might widen the range, but it was not tested, and neither family
-reached the range where $k$ stayed identifiable. The errors-in-variables estimator could not be
-judged, because its strong-form comparator never had a boundary at the noise levels where it was
-tested; whether errors-in-variables fitting helps a weak-form search remains open.
+The method families were complementary rather than interchangeable: weak-form sparse
+regression worked at the lowest rates and symbolic regression at intermediate ones, but neither
+reached the range where $k$ stayed identifiable. Combining them was not tested, nor was
+errors-in-variables fitting in the weak form.
+
+Where do real columns sit on this map? Rate constants and bed sizes reported for water on MOF-303
+\citep{lassitter2024} and for carbon dioxide on zeolite 13X \citep{dantas2011} place laboratory
+packed beds at roughly $\Da = 10^2$ to $10^4$, and thin coated layers possibly lower; these are
+order-of-magnitude estimates from a few sources, some read from figures. Practice therefore lies
+mostly beyond every discovery boundary measured here: at its lower end the data would still give
+$k$, and at its upper end, beyond the identifiability boundaries found here, neither the law nor
+its coefficient.
+% Da estimates (agent literature search 2026-11-05, recorded in paper2/WRITEUP_NOTES.md "Practical
+% Da"): MOF-303/water packed bed (Lassitter et al. 2024, D/r^2 by frequency response, k = 15 D/r^2,
+% t_stoich from breakthrough, partly read from figures) Da ~ 90 to 3,800; 13X/CO2 (Dantas et al.
+% 2011, k as reported, t_stoich computed from bed mass, capacity and flow) Da ~ 200 to 5,400.
 
 The closest prior work recovered the LDF law from noisy outlet curves with a neural network in
 the governing equations, with the isotherm given exactly, at one rate \citep{santana2023}. Our
