@@ -129,20 +129,20 @@ At the lowest Damk\"ohler number, with no noise and no isotherm error, discovery
 identifiability must both succeed in at least 90\,\% of the estimation replicates, or that
 isotherm is withheld from every verdict. Both isotherms passed: the best method recovered the
 LDF law in 135 of 135 replicates, and $k$ was identifiable in 135 of 135, for the Langmuir and
-for the step isotherm alike. (As first run, the step isotherm failed this check because of a
-search-range error in the identifiability code and was withheld; the Langmuir-only verdict of
-that first run was the same as the final one. The correction and both sets of verdicts are given
-in Supplementary Note~2 and Extended Data Fig.~7.)
+for the step isotherm alike. (As first run, a search-range error in the identifiability code
+failed and withheld the step isotherm; the Langmuir verdict was the same as now; Supplementary
+Note~2, Extended Data Fig.~7.)
 % results/p2_verdicts.json positive_control (langmuir, step: success_fraction 1.0,
 % identifiable_fraction 1.0, n 135, need 0.9); results/p2_verdicts_asrun.json (step failed).
 
 \subsection*{Discovery fails long before identifiability}
-H2b compares, in each slice of the design (one isotherm, one P\'eclet number, one noise level
+As $\Da$ grows, the driving force $\qs - q$ that distinguishes the law shrinks below the noise,
+while the curves still constrain $k$ (Fig.~2). H2b compares, in each slice of the design (one isotherm, one P\'eclet number, one noise level
 and one isotherm error), the Damk\"ohler number at which the best discovery method falls to
 50\,\% success, $\Da^{*}_{\mathrm{disc}}$, with the number at which $k$ stops being
 identifiable in half the replicates, $\Da^{*}_{\mathrm{ident}}$. Of the 96 slices, 30 had both
 boundaries on the grid. In all 30 the verdict was \verdict{discovery fails before
-identifiability}, so H2b's pre-registered overall word is the same (Fig.~2, Table~1; every slice
+identifiability}, so H2b's pre-registered overall word is the same (Fig.~3, Table~1; every slice
 in Extended Data Figs.~1 and~2). The gap
 was large everywhere: from 1.6 to 3.4 decades of $\Da$, with a median of 2.3 decades for the
 Langmuir sorbent (20 slices) and 2.5 for the step isotherm (10 slices). Discovery failed between
@@ -172,7 +172,7 @@ were seen sorts them by the boundary that is missing. The discovery boundary was
 59 of them. In 40, discovery never reached 50\,\% at any $\Da$: all 24 slices with 5\,\%
 isotherm error, 15 with 2\,\% and one with 0.5\,\%. In 8, all without noise, it
 never fell below 50\,\%. In the other 11, success crossed 50\,\% more than once, so no single
-logistic crossing, the pre-registered boundary, describes it (Fig.~2). The clearest case is
+logistic crossing, the pre-registered boundary, describes it (Fig.~3). The clearest case is
 symbolic regression (M7) at $\Pe \approx 94$ with 2\,\% isotherm error, the best method in four
 slices: its success peaked at 82 to 96\,\% of replicates near $\Da = 3$, in a window between
 $\Da = 1$ and 10, and was zero below $\Da = 1$ and above $\Da = 32$. In the remaining 7 slices only the
@@ -212,7 +212,7 @@ overall word and all 30 slice verdicts were unchanged.
 H2a asked whether one ratio, the realised driving force over the combined observation and
 isotherm error ($R = \delta/\varepsilon_{\mathrm{eff}}$), places the discovery boundary at the
 same $R^{*}$ in every condition. Only one of twelve conditions crossed 50\,\% in $R$
-($R^{*} = 123$, 95\,\% interval 113 to 135), so H2a has \verdict{no verdict} (Fig.~3). In the
+($R^{*} = 123$, 95\,\% interval 113 to 135), so H2a has \verdict{no verdict} (Extended Data Fig.~8). In the
 others success was not monotone in $R$, peaking at 51 to 71\,\% on O1 and never exceeding
 20\,\% at any level of $R$ on O2.
 % results/p2_figdata.json h2a levels: O1 conditions max 0.51-0.71 (Langmuir and step, Pe 470/94/19,
@@ -427,6 +427,21 @@ replicates ($\Da^{*}_{\mathrm{ident}}$). The curves in \textbf{b} are illustrati
 
 \begin{figure}[p]
 \centering
+\includegraphics[width=\textwidth]{fig_p2_examples.pdf}
+\caption{\textbf{What the data look like where discovery works, where only identifiability
+works, and where neither does.} Langmuir sorbent, $\Pe \approx 94$, 2\,\% noise and an exact
+isotherm, at $\Da = 0.32$, 31.6 and 1000 (columns). \textbf{a}--\textbf{c}, A mid-column probe as
+the methods see it: observed uptake (points, every fourth time shown), simulated uptake (line)
+and the measured isotherm evaluated on the observed $c$ and $T$ (dashed); the shaded band is the
+driving force $\qs - q$, which shrinks below the noise as $\Da$ grows. Each panel gives the
+number of the 45 estimation replicates in which the law was discovered and $k$ was identifiable,
+and the law the best method returned for one replicate. \textbf{d}--\textbf{f}, The outlet
+breakthrough curve of the same replicate.}
+\label{fig:examples}
+\end{figure}
+
+\begin{figure}[p]
+\centering
 \includegraphics[width=\textwidth]{fig_p2_map.pdf}
 \caption{\textbf{Discovery fails long before identifiability.} \textbf{a},\textbf{b}, Fraction
 of the 45 estimation replicates in which the best discovery method recovered the LDF law
@@ -442,19 +457,6 @@ noise and isotherm error; columns: isotherm and P\'eclet number) with the gap
 $\log_{10}\Da^{*}_{\mathrm{disc}} - \log_{10}\Da^{*}_{\mathrm{ident}}$ in decades. Grey cells
 have no boundary on the grid for one of the two.}
 \label{fig:map}
-\end{figure}
-
-\begin{figure}[p]
-\centering
-\includegraphics[width=\textwidth]{fig_p2_collapse.pdf}
-\caption{\textbf{No single error ratio places the discovery boundary (H2a).} \textbf{a},
-Success of the best method in each condition against $R = \delta/\varepsilon_{\mathrm{eff}}$,
-the realised driving force over the combined observation and isotherm error, on probes with
-uptake (O1, dark blue) and without (O2, light blue). \textbf{b}, The 50\,\% crossing $R^{*}$ of each
-condition with its 95\,\% interval; only one of the twelve conditions crosses. \textbf{c}, The
-pre-registered decision regions for the spread of $\log_{10}R^{*}$ across conditions; with fewer
-than two crossings, H2a has no verdict.}
-\label{fig:collapse}
 \end{figure}
 
 \begin{figure}[p]
@@ -817,5 +819,16 @@ first run (hatched) and corrected; the step isotherm failed as first run because
 identifiability search range (Supplementary Note~2). \textbf{b}, H2b slices by verdict.
 \textbf{c}, Gap of each slice with a verdict in both runs or withheld as first run; the verdict
 of every Langmuir slice is unchanged.}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed8_h2a.pdf}
+\caption{\textbf{No single error ratio places the discovery boundary (H2a).} \textbf{a}, Success
+of the best method in each condition against $R = \delta/\varepsilon_{\mathrm{eff}}$, the realised
+driving force over the combined observation and isotherm error, on probes with uptake (O1, dark
+blue) and without (O2, light blue). \textbf{b}, The 50\,\% crossing $R^{*}$ of each condition with
+its 95\,\% interval; only one of the twelve conditions crosses. \textbf{c}, The pre-registered
+decision regions for the spread of $\log_{10}R^{*}$; with fewer than two crossings, H2a has no
+verdict.}
 \end{figure}
 \end{document}

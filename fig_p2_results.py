@@ -587,7 +587,8 @@ def fig4(V, FD, da_levels, stem, noise=DISPLAY_METHODS_NOISE, pe=DISPLAY_PE):
 
 def make_all(V, FD, da_levels, out_dir="paper2"):
     return (fig2(V, FD, da_levels, os.path.join(out_dir, "fig_p2_map"))
-            + fig3(V, FD, os.path.join(out_dir, "fig_p2_collapse"))
+            # H2a (no verdict) is Extended Data Fig. 8; main Fig. 2 is the example data (fig_p2_examples.py)
+            + fig3(V, FD, os.path.join(out_dir, "fig_ed8_h2a"))
             + fig4(V, FD, da_levels, os.path.join(out_dir, "fig_p2_methods")))
 
 
