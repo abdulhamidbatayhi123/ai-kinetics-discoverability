@@ -52,9 +52,9 @@ its data, but where they can is unknown. In a pre-registered computational study
 four decades of Damk\"ohler number (Da), three P\'eclet numbers, noise and isotherm error, we
 compared the Da at which the best discovery method stopped recovering the linear-driving-force
 law with the Da at which its rate constant stopped being practically identifiable. In all 30
-conditions where both boundaries existed, discovery failed first, by 1.6 to 3.4 decades. An
-isotherm error of 5\,\% prevented discovery at every rate, while the rate constant remained
-identifiable from interior probes. Weak-form sparse regression worked at low Da and
+conditions where both boundaries existed, discovery failed first, by 1.6 to 3.4 decades. With
+5\,\% isotherm error no method reached 50\,\% success at any rate, while the rate constant
+remained identifiable from interior probes. Weak-form sparse regression worked at low Da and
 symbolic regression in a window near Da 1 to 10; neither reached the range where the
 rate constant stayed identifiable. Column data carry information about the rate long after its
 law can no longer be discovered.
@@ -116,9 +116,9 @@ on the same observations. The design, thresholds and verdict words were frozen b
 method ran on the grid.
 Discovery failed first. In every slice of the design where both boundaries could be measured,
 the law stopped being discovered 1.6 to 3.4 decades of Damk\"ohler number before its rate
-constant stopped being identifiable. An isotherm error of 5\,\% prevented discovery at every
-rate, and one of 2\,\% in most conditions, while $k$ remained identifiable from interior probes
-and, where tested, from the outlet alone.
+constant stopped being identifiable. With an isotherm error of 5\,\% no method reached 50\,\%
+success at any rate, and with 2\,\% few did, while $k$ remained identifiable from interior
+probes and, where tested, from the outlet alone.
 % results/p2_verdicts.json H2b (30/30 "fails before"; gaps -1.60 to -3.43); results/p2_ident_robustness.json
 % (discovery never reaches 50 % in all 24 eps 5 % slices and 15 of 24 eps 2 % slices); H2b_O2_O3_descriptive.
 
@@ -153,8 +153,8 @@ weak form.
 % da_ident 42.7 to 562; best_method best_subset|weak in all 30.
 
 Noise moved both boundaries, but not equally. With 0.5\,\% noise and an exact isotherm, discovery
-held to $\Da \approx 5$ to 7 and identifiability to between the two highest levels ($\Da = 316$
-and 1000). At 2\,\% noise the
+held to $\Da \approx 5$ to 7 and, for the Langmuir sorbent, identifiability to between the two
+highest levels ($\Da = 316$ and 1000). At 2\,\% noise the
 discovery boundary fell to $\Da \approx 1$, and at 5\,\% to $\Da \approx 0.1$ to 0.3, near the
 bottom of the grid, while the identifiability boundary stayed between $\Da \approx 57$ and 172.
 A small error in the isotherm hurt discovery more than noise did: at 0.5\,\% noise, an isotherm
@@ -169,7 +169,7 @@ no 50\,\% crossing on the grid, and the pre-registered words for that case are
 \verdict{no boundary on the grid for one of the two}. A descriptive check made after the verdicts
 were seen sorts them by the boundary that is missing. The discovery boundary was missing in
 59 of them. In 40, discovery never reached 50\,\% at any $\Da$: all 24 slices with 5\,\%
-isotherm error, 15 of the 24 with 2\,\%, and one with 0.5\,\%. In 8, all without noise, it
+isotherm error, 15 with 2\,\% and one with 0.5\,\%. In 8, all without noise, it
 never fell below 50\,\%. In the other 11, success crossed 50\,\% more than once, so no single
 logistic crossing, the pre-registered boundary, describes it (Fig.~2). The clearest case is
 symbolic regression (M7) at $\Pe \approx 94$ with 2\,\% isotherm error, the best method in four
@@ -191,7 +191,7 @@ none at the next are reported as lying between those levels (Methods).
 The identifiability boundaries at the top of the grid need one caution, found in a second
 descriptive check made after the verdicts were seen. With exact data the
 O1 profile recovered $k$ to within 11\,\% at every $\Da$ up to 100, but at $\Da = 316$ and
-1000 its estimate was off by a factor of 0.6 to 24, because the adsorption front crosses a
+1000 its median estimate ranged from 1.1 to 24 and from 0.61 to 0.67 times $k$, because the adsorption front crosses a
 probe in only a few of the 200 observation times. Identifiability there is limited by the time
 resolution of the data as well as by their information content. This does not affect H2b: in
 all 30 slices with a verdict, $k$ was identifiable in at least 95\,\% of replicates at every
@@ -284,17 +284,15 @@ more than 29\,\% of the replicates at any level of any slice.
 Identifiability, computed on the subgrid where every point of the profile is a full column
 solve ($\Pe \approx 94$, noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%), held to
 $\Da \approx 57$ to 286 from probes without uptake, and to $\Da \approx 38$ to 172 from the
-outlet alone (O3). At the same noise and isotherm error, discovery from probes of $c$, $q$
-and $T$, a far richer observation, last reached 50\,\% success at $\Da \approx 1$ to 7 without
-isotherm error, and at $\Da \approx 3$ to 10 with 2\,\% isotherm error, where only symbolic
-regression succeeded. In these slices the outlet curve still determined $k$ 1.3 to 2.0 decades
-of $\Da$ beyond the last discovered level without isotherm error, and 0.6 to 1.3 decades with
-2\,\% isotherm error.
-% Per subgrid slice (Pe 94), O3 da_ident vs the highest O1 Da with discovery >= 50 % (or da_disc):
-% eps 0: langmuir s0.5 172 vs 7.24 (1.38), langmuir s2 109 vs 1.05 (2.02), step s0.5 56.6 vs 3.16
-% (1.25), step s2 56.6 vs 0.851 (1.82); eps 2 %: langmuir s0.5 125 vs 10 (1.10), langmuir s2 56.6 vs
-% 3.16 (1.25), step s0.5 56.6 vs 10 (0.75), step s2 38.3 vs 10 (0.58). results/p2_verdicts.json
-% H2b, H2b_O2_O3_descriptive; results/p2_figdata.json h2b disc.
+outlet alone (O3). These profiles are costly, so they used three replicates per level, and
+their boundaries are correspondingly coarse. In the same slices, the last level at which any
+method discovered the law from probes of $c$, $q$ and $T$, a far richer observation, lay at
+$\Da = 3$ to 32, so the outlet curve still determined $k$ 0.25 to 1.5 decades beyond it.
+% Per subgrid slice (Pe 94): highest O1 Da where any rate-law method (M2-M4 both forms, M7; not M5,
+% M9) had success >= 0.5, against O3 da_ident: langmuir s0.5 e0 31.6 vs 172 (0.73); s0.5 e2 10 vs
+% 125 (1.10); s2 e0 3.16 vs 109 (1.54); s2 e2 3.16 vs 56.6 (1.25); step s0.5 e0 31.6 vs 56.6 (0.25);
+% s0.5 e2 10 vs 56.6 (0.75); s2 e0 10 vs 56.6 (0.75); s2 e2 10 vs 38.3 (0.58). results/p2_figdata.json
+% methods; results/p2_verdicts.json H2b_O2_O3_descriptive; p2_grid_o23.py (3 replicates).
 % results/p2_verdicts.json H2b_O2_descriptive (96 slices, da_disc null in all);
 % H2b_O2_O3_descriptive (O2_da_ident 56.6 to 286, O3_da_ident 38.3 to 172 over the 8 subgrid slices).
 
@@ -330,19 +328,19 @@ failed at both, while sequential thresholding selected $q$ at $\Da = 1$ and succ
 The rate law of a fixed-bed column could be discovered only over a narrow part of the range in
 which its rate constant could be measured. In every slice of the design where both boundaries
 existed, discovery failed between 1.6 and 3.4 decades of Damk\"ohler number before
-identifiability did. With an isotherm error of 5\,\% no method discovered the law at any rate,
+identifiability did. With an isotherm error of 5\,\% no method reached 50\,\% success at any rate,
 and with 2\,\% the best method reached 50\,\% at any level in only 8 of 24 slices: at
 $\Da \approx 0.3$ under 5\,\% noise, or, for symbolic regression, in a window between $\Da = 1$
 and 10. For
 % results/p2_figdata.json h2b disc fractions, eps 0.02: a level >= 0.5 in 8 of 24 slices (4 x m7|strong
 % at Pe 94, Da 1-10; 4 x best_subset|weak at sigma 5 %, Da 0.316).
 practice this sets an order of operations. Where the isotherm is known almost exactly (an error
-of 0.5\,\% already confined discovery to $\Da \le 0.2$) and the uptake is slow compared with the
+of 0.5\,\% with 0.5\,\% noise already confined discovery to $\Da \le 0.2$) and the uptake is slow compared with the
 passage of the front ($\Da$ of order one or below), sparse regression in the weak form can
 propose the law. Beyond that, the law has to be
 assumed or chosen among a few candidates by model comparison, and the data are then good for
 its coefficient over a further one and a half to three decades of $\Da$ from interior probes,
-and, at the noise and isotherm errors tested, over roughly one more decade from the outlet alone.
+and, in the few conditions tested, somewhat beyond the discovery range from the outlet alone.
 
 Why is discovery so much more fragile? The two tasks ask different things of the same data.
 Identifiability asks whether a known law with one free coefficient fits well only near the true
@@ -361,7 +359,7 @@ coefficient does.
 The discovery methods were not interchangeable. Exact best-subset selection in the weak form was
 the most reliable, and strong-form sparse methods, which differentiate noisy data, never produced
 a boundary. Symbolic regression failed where weak-form regression did best, at the lowest rates,
-and succeeded at intermediate $\Da$, up to about 32 without isotherm error and between 1 and 10
+and succeeded at intermediate $\Da$, up to 32 at 0.5\,\% noise and an exact isotherm, and between 1 and 10
 with 2\,\% isotherm error. A
 combination of the two families might widen the range, but it was not tested, and neither family
 reached the range where $k$ stayed identifiable. The errors-in-variables estimator could not be
@@ -386,9 +384,9 @@ transfer that were held exact here. Observation through interior probes of uptak
 ceiling that experiments rarely reach. The identifiability criterion asks whether the 95\,\%
 profile interval lies within a factor of two of $k$; it is a criterion of precision and accuracy,
 not of calibration. In an exploratory check the intervals contained the true $k$ in only about
-10\,\% of rows (Extended Data Fig.~4), because they are narrower than the small biases from time resolution and from
+10\,\% of O1 rows (23\,\% on O3; Extended Data Fig.~4), because they are narrower than the small biases from time resolution and from
 errors in the inputs to $\qsm$. At the two highest $\Da$ levels the time resolution also biased
-the estimate itself, by factors of 0.6 to 24, so identifiability there is partly a property of
+the estimate itself, by up to a factor of 24, so identifiability there is partly a property of
 the sampling; H2b does not depend on those levels. Symbolic regression ran on a subgrid, the
 neural pipeline only as a demonstration, and a Kolmogorov--Arnold network only in an exploratory
 run on its declared subgrid, where it recovered the law in none of 216 fits; each limit was set
@@ -450,7 +448,7 @@ have no boundary on the grid for one of the two.}
 \caption{\textbf{No single error ratio places the discovery boundary (H2a).} \textbf{a},
 Success of the best method in each condition against $R = \delta/\varepsilon_{\mathrm{eff}}$,
 the realised driving force over the combined observation and isotherm error, on probes with
-uptake (O1, blue) and without (O2, orange). \textbf{b}, The 50\,\% crossing $R^{*}$ of each
+uptake (O1, dark blue) and without (O2, light blue). \textbf{b}, The 50\,\% crossing $R^{*}$ of each
 condition with its 95\,\% interval; only one of the twelve conditions crosses. \textbf{c}, The
 pre-registered decision regions for the spread of $\log_{10}R^{*}$ across conditions; with fewer
 than two crossings, H2a has no verdict.}
@@ -493,7 +491,7 @@ Unchanged & \verdict{discovery fails before identifiability} \\
 H2a & Is the boundary at one value of $R = \delta/\varepsilon_{\mathrm{eff}}$ (spread
 $< 0.5$ decade)? & One of 12 conditions crosses ($R^{*} = 123$, 113 to 135) &
 \verdict{no verdict: fewer than two conditions have a crossing} \\
-H2c & Does errors-in-variables fitting move the boundary by $\ge 2\times$ at $\varepsilon > 0$? &
+H2c & Does errors-in-variables fitting move the boundary up by $\ge 0.25$ decade (two thirds of slices) at $\varepsilon > 0$? &
 No slice with a boundary for both estimators & \verdict{no verdict} at every $\varepsilon$ \\
 H2d (exploratory) & Is a loading-dependent rate discovered for the step isotherm? & At
 $\Da = 1$ in 77 to 100\,\% of replicates (best method); at most 58\,\% elsewhere & Descriptive \\
@@ -757,7 +755,7 @@ open squares), against $\log_{10}\Da$; rows, noise $\sigma$ and isotherm error $
 columns, P\'eclet number. Smooth curves are the logistic fits that define the boundaries, drawn
 only where a 50\,\% crossing exists; otherwise the measured fractions are joined. The square beside
 each panel gives the verdict (orange, \verdict{discovery fails before identifiability}; grey, no
-boundary on the grid for one of the two) and the number the gap in decades.}
+boundary on the grid for one of the two) and the number gives the gap in decades.}
 \end{figure}
 
 \begin{figure}[p]\centering
@@ -772,8 +770,9 @@ levels (descriptive checks made after the verdicts).} \textbf{a}, Median ratio o
 the true $k$ with exact data ($\sigma = \varepsilon = 0$), against $\Da$, for both isotherms and
 three P\'eclet numbers; dark band, 0.9 to 1.1; light band, the criterion's $[0.5, 2]$. The estimate
 is accurate up to $\Da = 100$ and biased by the time resolution at 316 and 1000. \textbf{b}, For
-the 30 slices with a verdict, the H2b gap against a lower bound computed without $\Da = 316$ and
-1000; every bound lies below the $-0.25$ decade threshold.}
+the 30 slices with a verdict, the H2b gap against the gap computed from the highest level up to
+$\Da = 100$ at which $k$ was identifiable in half the replicates (so without $\Da = 316$ and
+1000); every recomputed gap lies below the $-0.25$ decade threshold.}
 \end{figure}
 
 \begin{figure}[p]\centering
