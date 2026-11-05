@@ -36,7 +36,7 @@ import numpy as np  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch, Rectangle  # noqa: E402
 
-import figstyle  # noqa: E402
+import p2_figstyle as figstyle  # noqa: E402   Paper 2's Nature-rule style (fonts, colours, save checks)
 from p2.analysis import H2B_WORDS, r_collapse  # noqa: E402
 from p2_analyze import MDE, WITHHELD  # noqa: E402
 
@@ -51,15 +51,14 @@ DISPLAY_PE = 1.0
 DISPLAY_METHODS_NOISE = (0.02, 0.02)
 R_BIN = 0.25                          # display bin of log10 R in Fig 3a (decade)
 
-# Okabe-Ito (colour-blind safe)
-OI = {"orange": "#E69F00", "sky": "#56B4E9", "green": "#009E73", "yellow": "#F0E442",
-      "blue": "#0072B2", "verm": "#D55E00", "purple": "#CC79A7", "black": "#000000", "grey": "#999999"}
-WORD_COLOUR = dict(zip(H2B_WORDS, (OI["verm"], OI["blue"], OI["green"])))
+# Colours have ONE meaning across the paper; they are defined in p2_figstyle (Okabe-Ito).
+OI = {**figstyle.OI, "verm": figstyle.OI["vermilion"]}
+WORD_COLOUR = {w: figstyle.WORD[w] for w in H2B_WORDS}
 WORD_SHORT = dict(zip(H2B_WORDS, ("fails before", "fails with", "outlives")))
-NO_BOUNDARY, WITHHELD_FACE = "#dddddd", "#ffffff"
+NO_BOUNDARY, WITHHELD_FACE = figstyle.NO_VERDICT, "#ffffff"
 NO_BOUNDARY_WORDS = "no boundary on the grid for one of the two"   # p2_analyze's own words
-DISC_SHADES = ("#9ecae1", "#3b7fc4", "#08306b")    # discovery: light to dark = low to high noise
-IDENT_SHADES = ("#fdd0a2", "#e6750a", "#7f2704")   # identifiability
+DISC_SHADES = figstyle.DISC_SHADES     # discovery: light to dark = low to high noise
+IDENT_SHADES = figstyle.IDENT_SHADES   # identifiability
 
 METHOD_ORDER = ("stlsq|weak", "stlsq|strong", "ensemble|weak", "ensemble|strong", "best_subset|weak",
                 "best_subset|strong", "eiv_best_subset|strong", "m7|strong", "slow_manifold|strong")
@@ -71,8 +70,7 @@ METHOD_LABEL = {"stlsq|weak": "M2 weak-form STLSQ", "stlsq|strong": "M2b strong-
 METHOD_SHORT = {"stlsq|weak": "M2", "stlsq|strong": "M2b", "ensemble|weak": "M3 w",
                 "ensemble|strong": "M3 s", "best_subset|weak": "M4 w", "best_subset|strong": "M4 s",
                 "eiv_best_subset|strong": "M5", "m7|strong": "M7", "slow_manifold|strong": "M9"}
-SOLVER_COLOUR = {"stlsq": OI["blue"], "ensemble": OI["green"], "best_subset": OI["purple"],
-                 "eiv_best_subset": OI["black"], "m7": OI["orange"], "slow_manifold": OI["grey"]}
+SOLVER_COLOUR = figstyle.SOLVER
 ISO_LABEL = {"langmuir": "Langmuir", "step": "MOF-303-like step"}
 
 # The code labels the dispersion levels by the D_L multiplier; the paper names them by the
@@ -86,7 +84,7 @@ def pe_label(pe):
 
 ISO_MARKER = {"langmuir": "o", "step": "s"}
 PE_MARKER = {0.2: "v", 1.0: "o", 5.0: "^"}
-OBS_COLOUR = {"O1": OI["blue"], "O2": OI["verm"]}
+OBS_COLOUR = {"O1": figstyle.ROLE["disc"], "O2": DISC_SHADES[0]}   # both are discovery: one hue
 
 LOG_DA = r"$\log_{10}$ Da (Da = $k\,t_{stoich}$, dimensionless)"
 P_LAB = "probability\n(fraction of estimation replicates)"
@@ -134,8 +132,7 @@ def _curve(fit, x0, x1):
 
 
 def _letter(ax, s):
-    ax.text(-0.14, 1.02, s, transform=ax.transAxes, fontsize=10, fontweight="bold",
-            va="bottom", ha="left")
+    figstyle.letter(ax, s)
 
 
 def _note(ax, text):
@@ -143,12 +140,13 @@ def _note(ax, text):
             color=figstyle.C["grey"], wrap=True)
 
 
+INPUTS = ("results/p2_verdicts.json", "results/p2_figdata.json", "data/p2/manifest.json")
+
+
 def _save(fig, stem):
-    os.makedirs(os.path.dirname(stem) or ".", exist_ok=True)
-    fig.savefig(stem + ".pdf")
-    fig.savefig(stem + ".png", dpi=300)
-    plt.close(fig)
-    return [stem + ".pdf", stem + ".png"]
+    """p2_figstyle.save: refuses a figure that breaks the journal's artwork rules, and writes a
+    provenance file with the SHA-256 of this script, the style module and the inputs."""
+    return figstyle.save(fig, stem, inputs=INPUTS)
 
 
 def _method_colour(m):
@@ -317,7 +315,7 @@ def _h2b_wordmap(ax, V):
 
 def fig2(V, FD, da_levels, stem, noise=DISPLAY_NOISE, pe=DISPLAY_PE):
     figstyle.apply()
-    fig = plt.figure(figsize=(W2, 175 * MM), layout="constrained")
+    fig = plt.figure(figsize=(W2, 170 * MM), layout="constrained")
     gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 1.25])
     isos = sorted({_parse_slice(k)[2] for k in V.get("H2b", {})})
     for j, letter in enumerate("ab"):
@@ -406,9 +404,9 @@ def fig3(V, FD, stem):
         b.axvspan(mn, mn + SPREAD_OK, color="#e5f2ec", lw=0, zorder=0)
         b.axvline(mn + SPREAD_FAIL, color=OI["verm"], lw=0.9, ls="--", zorder=1)
         b.text(mn + SPREAD_OK, 1.0, f" {SPREAD_OK:g} decade", transform=b.get_xaxis_transform(),
-               fontsize=6, va="bottom", ha="right", color=OI["green"])
+               fontsize=6, va="bottom", ha="right")
         b.text(mn + SPREAD_FAIL, 1.0, f"{SPREAD_FAIL:g} decade", transform=b.get_xaxis_transform(),
-               fontsize=6, va="bottom", ha="left", color=OI["verm"])
+               fontsize=6, va="bottom", ha="left")
         for i, k in enumerate(order):
             st = _cond_style(k)
             b.errorbar(lr[i], i, xerr=_xerr(*rstar[k]), fmt=st["marker"], color=st["color"], ms=3.5,
@@ -521,7 +519,7 @@ def _h2c_panel(ax, V):
     ax.axhline(FACTOR2, color=OI["verm"], lw=0.8, ls=":")
     tr = ax.get_yaxis_transform()
     ax.text(1.0, MDE, f" MDE {MDE}", transform=tr, fontsize=6, va="top", ha="right")
-    ax.text(1.0, FACTOR2, " factor 2", transform=tr, fontsize=6, va="bottom", ha="right", color=OI["verm"])
+    ax.text(1.0, FACTOR2, " factor 2", transform=tr, fontsize=6, va="bottom", ha="right")
     n_none = 0
     for k in keys:
         iso, pe, e = k.split("|")
