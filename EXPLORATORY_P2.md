@@ -86,9 +86,14 @@ predictor).
 fails; the study does not test this. **What.** On O1, for a declared subgrid (Pe ~94; sigma 0.5
 and 2 %; eps 0 and 2 %; all Da; both isotherms; estimation replicates), fit each candidate law by
 the output-error likelihood used for identifiability (the exact update along the observed c and T)
-and choose by BIC: LDF k(q* - q); quadratic driving force k(q*^2 - q^2)/(2q); a rate linear in the
-fluid concentration k(c/c_in q_max - q); success = the LDF law chosen. Reported as success by Da
-beside discovery and identifiability.
+and choose by BIC: LDF k(q* - q); quadratic driving force k(q*^2 - q^2)/(2q); pseudo-second order
+k(q* - q)^2 (the three kinetic models most used in adsorption practice; amended 2026-11-05 before
+the run, replacing a rate linear in the fluid concentration, so that all three candidates are
+standard and fitted by the same stable implicit update). Each law is integrated by implicit Euler
+on the identifiability profile's upsampled q*(t) path, k profiled on 10^-7..10 at 10 points per
+decade; all three have one parameter, so BIC picks the largest likelihood. Success = LDF chosen;
+also reported: LDF chosen and its k within [k/2, 2k]. Reported by Da beside discovery and
+identifiability.
 
 ## E7. Systematic isotherm error (step isotherm)
 
