@@ -110,8 +110,8 @@ earlier. Ground truth came from a validated non-isothermal column model \citep{p
 Langmuir sorbent and a MOF-303-like step isotherm, over four decades of Damk\"ohler number,
 three P\'eclet numbers, four noise levels and four levels of isotherm error, observed through
 interior probes of concentration, uptake and temperature, through probes without uptake, or at
-the outlet alone. Methods from each family above were run in their strongest available
-configuration, and identifiability was judged by profile likelihood
+the outlet alone. Methods from each family above were run in the strongest configuration we
+could verify within declared cost limits, and identifiability was judged by profile likelihood
 on the same observations. The design, thresholds and verdict words were frozen before any
 method ran on the grid.
 Discovery failed first. In every slice of the design where both boundaries could be measured,
@@ -130,8 +130,9 @@ identifiability must both succeed in at least 90\,\% of the estimation replicate
 isotherm is withheld from every verdict. Both isotherms passed: the best method recovered the
 LDF law in 135 of 135 replicates, and $k$ was identifiable in 135 of 135, for the Langmuir and
 for the step isotherm alike. (As first run, the step isotherm failed this check because of a
-search-range error in the identifiability code; the correction and both sets of verdicts are
-given in Supplementary Note~2 and Extended Data Fig.~7.)
+search-range error in the identifiability code and was withheld; the Langmuir-only verdict of
+that first run was the same as the final one. The correction and both sets of verdicts are given
+in Supplementary Note~2 and Extended Data Fig.~7.)
 % results/p2_verdicts.json positive_control (langmuir, step: success_fraction 1.0,
 % identifiable_fraction 1.0, n 135, need 0.9); results/p2_verdicts_asrun.json (step failed).
 
@@ -208,15 +209,12 @@ overall word and all 30 slice verdicts were unchanged.
 % identifiability"; counts 30/0/0). PREREG_P2 A1 (k-aware sensitivity).
 
 \subsection*{No single error ratio predicts the boundary, and errors-in-variables could not be tested}
-H2a asked whether one dimensionless ratio, the realised driving force against the combined
-error of the observations and of the isotherm ($R = \delta/\varepsilon_{\mathrm{eff}}$), places
-the discovery boundary at the same value $R^{*}$ in every condition. A verdict needs at least
-two conditions whose success crosses 50\,\% in $R$. Only one did (the step isotherm at
-$\Pe \approx 19$, observed through all probes, with $R^{*} = 123$, 95\,\% interval 113 to 135),
-so H2a has \verdict{no verdict}. In the other eleven conditions success was not a monotone
-function of $R$: on probes with uptake (O1) it reached 51 to 71\,\% at single levels of $R$
-without a 50\,\% crossing of the fitted curve, and on probes without uptake (O2) it never
-exceeded 20\,\% at any level of $R$.
+H2a asked whether one ratio, the realised driving force over the combined observation and
+isotherm error ($R = \delta/\varepsilon_{\mathrm{eff}}$), places the discovery boundary at the
+same $R^{*}$ in every condition. Only one of twelve conditions crossed 50\,\% in $R$
+($R^{*} = 123$, 95\,\% interval 113 to 135), so H2a has \verdict{no verdict} (Fig.~3). In the
+others success was not monotone in $R$, peaking at 51 to 71\,\% on O1 and never exceeding
+20\,\% at any level of $R$ on O2.
 % results/p2_figdata.json h2a levels: O1 conditions max 0.51-0.71 (Langmuir and step, Pe 470/94/19,
 % except the one with a crossing); O2 conditions max 0.00-0.20.
 % results/p2_verdicts.json H2a (rstar: one condition, O1|step|pe=5.0|ensemble|weak,
@@ -351,10 +349,14 @@ identifiability fit the same error is absorbed into $k$, and the estimate stays 
 two of the truth. The observation that an isotherm error of 0.5\,\% moved the discovery boundary
 by more than a decade, while it moved the identifiability boundary by about 0.2 decade, is
 consistent with this reading, although the study was not designed to separate the mechanisms.
-A second effect is classical: as $\Da$ grows, uptake approaches equilibrium, the driving force
-$\qs - q$ shrinks and the candidate terms become nearly collinear on the slow manifold
-\citep{delgado2025,gallo2026}, so the selection step loses contrast before the fit of a single
-coefficient does.
+A second effect is classical: as $\Da$ grows, uptake approaches equilibrium and the law's two
+terms become nearly collinear on the slow manifold \citep{delgado2025,gallo2026}. In a
+descriptive check made after the verdicts, the smaller singular value of the standardised pair
+$\{q, \qsm\}$ fell from about 0.75 of the larger at $\Da = 0.1$ to about 0.001 at $\Da = 1000$.
+Exact data still separate the two terms, which is why discovery never failed without noise, but
+noise and isotherm error soon exceed the shrinking direction that distinguishes them.
+% results/p2_e5_conditioning.json (q_qstar_min_over_max_sv 0.71-0.79 at Da 0.1; 0.00065-0.00125 at Da 1000);
+% p2_e5_conditioning.py (EXPLORATORY_P2 E5).
 
 The discovery methods were not interchangeable. Exact best-subset selection in the weak form was
 the most reliable, and strong-form sparse methods, which differentiate noisy data, never produced
@@ -603,6 +605,9 @@ discovery methods: $k$ was practically identifiable when the 95\,\% profile inte
 (likelihood-ratio threshold 3.84) lay within $[k/2, 2k]$. On O1 the likelihood summed over
 all probes the fit of the known law, integrated exactly for piecewise-linear $\qs(t)$ along
 the observed $c$ and $T$. On O2 and O3 every point of the profile was a full column solve.
+The O1 likelihood involves only the local uptake law along the observed $c$ and $T$, so errors in
+dispersion, heat transfer or geometry do not enter it; on O2 and O3 the column model is taken as
+exact, as it is in the simulations.
 The profile searched a coarse logarithmic grid of $k$ and refined it around the interval
 (41 points per pass on O1, 21 on O2 and O3, as pre-registered).
 Two corrections to the identifiability profiles were made during the study and are reported
@@ -646,7 +651,9 @@ the gap $\log_{10}\Da^{*}_{\mathrm{disc}} - \log_{10}\Da^{*}_{\mathrm{ident}}$ w
 \verdict{discovery fails before identifiability} at $-0.25$ decade or less,
 \verdict{discovery outlives identifiability} at $+0.25$ or more, and
 \verdict{discovery fails with identifiability} in between; the hypothesis-level verdict was
-the word held by at least two thirds of the slices with a verdict. H2c: errors-in-variables
+the word held by at least two thirds of the slices with a verdict. Slices share ground-truth
+solves and isotherm-error draws, so they are not independent, and the two-thirds rule summarises
+them without a formal error rate. H2c: errors-in-variables
 regression moves the discovery boundary upwards by at least 0.25 decade in at least two thirds
 of the slices with a verdict at a given $\varepsilon > 0$, tested at $\sigma = 2\,\%$ on O1 in the
 strong form against the best strong-form method that is not errors-in-variables, in 18 slices
@@ -700,7 +707,9 @@ unpenalised logistic fit has no finite maximum-likelihood slope: the optimiser s
 steep curve whose crossing lies between the two levels, near their geometric midpoint. Every
 bootstrap resample reproduces the same data, so the interval has zero width. Such a boundary
 is reported as lying between those two levels; the gap used by H2b is computed from it exactly
-as from any other crossing.
+as from any other crossing. Such a boundary is interval-censored: wherever it lies between the
+two levels, the gap changes by at most 0.25 decade, and since every gap with a verdict exceeded
+1.6 decades in size, no verdict depends on where in that interval it is placed.
 % p2/analysis.py _fit (sklearn LogisticRegression, penalty=None, max_iter=1000; crossing -c/w)
 % and boundary_draws (resampling within each level). Checked on results/p2_figdata.json: every
 % zero-width da_ident_ci is all-to-none between the two adjacent levels (e.g. 562 between 316 and 1000).
