@@ -153,3 +153,14 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
 - The error (langmuir_L1_pe1_da10|0.005|0.0|0) is pykan's own: kan/spline.py curve2coef catches a
   failed torch.linalg.lstsq with a bare except, prints 'lstsq failed', then returns an unset local
   'coef' (UnboundLocalError). Counted as a failure (A2). Not our code; report the library version.
+
+## Journal research (2026-11-05, live; agent report)
+- Primary: Nature Computational Science (IF 20.3 2025; Article format matches; desk decision median
+  13 d; Crossref-measured received->accepted median 276 d, IQR 228-352; free on subscription route).
+- Fallback 1: AIChE Journal (Crossref median 87 d; free closed access, Wiley deal also funds OA; JCR Q2
+  per TUBITAK list, Scopus Q1 unverified). Fallback 2: Computers & Chemical Engineering (closest
+  topic: ~10 SINDy/SR/KAN/identifiability papers 2025-26; free subscription route; JCR Q2 third-party).
+- Nature Chemical Engineering: Crossref median 356 d (near the 1-year limit); Communications
+  Chemistry/Engineering excluded (fully OA; Springer Nature TUBITAK quota exhausted 2026).
+- Digital Discovery: JCR Q2 per EKUAL; Paper 1 already going there.
+- Open: SJR (Scopus) quartiles blocked by Cloudflare; check with library access if needed.
