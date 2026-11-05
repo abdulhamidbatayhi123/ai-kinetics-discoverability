@@ -54,3 +54,46 @@ known-answer failure at zero noise. M8 does not enter any confirmatory pool.
 whether it contains the true k. Reported as counts per observation model and Da level, and the
 fraction of "identifiable" rows whose interval misses k. Descriptive only; the confirmatory
 Da*_ident stays as pre-registered.
+
+## Post-verdict analyses E4-E7 (declared 2026-11-05, AFTER the corrected verdicts, BEFORE running)
+
+Prompted by an internal referee-panel review of the full draft. They are post hoc: they are
+reported as such wherever they are used, they enter no confirmatory test, and the pre-registered
+verdicts stay as computed (`results/p2_verdicts.json`).
+
+## E4. Matched success criteria (no new compute; re-scoring stored rows)
+
+**Why.** Discovery must return the exact terms with the coefficient ratio q* : q = -1 within 10 %;
+identifiability asks only for the 95 % interval inside [k/2, 2k]. The gap could partly reflect
+this asymmetry. **What.** H2b recomputed with `p2_analyze.verdicts` unchanged except the outcome
+of each row: (a) discovery relaxed to "exactly the terms {q, q*} with a negative q coefficient"
+(the ratio test dropped; the q* coefficient is not stored, so its sign cannot be checked);
+(b) identifiability strict, 95 % interval inside [0.9 k, 1.1 k]; (c) identifiability by the point
+estimate, the interval's geometric midpoint inside [k/2, 2k] (ignores the interval's width, so
+it does not rely on the interval's calibration); (d) = (a) with (c). Verdict words per slice and
+overall, and gaps, against the pre-registered ones. Boundaries by the same logistic estimator.
+
+## E5. Library conditioning against Da (no new compute if stored; otherwise from the fields)
+
+**Why.** The Discussion attributes part of the failure to collinear candidate terms near
+equilibrium. **What.** The condition number of the standardised library matrix on the O1
+observations at sigma = eps = 0, per isotherm, Pe and Da (PREREG_P2 lists it as a mechanistic
+predictor).
+
+## E6. Model selection among a few candidate laws (the comparator the Discussion recommends)
+
+**Why.** The Discussion recommends choosing among a few candidate rate laws when open discovery
+fails; the study does not test this. **What.** On O1, for a declared subgrid (Pe ~94; sigma 0.5
+and 2 %; eps 0 and 2 %; all Da; both isotherms; estimation replicates), fit each candidate law by
+the output-error likelihood used for identifiability (the exact update along the observed c and T)
+and choose by BIC: LDF k(q* - q); quadratic driving force k(q*^2 - q^2)/(2q); a rate linear in the
+fluid concentration k(c/c_in q_max - q); success = the LDF law chosen. Reported as success by Da
+beside discovery and identifiability.
+
+## E7. Systematic isotherm error (step isotherm)
+
+**Why.** The pre-registered isotherm error is a smooth random multiplicative function; real
+water-isotherm errors are often a shift of the step position. **What.** For the step isotherm,
+O1, sigma 0.5 and 2 %, a measured isotherm whose step is shifted by +-1 % and +-2 % relative
+humidity (the error model only; fields unchanged), discovery (the six sparse solvers) and O1
+identifiability, estimation replicates; descriptive.
