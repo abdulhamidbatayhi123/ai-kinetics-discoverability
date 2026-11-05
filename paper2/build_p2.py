@@ -109,6 +109,16 @@ def bindings():
     m8 = load("results/p2_e2_m8.json")["rows"]
     out += [("M8 (E2)", f"none of {len(m8)} fits" if not any(v.get("success") for v in m8.values())
              else "M8 has successes")]
+    meth = load("results/p2_figdata.json")["methods"]
+    m7gaps = []
+    for k, s in h2b.items():
+        if s["gap_decades"] is None or "m7|strong" not in meth.get(k, {}):
+            continue
+        last = max([da for da, a, n in meth[k]["m7|strong"] if a / n >= 0.5], default=None)
+        if last:
+            m7gaps.append(__import__("math").log10(s["da_ident"] / last))
+    if m7gaps:
+        out += [("M7 last level vs Da*_ident", f"that level lay {min(m7gaps):.1f} to {max(m7gaps):.1f} decades")]
     fig = load("results/p2_figdata.json")["h2b"]
     eps2 = [k for k in h2b if "eps=0.02" in k]
     reach = sum(any(a / n >= 0.5 for _, a, n in (fig[k]["disc"] or [])) for k in eps2)
@@ -142,7 +152,8 @@ def main():
     # their legends, Methods, references and the abstract are excluded); comments already stripped
     a, b = tex.index("---- Introduction"), tex.index("% ---- Display items")
     main_words = len(re.sub(re.escape(BS) + r"cite[pt]?\{[^}]*\}", "", strip_comments(tex[a:b])).split())
-    disp = len(re.findall(re.escape(BS) + r"begin\{(figure|table)\}", body))
+    main_part = body.split(BS + "section*{Extended Data}")[0]   # Extended Data are not display items
+    disp = len(re.findall(re.escape(BS) + r"begin\{(figure|table)\}", main_part))
     if main_words > 3500:
         fail("G4", f"main text {main_words} words > 3,500")
     if disp > 6:
@@ -163,10 +174,18 @@ def main():
         for p in ("PENDING", "VERIFY", "[CHECK", "TODO"):
             if p in text:
                 fail("G8", f"{name}: placeholder {p}")
-    for f in sorted(os.listdir(HERE)):
-        m = re.match(r"fig_ed(\d+)\.pdf$", f)
-        if m and f"Extended Data Fig.~{int(m.group(1))}" not in body:
-            fail("G9", f"{f} exists but 'Extended Data Fig.~{int(m.group(1))}' is not cited")
+    # every Extended Data figure file must be cited in the main part ("Extended Data Fig.~3",
+    # "Extended Data Figs.~1 and~2"); the Extended Data section's own legends do not count
+    cited = set()
+    for grp in re.findall(r"Extended Data Figs?\.~([0-9~, and\-]+)", main_part):
+        cited |= {int(n) for n in re.findall(r"\d+", grp)}
+    ed_files = [f for f in sorted(os.listdir(HERE)) if re.match(r"fig_ed\d+(_[^.]*)?\.pdf$", f)]
+    for f in ed_files:
+        n = int(re.match(r"fig_ed(\d+)", f).group(1))
+        if n not in cited:
+            fail("G9", f"{f} exists but Extended Data Fig. {n} is not cited in the main text")
+    if not ed_files:
+        fail("G9", "no Extended Data figure files found (check the file-name pattern)")
     for inc in re.findall(re.escape(BS) + r"includegraphics(?:\[[^]]*\])?\{([^}]*)\}", body):
         stem = os.path.splitext(inc)[0]
         if not os.path.exists(inc):

@@ -131,7 +131,7 @@ isotherm is withheld from every verdict. Both isotherms passed: the best method 
 LDF law in 135 of 135 replicates, and $k$ was identifiable in 135 of 135, for the Langmuir and
 for the step isotherm alike. (As first run, the step isotherm failed this check because of a
 search-range error in the identifiability code; the correction and both sets of verdicts are
-given in Supplementary Note~2.)
+given in Supplementary Note~2 and Extended Data Fig.~7.)
 % results/p2_verdicts.json positive_control (langmuir, step: success_fraction 1.0,
 % identifiable_fraction 1.0, n 135, need 0.9); results/p2_verdicts_asrun.json (step failed).
 
@@ -141,7 +141,8 @@ and one isotherm error), the Damk\"ohler number at which the best discovery meth
 50\,\% success, $\Da^{*}_{\mathrm{disc}}$, with the number at which $k$ stops being
 identifiable in half the replicates, $\Da^{*}_{\mathrm{ident}}$. Of the 96 slices, 30 had both
 boundaries on the grid. In all 30 the verdict was \verdict{discovery fails before
-identifiability}, so H2b's pre-registered overall word is the same (Fig.~2, Table~1). The gap
+identifiability}, so H2b's pre-registered overall word is the same (Fig.~2, Table~1; every slice
+in Extended Data Figs.~1 and~2). The gap
 was large everywhere: from 1.6 to 3.4 decades of $\Da$, with a median of 2.3 decades for the
 Langmuir sorbent (20 slices) and 2.5 for the step isotherm (10 slices). Discovery failed between
 $\Da = 0.11$ and $7.2$, while $k$ stayed identifiable up to $\Da$ between 43 and 562. In every
@@ -182,9 +183,8 @@ identifiability dipped and recovered at the top of the grid (see below).
 % 0.05 24, 0.02 15, 0.005 1. M7 window: results/p2_figdata.json h2b, slices sigma 0.005/0.02,
 % eps 0.02, Pe 94, langmuir/step, best_method m7|strong: max 0.87-0.96 at Da 1-10, 0.00 at
 % Da 0.1, 0.316 and >= 100 (0.02 at Da 31.6 for sigma 0.02 step; 0.20/0.40 at Da 31.6 for sigma 0.005).
-Many identifiability boundaries fell exactly between two adjacent levels of $\Da$: in every
-such slice, $k$ was identifiable in all replicates at one level and in none at the next. These
-boundaries are reported as lying between those levels (Methods).
+Identifiability boundaries where $k$ was identifiable in every replicate at one level and in
+none at the next are reported as lying between those levels (Methods).
 % Checked on results/p2_figdata.json h2b ident: every zero-width da_ident_ci is all-to-none
 % between the two adjacent levels around it.
 
@@ -196,7 +196,7 @@ probe in only a few of the 200 observation times. Identifiability there is limit
 resolution of the data as well as by their information content. This does not affect H2b: in
 all 30 slices with a verdict, $k$ was identifiable in at least 95\,\% of replicates at every
 $\Da \le 31.6$, and the highest $\Da \le 100$ at which it was identifiable in half the
-replicates lay at least 1.1 decades above the discovery boundary.
+replicates lay at least 1.1 decades above the discovery boundary (Extended Data Fig.~3).
 % results/p2_ident_robustness.json accuracy_median_khat_over_k_sigma0_eps0 (<= 1.10 up to Da 100;
 % Da 316: 1.12 to 24.5; Da 1000: 0.61 to 0.67); h2b_without_da_316_1000_summary
 % (min_p_ident_da_le_31.6 0.956; min_gap_lower_bound_decades 1.14).
@@ -224,21 +224,15 @@ exceeded 20\,\% at any level of $R$.
 % conditions have a crossing"). pe=5.0 is the D_L x 5 level, Pe about 19.
 
 H2c asked whether an errors-in-variables estimator (M5), which treats the measured isotherm as a
-regressor with error, moves the discovery boundary upward. It is tested at 2\,\% noise on probes
-with uptake, in the strong form, against the best strong-form method that is not
-errors-in-variables, in 18 slices (three isotherm errors from 0.5 to 5\,\%, two isotherms, three
-P\'eclet numbers). It holds at an isotherm error if the upward shift is at least 0.25 decade in
-two thirds of that error's slices with a verdict, and a slice has a verdict only if both
-estimators have a boundary on the grid. No slice had both, so H2c has \verdict{no verdict} at
-every isotherm error and is neither supported nor falsified. The reason is the form of the
-regression. Errors-in-variables fitting needs the time derivative of the uptake, and in 16 of
-the 18 slices the comparator was strong-form best-subset selection, which, like the other
-strong-form sparse methods, succeeded in no replicate at any $\Da$ at this noise level; the
-errors-in-variables estimator reached at most 40\,\% (step isotherm, 5\,\% isotherm error),
-never 50\,\%. In the other two slices ($\Pe \approx 94$, 2\,\% isotherm error) the comparator was
-symbolic regression, whose success rose above 50\,\% and fell again within the grid, so it had
-no single boundary either. Because the refined grid that H2c would have used is placed around
-discovery boundaries, and there were none, it was not solved.
+regressor with error, moves the discovery boundary upward relative to the best strong-form
+comparator (18 slices at 2\,\% noise; rule in Methods). A slice has a verdict only if both have
+a boundary on the grid, and none had, so H2c has \verdict{no verdict} at every isotherm error and
+is neither supported nor falsified. The reason is the form of the regression. Errors-in-variables
+fitting needs the time derivative of the uptake, and in 16 of the 18 slices the comparator was
+strong-form best-subset selection, which, like the other strong-form sparse methods, succeeded
+in no replicate at any $\Da$ at this noise level; the errors-in-variables estimator reached at
+most 40\,\%, never 50\,\%. In the other two slices the comparator was symbolic regression, whose
+success rose above 50\,\% and fell again, so it had no single boundary either.
 % results/p2_verdicts.json H2c: 18 slices; best_strong_method best_subset|strong in 16, m7|strong in
 % langmuir|pe=1.0|eps=0.02 and step|pe=1.0|eps=0.02 (M7 covers every design cell there, so the
 % coverage rule admits it, p2_analyze.py). results/p2_figdata.json methods, sigma = 0.02:
@@ -258,9 +252,17 @@ regression (M7), run only at $\Pe \approx 94$ with noise of 0.5 or 2\,\% and iso
 of 0 or 2\,\%, behaved differently from all the sparse methods. It failed at the lowest rates,
 where weak-form sparse regression worked best, and succeeded at intermediate rates: up to
 $\Da \approx 32$ without isotherm error, and between $\Da = 1$ and 10 with 2\,\% isotherm error,
-where no sparse method reached 50\,\% (Fig.~4a,b). The
-two families therefore cover different ranges of $\Da$, and neither covers the range in which
-$k$ remains identifiable. The neural-network pipeline of the closest prior work (M1), run as a
+where no sparse method reached 50\,\% (Fig.~4a,b; Extended Data Fig.~5). The pre-registered rule did not select
+symbolic regression as the best method in the slices it shared with sparse regression, because a
+falling logistic curve cannot describe success that is zero at the lowest rates. Taking its last
+level with at least 50\,\% success instead would not change H2b: in the three such slices with a
+verdict, that level lay 1.2 to 1.4 decades below the identifiability boundary. The two families
+therefore cover different ranges of $\Da$, and neither covers the range in which $k$ remains
+identifiable.
+% M7 last level >= 0.5 vs da_ident (results/p2_figdata.json methods, results/p2_verdicts.json H2b):
+% langmuir s0.5 e0 31.6 vs 562 (1.25); langmuir s2 e0 3.16 vs 73.5 (1.37); step s2 e0 10 vs 172 (1.23).
+% M7's falling-logistic crossings on the estimation set are 0.12 and 0.39 (da_disc_by_method) or absent;
+% select_best (largest crossing on replicates 0-14) chose best_subset|weak in all three slices. The neural-network pipeline of the closest prior work (M1), run as a
 declared demonstration at one noise level, recovered the law in one of its nine fits, at
 $\Da = 3.16$. Slow-manifold discovery (M9), which targets the isotherm rather than the rate law,
 recovered its own target only at the highest rate and without noise (67\,\% of replicates at
@@ -301,13 +303,22 @@ For the step isotherm the study also simulated a rate that falls to 20\,\% of it
 the isotherm step (L2), a form motivated by the measurements in MOF-303. This part is
 exploratory. The
 state dependence was discovered, by the pre-registered rule, almost only at $\Da = 1$: there
-the best method succeeded in 77 to 100\,\% of replicates at every noise level and isotherm
-error, against at most 58\,\% at any other level and none at $\Da \le 0.32$ without noise.
+the best method succeeded in 77 to 100\,\% of all 60 replicates at every noise level and
+isotherm error (Extended Data Fig.~6), against at most 58\,\% at any other level and none at $\Da \le 0.32$ without noise.
 These are the best of all methods and P\'eclet numbers at each level, so they overstate what
 a single method achieves. The failure at low $\Da$ is not because the loading never reaches
 the step: at $\Da = 0.1$ and 0.32 the loading rose to 41 to 47\,\% of capacity, past the step
-midpoint at 36\,\%, and stayed near the step for most of the run. Why the state dependence is
-recovered at $\Da = 1$ and not at its neighbours was not resolved here.
+midpoint at 36\,\%, and stayed near the step for most of the run. A likely reason lies in the
+test itself: the candidate library holds no term that can represent a rate falling sigmoidally
+across the step, so the pre-registered rule asks whether the selected polynomial terms, which
+must include $q$ and $\qsm$, imply a rate that falls by at least 40\,\% across the observed
+loading. Success then follows which terms are selected. Without noise, exact best-subset
+selection in the weak form chose the same four terms, without $q$, at $\Da = 0.32$ and 1 and
+failed at both, while sequential thresholding selected $q$ at $\Da = 1$ and succeeded.
+% results/p2_extra_l2.json, step_L2_pe1, sigma = eps = 0, best_subset|weak: support {c, c*q, q^2, qstar}
+% at Da 0.316 and 1 (0/60 each); {c, c*q, q, qstar} at 3.16 (0/60); stlsq|weak 1.00 at Da 1
+% (results/p2_verdicts.json H2d_descriptive). p2/metric.py success_L2 (q and qstar selected, Spearman
+% rho < -0.8, top-bin k_hat <= 0.6 of bottom bin). Lib-B = {1, c, q, T, cq, q^2, c^2, q*}.
 % data/p2/step_L2_pe1_da*.npz (q/q_max max 0.408 at Da 0.1, 0.473 at 0.316, 0.775 at 1,
 % 0.87-0.88 at Da >= 3.16; fraction of (z, t) within +-0.1 of theta 0.54 and 0.62 at Da 0.1
 % and 0.316); manifest theta_step 0.355.
@@ -375,7 +386,7 @@ transfer that were held exact here. Observation through interior probes of uptak
 ceiling that experiments rarely reach. The identifiability criterion asks whether the 95\,\%
 profile interval lies within a factor of two of $k$; it is a criterion of precision and accuracy,
 not of calibration. In an exploratory check the intervals contained the true $k$ in only about
-10\,\% of rows, because they are narrower than the small biases from time resolution and from
+10\,\% of rows (Extended Data Fig.~4), because they are narrower than the small biases from time resolution and from
 errors in the inputs to $\qsm$. At the two highest $\Da$ levels the time resolution also biased
 the estimate itself, by factors of 0.6 to 24, so identifiability there is partly a property of
 the sampling; H2b does not depend on those levels. Symbolic regression ran on a subgrid, the
@@ -639,7 +650,11 @@ the gap $\log_{10}\Da^{*}_{\mathrm{disc}} - \log_{10}\Da^{*}_{\mathrm{ident}}$ w
 \verdict{discovery fails with identifiability} in between; the hypothesis-level verdict was
 the word held by at least two thirds of the slices with a verdict. H2c: errors-in-variables
 regression moves the discovery boundary upwards by at least 0.25 decade in at least two thirds
-of the slices at a given $\varepsilon > 0$. With 45 estimation replicates the H2b rule
+of the slices with a verdict at a given $\varepsilon > 0$, tested at $\sigma = 2\,\%$ on O1 in the
+strong form against the best strong-form method that is not errors-in-variables, in 18 slices
+(three $\varepsilon$, two isotherms, three P\'eclet numbers); a slice has a verdict only if both
+estimators have a boundary on the grid, and the refined grid placed around those boundaries
+is solved only if they exist. With 45 estimation replicates the H2b rule
 returned a wrong directional verdict with probability 0.001 when there was no gap, and the
 correct one with probability 0.965 at a gap of 0.40 decade, the smallest effect of interest.
 A positive control guarded every verdict: in each isotherm's easiest cells (lowest $\Da$,
@@ -727,4 +742,72 @@ described in Methods.
 The author declares no competing interests.
 
 \input{bib_article.tex}   % generated by make_article_bib.py: cited entries, in citation order
+
+% ---- Extended Data (<= 10 figures, each cited in the main text; not counted as display items) ----
+\clearpage
+\section*{Extended Data}
+\renewcommand{\figurename}{Extended Data Fig.}
+\setcounter{figure}{0}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed1_h2b_langmuir.pdf}
+\caption{\textbf{Every H2b slice, Langmuir sorbent.} Fraction of the 45 estimation replicates in
+which the best method recovered the law (blue circles) and in which $k$ was identifiable (orange
+open squares), against $\log_{10}\Da$; rows, noise $\sigma$ and isotherm error $\varepsilon$;
+columns, P\'eclet number. Smooth curves are the logistic fits that define the boundaries, drawn
+only where a 50\,\% crossing exists; otherwise the measured fractions are joined. The square beside
+each panel gives the verdict (orange, \verdict{discovery fails before identifiability}; grey, no
+boundary on the grid for one of the two) and the number the gap in decades.}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed2_h2b_step.pdf}
+\caption{\textbf{Every H2b slice, MOF-303-like step isotherm.} As Extended Data Fig.~1.}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed3_ident.pdf}
+\caption{\textbf{Accuracy of the O1 identifiability estimator and H2b without the top two
+levels (descriptive checks made after the verdicts).} \textbf{a}, Median ratio of the estimated to
+the true $k$ with exact data ($\sigma = \varepsilon = 0$), against $\Da$, for both isotherms and
+three P\'eclet numbers; dark band, 0.9 to 1.1; light band, the criterion's $[0.5, 2]$. The estimate
+is accurate up to $\Da = 100$ and biased by the time resolution at 316 and 1000. \textbf{b}, For
+the 30 slices with a verdict, the H2b gap against a lower bound computed without $\Da = 316$ and
+1000; every bound lies below the $-0.25$ decade threshold.}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed4_coverage.pdf}
+\caption{\textbf{Precision against coverage of the identifiability criterion (E3, exploratory).}
+Fraction of identifiability rows that meet the criterion (95\,\% interval inside $[k/2, 2k]$)
+and fraction whose interval contains the true $k$, by $\Da$ on O1 and in total on O2 and O3.
+Most intervals that meet the criterion do not contain $k$.}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed5_methods.pdf}
+\caption{\textbf{Every method against $\Da$, and the methods outside the confirmatory pool.}
+\textbf{a}--\textbf{d}, Success of each method at $\Pe \approx 94$ and 2\,\% noise, with an exact
+isotherm (\textbf{a}, Langmuir; \textbf{b}, step) and with 2\,\% isotherm error (\textbf{c},
+\textbf{d}); methods listed in a panel had no success at any $\Da$. \textbf{e}, Slow-manifold
+discovery (M9) against its own target, pooled over noise, isotherm error and P\'eclet number.
+\textbf{f}, The Kolmogorov--Arnold network (M8, exploratory E2; 0 of 216 fits) and the
+neural-network demonstration (M1; one replicate per level).}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed6_h2d.pdf}
+\caption{\textbf{Loading-dependent rate (H2d, exploratory).} Best success over methods and
+P\'eclet numbers for each noise and isotherm-error pair (rows) and $\Da$ (columns), over all 60
+replicates; values printed in the cells.}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed7_asrun.pdf}
+\caption{\textbf{As-run against corrected results.} \textbf{a}, Positive-control fractions as
+first run (hatched) and corrected; the step isotherm failed as first run because of the
+identifiability search range (Supplementary Note~2). \textbf{b}, H2b slices by verdict.
+\textbf{c}, Gap of each slice with a verdict in both runs or withheld as first run; the verdict
+of every Langmuir slice is unchanged.}
+\end{figure}
 \end{document}
