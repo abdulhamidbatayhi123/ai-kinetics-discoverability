@@ -216,7 +216,7 @@ $\Pe \approx 19$, observed through all probes, with $R^{*} = 123$, 95\,\% interv
 so H2a has \verdict{no verdict}. In the other eleven conditions success was not a monotone
 function of $R$: on probes with uptake (O1) it reached 51 to 71\,\% at single levels of $R$
 without a 50\,\% crossing of the fitted curve, and on probes without uptake (O2) it never
-exceeded 20\,\%.
+exceeded 20\,\% at any level of $R$.
 % results/p2_figdata.json h2a levels: O1 conditions max 0.51-0.71 (Langmuir and step, Pe 470/94/19,
 % except the one with a crossing); O2 conditions max 0.00-0.20.
 % results/p2_verdicts.json H2a (rstar: one condition, O1|step|pe=5.0|ensemble|weak,
@@ -270,9 +270,9 @@ $\Da = 1000$, pooled over isotherms and P\'eclet numbers), and in at most 17\,\%
 % results/p2_figdata.json methods (O1 slices with a crossing: M4 weak 96-60 = 36, M2 weak 96-88 = 8,
 % M3 weak 96-89 = 7, strong forms 0; M7 2 of its 8 subgrid slices); M7 vs M4 weak per Da:
 % fig_p2_methods panels a, b and the per-slice listing in paper2/WRITEUP_NOTES.md;
-% results/p2_extra_m1.json (1 of 9, Da 3.16). [CHECK in review: M9 own-target summary in Supp. Note 1.]
+% results/p2_extra_m1.json (1 of 9, Da 3.16).
 
-\subsection*{From the outlet alone, $k$ stays identifiable; the law is not discovered}
+\subsection*{Without probes of uptake, $k$ stays identifiable but the law is not discovered}
 Real columns are rarely fitted with probes inside the bed. With concentration and temperature
 probes but no uptake (O2), uptake must first be reconstructed from the gas-phase mass balance.
 Discovery failed on O2 everywhere: no slice had a 50\,\% boundary, and no method succeeded in
@@ -296,7 +296,7 @@ of $\Da$ beyond the last discovered level without isotherm error, and 0.6 to 1.3
 % results/p2_verdicts.json H2b_O2_descriptive (96 slices, da_disc null in all);
 % H2b_O2_O3_descriptive (O2_da_ident 56.6 to 286, O3_da_ident 38.3 to 172 over the 8 subgrid slices).
 
-\subsection*{A loading-dependent rate is found only where the front crosses the step}
+\subsection*{A loading-dependent rate is found almost only at one rate}
 For the step isotherm the study also simulated a rate that falls to 20\,\% of its value across
 the isotherm step (L2), a form motivated by the measurements in MOF-303. This part is
 exploratory. The
@@ -320,12 +320,15 @@ The rate law of a fixed-bed column could be discovered only over a narrow part o
 which its rate constant could be measured. In every slice of the design where both boundaries
 existed, discovery failed between 1.6 and 3.4 decades of Damk\"ohler number before
 identifiability did. With an isotherm error of 5\,\% no method discovered the law at any rate,
-and with 2\,\% discovery reached 50\,\% in only 9 of 24 slices, at the lowest rates or, for
-symbolic regression, in a narrow window. For
-% results/p2_ident_robustness.json / figdata: eps 0.02 slices whose discovery never reaches 50 %: 15 of 24.
-practice this sets an order of operations. Where the isotherm is known to better than about
-0.5\,\% and the uptake is slow compared with the passage of the front ($\Da$ of order one or
-below), sparse regression in the weak form can propose the law. Beyond that, the law has to be
+and with 2\,\% the best method reached 50\,\% at any level in only 8 of 24 slices: at
+$\Da \approx 0.3$ under 5\,\% noise, or, for symbolic regression, in a window between $\Da = 1$
+and 10. For
+% results/p2_figdata.json h2b disc fractions, eps 0.02: a level >= 0.5 in 8 of 24 slices (4 x m7|strong
+% at Pe 94, Da 1-10; 4 x best_subset|weak at sigma 5 %, Da 0.316).
+practice this sets an order of operations. Where the isotherm is known almost exactly (an error
+of 0.5\,\% already confined discovery to $\Da \le 0.2$) and the uptake is slow compared with the
+passage of the front ($\Da$ of order one or below), sparse regression in the weak form can
+propose the law. Beyond that, the law has to be
 assumed or chosen among a few candidates by model comparison, and the data are then good for
 its coefficient over a further one and a half to three decades of $\Da$ from interior probes,
 and, at the noise and isotherm errors tested, over roughly one more decade from the outlet alone.

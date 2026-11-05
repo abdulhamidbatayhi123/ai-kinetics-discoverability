@@ -109,6 +109,10 @@ def bindings():
     m8 = load("results/p2_e2_m8.json")["rows"]
     out += [("M8 (E2)", f"none of {len(m8)} fits" if not any(v.get("success") for v in m8.values())
              else "M8 has successes")]
+    fig = load("results/p2_figdata.json")["h2b"]
+    eps2 = [k for k in h2b if "eps=0.02" in k]
+    reach = sum(any(a / n >= 0.5 for _, a, n in (fig[k]["disc"] or [])) for k in eps2)
+    out += [("eps 2 %: slices reaching 50 % at any level", f"in only {reach} of {len(eps2)} slices")]
     e3 = load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
     out += [("E3 coverage", f"only about {round(e3 * 100)}{BS},{BS}%")]
     return out
