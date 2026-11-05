@@ -27,3 +27,8 @@ submission/
 results/tmp*.tmp
 Thumbs.db
 .DS_Store
+
+# Raw run logs (gzipped copies are tracked as the record)
+p2_rerun_A6.log
+p2_e2_m8.log
+p2_figdata.log

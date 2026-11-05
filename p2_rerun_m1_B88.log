@@ -1,0 +1,82 @@
+      1 [main] bash 35478 dofork: child -1 - forked process 60312 died unexpectedly, retry 0, exit code 0xC000026B, errno 11
+p2_rerun_m1_B88.sh: fork: retry: Resource temporarily unavailable
+[2026-11-04 10:30:57] B88 M1 rerun start; freeze: (True, '375552befc058f84ece428e4a86d8cbc46f90b30')
+removed 4 error rows: ['langmuir_L1_pe1_da100|0.02|0.0|0|m1_ude|o3', 'langmuir_L1_pe1_da1e+03|0.02|0.0|0|m1_ude|o3', 'langmuir_L1_pe1_da31.6|0.02|0.0|0|m1_ude|o3', 'langmuir_L1_pe1_da316|0.02|0.0|0|m1_ude|o3']
+m1 langmuir_L1_pe1_da0.1              [0s]
+m1 langmuir_L1_pe1_da0.316            [0s]
+m1 langmuir_L1_pe1_da1                [0s]
+m1 langmuir_L1_pe1_da10               [0s]
+jax.pure_callback failed
+Traceback (most recent call last):
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\jax\_src\callback.py", line 93, in pure_callback_impl
+    return tree_util.tree_map(np.asarray, callback(*args))
+                                          ^^^^^^^^^^^^^^^
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\jax\_src\callback.py", line 71, in __call__
+    return tree_util.tree_leaves(self.callback_func(*args, **kwargs))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\equinox\_errors.py", line 88, in raises
+    raise _EquinoxRuntimeError(
+equinox._errors._EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.
+
+
+--------------------
+An error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.
+--------------------
+
+m1 langmuir_L1_pe1_da100              [5428s]
+jax.pure_callback failed
+Traceback (most recent call last):
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\jax\_src\callback.py", line 93, in pure_callback_impl
+    return tree_util.tree_map(np.asarray, callback(*args))
+                                          ^^^^^^^^^^^^^^^
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\jax\_src\callback.py", line 71, in __call__
+    return tree_util.tree_leaves(self.callback_func(*args, **kwargs))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\equinox\_errors.py", line 88, in raises
+    raise _EquinoxRuntimeError(
+equinox._errors._EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.
+
+
+--------------------
+An error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.
+--------------------
+
+m1 langmuir_L1_pe1_da1e+03            [5089s]
+m1 langmuir_L1_pe1_da3.16             [0s]
+jax.pure_callback failed
+Traceback (most recent call last):
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\jax\_src\callback.py", line 93, in pure_callback_impl
+    return tree_util.tree_map(np.asarray, callback(*args))
+                                          ^^^^^^^^^^^^^^^
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\jax\_src\callback.py", line 71, in __call__
+    return tree_util.tree_leaves(self.callback_func(*args, **kwargs))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\equinox\_errors.py", line 88, in raises
+    raise _EquinoxRuntimeError(
+equinox._errors._EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.
+
+
+--------------------
+An error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.
+--------------------
+
+m1 langmuir_L1_pe1_da31.6             [6054s]
+jax.pure_callback failed
+Traceback (most recent call last):
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\jax\_src\callback.py", line 93, in pure_callback_impl
+    return tree_util.tree_map(np.asarray, callback(*args))
+                                          ^^^^^^^^^^^^^^^
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\jax\_src\callback.py", line 71, in __call__
+    return tree_util.tree_leaves(self.callback_func(*args, **kwargs))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Lib\site-packages\equinox\_errors.py", line 88, in raises
+    raise _EquinoxRuntimeError(
+equinox._errors._EquinoxRuntimeError: The maximum number of solver steps was reached. Try increasing `max_steps`.
+
+
+--------------------
+An error occurred during the runtime of your JAX program! Unfortunately you do not appear to be using `equinox.filter_jit` (perhaps you are using `jax.jit` instead?) and so further information about the error cannot be displayed. (Probably you are seeing a very large but uninformative error message right now.) Please wrap your program with `equinox.filter_jit`.
+--------------------
+
+m1 langmuir_L1_pe1_da316              [7706s]
+[2026-11-04 17:16:30] === B88_M1_RERUN_DONE
