@@ -7,10 +7,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 561.825561467881,
       "da_ident_ci": [
-        null,
-        null
+        561.825561467881,
+        561.825561467881
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -76,10 +76,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 561.825561467881,
       "da_ident_ci": [
-        null,
-        null
+        561.825561467881,
+        561.825561467881
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -99,10 +99,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 561.825561467881,
       "da_ident_ci": [
-        null,
-        null
+        561.825561467881,
+        561.825561467881
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -145,10 +145,10 @@
         8.032547422443868,
         20.01073790981761
       ],
-      "da_ident": null,
+      "da_ident": 963.1410136062586,
       "da_ident_ci": [
-        null,
-        null
+        893.3892885418757,
+        993.8037475415949
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -158,8 +158,8 @@
         "ensemble|strong": null,
         "ensemble|weak": 12.83076817435046
       },
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -1.8754372186563277,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.0|eps=0.005|langmuir|pe=1.0": {
       "best_method": "ensemble|weak",
@@ -168,10 +168,10 @@
         4.987581943606398,
         12.204178231557718
       ],
-      "da_ident": null,
+      "da_ident": 993.8037475415949,
       "da_ident_ci": [
-        null,
-        null
+        910.7818971459355,
+        993.8037475415949
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -181,8 +181,8 @@
         "ensemble|strong": null,
         "ensemble|weak": 7.759839600067323
       },
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.107447885839277,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.0|eps=0.005|langmuir|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -191,10 +191,10 @@
         5.207235141783949,
         13.81114370048233
       ],
-      "da_ident": null,
+      "da_ident": 910.7818971459337,
       "da_ident_ci": [
-        null,
-        null
+        846.9164230492565,
+        983.1916903857585
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -204,8 +204,8 @@
         "ensemble|strong": null,
         "ensemble|weak": 8.442650525971459
       },
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.032935577405402,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.0|eps=0.005|step|pe=0.2": {
       "best_method": "stlsq|weak",
@@ -214,10 +214,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 741.6168198314392,
       "da_ident_ci": [
-        null,
-        null
+        561.825561467881,
+        823.3052404110024
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -237,10 +237,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 893.3892885418738,
       "da_ident_ci": [
-        null,
-        null
+        775.1437761308022,
+        955.6873252634155
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -260,10 +260,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 963.1410136062439,
       "da_ident_ci": [
-        null,
-        null
+        893.3892885418784,
+        993.8037475415949
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -283,10 +283,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 285.9710414946978,
       "da_ident_ci": [
-        null,
-        null
+        225.26850304272477,
+        364.8821204802985
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -306,10 +306,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 244.7764013313697,
       "da_ident_ci": [
-        null,
-        null
+        197.80657058149697,
+        309.59982960494534
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -329,10 +329,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 269.78677134715736,
       "da_ident_ci": [
-        null,
-        null
+        219.49784969636084,
+        337.062020672381
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -352,10 +352,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 760.6534123019337,
       "da_ident_ci": [
-        null,
-        null
+        618.4699599949646,
+        951.9999096763206
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -375,10 +375,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 443.1652525168759,
       "da_ident_ci": [
-        null,
-        null
+        349.6867166836294,
+        563.1201134909385
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -398,10 +398,10 @@
         null,
         null
       ],
-      "da_ident": 716.565435546488,
+      "da_ident": 290.72969422855425,
       "da_ident_ci": [
-        476.4155523236251,
-        977.9913320142779
+        240.362624396861,
+        349.74299040099305
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -421,10 +421,10 @@
         null,
         null
       ],
-      "da_ident": 536.7246878589079,
+      "da_ident": 94.39554233321819,
       "da_ident_ci": [
-        306.20413737634203,
-        924.9116203672392
+        73.10969707406416,
+        119.76631566797036
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -444,10 +444,10 @@
         null,
         null
       ],
-      "da_ident": 479.58880082503293,
+      "da_ident": 74.67899506242523,
       "da_ident_ci": [
-        285.34989021203256,
-        884.905911945867
+        59.26869940121691,
+        95.3540873937473
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -467,10 +467,10 @@
         null,
         null
       ],
-      "da_ident": 338.10819842424047,
+      "da_ident": 118.51288972147425,
       "da_ident_ci": [
-        226.2895397165451,
-        561.0092876338915
+        93.96509577873553,
+        150.29006089530998
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -490,10 +490,10 @@
         null,
         null
       ],
-      "da_ident": 547.7545107447655,
+      "da_ident": 216.7589534246811,
       "da_ident_ci": [
-        347.5453894786497,
-        881.8971063417414
+        169.60340005346316,
+        283.86651893800604
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -513,10 +513,10 @@
         null,
         null
       ],
-      "da_ident": 710.1092819206326,
+      "da_ident": 153.03487551965466,
       "da_ident_ci": [
-        389.23829838922705,
-        973.3185980249676
+        114.61692424684311,
+        203.38922476138268
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -536,10 +536,10 @@
         null,
         null
       ],
-      "da_ident": 281.58449710726336,
+      "da_ident": 91.98765091394475,
       "da_ident_ci": [
-        180.90549989294507,
-        481.6962381613122
+        70.82450295990503,
+        118.97950971061199
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -559,10 +559,10 @@
         3.976621335860823,
         7.075599312080325
       ],
-      "da_ident": 561.825561467881,
+      "da_ident": 356.49811932459244,
       "da_ident_ci": [
-        561.825561467881,
-        561.825561467881
+        331.3547817726971,
+        392.35038547728675
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -572,7 +572,7 @@
         "ensemble|strong": null,
         "ensemble|weak": 0.3986409128168571
       },
-      "gap_decades": -2.024095635604194,
+      "gap_decades": -1.826551384233722,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|langmuir|pe=1.0": {
@@ -582,10 +582,10 @@
         5.542783609272858,
         9.377180528771966
       ],
-      "da_ident": 561.825561467881,
+      "da_ident": 356.4981193245903,
       "da_ident_ci": [
-        561.825561467881,
-        561.825561467881
+        331.35478177269334,
+        385.43415319611177
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -596,7 +596,7 @@
         "ensemble|weak": 0.7116121094387493,
         "m7|strong": 0.11727227355631023
       },
-      "gap_decades": -1.889643475604054,
+      "gap_decades": -1.6920992242335793,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|langmuir|pe=5.0": {
@@ -606,10 +606,10 @@
         3.9463332485438647,
         6.720469445796393
       ],
-      "da_ident": 561.825561467881,
+      "da_ident": 318.5249747081747,
       "da_ident_ci": [
-        561.825561467881,
-        561.825561467881
+        298.3733230257328,
+        350.25733099572483
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -619,7 +619,7 @@
         "ensemble|strong": null,
         "ensemble|weak": 0.37927658704591033
       },
-      "gap_decades": -2.0357227732140943,
+      "gap_decades": -1.7892647686312888,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|step|pe=0.2": {
@@ -629,10 +629,10 @@
         3.525487199766904,
         7.0104184693231595
       ],
-      "da_ident": null,
+      "da_ident": 561.825561467881,
       "da_ident_ci": [
-        null,
-        null
+        561.825561467881,
+        561.825561467881
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -642,8 +642,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.0511844046360235,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -652,10 +652,10 @@
         2.9563428527983926,
         5.729766023308466
       ],
-      "da_ident": null,
+      "da_ident": 561.825561467881,
       "da_ident_ci": [
-        null,
-        null
+        561.825561467881,
+        561.825561467881
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -666,8 +666,8 @@
         "ensemble|weak": null,
         "m7|strong": 0.3901850237357794
       },
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.1283757434016044,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -676,10 +676,10 @@
         3.240123997373462,
         6.060267323549236
       ],
-      "da_ident": null,
+      "da_ident": 739.9135296922882,
       "da_ident_ci": [
-        null,
-        null
+        561.825561467881,
+        784.0541200208698
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -689,8 +689,8 @@
         "ensemble|strong": null,
         "ensemble|weak": 0.3207580215303655
       },
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.213841804700916,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -699,10 +699,10 @@
         0.14826383328495027,
         0.3223798245846494
       ],
-      "da_ident": 373.7443969037765,
+      "da_ident": 321.0994283568287,
       "da_ident_ci": [
-        350.25733099575706,
-        409.5976785224845
+        298.3733230257343,
+        351.587670247213
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -712,7 +712,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -3.213877667439924,
+      "gap_decades": -3.1479425093152478,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
@@ -722,10 +722,10 @@
         null,
         null
       ],
-      "da_ident": 356.49811932459244,
+      "da_ident": 324.218415784129,
       "da_ident_ci": [
-        331.3547817726954,
-        392.35038547728755
+        299.07831188299525,
+        351.5876702472141
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -745,10 +745,10 @@
         0.10292781657715258,
         0.22433004951041544
       ],
-      "da_ident": 350.257330995737,
+      "da_ident": 299.078311883087,
       "da_ident_ci": [
-        324.21841578413495,
-        384.63536602948864
+        278.9761908466679,
+        324.2184157841472
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -758,7 +758,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -3.428855483744308,
+      "gap_decades": -3.360253170422536,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|step|pe=0.2": {
@@ -768,10 +768,10 @@
         0.10289730776555656,
         0.22135770787944958
       ],
-      "da_ident": null,
+      "da_ident": 691.5115974613176,
       "da_ident_ci": [
-        null,
-        null
+        561.825561467881,
+        741.616819831443
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -781,8 +781,8 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -3.7198910924633246,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -791,10 +791,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 823.305240411005,
       "da_ident_ci": [
-        null,
-        null
+        739.913529692242,
+        870.4217840116229
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -814,10 +814,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 870.4217840116237,
       "da_ident_ci": [
-        null,
-        null
+        775.1437761307958,
+        947.7602100753647
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -837,10 +837,10 @@
         null,
         null
       ],
-      "da_ident": 313.4133647502453,
+      "da_ident": 290.80974228622614,
       "da_ident_ci": [
-        256.1900968538307,
-        377.8097744488667
+        243.14661804985445,
+        352.7053194905639
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -860,10 +860,10 @@
         null,
         null
       ],
-      "da_ident": 347.3808046999816,
+      "da_ident": 297.9375275417087,
       "da_ident_ci": [
-        284.62816934197986,
-        423.29362559114827
+        249.70882199658394,
+        355.316739824238
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -884,10 +884,10 @@
         null,
         null
       ],
-      "da_ident": 297.9375275417087,
+      "da_ident": 250.20165088590005,
       "da_ident_ci": [
-        249.70882199658394,
-        357.62431002009924
+        208.28615813664774,
+        299.3151967787346
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -907,10 +907,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 676.7343448677927,
       "da_ident_ci": [
-        null,
-        null
+        551.2759204639074,
+        852.4318703267799
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -930,10 +930,10 @@
         null,
         null
       ],
-      "da_ident": null,
+      "da_ident": 384.5910513926605,
       "da_ident_ci": [
-        null,
-        null
+        313.0501040172308,
+        478.85801780618436
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -954,10 +954,10 @@
         null,
         null
       ],
-      "da_ident": 514.6089137273225,
+      "da_ident": 290.80974228622614,
       "da_ident_ci": [
-        370.0429826639445,
-        773.9286181929376
+        244.79033810879838,
+        354.03953856210643
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -977,10 +977,10 @@
         null,
         null
       ],
-      "da_ident": 174.5485126125669,
+      "da_ident": 91.63207172009997,
       "da_ident_ci": [
-        125.36956552248314,
-        250.88014348661704
+        72.8312468593873,
+        115.40044383652497
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1000,10 +1000,10 @@
         null,
         null
       ],
-      "da_ident": 187.9564763153218,
+      "da_ident": 85.00822377504711,
       "da_ident_ci": [
-        129.23117851535653,
-        290.70049997080264
+        67.3925361925657,
+        107.93519283957212
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1023,10 +1023,10 @@
         null,
         null
       ],
-      "da_ident": 166.82091975539691,
+      "da_ident": 112.19505430936545,
       "da_ident_ci": [
-        125.92576880701394,
-        227.20784136219697
+        91.59698864912745,
+        140.60970246321676
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1046,10 +1046,10 @@
         null,
         null
       ],
-      "da_ident": 557.0303932746493,
+      "da_ident": 210.45821466959765,
       "da_ident_ci": [
-        356.72960667619776,
-        885.597980424364
+        164.98221143803062,
+        274.1134347421625
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1069,10 +1069,10 @@
         null,
         null
       ],
-      "da_ident": 479.51651659187365,
+      "da_ident": 136.30357848402474,
       "da_ident_ci": [
-        283.2734323703887,
-        829.7934388951661
+        104.37019342889356,
+        176.41285475637775
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1092,10 +1092,10 @@
         null,
         null
       ],
-      "da_ident": 173.37253517471405,
+      "da_ident": 89.45651895602347,
       "da_ident_ci": [
-        121.24184178387014,
-        262.6468748051694
+        69.22590826084482,
+        115.82769319547735
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1115,10 +1115,10 @@
         0.9740203433274193,
         1.8478528187090228
       ],
-      "da_ident": 76.47488931823074,
+      "da_ident": 74.55472523020914,
       "da_ident_ci": [
-        69.91908633462467,
-        82.0940090852618
+        56.586806562463394,
+        80.12139808030621
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1128,7 +1128,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -1.7480974519911066,
+      "gap_decades": -1.7370537688507846,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
@@ -1255,10 +1255,10 @@
         0.6070957428207723,
         1.229470163279661
       ],
-      "da_ident": 89.29915475899381,
+      "da_ident": 83.49211089043172,
       "da_ident_ci": [
-        81.28876273541472,
-        95.37140733091253
+        76.47488931823071,
+        89.55891551876152
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1268,7 +1268,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.0105936187091396,
+      "gap_decades": -1.9813917117662618,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
@@ -1278,10 +1278,10 @@
         0.30562215093649436,
         0.7453196201391237
       ],
-      "da_ident": 89.00305956239214,
+      "da_ident": 83.49211089043057,
       "da_ident_ci": [
-        80.12139808030605,
-        94.18882908619646
+        76.47488931823082,
+        89.55891551876142
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1291,7 +1291,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.2595275772069883,
+      "gap_decades": -2.231768082280118,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
@@ -1440,10 +1440,10 @@
         0.1067825387663321,
         0.24530248781894495
       ],
-      "da_ident": 89.55891551876134,
+      "da_ident": 89.0030595623904,
       "da_ident_ci": [
-        82.09400908526155,
-        96.33191223046238
+        80.1213980803061,
+        94.18882908619713
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1453,7 +1453,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.7558600605232018,
+      "gap_decades": -2.7531561706915686,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.02|step|pe=0.2": {
@@ -1463,10 +1463,10 @@
         null,
         null
       ],
-      "da_ident": 261.5474287525634,
+      "da_ident": 228.12467456380938,
       "da_ident_ci": [
-        228.12467456375387,
-        282.0553790612401
+        171.62900428612906,
+        252.00883776050827
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1486,10 +1486,10 @@
         null,
         null
       ],
-      "da_ident": 273.9845757621856,
+      "da_ident": 261.5474287525639,
       "da_ident_ci": [
-        251.68773840800898,
-        298.37332302573463
+        228.12467456375038,
+        282.0553790612205
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1510,10 +1510,10 @@
         null,
         null
       ],
-      "da_ident": 115.12981570654756,
+      "da_ident": 113.89620516384234,
       "da_ident_ci": [
-        108.55094638123236,
-        133.91980788813405
+        106.96184769811197,
+        124.4413723232479
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1533,10 +1533,10 @@
         null,
         null
       ],
-      "da_ident": 94.0951371035593,
+      "da_ident": 91.81973210229363,
       "da_ident_ci": [
-        77.10420095589787,
-        111.7899540844519
+        75.20565672553569,
+        109.84979452214435
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1602,10 +1602,10 @@
         null,
         null
       ],
-      "da_ident": 192.81025357018092,
+      "da_ident": 164.83764057998445,
       "da_ident_ci": [
-        155.95966238349226,
-        238.04031751871995
+        133.85011587806582,
+        205.45110081300754
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1625,10 +1625,10 @@
         null,
         null
       ],
-      "da_ident": 170.7315319563877,
+      "da_ident": 152.78619871508738,
       "da_ident_ci": [
-        134.28930564079045,
-        216.22676465911584
+        124.31897031693386,
+        188.3693231636371
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1648,10 +1648,10 @@
         null,
         null
       ],
-      "da_ident": 109.46254839931551,
+      "da_ident": 96.4138873485306,
       "da_ident_ci": [
-        87.2683854650941,
-        134.73552105132694
+        79.74281290869845,
+        114.32204024965921
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1740,10 +1740,10 @@
         0.101934041542475,
         0.2148263172931897
       ],
-      "da_ident": 69.91908633462495,
+      "da_ident": 56.586806562463394,
       "da_ident_ci": [
         56.586806562463394,
-        74.55472523020919
+        56.586806562463394
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -1753,7 +1753,7 @@
         "ensemble|strong": null,
         "ensemble|weak": null
       },
-      "gap_decades": -2.748342967712643,
+      "gap_decades": -2.656462408694443,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.0|step|pe=1.0": {
@@ -2016,10 +2016,10 @@
         null,
         null
       ],
-      "da_ident": 80.12139808030601,
+      "da_ident": 79.7873591125781,
       "da_ident_ci": [
-        73.53871817793446,
-        86.85758848698306
+        69.91908633462491,
+        84.14383882549467
       ],
       "da_disc_by_method": {
         "best_subset|strong": null,
@@ -2285,8 +2285,8 @@
         7.730485654646337,
         18.435949582585785
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -1.9020559366635474,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.0|eps=0.005|langmuir|pe=1.0": {
       "best_method": "ensemble|weak",
@@ -2295,8 +2295,8 @@
         4.275801855709303,
         9.856740337191972
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.18821346936123,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.0|eps=0.005|langmuir|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -2305,8 +2305,8 @@
         4.259793970221258,
         10.147635215782088
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.141890614570429,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.0|eps=0.005|step|pe=0.2": {
       "best_method": "stlsq|weak",
@@ -2325,8 +2325,8 @@
         29.736488151490093,
         600.8850703024224
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -0.8904130721933541,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.0|eps=0.005|step|pe=5.0": {
       "best_method": "ensemble|weak",
@@ -2335,8 +2335,8 @@
         262.98680050454914,
         786.2625581041644
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -0.35226671094442885,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.0|eps=0.02|langmuir|pe=0.2": {
       "best_method": "ensemble|weak",
@@ -2465,7 +2465,7 @@
         3.976621335860823,
         7.075599312080325
       ],
-      "gap_decades": -2.024095635604194,
+      "gap_decades": -1.826551384233722,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|langmuir|pe=1.0": {
@@ -2475,7 +2475,7 @@
         5.542783609272858,
         9.377180528771966
       ],
-      "gap_decades": -1.889643475604054,
+      "gap_decades": -1.6920992242335793,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|langmuir|pe=5.0": {
@@ -2485,7 +2485,7 @@
         3.9463332485438647,
         6.720469445796393
       ],
-      "gap_decades": -2.0357227732140943,
+      "gap_decades": -1.7892647686312888,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|step|pe=0.2": {
@@ -2495,8 +2495,8 @@
         3.525487199766904,
         7.0104184693231595
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.0511844046360235,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2505,8 +2505,8 @@
         2.9563428527983926,
         5.729766023308466
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.1283757434016044,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.0|step|pe=5.0": {
       "best_method": "best_subset|weak",
@@ -2515,8 +2515,8 @@
         3.240123997373462,
         6.060267323549236
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -2.213841804700916,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
       "best_method": "best_subset|weak",
@@ -2525,7 +2525,7 @@
         0.14826383328495027,
         0.3223798245846494
       ],
-      "gap_decades": -3.213877667439924,
+      "gap_decades": -3.1479425093152478,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
@@ -2545,7 +2545,7 @@
         0.10292781657715258,
         0.22433004951041544
       ],
-      "gap_decades": -3.428855483744308,
+      "gap_decades": -3.360253170422536,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|step|pe=0.2": {
@@ -2555,8 +2555,8 @@
         0.10289730776555656,
         0.22135770787944958
       ],
-      "gap_decades": null,
-      "words": "no boundary on the grid for one of the two; reported as the range tested"
+      "gap_decades": -3.7198910924633246,
+      "words": "discovery fails before identifiability"
     },
     "sigma=0.005|eps=0.005|step|pe=1.0": {
       "best_method": "best_subset|weak",
@@ -2705,7 +2705,7 @@
         0.9740203433274193,
         1.8478528187090228
       ],
-      "gap_decades": -1.7480974519911066,
+      "gap_decades": -1.7370537688507846,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
@@ -2765,7 +2765,7 @@
         0.6070957428207723,
         1.229470163279661
       ],
-      "gap_decades": -2.0105936187091396,
+      "gap_decades": -1.9813917117662618,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
@@ -2775,7 +2775,7 @@
         0.30562215093649436,
         0.7453196201391237
       ],
-      "gap_decades": -2.2595275772069883,
+      "gap_decades": -2.231768082280118,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
@@ -2845,7 +2845,7 @@
         0.1067825387663321,
         0.24530248781894495
       ],
-      "gap_decades": -2.7558600605232018,
+      "gap_decades": -2.7531561706915686,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.02|eps=0.02|step|pe=0.2": {
@@ -2975,7 +2975,7 @@
         0.101934041542475,
         0.2148263172931897
       ],
-      "gap_decades": -2.748342967712643,
+      "gap_decades": -2.656462408694443,
       "words": "discovery fails before identifiability"
     },
     "sigma=0.05|eps=0.0|step|pe=1.0": {
@@ -4000,53 +4000,58 @@
   "H2b_overall": {
     "words": "discovery fails before identifiability",
     "counts": {
-      "discovery fails before identifiability": 30,
+      "discovery fails before identifiability": 37,
       "discovery fails with identifiability": 0,
       "discovery outlives identifiability": 0
     },
     "counts_by_axis": {
-      "sigma=0.005": {
-        "discovery fails before identifiability": 5,
-        "discovery fails with identifiability": 0,
-        "discovery outlives identifiability": 0
-      },
-      "eps=0.0": {
-        "discovery fails before identifiability": 14,
-        "discovery fails with identifiability": 0,
-        "discovery outlives identifiability": 0
-      },
-      "langmuir": {
-        "discovery fails before identifiability": 20,
-        "discovery fails with identifiability": 0,
-        "discovery outlives identifiability": 0
-      },
-      "pe=0.2": {
-        "discovery fails before identifiability": 10,
-        "discovery fails with identifiability": 0,
-        "discovery outlives identifiability": 0
-      },
-      "pe=1.0": {
-        "discovery fails before identifiability": 8,
-        "discovery fails with identifiability": 0,
-        "discovery outlives identifiability": 0
-      },
-      "pe=5.0": {
-        "discovery fails before identifiability": 12,
+      "sigma=0.0": {
+        "discovery fails before identifiability": 3,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "eps=0.005": {
+        "discovery fails before identifiability": 17,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "langmuir": {
+        "discovery fails before identifiability": 23,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "pe=0.2": {
         "discovery fails before identifiability": 13,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "pe=1.0": {
+        "discovery fails before identifiability": 10,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "pe=5.0": {
+        "discovery fails before identifiability": 14,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "sigma=0.005": {
+        "discovery fails before identifiability": 9,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "eps=0.0": {
+        "discovery fails before identifiability": 17,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "step": {
+        "discovery fails before identifiability": 14,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "sigma=0.02": {
         "discovery fails before identifiability": 13,
-        "discovery fails with identifiability": 0,
-        "discovery outlives identifiability": 0
-      },
-      "step": {
-        "discovery fails before identifiability": 10,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
@@ -4061,7 +4066,7 @@
         "discovery outlives identifiability": 0
       }
     },
-    "n_with_verdict": 30,
+    "n_with_verdict": 37,
     "no_verdict": [
       "sigma=0.0|eps=0.0|langmuir|pe=0.2",
       "sigma=0.0|eps=0.0|langmuir|pe=1.0",
@@ -4069,9 +4074,6 @@
       "sigma=0.0|eps=0.0|step|pe=0.2",
       "sigma=0.0|eps=0.0|step|pe=1.0",
       "sigma=0.0|eps=0.0|step|pe=5.0",
-      "sigma=0.0|eps=0.005|langmuir|pe=0.2",
-      "sigma=0.0|eps=0.005|langmuir|pe=1.0",
-      "sigma=0.0|eps=0.005|langmuir|pe=5.0",
       "sigma=0.0|eps=0.005|step|pe=0.2",
       "sigma=0.0|eps=0.005|step|pe=1.0",
       "sigma=0.0|eps=0.005|step|pe=5.0",
@@ -4087,11 +4089,7 @@
       "sigma=0.0|eps=0.05|step|pe=0.2",
       "sigma=0.0|eps=0.05|step|pe=1.0",
       "sigma=0.0|eps=0.05|step|pe=5.0",
-      "sigma=0.005|eps=0.0|step|pe=0.2",
-      "sigma=0.005|eps=0.0|step|pe=1.0",
-      "sigma=0.005|eps=0.0|step|pe=5.0",
       "sigma=0.005|eps=0.005|langmuir|pe=1.0",
-      "sigma=0.005|eps=0.005|step|pe=0.2",
       "sigma=0.005|eps=0.005|step|pe=1.0",
       "sigma=0.005|eps=0.005|step|pe=5.0",
       "sigma=0.005|eps=0.02|langmuir|pe=0.2",
@@ -4135,53 +4133,58 @@
   "H2b_k_sensitivity_overall": {
     "words": "discovery fails before identifiability",
     "counts": {
-      "discovery fails before identifiability": 30,
+      "discovery fails before identifiability": 39,
       "discovery fails with identifiability": 0,
       "discovery outlives identifiability": 0
     },
     "counts_by_axis": {
-      "sigma=0.005": {
+      "sigma=0.0": {
         "discovery fails before identifiability": 5,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
-      "eps=0.0": {
-        "discovery fails before identifiability": 14,
+      "eps=0.005": {
+        "discovery fails before identifiability": 19,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "langmuir": {
-        "discovery fails before identifiability": 20,
+        "discovery fails before identifiability": 23,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "pe=0.2": {
-        "discovery fails before identifiability": 10,
+        "discovery fails before identifiability": 13,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "pe=1.0": {
-        "discovery fails before identifiability": 8,
+        "discovery fails before identifiability": 11,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "pe=5.0": {
-        "discovery fails before identifiability": 12,
+        "discovery fails before identifiability": 15,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
-      "eps=0.005": {
-        "discovery fails before identifiability": 13,
+      "step": {
+        "discovery fails before identifiability": 16,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "sigma=0.005": {
+        "discovery fails before identifiability": 9,
+        "discovery fails with identifiability": 0,
+        "discovery outlives identifiability": 0
+      },
+      "eps=0.0": {
+        "discovery fails before identifiability": 17,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
       "sigma=0.02": {
         "discovery fails before identifiability": 13,
-        "discovery fails with identifiability": 0,
-        "discovery outlives identifiability": 0
-      },
-      "step": {
-        "discovery fails before identifiability": 10,
         "discovery fails with identifiability": 0,
         "discovery outlives identifiability": 0
       },
@@ -4196,7 +4199,7 @@
         "discovery outlives identifiability": 0
       }
     },
-    "n_with_verdict": 30,
+    "n_with_verdict": 39,
     "no_verdict": [
       "sigma=0.0|eps=0.0|langmuir|pe=0.2",
       "sigma=0.0|eps=0.0|langmuir|pe=1.0",
@@ -4204,12 +4207,7 @@
       "sigma=0.0|eps=0.0|step|pe=0.2",
       "sigma=0.0|eps=0.0|step|pe=1.0",
       "sigma=0.0|eps=0.0|step|pe=5.0",
-      "sigma=0.0|eps=0.005|langmuir|pe=0.2",
-      "sigma=0.0|eps=0.005|langmuir|pe=1.0",
-      "sigma=0.0|eps=0.005|langmuir|pe=5.0",
       "sigma=0.0|eps=0.005|step|pe=0.2",
-      "sigma=0.0|eps=0.005|step|pe=1.0",
-      "sigma=0.0|eps=0.005|step|pe=5.0",
       "sigma=0.0|eps=0.02|langmuir|pe=0.2",
       "sigma=0.0|eps=0.02|langmuir|pe=1.0",
       "sigma=0.0|eps=0.02|langmuir|pe=5.0",
@@ -4222,11 +4220,7 @@
       "sigma=0.0|eps=0.05|step|pe=0.2",
       "sigma=0.0|eps=0.05|step|pe=1.0",
       "sigma=0.0|eps=0.05|step|pe=5.0",
-      "sigma=0.005|eps=0.0|step|pe=0.2",
-      "sigma=0.005|eps=0.0|step|pe=1.0",
-      "sigma=0.005|eps=0.0|step|pe=5.0",
       "sigma=0.005|eps=0.005|langmuir|pe=1.0",
-      "sigma=0.005|eps=0.005|step|pe=0.2",
       "sigma=0.005|eps=0.005|step|pe=1.0",
       "sigma=0.005|eps=0.005|step|pe=5.0",
       "sigma=0.005|eps=0.02|langmuir|pe=0.2",

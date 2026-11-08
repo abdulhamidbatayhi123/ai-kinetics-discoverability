@@ -1,9 +1,9 @@
 """E8 Kaggle queue (sampling rate). The account's five CPU slots are shared with other projects, so at
-most MAX_MINE E6 kernels run at once; a push Kaggle refuses is retried at the next poll. Pushes are
+most MAX_MINE E8 kernels run at once; a push Kaggle refuses is retried at the next poll. Pushes are
 recorded in registry.txt and never repeated. Only the part file and the log are downloaded
 (--file-pattern). Poll results other than an explicit 'not found' count as unknown, never absent.
 
-    python kaggle_e6/queue.py
+    python kaggle_e8/queue.py
 """
 import os
 import re
@@ -62,6 +62,9 @@ def main():
                     pushed.add(p)
                     busy += 1
                     log(f"k{p} pushed")
+                else:
+                    print(f"k{p} push refused: {out.splitlines()[-1] if out else 'no output'}", flush=True)
+                    break                      # account full: retry at the next poll
         print(time.strftime("%H:%M:%S"), st, flush=True)
         time.sleep(300)
     log("ALL_OUTPUTS_DOWNLOADED")

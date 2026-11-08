@@ -3,59 +3,74 @@
   "langmuir_L1_pe0.2_da0.1": 1.0025513433093092,
   "langmuir_L1_pe0.2_da0.316": 1.0031286243927373,
   "langmuir_L1_pe0.2_da1": 1.0054410746947178,
-  "langmuir_L1_pe0.2_da3.16": 1.0031286243927366,
-  "langmuir_L1_pe0.2_da10": 1.001974394439958,
-  "langmuir_L1_pe0.2_da31.6": 1.010081979832793,
-  "langmuir_L1_pe0.2_da100": 1.028860805886336,
-  "langmuir_L1_pe0.2_da316": 1.1206800045996734,
-  "langmuir_L1_pe0.2_da1e+03": 0.6130298518121103,
+  "langmuir_L1_pe0.2_da3.16": 1.0025513433093092,
+  "langmuir_L1_pe0.2_da10": 1.0013977775935006,
+  "langmuir_L1_pe0.2_da31.6": 1.0057305055489771,
+  "langmuir_L1_pe0.2_da100": 0.9873738550551574,
+  "langmuir_L1_pe0.2_da316": 0.7797971134344416,
+  "langmuir_L1_pe0.2_da1e+03": 0.49642840490679135,
   "langmuir_L1_pe1_da0.1": 1.0031286243927373,
   "langmuir_L1_pe1_da0.316": 1.0031286243927373,
   "langmuir_L1_pe1_da1": 1.0054410746947178,
   "langmuir_L1_pe1_da3.16": 1.0025513433093092,
   "langmuir_L1_pe1_da10": 1.0013977775935006,
-  "langmuir_L1_pe1_da31.6": 1.0077588557451882,
-  "langmuir_L1_pe1_da100": 1.022072311644333,
-  "langmuir_L1_pe1_da316": 1.152740689640519,
-  "langmuir_L1_pe1_da1e+03": 0.6147968352337536,
+  "langmuir_L1_pe1_da31.6": 1.003706237881533,
+  "langmuir_L1_pe1_da100": 0.9811414491366849,
+  "langmuir_L1_pe1_da316": 0.7831710461798257,
+  "langmuir_L1_pe1_da1e+03": 0.5023213338119195,
   "langmuir_L1_pe5_da0.1": 1.0025513433093092,
   "langmuir_L1_pe5_da0.316": 1.0031286243927373,
   "langmuir_L1_pe5_da1": 1.0048624628409557,
   "langmuir_L1_pe5_da3.16": 1.0025513433093092,
   "langmuir_L1_pe5_da10": 1.0008214925788634,
-  "langmuir_L1_pe5_da31.6": 1.0025513433093094,
-  "langmuir_L1_pe5_da100": 1.009791296703781,
-  "langmuir_L1_pe5_da316": 3.8757577420302876,
-  "langmuir_L1_pe5_da1e+03": 0.6140894315121923,
+  "langmuir_L1_pe5_da31.6": 0.9985196670209148,
+  "langmuir_L1_pe5_da100": 0.969352251192113,
+  "langmuir_L1_pe5_da316": 0.7917838208697033,
+  "langmuir_L1_pe5_da1e+03": 0.516543169736875,
   "step_L1_pe0.2_da0.1": 1.0036155465183383,
   "step_L1_pe0.2_da0.316": 1.0047716670053428,
   "step_L1_pe0.2_da1": 1.0059291192917452,
   "step_L1_pe0.2_da3.16": 1.0036155465183398,
-  "step_L1_pe0.2_da10": 1.0018838595600432,
-  "step_L1_pe0.2_da31.6": 1.0059291192917463,
-  "step_L1_pe0.2_da100": 1.04307942792352,
-  "step_L1_pe0.2_da316": 24.540300709513172,
-  "step_L1_pe0.2_da1e+03": 0.6607959615587352,
+  "step_L1_pe0.2_da10": 1.0013072948146546,
+  "step_L1_pe0.2_da31.6": 1.0013072948146549,
+  "step_L1_pe0.2_da100": 0.9947006005306128,
+  "step_L1_pe0.2_da316": 0.7545575694305848,
+  "step_L1_pe0.2_da1e+03": 0.39304509433384793,
   "step_L1_pe1_da0.1": 1.0036155465183383,
   "step_L1_pe1_da0.316": 1.0047716670053428,
   "step_L1_pe1_da1": 1.0059291192917452,
   "step_L1_pe1_da3.16": 1.0036155465183398,
-  "step_L1_pe1_da10": 1.0024607562983254,
-  "step_L1_pe1_da31.6": 1.008248025401206,
-  "step_L1_pe1_da100": 1.0643081312280054,
-  "step_L1_pe1_da316": 6.69602983647123,
-  "step_L1_pe1_da1e+03": 0.668832518323533,
+  "step_L1_pe1_da10": 1.0018838595600432,
+  "step_L1_pe1_da31.6": 1.0041934403827348,
+  "step_L1_pe1_da100": 1.0123189814285,
+  "step_L1_pe1_da316": 0.8110868870082344,
+  "step_L1_pe1_da1e+03": 0.44342214669906627,
   "step_L1_pe5_da0.1": 1.0036155465183383,
   "step_L1_pe5_da0.316": 1.0047716670053428,
   "step_L1_pe5_da1": 1.0059291192917452,
   "step_L1_pe5_da3.16": 1.0036155465183398,
-  "step_L1_pe5_da10": 1.00361554651834,
-  "step_L1_pe5_da31.6": 1.0129018868350645,
-  "step_L1_pe5_da100": 1.1020273683048076,
-  "step_L1_pe5_da316": 3.042232349891039,
-  "step_L1_pe5_da1e+03": 0.6604156862886085
+  "step_L1_pe5_da10": 1.0030379852206655,
+  "step_L1_pe5_da31.6": 1.008828586702481,
+  "step_L1_pe5_da100": 1.0445816205422043,
+  "step_L1_pe5_da316": 0.908222758007465,
+  "step_L1_pe5_da1e+03": 0.5360340528126576
  },
  "h2b_without_da_316_1000": {
+  "sigma=0.0|eps=0.005|langmuir|pe=0.2": {
+   "min_p_ident_da_le_31.6": 1.0,
+   "highest_da_le_100_p_ge_0.5": 100.0,
+   "gap_lower_bound_decades": 0.891747341762666
+  },
+  "sigma=0.0|eps=0.005|langmuir|pe=1.0": {
+   "min_p_ident_da_le_31.6": 1.0,
+   "highest_da_le_100_p_ge_0.5": 100.0,
+   "gap_lower_bound_decades": 1.1101472557425354
+  },
+  "sigma=0.0|eps=0.005|langmuir|pe=5.0": {
+   "min_p_ident_da_le_31.6": 1.0,
+   "highest_da_le_100_p_ge_0.5": 100.0,
+   "gap_lower_bound_decades": 1.073521187486627
+  },
   "sigma=0.005|eps=0.0|langmuir|pe=0.2": {
    "min_p_ident_da_le_31.6": 1.0,
    "highest_da_le_100_p_ge_0.5": 100.0,
@@ -71,6 +86,21 @@
    "highest_da_le_100_p_ge_0.5": 100.0,
    "gap_lower_bound_decades": 1.2861212787331746
   },
+  "sigma=0.005|eps=0.0|step|pe=0.2": {
+   "min_p_ident_da_le_31.6": 1.0,
+   "highest_da_le_100_p_ge_0.5": 100.0,
+   "gap_lower_bound_decades": 1.3015829101551033
+  },
+  "sigma=0.005|eps=0.0|step|pe=1.0": {
+   "min_p_ident_da_le_31.6": 1.0,
+   "highest_da_le_100_p_ge_0.5": 100.0,
+   "gap_lower_bound_decades": 1.3787742489206842
+  },
+  "sigma=0.005|eps=0.0|step|pe=5.0": {
+   "min_p_ident_da_le_31.6": 1.0,
+   "highest_da_le_100_p_ge_0.5": 100.0,
+   "gap_lower_bound_decades": 1.3446608360128582
+  },
   "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
    "min_p_ident_da_le_31.6": 1.0,
    "highest_da_le_100_p_ge_0.5": 100.0,
@@ -80,6 +110,11 @@
    "min_p_ident_da_le_31.6": 1.0,
    "highest_da_le_100_p_ge_0.5": 100.0,
    "gap_lower_bound_decades": 2.8844682497717176
+  },
+  "sigma=0.005|eps=0.005|step|pe=0.2": {
+   "min_p_ident_da_le_31.6": 1.0,
+   "highest_da_le_100_p_ge_0.5": 100.0,
+   "gap_lower_bound_decades": 2.880091624328598
   },
   "sigma=0.02|eps=0.0|langmuir|pe=0.2": {
    "min_p_ident_da_le_31.6": 1.0,
@@ -208,20 +243,14 @@
   }
  },
  "h2b_without_da_316_1000_summary": {
-  "n_slices": 30,
+  "n_slices": 37,
   "min_p_ident_da_le_31.6": 0.9555555555555556,
-  "min_gap_lower_bound_decades": 1.1400419811231342
+  "min_gap_lower_bound_decades": 0.891747341762666
  },
  "h2b_no_verdict_classes": {
-  "discovery missing, always >= 50 % | identifiability missing, always >= 50 %": 2,
-  "discovery missing, always >= 50 % | identifiability missing, straddles 50 %": 6,
-  "discovery present | identifiability missing, always >= 50 %": 4,
-  "discovery present | identifiability missing, straddles 50 %": 3,
-  "discovery missing, straddles 50 % | identifiability missing, straddles 50 %": 2,
-  "discovery missing, always < 50 % | identifiability missing, always >= 50 %": 4,
-  "discovery missing, always < 50 % | identifiability missing, straddles 50 %": 2,
-  "discovery missing, always < 50 % | identifiability present": 34,
-  "discovery missing, straddles 50 % | identifiability missing, always >= 50 %": 2,
-  "discovery missing, straddles 50 % | identifiability present": 7
+  "discovery missing, always >= 50 % | identifiability present": 5,
+  "discovery missing, always >= 50 % | identifiability missing, always >= 50 %": 3,
+  "discovery missing, straddles 50 % | identifiability present": 11,
+  "discovery missing, always < 50 % | identifiability present": 40
  }
 }

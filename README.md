@@ -21,13 +21,15 @@ design, thresholds and verdict words were frozen before any method ran.
 | Hypothesis | Pre-registered verdict (corrected run, `results/p2_verdicts.json`) |
 |---|---|
 | Positive control | both isotherms pass (discovery and identifiability 135 of 135 each) |
-| H2b, discovery vs identifiability | "discovery fails before identifiability" in all 30 slices with both boundaries; gap 1.6 to 3.4 decades of Da |
+| H2b, discovery vs identifiability | "discovery fails before identifiability" in all 37 slices with both boundaries; gap 1.6 to 3.7 decades of Da |
 | H2a, one error ratio places the boundary | no verdict: one of twelve conditions has a crossing |
 | H2c, errors-in-variables moves the boundary | no verdict: no slice has a boundary for both estimators |
 | H2d, loading-dependent rate (exploratory) | found almost only at Da = 1 |
 
-The first-run verdicts are kept beside them (`results/p2_verdicts_asrun.json`); the corrections
-between the two are listed below and in `RETRACTIONS_P2.md`.
+The first-run verdicts (`results/p2_verdicts_asrun.json`) and those computed before the last
+correction, B90 (`results/p2_verdicts_preB90.json`, 30 slices with a verdict), are kept beside
+them; the corrections are listed below and in `RETRACTIONS_P2.md`. No correction changed a
+verdict word.
 
 ## Pre-registration and amendments
 
@@ -53,7 +55,10 @@ refines with the pre-registered 41 points per pass), B90 (the O1 likelihood's "e
 wrong coefficient, found by an independent review; fixed and tested against an ODE solver). All O1
 identifiability rows were recomputed with A6 and B89 together, and again after B90 (on Kaggle, merged and
 validated locally, `kaggle_b90/`, `p2_b90_merge.py`); the four failed M1 fits were rerun with B88.
-Earlier result files are kept as `results/*_asrun.json` (first run) and `results/*_preB90.json`.
+B91 (the exploratory model-selection check E6 read each law's rate constant off a coarse grid; now
+refined, and E6 rerun on Kaggle, `kaggle_e6/`, `p2_e6_merge.py`) affects no confirmatory result.
+Earlier result files are kept as `results/*_asrun.json` (first run), `results/*_preB90.json` and
+`results/p2_e6_modelselect_v1.json`.
 
 **Where the history comes from.** The study began inside the repository of the author's first
 paper, [ai-mof-cof-dynamics](https://github.com/abdulhamidbatayhi123/ai-mof-cof-dynamics)
@@ -77,6 +82,9 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `p2_compare_verdicts.py` | as-run against corrected verdicts |
 | `p2_figdata.py` | per-level fractions behind the figures (`results/p2_figdata.json`) |
 | `p2_e2_m8.py`, `p2_e3_coverage.py` | exploratory analyses E2 and E3 (declared in `EXPLORATORY_P2.md` before they ran) |
+| `p2_e4_criteria.py`, `p2_e5_conditioning.py`, `p2_e6_modelselect.py`, `p2_e7_stepshift.py`, `p2_e8_sampling.py` | post-verdict analyses E4 to E8, each declared in `EXPLORATORY_P2.md` before it ran |
+| `p2_rerun_B90.sh`, `kaggle_b90/`, `p2_b90_merge.py` | the B90 recomputation of every O1 identifiability row (Kaggle) and its local validation |
+| `kaggle_e6/`, `p2_e6_merge.py`, `kaggle_e8/` | E6 and E8 on Kaggle: kits, kernels, queues and merges with local spot checks |
 | `p2_ident_robustness.py` | descriptive checks made after the verdicts were seen (labelled so in the paper) |
 | `p2_figstyle.py` | one figure style built to Nature Portfolio's artwork rules; the save step asserts them |
 | `fig_p2_overview.py`, `fig_p2_results.py`, `fig_p2_extended.py` | Figure 1, Figures 2 to 4, Extended Data figures |
@@ -113,7 +121,7 @@ skips rows already on disk.
 - `results/p2_verdicts.json` `positive_control.<isotherm>.n_success` and `.n_ident` are the NUMBERS OF ROWS
   evaluated (estimation replicates at the lowest Da, sigma = eps = 0), not the numbers that succeeded; the
   fractions are `success_fraction` and `identifiable_fraction`.
-- Exploratory and post-verdict analyses (E1-E7) are declared in `EXPLORATORY_P2.md`, each before it ran.
+- Exploratory and post-verdict analyses (E1-E8) are declared in `EXPLORATORY_P2.md`, each before it ran.
 
 ## Licence and citation
 
