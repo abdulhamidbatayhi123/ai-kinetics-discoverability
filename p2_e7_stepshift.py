@@ -97,6 +97,29 @@ def main():
     cells = json.load(open("data/p2/manifest.json"))["cells"]
     names = sorted(n for n, c in cells.items() if c["iso"] == "step" and c["law"] == "L1"
                    and c["pe_mult"] == 1.0 and not c.get("refined"))
+    if "--ident-only" in sys.argv:      # B90: recompute only the identifiability part of every row
+        from p2.identifiability import identifiable, profile_interval_o1
+        res = json.load(open(OUT))
+        for i, (key, r) in enumerate(sorted(res["rows"].items())):
+            if r["ident"].get("b90"):
+                continue
+            n, s, sh, rep = key.split("|")
+            obs = shifted_obs(n, int(rep), float(s), float(sh))
+            ch = obs["channels"]
+            sq = max(float(s), 1e-4) * float(np.ptp(ch["q"]))
+            try:
+                lo, hi = profile_interval_o1(obs["t"], list(ch["c"]), list(ch["q"]), obs["qstar_meas"], sq,
+                                             Ts=list(ch["T"]))
+                r["ident"] = {"lo": lo, "hi": hi, "success": bool(identifiable(lo, hi, cells[n]["k_LDF"])), "b90": True}
+            except Exception as ex:
+                r["ident"] = {"success": False, "error": f"{type(ex).__name__}: {ex}", "b90": True}
+            if i % 120 == 119:
+                write_atomic(res, OUT)
+                print(f"ident {i + 1}/{len(res['rows'])}", flush=True)
+        write_atomic(res, OUT)
+        write_atomic(summarise(cells, res["rows"]), SUMMARY)
+        print("E7 ident-only done", flush=True)
+        return
     if "--smoke" in sys.argv:
         for n in names[:2]:
             print(n, one_row(n, 15, 0.02, 0.01, cells[n]["k_LDF"]))
