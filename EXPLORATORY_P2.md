@@ -102,3 +102,18 @@ water-isotherm errors are often a shift of the step position. **What.** For the 
 O1, sigma 0.5 and 2 %, a measured isotherm whose step is shifted by +-1 % and +-2 % relative
 humidity (the error model only; fields unchanged), discovery (the six sparse solvers) and O1
 identifiability, estimation replicates; descriptive.
+
+## E8. Sampling rate (declared 2026-11-08, after E6's corrected rows, BEFORE running)
+
+**Why.** After B91, E6 still chose the wrong law at Da >= 31.6 with an exact isotherm. A six-replicate
+pilot (not reported as a result; noise drawn outside p2_observe) suggested the cause is the time
+resolution: at Da = 31.6 the step isotherm's LDF law lost to the quadratic driving force at 200 time
+points and won at 400, with noise on q alone or on c, q and T alike. The Discussion recommends
+choosing sampling rates; this tests that recommendation. **What.** O1, both isotherms, Pe ~94, all
+nine Da, sigma 0.5 and 2 %, eps 0, replicates 0..59, at two sampling rates: N_T = 200 (the grid's;
+identical to p2_observe.observe) and N_T = 400 (every stored time of the ground-truth fields, the
+same noise SD per sample). Per row: discovery by the six sparse solvers in both forms (success_L1),
+O1 identifiability (profile_interval_o1, the pre-registered criterion) and, for replicates 15..59,
+E6's model selection (p2_e6_modelselect.select). Boundaries as in E7 (best discovery method chosen
+on replicates 0..14, logistic 50 % crossings on 15..59). Reported: success against Da for each
+quantity at both rates, and the boundary shift from 200 to 400 samples; descriptive, no verdict.
