@@ -1,7 +1,7 @@
 {
   "title": "Code, results and pre-registration for: When can AI discover adsorption kinetics?",
   "upload_type": "software",
-  "description": "A pre-registered computational study of when equation-discovery methods recover the kinetic law of an adsorption column from its outlet and profile data. Ground truth comes from a verified finite-difference solver (imported from the Paper 1 archive, doi:10.5281/zenodo.23323685). Nine methods, three observation models and a grid of noise, Damkoehler and Peclet numbers are compared against profile-likelihood identifiability. The pre-registration (PREREG_P2_discoverability.md) and its amendments A1 to A4 were each committed before the runs they govern; the commit history is kept here.",
+  "description": "A pre-registered computational study of when equation-discovery methods recover the kinetic law of an adsorption column from its outlet and profile data. Ground truth comes from a verified finite-difference solver (imported from the Paper 1 archive, doi:10.5281/zenodo.23323685). Sparse regression in weak and strong forms, exact best-subset selection, ensembles, errors-in-variables regression, symbolic regression and a neural network in the column model are compared, over a grid of Damkoehler number, Peclet number, noise, isotherm error and three observation models, against profile-likelihood identifiability of the rate constant. The pre-registration (PREREG_P2_discoverability.md) was frozen before any method ran on the grid; amendments A1 to A4 preceded the grid, A5 was made while it ran, and A6 and A7 (implementation corrections, RETRACTIONS_P2 B87, B89, B90) after the first verdicts, with every earlier result file kept. The commit history is kept here.",
   "creators": [
     {
       "name": "Batayhi, Abdulhamid",
@@ -28,6 +28,18 @@
       "identifier": "https://github.com/abdulhamidbatayhi123/ai-mof-cof-dynamics",
       "relation": "isDerivedFrom",
       "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.23302586",
+      "relation": "references",
+      "resource_type": "software",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.26434/chemrxiv.15010365/v1",
+      "relation": "references",
+      "resource_type": "publication-preprint",
+      "scheme": "doi"
     }
   ]
 }

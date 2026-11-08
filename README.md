@@ -44,12 +44,16 @@ commit whose subject contains "FREEZE PREREG_P2".
 | `ffc8d88` | 2026-10-12 17:53 | A4: the M1 demonstration implemented |
 | `97150f6` | 2026-10-29 22:58 | A5: a 600 s cap per column solve in the O2/O3 profile (made while the grid ran) |
 | `375552b` | 2026-11-01 10:49 | A6: the O1 profile's k range widened (made after the first verdicts) |
+| `539d9a7` | 2026-11-08 | A7: two implementation corrections to the O1 profile recorded (B89 refinement points, B90 exact LDF update) |
 
 Corrections after the grid started (`RETRACTIONS_P2.md`): B86 (a solve that could run for days,
 fixed by A5), B87 (the O1 k range excluded three step cells; caught by the positive control;
 fixed by A6), B88 (M1 now keeps its best parameters when a solve fails), B89 (the O1 profile now
-refines with the pre-registered 41 points per pass). All O1 identifiability rows were recomputed
-with A6 and B89 together; the four failed M1 fits were rerun with B88.
+refines with the pre-registered 41 points per pass), B90 (the O1 likelihood's "exact" LDF update had a
+wrong coefficient, found by an independent review; fixed and tested against an ODE solver). All O1
+identifiability rows were recomputed with A6 and B89 together, and again after B90 (on Kaggle, merged and
+validated locally, `kaggle_b90/`, `p2_b90_merge.py`); the four failed M1 fits were rerun with B88.
+Earlier result files are kept as `results/*_asrun.json` (first run) and `results/*_preB90.json`.
 
 **Where the history comes from.** The study began inside the repository of the author's first
 paper, [ai-mof-cof-dynamics](https://github.com/abdulhamidbatayhi123/ai-mof-cof-dynamics)
@@ -103,6 +107,13 @@ python paper2/build_p2.py             # article + SI, with every gate
 
 The grid took about three weeks on one computer without a graphics processor; every driver
 skips rows already on disk.
+
+## Notes on result files
+
+- `results/p2_verdicts.json` `positive_control.<isotherm>.n_success` and `.n_ident` are the NUMBERS OF ROWS
+  evaluated (estimation replicates at the lowest Da, sigma = eps = 0), not the numbers that succeeded; the
+  fractions are `success_fraction` and `identifiable_fraction`.
+- Exploratory and post-verdict analyses (E1-E7) are declared in `EXPLORATORY_P2.md`, each before it ran.
 
 ## Licence and citation
 

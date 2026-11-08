@@ -12,7 +12,7 @@ authors:
       Yıldız Technical University, Faculty of Mechanical Engineering, Department of Mechatronics Engineering, Istanbul, Türkiye
 repository-code: "https://github.com/abdulhamidbatayhi123/ai-kinetics-discoverability"
 abstract: >-
-  A pre-registered computational study of when equation-discovery methods recover the kinetic law of an adsorption column from its outlet and profile data. Ground truth comes from a verified finite-difference solver (imported from the Paper 1 archive, doi:10.5281/zenodo.23323685). Nine methods, three observation models and a grid of noise, Damkoehler and Peclet numbers are compared against profile-likelihood identifiability. The pre-registration (PREREG_P2_discoverability.md) and its amendments A1 to A4 were each committed before the runs they govern; the commit history is kept here.
+  A pre-registered computational study of when equation-discovery methods recover the kinetic law of an adsorption column from its outlet and profile data. Ground truth comes from a verified finite-difference solver (imported from the Paper 1 archive, doi:10.5281/zenodo.23323685). Sparse regression in weak and strong forms, exact best-subset selection, ensembles, errors-in-variables regression, symbolic regression and a neural network in the column model are compared, over a grid of Damkoehler number, Peclet number, noise, isotherm error and three observation models, against profile-likelihood identifiability of the rate constant. The pre-registration (PREREG_P2_discoverability.md) was frozen before any method ran on the grid; amendments A1 to A4 preceded the grid, A5 was made while it ran, and A6 and A7 (implementation corrections, RETRACTIONS_P2 B87, B89, B90) after the first verdicts, with every earlier result file kept. The commit history is kept here.
 keywords:
   - equation discovery
   - adsorption kinetics
@@ -26,8 +26,16 @@ license: MIT
 references:
   - type: software
     title: >-
-      Code, results and pre-registrations for: The coefficient map, not the basis
+      Code, results and pre-registrations for: Machine-learning surrogates of MOF water-adsorption beds: the coefficient map, not the basis, limits accuracy on unseen materials
     authors:
       - given-names: Abdulhamid
         family-names: Batayhi
-    doi: "10.5281/zenodo.23323685"
+    doi: "10.5281/zenodo.23302586"
+    notes: "All versions (concept DOI). The finite-difference solver used here was imported from version v1.0.5, doi:10.5281/zenodo.23323685."
+  - type: article
+    title: >-
+      The coefficient map, not the basis, limits how machine-learning surrogates of metal-organic framework water-adsorption beds transfer to unseen materials
+    authors:
+      - given-names: Abdulhamid
+        family-names: Batayhi
+    doi: "10.26434/chemrxiv.15010365/v1"
