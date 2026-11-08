@@ -1,0 +1,15 @@
+{
+ "id": "abdulhamidbatayhi/p2-e6-select-4",
+ "title": "p2-e6-select-4",
+ "code_file": "run.py",
+ "language": "python",
+ "kernel_type": "script",
+ "is_private": true,
+ "enable_gpu": false,
+ "enable_internet": false,
+ "dataset_sources": [
+  "abdulhamidbatayhi/p2-e6-select-kit"
+ ],
+ "competition_sources": [],
+ "kernel_sources": []
+}

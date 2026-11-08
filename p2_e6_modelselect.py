@@ -8,8 +8,14 @@ Candidates (one parameter each, so BIC picks the largest likelihood):
   ldf  dq/dt = k (q* - q)                 linear driving force (the truth under L1)
   qdf  dq/dt = k (q*^2 - q^2) / (2 q)     quadratic driving force
   pso  dq/dt = k (q* - q)^2               pseudo-second order
-Each is integrated by implicit Euler on the upsampled grid (stable at any k; the quadratic steps
-have closed-form roots), so all candidates share the same discretisation.
+Each is integrated by implicit Euler on the upsampled grid with NSUB substeps per interval along
+the linearly interpolated q*(t) (stable at any k; the quadratic steps have closed-form roots), so all
+candidates share the same discretisation; with NSUB = 4 the LDF result differs from the exact update
+by at most 0.03 log-likelihood units per probe at the true k (Da 31.6 to 1000).
+B91: the first version took each law's best k from the coarse grid only (10 points per decade). At
+0.5 % noise a k 10 % from the optimum costs ~1e5 log-likelihood units, so the choice of law followed
+which law had a grid point nearest its optimum. Each law's k is now refined by bounded Brent search
+on log10 k between the grid neighbours of the coarse maximum (xatol 1e-6 decade).
 
 Subgrid: Pe ~94 (pe_mult 1.0); sigma 0.5 and 2 %; eps 0 and 2 %; all nine Da; both isotherms;
 estimation replicates 15..59. Writes results/p2_e6_modelselect.json (resumable row by row).
@@ -23,9 +29,12 @@ import sys
 import numpy as np
 
 from p2.identifiability import UPSAMPLE, _qstar_path
+from scipy.optimize import minimize_scalar
+
 from p2.io_utils import write_atomic
 
 K_GRID = np.logspace(-7, 1, 81)
+NSUB = 4
 OUT = "results/p2_e6_modelselect.json"
 
 
@@ -48,33 +57,49 @@ LAWS = {"ldf": _step_ldf, "qdf": _step_qdf, "pso": _step_pso}
 
 
 def integrate(step, k, tf, qsf, q0):
-    """q on tf for every k (array): implicit Euler, shape (len(k), len(tf))."""
+    """q on tf for every k (array) and every probe at once: implicit Euler with NSUB substeps per
+    interval along linearly interpolated q*. qsf (n_probe, n_tf), q0 (n_probe,); returns
+    (len(k), n_probe, n_tf)."""
     k = np.atleast_1d(np.asarray(k, float))[:, None]
-    h = np.diff(tf)
-    q = np.full((k.shape[0], 1), float(q0))
-    out = [q[:, 0].copy()]
-    for i in range(len(h)):
-        q = step(q, qsf[i + 1], k * h[i])
-        out.append(q[:, 0].copy())
-    return np.array(out).T
+    qsf = np.atleast_2d(np.asarray(qsf, float))
+    q = np.broadcast_to(np.asarray(q0, float)[None, :], (k.shape[0], qsf.shape[0])).copy()
+    out = [q.copy()]
+    for i in range(qsf.shape[1] - 1):
+        h = (tf[i + 1] - tf[i]) / NSUB
+        for j in range(1, NSUB + 1):
+            q = step(q, qsf[None, :, i] + (qsf[None, :, i + 1] - qsf[None, :, i]) * (j / NSUB), k * h)
+        out.append(q.copy())
+    return np.stack(out, axis=2)
 
 
-def loglik(step, t, cs, qs_obs, qstar_fn, sigma, Ts):
-    ll = np.zeros(K_GRID.size)
-    for c, q, T in zip(cs, qs_obs, Ts):
-        tf, qsf = _qstar_path(t, np.asarray(c, float), qstar_fn, None if T is None else np.asarray(T, float))
-        pred = integrate(step, K_GRID, tf, qsf, float(q[0]))[:, ::UPSAMPLE]
-        ll += -0.5 * np.sum((pred - np.asarray(q, float)[None, :]) ** 2, axis=1) / sigma ** 2
-    return ll
+def _paths(t, cs, qstar_fn, Ts):
+    tf = None
+    qsf = []
+    for c, T in zip(cs, Ts):
+        tf, qs = _qstar_path(t, np.asarray(c, float), qstar_fn, None if T is None else np.asarray(T, float))
+        qsf.append(qs)
+    return tf, np.array(qsf)
+
+
+def loglik(step, ks, tf, qsf, q_obs, sigma):
+    pred = integrate(step, ks, tf, qsf, q_obs[:, 0])[:, :, ::UPSAMPLE]
+    return -0.5 * np.sum((pred - q_obs[None]) ** 2, axis=(1, 2)) / sigma ** 2
 
 
 def select(t, cs, qs_obs, qstar_fn, sigma, Ts=None):
     Ts = [None] * len(cs) if Ts is None else Ts
+    tf, qsf = _paths(t, cs, qstar_fn, Ts)
+    q_obs = np.array([np.asarray(q, float) for q in qs_obs])
     fits = {}
     for name, step in LAWS.items():
-        ll = loglik(step, t, cs, qs_obs, qstar_fn, sigma, Ts)
+        ll = loglik(step, K_GRID, tf, qsf, q_obs, sigma)
         i = int(np.argmax(ll))
-        fits[name] = {"ll": float(ll[i]), "k_hat": float(K_GRID[i]), "edge": i in (0, len(K_GRID) - 1)}
+        lo, hi = np.log10(K_GRID[max(i - 1, 0)]), np.log10(K_GRID[min(i + 1, len(K_GRID) - 1)])
+        r = minimize_scalar(lambda x: -loglik(step, [10.0 ** x], tf, qsf, q_obs, sigma)[0],
+                            bounds=(lo, hi), method="bounded", options={"xatol": 1e-6})
+        llr, kr = (-float(r.fun), 10.0 ** float(r.x)) if -r.fun >= ll[i] else (float(ll[i]), float(K_GRID[i]))
+        fits[name] = {"ll": llr, "k_hat": kr, "ll_grid": float(ll[i]), "k_grid": float(K_GRID[i]),
+                      "edge": i in (0, len(K_GRID) - 1)}
     best = max(fits, key=lambda n: fits[n]["ll"])
     return best, fits
 
