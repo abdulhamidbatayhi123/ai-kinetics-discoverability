@@ -117,3 +117,7 @@ O1 identifiability (profile_interval_o1, the pre-registered criterion) and, for 
 E6's model selection (p2_e6_modelselect.select). Boundaries as in E7 (best discovery method chosen
 on replicates 0..14, logistic 50 % crossings on 15..59). Reported: success against Da for each
 quantity at both rates, and the boundary shift from 200 to 400 samples; descriptive, no verdict.
+*Clarification added before running (2026-11-08):* every method runs unchanged. Their windows are
+defined in samples (the 21-sample Savitzky-Golay derivative, the weak-form supports), so at
+N_T = 400 they span half the time they span at 200; this is what applying the methods as published
+to faster-sampled data does, and it is reported as such.
