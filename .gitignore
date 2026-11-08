@@ -32,3 +32,9 @@ Thumbs.db
 p2_rerun_A6.log
 p2_e2_m8.log
 p2_figdata.log
+
+# Kaggle B90 kit and downloads (regenerable; the scripts and registry are tracked)
+kaggle_b90/kit/
+kaggle_b90/upload/
+kaggle_b90/out/
+kaggle_b90/queue.log
