@@ -1,0 +1,5 @@
+pre: discovery fails before identifiability | {'no boundary on the grid for one of the two; reported as the range tested': 66, 'discovery fails before identifiability': 30} | gaps -3.428855483744308 .. -1.6047305823908282
+a: discovery fails before identifiability | {'no boundary on the grid for one of the two; reported as the range tested': 63, 'discovery fails before identifiability': 33} | gaps -3.428855483744308 .. -1.6047305823908282
+b: discovery fails before identifiability | {'no boundary on the grid for one of the two; reported as the range tested': 59, 'discovery fails before identifiability': 37} | gaps -3.034282583710673 .. -0.9165352056540701
+c: discovery fails before identifiability | {'no boundary on the grid for one of the two; reported as the range tested': 66, 'discovery fails before identifiability': 30} | gaps -3.457042940302835 .. -1.8014203330498724
+d: discovery fails before identifiability | {'no boundary on the grid for one of the two; reported as the range tested': 63, 'discovery fails before identifiability': 33} | gaps -3.457042940302835 .. -1.8014203330498724

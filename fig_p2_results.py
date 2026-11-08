@@ -140,7 +140,8 @@ def _note(ax, text):
             color=figstyle.C["grey"], wrap=True)
 
 
-INPUTS = ("results/p2_verdicts.json", "results/p2_figdata.json", "data/p2/manifest.json")
+INPUTS = ("results/p2_verdicts.json", "results/p2_figdata.json", "data/p2/manifest.json",
+          "results/p2_e6_modelselect.json")
 
 
 def _save(fig, stem):
@@ -561,6 +562,52 @@ def _h2c_panel(ax, V):
                 fontsize=6.5, fontweight="bold", color=figstyle.C["dark"])
 
 
+E6_FILE = "results/p2_e6_modelselect.json"
+
+
+def _e6_panel(ax, FD, da_levels, sigma=0.02, eps=0.0, pe=DISPLAY_PE):
+    """E6 (post hoc, EXPLORATORY_P2): choosing among three candidate laws (LDF, quadratic driving
+    force, pseudo-second order) by output-error likelihood, beside open discovery (best method) and
+    identifiability of k, for one noise level and an exact isotherm, both isotherms."""
+    if not os.path.exists(E6_FILE):
+        _note(ax, "E6 not run")
+        return
+    rows = json.load(open(E6_FILE))["rows"]
+    cells = json.load(open("data/p2/manifest.json"))["cells"]
+    for iso, mk in (("langmuir", "o"), ("step", "s")):
+        by = {}
+        for k, r in rows.items():
+            n, s, e, rep = k.split("|")
+            c = cells[n]
+            if c["iso"] == iso and float(s) == sigma and float(e) == eps:
+                by.setdefault(c["Da"], []).append(float(r["success"]))
+        das = sorted(by)
+        x = np.log10(das)
+        ax.plot(x, [np.mean(by[d]) for d in das], color=OI["black"], ls="-.", marker=mk, ms=3, lw=1.0,
+                mfc="white" if iso == "step" else OI["black"])
+        fd = (FD or {}).get("h2b", {}).get(_key(sigma, eps, iso, pe), {})
+        if fd.get("disc"):
+            xx, p = _frac(fd["disc"])
+            ax.plot(xx, p, color=figstyle.ROLE["disc"], marker=mk, ms=3, lw=1.0,
+                    mfc="white" if iso == "step" else figstyle.ROLE["disc"])
+        if fd.get("ident"):
+            xx, p = _frac(fd["ident"])
+            ax.plot(xx, p, color=figstyle.ROLE["ident"], ls="--", marker=mk, ms=3, lw=1.0,
+                    mfc="white" if iso == "step" else figstyle.ROLE["ident"])
+    ax.axhline(0.5, color=figstyle.C["grey"], lw=0.5)
+    _da_axis(ax, da_levels)
+    ax.set_ylim(-0.03, 1.08)
+    ax.set_xlabel(LOG_DA)
+    ax.set_ylabel(P_LAB)
+    hd = [Line2D([], [], color=figstyle.ROLE["disc"], marker="o", ms=3, label="open discovery, best method"),
+          Line2D([], [], color=OI["black"], ls="-.", marker="o", ms=3, label="choice among 3 laws (post hoc)"),
+          Line2D([], [], color=figstyle.ROLE["ident"], ls="--", marker="o", ms=3, label="k identifiable"),
+          Line2D([], [], color=figstyle.C["dark"], lw=0, marker="o", ms=3, label="Langmuir"),
+          Line2D([], [], color=figstyle.C["dark"], lw=0, marker="s", mfc="white", ms=3, label="MOF-303-like step")]
+    ax.legend(handles=hd, loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=2, fontsize=5.8, frameon=False)
+    ax.set_title(f"{pe_label(pe)}, σ = {_pct(sigma)}, ε = {_pct(eps)}", fontsize=6.5)
+
+
 def fig4(V, FD, da_levels, stem, noise=DISPLAY_METHODS_NOISE, pe=DISPLAY_PE):
     figstyle.apply()
     fig = plt.figure(figsize=(W2, 150 * MM), layout="constrained")
@@ -579,7 +626,9 @@ def fig4(V, FD, da_levels, stem, noise=DISPLAY_METHODS_NOISE, pe=DISPLAY_PE):
         fig.legend(h, lab, loc="outside upper center", ncol=5, fontsize=6.3, handlelength=2.2)
     axc, axd = fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[1, 1])
     _by_method_strip(axc, V, da_levels)
-    _h2c_panel(axd, V)
+    # H2c has no verdict and an empty panel says nothing; d shows the post-hoc comparator E6
+    # instead (H2c stays in Table 1 and the text)
+    _e6_panel(axd, FD, da_levels)
     _letter(axc, "c")
     _letter(axd, "d")
     return _save(fig, stem)

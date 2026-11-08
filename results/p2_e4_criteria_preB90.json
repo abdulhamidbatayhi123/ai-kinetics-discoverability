@@ -1,0 +1,2970 @@
+{
+ "_what": "E4 (post-verdict, declared in EXPLORATORY_P2.md before running): H2b under matched success",
+ "variants": {
+  "pre": {
+   "overall": "discovery fails before identifiability",
+   "word_counts": {
+    "no boundary on the grid for one of the two; reported as the range tested": 66,
+    "discovery fails before identifiability": 30
+   },
+   "n_with_verdict": 30,
+   "gap_min": -3.428855483744308,
+   "gap_max": -1.6047305823908282,
+   "gap_median": -2.3879706909273484,
+   "positive_control": {
+    "langmuir": true,
+    "step": true
+   },
+   "slices": {
+    "sigma=0.0|eps=0.0|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 12.83076817435046,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 7.759839600067323,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 8.442650525971459,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 716.565435546488
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 536.7246878589079
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 479.58880082503293
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 338.10819842424047
+    },
+    "sigma=0.0|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 547.7545107447655
+    },
+    "sigma=0.0|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 710.1092819206326
+    },
+    "sigma=0.0|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 281.58449710726336
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.024095635604194,
+     "da_disc": 5.315031697348591,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.889643475604054,
+     "da_disc": 7.243659357789491,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0357227732140943,
+     "da_disc": 5.174623080405696,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.993638387123063,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.180476159559762,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.522089608822634,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.213877667439924,
+     "da_disc": 0.22840048568794497,
+     "da_ident": 373.7443969037765
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 356.49811932459244
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.428855483744308,
+     "da_disc": 0.13047633532735636,
+     "da_ident": 350.257330995737
+    },
+    "sigma=0.005|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 0.13179786515592035,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 313.4133647502453
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 347.3808046999816
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 297.9375275417087
+    },
+    "sigma=0.005|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 514.6089137273225
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 174.5485126125669
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 187.9564763153218
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 166.82091975539691
+    },
+    "sigma=0.005|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 557.0303932746493
+    },
+    "sigma=0.005|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 479.51651659187365
+    },
+    "sigma=0.005|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 173.37253517471405
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.7480974519911066,
+     "da_disc": 1.3659078630447035,
+     "da_ident": 76.47488931823074
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.8444073342468188,
+     "da_disc": 1.0522252550927818,
+     "da_ident": 73.5387181779407
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.6047305823908282,
+     "da_disc": 1.4059976769536526,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.02|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2538540265608877,
+     "da_disc": 0.9566138323540785,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.0|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3044083659128423,
+     "da_disc": 0.8514954213054772,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2253746778856405,
+     "da_disc": 1.0214473946318248,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0105936187091396,
+     "da_disc": 0.8714725849291082,
+     "da_ident": 89.29915475899381
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2595275772069883,
+     "da_disc": 0.48964052956350074,
+     "da_ident": 89.00305956239214
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.852238770149322,
+     "da_disc": 0.9825552361233723,
+     "da_ident": 69.91908633462488
+    },
+    "sigma=0.02|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.504580784070536,
+     "da_disc": 0.5370440370356508,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.005|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.493757415846196,
+     "da_disc": 0.5505962726820933,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.567646399644973,
+     "da_disc": 0.46445568521111763,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 101.76473764966407
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 100.68345164867964
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.7558600605232018,
+     "da_disc": 0.15712625716207884,
+     "da_ident": 89.55891551876134
+    },
+    "sigma=0.02|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 261.5474287525634
+    },
+    "sigma=0.02|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 273.9845757621856
+    },
+    "sigma=0.02|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 115.12981570654756
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 94.0951371035593
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 96.38000692697452
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 74.99585195820232
+    },
+    "sigma=0.02|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 192.81025357018092
+    },
+    "sigma=0.02|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 170.7315319563877
+    },
+    "sigma=0.02|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 109.46254839931551
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.502407041857168,
+     "da_disc": 0.17795415950109353,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.389856278254439,
+     "da_disc": 0.230599789894523,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2684411316481468,
+     "da_disc": 0.30498189169365847,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.748342967712643,
+     "da_disc": 0.12481097528499834,
+     "da_ident": 69.91908633462495
+    },
+    "sigma=0.05|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5816662635615413,
+     "da_disc": 0.14826850957133217,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5240894425830898,
+     "da_disc": 0.16928783189850047,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.401827733322268,
+     "da_disc": 0.22433004951041544,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.240945181835989,
+     "da_disc": 0.3249151812515402,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.8297343576518914,
+     "da_disc": 0.11034199106434733,
+     "da_ident": 74.55472523020896
+    },
+    "sigma=0.05|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.6172248348485945,
+     "da_disc": 0.13661247222357367,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 42.73260970613168
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.4927671227607897,
+     "da_disc": 0.137401759300163,
+     "da_ident": 42.73260970613188
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3879706909273484,
+     "da_disc": 0.17489956338767135,
+     "da_ident": 42.732609706131754
+    },
+    "sigma=0.05|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 80.12139808030601
+    },
+    "sigma=0.05|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 73.53871817794118
+    },
+    "sigma=0.05|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 33.680393543605625
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 34.60221605226544
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 34.06992880899856
+    },
+    "sigma=0.05|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 76.85476583614276
+    },
+    "sigma=0.05|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 64.47215990293124
+    },
+    "sigma=0.05|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 50.36174284745427
+    }
+   }
+  },
+  "a": {
+   "overall": "discovery fails before identifiability",
+   "word_counts": {
+    "no boundary on the grid for one of the two; reported as the range tested": 63,
+    "discovery fails before identifiability": 33
+   },
+   "n_with_verdict": 33,
+   "gap_min": -3.428855483744308,
+   "gap_max": -1.6047305823908282,
+   "gap_median": -2.355563464708573,
+   "positive_control": {
+    "langmuir": true,
+    "step": true
+   },
+   "slices": {
+    "sigma=0.0|eps=0.0|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 12.83076817435046,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 7.759839600067323,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 8.990186546295137,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 716.565435546488
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 536.7246878589079
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 479.58880082503293
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 338.10819842424047
+    },
+    "sigma=0.0|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 547.7545107447655
+    },
+    "sigma=0.0|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 710.1092819206326
+    },
+    "sigma=0.0|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 281.58449710726336
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.024095635604194,
+     "da_disc": 5.315031697348591,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.889643475604054,
+     "da_disc": 7.243659357789491,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0357227732140943,
+     "da_disc": 5.174623080405696,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.993638387123063,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.180476159559762,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.522089608822634,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.213877667439924,
+     "da_disc": 0.22840048568794497,
+     "da_ident": 373.7443969037765
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 356.49811932459244
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.428855483744308,
+     "da_disc": 0.13047633532735636,
+     "da_ident": 350.257330995737
+    },
+    "sigma=0.005|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 0.13179786515592035,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 313.4133647502453
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 347.3808046999816
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 297.9375275417087
+    },
+    "sigma=0.005|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 514.6089137273225
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 174.5485126125669
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 187.9564763153218
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 166.82091975539691
+    },
+    "sigma=0.005|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 557.0303932746493
+    },
+    "sigma=0.005|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 479.51651659187365
+    },
+    "sigma=0.005|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 173.37253517471405
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.7480974519911066,
+     "da_disc": 1.3659078630447035,
+     "da_ident": 76.47488931823074
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.8444073342468188,
+     "da_disc": 1.0522252550927818,
+     "da_ident": 73.5387181779407
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.6047305823908282,
+     "da_disc": 1.4059976769536526,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.02|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2538540265608877,
+     "da_disc": 0.9566138323540785,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.0|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3044083659128423,
+     "da_disc": 0.8514954213054772,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2253746778856405,
+     "da_disc": 1.0214473946318248,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0105936187091396,
+     "da_disc": 0.8714725849291082,
+     "da_ident": 89.29915475899381
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2595275772069883,
+     "da_disc": 0.48964052956350074,
+     "da_ident": 89.00305956239214
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.852238770149322,
+     "da_disc": 0.9825552361233723,
+     "da_ident": 69.91908633462488
+    },
+    "sigma=0.02|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.504580784070536,
+     "da_disc": 0.5370440370356508,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.005|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.493757415846196,
+     "da_disc": 0.5505962726820933,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.567646399644973,
+     "da_disc": 0.46445568521111763,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 101.76473764966407
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 100.68345164867964
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.7558600605232018,
+     "da_disc": 0.15712625716207884,
+     "da_ident": 89.55891551876134
+    },
+    "sigma=0.02|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 261.5474287525634
+    },
+    "sigma=0.02|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 273.9845757621856
+    },
+    "sigma=0.02|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 115.12981570654756
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 94.0951371035593
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 96.38000692697452
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 74.99585195820232
+    },
+    "sigma=0.02|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 192.81025357018092
+    },
+    "sigma=0.02|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 170.7315319563877
+    },
+    "sigma=0.02|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 109.46254839931551
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3947881390074857,
+     "da_disc": 0.22799590486133225,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.343817067999139,
+     "da_disc": 0.2563882496854194,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.123433881175347,
+     "da_disc": 0.4258741740938518,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.605295434285457,
+     "da_disc": 0.17350033203237378,
+     "da_ident": 69.91908633462495
+    },
+    "sigma=0.05|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5326388582908015,
+     "da_disc": 0.1659878605355186,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3887421820547905,
+     "da_disc": 0.23119210724707087,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.355563464708573,
+     "da_disc": 0.24954663660304713,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0943310855015067,
+     "da_disc": 0.45539064003992824,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.701526482167052,
+     "da_disc": 0.14823429485773099,
+     "da_ident": 74.55472523020896
+    },
+    "sigma=0.05|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5403981006494463,
+     "da_disc": 0.16304860402977314,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5282314303729096,
+     "da_disc": 0.12662748634665802,
+     "da_ident": 42.73260970613168
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3997291745616622,
+     "da_disc": 0.17022770407381657,
+     "da_ident": 42.73260970613188
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.225051788805342,
+     "da_disc": 0.2545116271158726,
+     "da_ident": 42.732609706131754
+    },
+    "sigma=0.05|eps=0.02|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.8720109494685007,
+     "da_disc": 0.10758149359188116,
+     "da_ident": 80.12139808030601
+    },
+    "sigma=0.05|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 73.53871817794118
+    },
+    "sigma=0.05|eps=0.02|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.7082474275503072,
+     "da_disc": 0.11078163180080354,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 33.680393543605625
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 34.60221605226544
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 34.06992880899856
+    },
+    "sigma=0.05|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 76.85476583614276
+    },
+    "sigma=0.05|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 64.47215990293124
+    },
+    "sigma=0.05|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 50.36174284745427
+    }
+   }
+  },
+  "b": {
+   "overall": "discovery fails before identifiability",
+   "word_counts": {
+    "no boundary on the grid for one of the two; reported as the range tested": 59,
+    "discovery fails before identifiability": 37
+   },
+   "n_with_verdict": 37,
+   "gap_min": -3.034282583710673,
+   "gap_max": -0.9165352056540701,
+   "gap_median": -1.650022759900311,
+   "positive_control": {
+    "langmuir": true,
+    "step": true
+   },
+   "slices": {
+    "sigma=0.0|eps=0.0|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.0|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.0|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.0|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -0.9165352056540701,
+     "da_disc": 12.83076817435046,
+     "da_ident": 105.87364469214715
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.126463438252337,
+     "da_disc": 7.759839600067323,
+     "da_ident": 103.82840500635521
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.109154801609213,
+     "da_disc": 8.442650525971459,
+     "da_ident": 108.55094638123059
+    },
+    "sigma=0.0|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 115.12981570656062
+    },
+    "sigma=0.0|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 113.08717828462183
+    },
+    "sigma=0.0|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 96.63454135630987
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 16.51698893749905
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 12.1323229581214
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 22.547350535091354
+    },
+    "sigma=0.0|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 19.273080026274506
+    },
+    "sigma=0.0|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 20.978114954162244
+    },
+    "sigma=0.0|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 12.442510059942663
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.5042488365949649
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.9697547790134137
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.443171005081878
+    },
+    "sigma=0.0|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.7996986177679892
+    },
+    "sigma=0.0|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.2057241332119284
+    },
+    "sigma=0.0|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.0199994448987346
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.3037230376038607,
+     "da_disc": 5.315031697348591,
+     "da_ident": 106.96184769811208
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.0894469172985322,
+     "da_disc": 7.243659357789491,
+     "da_ident": 89.00305956236457
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.130717023267654,
+     "da_disc": 5.174623080405696,
+     "da_ident": 69.91908633462474
+    },
+    "sigma=0.005|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.6130764062758711,
+     "da_disc": 4.993638387123063,
+     "da_ident": 204.87713678699293
+    },
+    "sigma=0.005|eps=0.0|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.7369465111695848,
+     "da_disc": 4.180476159559762,
+     "da_ident": 228.1246745638614
+    },
+    "sigma=0.005|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.4402560060465657,
+     "da_disc": 4.522089608822634,
+     "da_ident": 124.62213006734207
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.6560330552928355,
+     "da_disc": 0.22840048568794497,
+     "da_ident": 103.44990076069399
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 101.0669192763236
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.8251093044880795,
+     "da_disc": 0.13047633532735636,
+     "da_ident": 87.22501538381344
+    },
+    "sigma=0.005|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.034282583710673,
+     "da_disc": 0.13179786515592035,
+     "da_ident": 142.62345714150842
+    },
+    "sigma=0.005|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 121.47550395110989
+    },
+    "sigma=0.005|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 77.86692595835906
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 17.380906153677394
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 11.242598966694924
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 18.76798808169051
+    },
+    "sigma=0.005|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 16.93109415244904
+    },
+    "sigma=0.005|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 16.09557760241638
+    },
+    "sigma=0.005|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 11.817790326832416
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.3994733100083827
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.9577454932423052
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.3338327145852311
+    },
+    "sigma=0.005|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.7059763103655279
+    },
+    "sigma=0.005|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.143086526250704
+    },
+    "sigma=0.005|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.0107160148952037
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.0976774096139754,
+     "da_disc": 1.3659078630447035,
+     "da_ident": 17.10404437976546
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.2109900933776043,
+     "da_disc": 1.0522252550927818,
+     "da_ident": 17.10404437976546
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.0851142116021033,
+     "da_disc": 1.4059976769536526,
+     "da_ident": 17.10404437976546
+    },
+    "sigma=0.02|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.650022759900311,
+     "da_disc": 0.9566138323540785,
+     "da_ident": 42.732609706131775
+    },
+    "sigma=0.02|eps=0.0|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.665733946846199,
+     "da_disc": 0.8514954213054772,
+     "da_ident": 39.43812542442142
+    },
+    "sigma=0.02|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.5350865382375016,
+     "da_disc": 1.0214473946318248,
+     "da_ident": 35.01890348267551
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.2928450852451496,
+     "da_disc": 0.8714725849291082,
+     "da_ident": 17.10404437976546
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.6597045459522133,
+     "da_disc": 0.48964052956350074,
+     "da_ident": 22.36566959934217
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.3357898430139574,
+     "da_disc": 0.9825552361233723,
+     "da_ident": 21.288586053408206
+    },
+    "sigma=0.02|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.8142926444223957,
+     "da_disc": 0.5370440370356508,
+     "da_ident": 35.01890348267543
+    },
+    "sigma=0.02|eps=0.005|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.827267091563237,
+     "da_disc": 0.5505962726820933,
+     "da_ident": 36.99136511356346
+    },
+    "sigma=0.02|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.8456341742002644,
+     "da_disc": 0.46445568521111763,
+     "da_ident": 32.55205851063693
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 10.393595344599303
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 8.468686538966702
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.8761947443740161,
+     "da_disc": 0.15712625716207884,
+     "da_ident": 11.815266174133805
+    },
+    "sigma=0.02|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 13.78662515479111
+    },
+    "sigma=0.02|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 11.819174737026769
+    },
+    "sigma=0.02|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 7.840484453784357
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.2099261907163292
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.8255308906248054
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.9150318523106322
+    },
+    "sigma=0.02|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.4800893276486644
+    },
+    "sigma=0.02|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.9026104222486063
+    },
+    "sigma=0.02|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.9065249846983752
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.7791858171540804,
+     "da_disc": 0.17795415950109353,
+     "da_ident": 10.702714998890775
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.6952094547336916,
+     "da_disc": 0.230599789894523,
+     "da_ident": 11.43058248641658
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.5507045799604806,
+     "da_disc": 0.30498189169365847,
+     "da_ident": 10.838735889169307
+    },
+    "sigma=0.05|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.1368460379057184,
+     "da_disc": 0.12481097528499834,
+     "da_ident": 17.10404437976546
+    },
+    "sigma=0.05|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 14.007542940436206
+    },
+    "sigma=0.05|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.9444968750013403,
+     "da_disc": 0.14826850957133217,
+     "da_ident": 13.048055549427616
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.800868217880002,
+     "da_disc": 0.16928783189850047,
+     "da_ident": 10.70271499889077
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.6840911816346016,
+     "da_disc": 0.22433004951041544,
+     "da_ident": 10.838735889169296
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.534470959335653,
+     "da_disc": 0.3249151812515402,
+     "da_ident": 11.123487292734408
+    },
+    "sigma=0.05|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.065555388368666,
+     "da_disc": 0.11034199106434733,
+     "da_ident": 12.83205477218089
+    },
+    "sigma=0.05|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 13.444323133304032
+    },
+    "sigma=0.05|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.9349914352233641,
+     "da_disc": 0.13661247222357367,
+     "da_ident": 11.762016542989555
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 5.917958542679383
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.4782303035986806,
+     "da_disc": 0.137401759300163,
+     "da_ident": 4.132592632314692
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.4845961705492114,
+     "da_disc": 0.17489956338767135,
+     "da_ident": 5.33807775988256
+    },
+    "sigma=0.05|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 5.473259213427825
+    },
+    "sigma=0.05|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 5.071112450380403
+    },
+    "sigma=0.05|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 4.242950553982255
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.8769407517494677
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.5561939449309747
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.837856506788583
+    },
+    "sigma=0.05|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 1.088691799435343
+    },
+    "sigma=0.05|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.7515377113172185
+    },
+    "sigma=0.05|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 0.6218169196088229
+    }
+   }
+  },
+  "c": {
+   "overall": "discovery fails before identifiability",
+   "word_counts": {
+    "no boundary on the grid for one of the two; reported as the range tested": 66,
+    "discovery fails before identifiability": 30
+   },
+   "n_with_verdict": 30,
+   "gap_min": -3.457042940302835,
+   "gap_max": -1.8014203330498724,
+   "gap_median": -2.401827733322268,
+   "positive_control": {
+    "langmuir": true,
+    "step": true
+   },
+   "slices": {
+    "sigma=0.0|eps=0.0|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 12.83076817435046,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 7.759839600067323,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 8.442650525971459,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 745.848524863634
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 536.7246878589079
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 479.58880082503293
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 338.10819842424047
+    },
+    "sigma=0.0|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 571.7716897187403
+    },
+    "sigma=0.0|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 710.1092819206326
+    },
+    "sigma=0.0|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 281.58449710726336
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.024095635604194,
+     "da_disc": 5.315031697348591,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.889643475604054,
+     "da_disc": 7.243659357789491,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0357227732140943,
+     "da_disc": 5.174623080405696,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.993638387123063,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.180476159559762,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.522089608822634,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.2460260152049676,
+     "da_disc": 0.22840048568794497,
+     "da_ident": 402.4602923151252
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 392.35038547728755
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.457042940302835,
+     "da_disc": 0.13047633532735636,
+     "da_ident": 373.7443969037772
+    },
+    "sigma=0.005|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 0.13179786515592035,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 358.8011224989024
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 409.9479767111949
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 331.0731045349514
+    },
+    "sigma=0.005|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 208.5392049281827
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 251.2324995666496
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 215.2502511753027
+    },
+    "sigma=0.005|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 717.2412432132584
+    },
+    "sigma=0.005|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 339.4328769802539
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.9032267660301907,
+     "da_disc": 1.3659078630447035,
+     "da_ident": 109.30704937263039
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0107666668181414,
+     "da_disc": 1.0522252550927818,
+     "da_ident": 107.86371851616046
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.8014203330498724,
+     "da_disc": 1.4059976769536526,
+     "da_ident": 89.00305956234963
+    },
+    "sigma=0.02|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.420125401980065,
+     "da_disc": 0.9566138323540785,
+     "da_ident": 251.6877384080077
+    },
+    "sigma=0.02|eps=0.0|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3044083659128423,
+     "da_disc": 0.8514954213054772,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2253746778856405,
+     "da_disc": 1.0214473946318248,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.1131596383440616,
+     "da_disc": 0.8714725849291082,
+     "da_ident": 113.08717828462147
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3429980291995505,
+     "da_disc": 0.48964052956350074,
+     "da_ident": 107.8637185161609
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.9597518516219987,
+     "da_disc": 0.9825552361233723,
+     "da_ident": 89.55891551876134
+    },
+    "sigma=0.02|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.6891539490224363,
+     "da_disc": 0.5370440370356508,
+     "da_ident": 262.5208778675704
+    },
+    "sigma=0.02|eps=0.005|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.617338995182443,
+     "da_disc": 0.5505962726820933,
+     "da_ident": 228.12467456375245
+    },
+    "sigma=0.02|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.567646399644973,
+     "da_disc": 0.46445568521111763,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 105.70096922607713
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 107.86371851616057
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.7831694257856903,
+     "da_disc": 0.15712625716207884,
+     "da_ident": 95.37140733091258
+    },
+    "sigma=0.02|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 298.8897878872394
+    },
+    "sigma=0.02|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 282.7947758938398
+    },
+    "sigma=0.02|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 142.62063332557707
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 98.79701714472311
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 96.38000692697452
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 86.21400913570473
+    },
+    "sigma=0.02|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 231.24495892685638
+    },
+    "sigma=0.02|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 208.7581938691951
+    },
+    "sigma=0.02|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 127.82631990290426
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.502407041857168,
+     "da_disc": 0.17795415950109353,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.389856278254439,
+     "da_disc": 0.230599789894523,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2684411316481468,
+     "da_disc": 0.30498189169365847,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.936622611346256,
+     "da_disc": 0.12481097528499834,
+     "da_ident": 107.86371851616067
+    },
+    "sigma=0.05|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 84.1438388255028
+    },
+    "sigma=0.05|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5816662635615413,
+     "da_disc": 0.14826850957133217,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5240894425830898,
+     "da_disc": 0.16928783189850047,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.401827733322268,
+     "da_disc": 0.22433004951041544,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.240945181835989,
+     "da_disc": 0.3249151812515402,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.974350337450382,
+     "da_disc": 0.11034199106434733,
+     "da_ident": 104.01384568477341
+    },
+    "sigma=0.05|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 83.49211089043104
+    },
+    "sigma=0.05|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.6172248348485945,
+     "da_disc": 0.13661247222357367,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.6147228920252,
+     "da_disc": 0.137401759300163,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5099264601917595,
+     "da_disc": 0.17489956338767135,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 99.30742384428532
+    },
+    "sigma=0.05|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 83.49211089043519
+    },
+    "sigma=0.05|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 36.42924072773727
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 35.9887151108131
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 35.98871511081317
+    },
+    "sigma=0.05|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 94.18882908619761
+    },
+    "sigma=0.05|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 73.42627204665513
+    },
+    "sigma=0.05|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 79.78735911257712
+    }
+   }
+  },
+  "d": {
+   "overall": "discovery fails before identifiability",
+   "word_counts": {
+    "no boundary on the grid for one of the two; reported as the range tested": 63,
+    "discovery fails before identifiability": 33
+   },
+   "n_with_verdict": 33,
+   "gap_min": -3.457042940302835,
+   "gap_max": -1.8014203330498724,
+   "gap_median": -2.3887421820547905,
+   "positive_control": {
+    "langmuir": true,
+    "step": true
+   },
+   "slices": {
+    "sigma=0.0|eps=0.0|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 12.83076817435046,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 7.759839600067323,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 8.990186546295137,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.0|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 745.848524863634
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 536.7246878589079
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 479.58880082503293
+    },
+    "sigma=0.0|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 338.10819842424047
+    },
+    "sigma=0.0|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 571.7716897187403
+    },
+    "sigma=0.0|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 710.1092819206326
+    },
+    "sigma=0.0|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 281.58449710726336
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.024095635604194,
+     "da_disc": 5.315031697348591,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.889643475604054,
+     "da_disc": 7.243659357789491,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0357227732140943,
+     "da_disc": 5.174623080405696,
+     "da_ident": 561.825561467881
+    },
+    "sigma=0.005|eps=0.0|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.993638387123063,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.180476159559762,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.0|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 4.522089608822634,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.2460260152049676,
+     "da_disc": 0.22840048568794497,
+     "da_ident": 402.4602923151252
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 392.35038547728755
+    },
+    "sigma=0.005|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -3.457042940302835,
+     "da_disc": 0.13047633532735636,
+     "da_ident": 373.7443969037772
+    },
+    "sigma=0.005|eps=0.005|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": 0.13179786515592035,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.005|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 358.8011224989024
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 409.9479767111949
+    },
+    "sigma=0.005|eps=0.02|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 331.0731045349514
+    },
+    "sigma=0.005|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 208.5392049281827
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 251.2324995666496
+    },
+    "sigma=0.005|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 215.2502511753027
+    },
+    "sigma=0.005|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 717.2412432132584
+    },
+    "sigma=0.005|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": null
+    },
+    "sigma=0.005|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 339.4328769802539
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.9032267660301907,
+     "da_disc": 1.3659078630447035,
+     "da_ident": 109.30704937263039
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0107666668181414,
+     "da_disc": 1.0522252550927818,
+     "da_ident": 107.86371851616046
+    },
+    "sigma=0.02|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.8014203330498724,
+     "da_disc": 1.4059976769536526,
+     "da_ident": 89.00305956234963
+    },
+    "sigma=0.02|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.420125401980065,
+     "da_disc": 0.9566138323540785,
+     "da_ident": 251.6877384080077
+    },
+    "sigma=0.02|eps=0.0|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3044083659128423,
+     "da_disc": 0.8514954213054772,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.2253746778856405,
+     "da_disc": 1.0214473946318248,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.1131596383440616,
+     "da_disc": 0.8714725849291082,
+     "da_ident": 113.08717828462147
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3429980291995505,
+     "da_disc": 0.48964052956350074,
+     "da_ident": 107.8637185161609
+    },
+    "sigma=0.02|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -1.9597518516219987,
+     "da_disc": 0.9825552361233723,
+     "da_ident": 89.55891551876134
+    },
+    "sigma=0.02|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.6891539490224363,
+     "da_disc": 0.5370440370356508,
+     "da_ident": 262.5208778675704
+    },
+    "sigma=0.02|eps=0.005|step|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.617338995182443,
+     "da_disc": 0.5505962726820933,
+     "da_ident": 228.12467456375245
+    },
+    "sigma=0.02|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.567646399644973,
+     "da_disc": 0.46445568521111763,
+     "da_ident": 171.62900428612906
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 105.70096922607713
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 107.86371851616057
+    },
+    "sigma=0.02|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.7831694257856903,
+     "da_disc": 0.15712625716207884,
+     "da_ident": 95.37140733091258
+    },
+    "sigma=0.02|eps=0.02|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 298.8897878872394
+    },
+    "sigma=0.02|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 282.7947758938398
+    },
+    "sigma=0.02|eps=0.02|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 142.62063332557707
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 98.79701714472311
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 96.38000692697452
+    },
+    "sigma=0.02|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 86.21400913570473
+    },
+    "sigma=0.02|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 231.24495892685638
+    },
+    "sigma=0.02|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 208.7581938691951
+    },
+    "sigma=0.02|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 127.82631990290426
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3947881390074857,
+     "da_disc": 0.22799590486133225,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.343817067999139,
+     "da_disc": 0.2563882496854194,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.123433881175347,
+     "da_disc": 0.4258741740938518,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.0|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.79357507791907,
+     "da_disc": 0.17350033203237378,
+     "da_ident": 107.86371851616067
+    },
+    "sigma=0.05|eps=0.0|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 84.1438388255028
+    },
+    "sigma=0.05|eps=0.0|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5326388582908015,
+     "da_disc": 0.1659878605355186,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3887421820547905,
+     "da_disc": 0.23119210724707087,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.355563464708573,
+     "da_disc": 0.24954663660304713,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.0943310855015067,
+     "da_disc": 0.45539064003992824,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.005|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.8461424619655427,
+     "da_disc": 0.14823429485773099,
+     "da_ident": 104.01384568477341
+    },
+    "sigma=0.05|eps=0.005|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 83.49211089043104
+    },
+    "sigma=0.05|eps=0.005|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5403981006494463,
+     "da_disc": 0.16304860402977314,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.650187199637322,
+     "da_disc": 0.12662748634665802,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=1.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.5216849438260724,
+     "da_disc": 0.17022770407381657,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|langmuir|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.3470075580697536,
+     "da_disc": 0.2545116271158726,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.02|step|pe=0.2": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.965244146456799,
+     "da_disc": 0.10758149359188116,
+     "da_ident": 99.30742384428532
+    },
+    "sigma=0.05|eps=0.02|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 83.49211089043519
+    },
+    "sigma=0.05|eps=0.02|step|pe=5.0": {
+     "words": "discovery fails before identifiability",
+     "gap": -2.7082474275503072,
+     "da_disc": 0.11078163180080354,
+     "da_ident": 56.586806562463394
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 36.42924072773727
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 35.9887151108131
+    },
+    "sigma=0.05|eps=0.05|langmuir|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 35.98871511081317
+    },
+    "sigma=0.05|eps=0.05|step|pe=0.2": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 94.18882908619761
+    },
+    "sigma=0.05|eps=0.05|step|pe=1.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 73.42627204665513
+    },
+    "sigma=0.05|eps=0.05|step|pe=5.0": {
+     "words": "no boundary on the grid for one of the two; reported as the range tested",
+     "gap": null,
+     "da_disc": null,
+     "da_ident": 79.78735911257712
+    }
+   }
+  }
+ }
+}
