@@ -619,6 +619,32 @@ the affected cells. This amendment is written after the verdicts were seen; it c
 of a numerical search, chosen to contain every k of the design, and nothing a result could steer.
 Recorded in RETRACTIONS_P2 B87; tests in `tests/test_profile_range.py`.
 
+### A7 — 2026-11-08, after the corrected verdicts: two implementation corrections to the O1 profile
+
+**What happened.** Two defects in the code of the O1 identifiability profile were found after A6,
+both making the code depart from what this pre-registration already says; neither changes a rule.
+(1) **B89 (found 2026-11-01, during the A6 recomputation).** §3 Phase A (ii) declares that the ODE
+(O1) profile refines with up to 6 passes of 41 points; the O1 code used 21. It was set to 41 before
+the A6 recomputation was restarted from zero, so every corrected O1 row used 41 points. A6 said
+"nothing else changes"; this addendum records that B89 changed the refinement as well.
+(2) **B90 (found 2026-11-07 by an independent review, confirmed 2026-11-08).** The O1 likelihood is
+declared to integrate the LDF law exactly for the interpolated q*(t). The exact update in
+`p2.identifiability._ldf_exact` had a wrong coefficient that agrees with the exact solution only to
+second order in k h and lags one step as k h grows, so at Da = 316 and 1000 the O1 likelihood did not
+compute the declared estimand. The update was corrected and tested against an ODE solver for k h from
+1e-4 to 100 (`tests/test_ldf_exact.py`).
+
+**What changes.** All 51,840 O1 identifiability rows are recomputed with both corrections, and
+`p2_analyze.py` is rerun unchanged. Nothing else changes: not the k range of A6, the [k/2, 2k]
+criterion, the positive-control rule, any estimand, threshold or verdict word, and no discovery
+result. Analyses that use O1 identifiability (figure data, E3, E4, the descriptive checks, E7's
+identifiability part) are recomputed with the corrected rows.
+
+**How it is reported.** The files computed before B90 are kept as `results/*_preB90.json`, beside the
+first as-run files (`*_asrun.json`), and the paper reports all three where they differ, with this
+amendment and RETRACTIONS_P2 B89 and B90. This amendment is written after the verdicts were seen; it
+corrects implementation errors against the text above and changes nothing a result could steer.
+
 ## 10. Pre-freeze revisions, 2026-10-04 (before any discovery method has run on any grid cell)
 Found by drafting the Registered-Report Stage-1 manuscript against this document and
 the code; each fixed here, in the open, rather than silently:
