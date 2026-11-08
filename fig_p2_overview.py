@@ -206,12 +206,12 @@ def main():
     res = c.box(L, y3, 120, h3, fc=TINT["out"])
     c.text(L + 1.6, y3 + h3 - 1.3, "6  Boundaries and the analyses that use them (Results subsection)",
            box=res, fs=FS_T, fontweight="bold")
-    rows = [("H2b", "discovery against identifiability boundary, 96 slices (2)", "confirmatory"),
-            ("H2a", "does one error ratio place the boundary? (3)", "confirmatory"),
-            ("H2c", "does errors-in-variables fitting move it? (3)", "confirmatory"),
-            ("", "which methods discover the law, and where (4)", "descriptive"),
-            ("", "O2 and O3: probes without uptake, outlet only (5)", "descriptive"),
-            ("H2d", "loading-dependent rate, step isotherm (6)", "exploratory")]
+    rows = [("H2b", "discovery against identifiability boundary, 96 slices (1)", "confirmatory"),
+            ("H2a", "does one error ratio place the boundary? (2)", "confirmatory"),
+            ("H2c", "does errors-in-variables fitting move it? (2)", "confirmatory"),
+            ("", "which methods discover the law, and where (3)", "descriptive"),
+            ("", "O2 and O3: probes without uptake, outlet only (4)", "descriptive"),
+            ("H2d", "loading-dependent rate, step isotherm (5)", "exploratory")]
     for i, (h, txt, kind) in enumerate(rows):
         yy = y3 + h3 - 7.3 - i * 3.7
         c.text(L + 1.6, yy, h, box=res, fs=FS, va="center", fontweight="bold")

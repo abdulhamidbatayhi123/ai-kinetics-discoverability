@@ -51,8 +51,8 @@ Equation-discovery methods promise to learn the uptake rate law of an adsorption
 its data, but where they can is unknown. In a pre-registered computational study spanning
 four decades of Damk\"ohler number (Da), three P\'eclet numbers, noise and isotherm error, we
 compared the Da at which the best discovery method stopped recovering the linear-driving-force
-law with the Da at which its rate constant stopped being practically identifiable. In all 30
-conditions where both boundaries existed, discovery failed first, by 1.6 to 3.4 decades. With
+law with the Da at which its rate constant stopped being practically identifiable. In all 30 of
+96 conditions with both boundaries, discovery failed first, by 1.6 to 3.4 decades. With
 5\,\% isotherm error no method reached 50\,\% success at any rate, while the rate constant
 remained identifiable from interior probes. Weak-form sparse regression worked at low Da and
 symbolic regression in a window near Da 1 to 10; neither reached the range where the
@@ -84,16 +84,20 @@ Part of the answer is classical. Near local equilibrium the mass-transfer coeffi
 poorly determined by column data \citep{valocchi1985}: finite rates then act only through an
 apparent dispersion \citep{katsoulas2023}, the LDF coefficient can be extracted wrongly from outlet
 breakthrough \citep{knox2016}, and most of the output variability belongs to the isotherm
-\citep{ward2022,taylor2026}. Yet in the constant-pattern regime a lumped rate coefficient is
-recovered from breakthrough consistently with theory \citep{miyabe2000}, so any limit must be
-conditioned on dispersion, isotherm shape, noise and isotherm error. Equation discovery has its
-own limits. On a single transient trajectory that settles onto a slow manifold, as a
-breakthrough run does, the candidate terms become nearly collinear and the data barely
-distinguish them \citep{stanhope2014,gallo2026,delgado2025}; noise induces phase transitions
-in what can be recovered \citep{klishin2024,fajardo2023}; and unique recovery
-needs conditions that non-chaotic dynamics generally lack \citep{shumaylov2025}. These results
-say that discovery must fail somewhere for column data. None says where, for which methods, or
-whether it fails where the rate constant itself stops being identifiable.
+\citep{ward2022,taylor2026}; yet a lumped rate coefficient can be recovered from breakthrough in
+the constant-pattern regime \citep{miyabe2000} and estimated statistically from breakthrough
+curves \citep{dejaco2024,dejaco2025}. Batch studies warn that data near equilibrium cannot tell
+kinetic laws apart \citep{canzano2012,simonin2016}. Equation discovery has its own limits. On a
+single transient that settles onto a slow manifold, as a breakthrough run does, the candidate
+terms become nearly collinear \citep{stanhope2014,gallo2026,delgado2025}; noise induces phase
+transitions in what can be recovered \citep{klishin2024,fajardo2023}; unique recovery needs
+conditions non-chaotic dynamics generally lack \citep{shumaylov2025}; and success maps of
+equation learning against sampling and noise exist for biological data \citep{nardini2020}.
+Discovery has been coupled to identifiability by keeping only identifiable models
+\citep{massonis2023,loman2026}, and kinetic rate laws have been discovered in reaction
+engineering \citep{servia2024}. That discovering a law is harder than fitting its coefficient
+is therefore expected. How much harder, where, for which methods, and from which measurements
+has not, to our knowledge, been measured.
 
 The question matters most where the law is not the textbook one. In the water-harvesting
 framework MOF-303 the water diffusion rate passes through a minimum at the steep
@@ -124,18 +128,13 @@ probes and, where tested, from the outlet alone.
 
 \section*{Results}
 
-\subsection*{Both isotherms pass the positive control}
-At the lowest Damk\"ohler number, with no noise and no isotherm error, discovery and
-identifiability must both succeed in at least 90\,\% of the estimation replicates, or that
-isotherm is withheld from every verdict. Both isotherms passed: the best method recovered the
-LDF law in 135 of 135 replicates, and $k$ was identifiable in 135 of 135, for the Langmuir and
-for the step isotherm alike. (As first run, a search-range error in the identifiability code
-failed and withheld the step isotherm; the Langmuir verdict was the same as now; Supplementary
+\subsection*{Discovery fails long before identifiability}
+Both isotherms passed the positive control (lowest $\Da$, no noise or isotherm error): the law
+was recovered, and $k$ identifiable, in 135 of 135 replicates for each. (As first run, a
+search-range error withheld the step isotherm; the Langmuir verdict was the same; Supplementary
 Note~2, Extended Data Fig.~7.)
 % results/p2_verdicts.json positive_control (langmuir, step: success_fraction 1.0,
 % identifiable_fraction 1.0, n 135, need 0.9); results/p2_verdicts_asrun.json (step failed).
-
-\subsection*{Discovery fails long before identifiability}
 As $\Da$ grows, the driving force $\qs - q$ that distinguishes the law shrinks below the noise,
 while the curves still constrain $k$ (Fig.~2). H2b compares, in each slice of the design (one isotherm, one P\'eclet number, one noise level
 and one isotherm error), the Damk\"ohler number at which the best discovery method falls to
@@ -375,16 +374,14 @@ its coefficient.
 % t_stoich from breakthrough, partly read from figures) Da ~ 90 to 3,800; 13X/CO2 (Dantas et al.
 % 2011, k as reported, t_stoich computed from bed mass, capacity and flow) Da ~ 200 to 5,400.
 
-The closest prior work recovered the LDF law from noisy outlet curves with a neural network in
-the governing equations, with the isotherm given exactly, at one rate \citep{santana2023}. Our
-results place that success at one end of a wider map: with an exact isotherm, discovery from
-interior probes survives noise of 2 to 5\,\% at low $\Da$, but outside that corner it fails,
-and from probes without uptake no method reached 50\,\% at any rate. From the outlet, only
-our demonstration of the same neural pipeline (M1) was run; limited by computation to one
-noise level, one replicate per rate and fifty optimisation steps, it recovered the law in one
-of nine fits. For water in MOF-303, where the rate
+The closest prior work recovered the LDF law from noisy outlet curves at one rate, with the
+isotherm given exactly \citep{santana2023}. Our results place that success at one end of a wider
+map: with an exact isotherm, discovery from probes survives 2 to 5\,\% noise at low $\Da$, but
+outside that corner it fails. For water in MOF-303, where the rate
 depends on loading at the isotherm step \citep{lassitter2024,hastings2024}, a loading-dependent
-law was recovered almost only at $\Da = 1$; such a law can be found, but not yet reliably.
+law was recovered almost only at $\Da = 1$. Because the library holds no term that can represent
+a sigmoidal $k(q)$, this test measured the selection of polynomial terms more than the
+discoverability of the MOF-303 law, which remains open.
 
 The study has limits that bound these conclusions. All data were simulated by one validated
 column model with the LDF law as the truth, so the boundaries hold for that model, the two
@@ -406,11 +403,17 @@ found and corrected during the study; the corrections, and the verdicts as first
 public (Supplementary Note~2), and none changed the main verdict.
 % RETRACTIONS_P2 B86 (solve stall, A5), B87, B88, B89 ("Our own error").
 
-Two directions follow. Discovery would gain most from better isotherms: the boundaries moved
-more with isotherm error than with noise, so an isotherm measured to a fraction of a per cent is
-worth more to discovery than quieter sensors. And the map should be tested where it is most
-uncertain, on experimental breakthrough data with interior probes at moderate $\Da$, where it
-predicts that discovery should first become possible.
+Three directions follow. Discovery would gain most from better isotherms: the boundaries moved
+more with isotherm error than with noise, and in a post hoc test, shifting the step of the
+MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,\% at every rate.
+An isotherm whose step is placed to better than 1\,\% relative humidity is worth more to discovery
+than quieter sensors. Experiments can also be designed to discriminate among candidate laws,
+choosing probe positions and sampling rates that widen the range where the LDF law is
+distinguishable from its alternatives. And the map should be tested on experimental breakthrough
+data with interior probes at moderate $\Da$, where it predicts that discovery first becomes
+possible.
+% results/p2_e7_summary.json (EXPLORATORY_P2 E7; discovery part, unaffected by B90): best-method
+% success at any Da <= 0.31 (sigma 2 %, shift -1 % RH), 0.27 (+1 %), 0.00 otherwise.
 % Numbers: see Results source comments; E3 coverage results/p2_e3_coverage.json per_model O1
 % coverage 0.099; accuracy results/p2_ident_robustness.json. The isotherm-error effect on ident:
 % (0.005, 0) 562 -> (0.005, 0.005) 350-374 = about 0.2 decade.

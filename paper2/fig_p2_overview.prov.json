@@ -8,12 +8,12 @@
   5.4,
   8.0
  ],
- "made": "2026-11-05 09:00:44",
+ "made": "2026-11-08 12:50:59",
  "style_sha256": "f69868eda5a7b118e22266695e3f2c3b8770bb5a3bc4df93008cb0a5b4fab875",
  "script": "fig_p2_overview.py",
- "script_sha256": "3ce71ad16209b96463dd9483f509f37842735ca19be879eca5453d73a20219df",
+ "script_sha256": "3dd0d2a830b875d6f488d7e0c327452be626c425c03ebeea0f6ac54fc752b981",
  "inputs": {
-  "PREREG_P2_discoverability.md": "ecb0841ee7856ca64f09d96b5dca56832d57348c5fbb6d4f8fb0255ced0e1b3e",
+  "PREREG_P2_discoverability.md": "24dc33ec317e14dfff8bc9d190118e70a283400f235ad5fd34387fbfda0c112a",
   "data/p2/manifest.json": "2742ff22b55f0fa6302e0707a2bfcef9949a809104c853755b3dd4bb325bf270",
   "p2_generate.py": "0e4c3a1da7d827b318ed859305fe9da6b4405b8b9caae0c9803e2e6e9abca296",
   "isotherm.py": "48781be8651b3778f390bc9788598b1e12d895a1b0571477d1be01d68bc6cc71"
