@@ -140,3 +140,11 @@ E6's eps = 0 fractions, and each law's median log-likelihood. **Reading fixed in
 LDF fraction rises from E6's to at least two thirds, the failure there is attributed to noise in the
 forcing (a property of the likelihood, not of the data); where it stays at or below one third, it is
 not; otherwise mixed. Descriptive, no verdict; it changes no confirmatory result.
+
+**Outcome (2026-11-09, results/p2_e9_summary.json, 720 rows, 0 errors).** LDF fraction with noise-free
+forcing (E6's in brackets): Langmuir Da 31.6, sigma 0.5 % 1.00 (0.69) and 2 % 0.69 (0): attributed to
+noise in the forcing at 2 %, already chosen at 0.5 %. Langmuir Da 100, 316, 1000: at most 0.22 (all 0 in
+E6): not attributed. Step isotherm, all four Da and both sigma: 0 (0): not attributed. A diagnostic made
+afterwards and NOT declared (p2_diag_e9_noisefree.py, replicate 15, q, c and T all noise-free): the LDF
+law was still not chosen at Da 100 (both isotherms; LDF k_hat/k 0.984 and 1.007) or 1000 (Langmuir), so
+the misfit there is deterministic. Reported in Supplementary Note 3 (E9), labelled as such.

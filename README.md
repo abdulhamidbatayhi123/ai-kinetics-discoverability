@@ -37,7 +37,8 @@ under four alternative success rules (E4, `results/p2_e4_criteria.json`: gaps 0.
 and at twice the sampling rate (E8, `results/p2_e8_summary.json`: every boundary moves up, the gap
 stays at least 1.25 decades). Choosing among three candidate laws by likelihood (E6) finds the
 LDF law in every replicate up to Da = 10 with an exact isotherm, further than open discovery, but
-in none from Da = 100 on. A systematic isotherm error limits the rate constant too: shifting the
+in none from Da = 100 on; noise-free forcing (E9, `results/p2_e9_summary.json`) restores
+the choice only for the Langmuir sorbent at Da = 31.6. A systematic isotherm error limits the rate constant too: shifting the
 step of the MOF-303-like isotherm by 1 % relative humidity (E7, `results/p2_e7_summary.json`)
 biases the fitted k and lowers the identifiability boundary to Da = 17 to 57, while discovery
 stays at or below 31 % at every rate.
@@ -93,7 +94,7 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `p2_compare_verdicts.py` | as-run against corrected verdicts |
 | `p2_figdata.py` | per-level fractions behind the figures (`results/p2_figdata.json`) |
 | `p2_e2_m8.py`, `p2_e3_coverage.py` | exploratory analyses E2 and E3 (declared in `EXPLORATORY_P2.md` before they ran) |
-| `p2_e4_criteria.py`, `p2_e5_conditioning.py`, `p2_e6_modelselect.py`, `p2_e7_stepshift.py`, `p2_e8_sampling.py` | post-verdict analyses E4 to E8, each declared in `EXPLORATORY_P2.md` before it ran |
+| `p2_e4_criteria.py`, `p2_e5_conditioning.py`, `p2_e6_modelselect.py`, `p2_e7_stepshift.py`, `p2_e8_sampling.py`, `p2_e9_cleanforcing.py` | post-verdict analyses E4 to E9, each declared in `EXPLORATORY_P2.md` before it ran |
 | `p2_rerun_B90.sh`, `kaggle_b90/`, `p2_b90_merge.py` | the B90 recomputation of every O1 identifiability row (Kaggle) and its local validation, then everything downstream |
 | `p2_e4_parallel.sh`, `p2_e7_parallel.sh` | the last two steps of `p2_rerun_B90.sh` (E4, E7 identifiability) split into parallel parts and merged, after the machine ran out of process slots on 2026-11-09; same computation |
 | `kaggle_e6/`, `p2_e6_merge.py`, `kaggle_e8/`, `p2_e8_merge.py` | E6 and E8 on Kaggle: kits, kernels, queues and merges with local spot checks |
@@ -104,7 +105,7 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `paper2/build_p2.py` | builds both documents and runs the gates (key numbers recomputed from the results files, word and display-item limits, banned phrases, figure provenance) |
 | `paper2/terminology.md` | each technical term defined once, and the banned-phrase list |
 | `p2_pilot_*.py`, `p2_operating_characteristics.py` | pre-freeze pilots and power simulations |
-| `p2_diag_*.py`, `p2_e2_diag.py` | diagnostics behind corrections B87 and the E2 check |
+| `p2_diag_*.py`, `p2_e2_diag.py` | diagnostics behind corrections B87, the E2 check and E9 (`p2_diag_e9_noisefree.py`) |
 | `tests/` | `python -m pytest tests -q` |
 | `RETRACTIONS_P2.md` | every defect found, its cause, its fix and how it was found |
 
@@ -124,6 +125,7 @@ bash p2_rerun_B90.sh                  # O1 identifiability with the B90 fix, ver
                                       # (the O1 rows ran on Kaggle: kaggle_b90/, then python p2_b90_merge.py)
 python p2_e5_conditioning.py          # post hoc analyses E5 and E6 (E6 and E8 ran on Kaggle:
 python p2_e6_modelselect.py           #   kaggle_e6/, kaggle_e8/, merged by p2_e6_merge.py, p2_e8_merge.py)
+python p2_e9_cleanforcing.py          # post hoc E9 (E6 with noise-free forcing)
 python p2_figdata.py                  # per-level fractions for the figures
 python fig_p2_overview.py && python fig_p2_results.py && python fig_p2_extended.py
 python paper2/build_p2.py             # article + SI, with every gate
@@ -137,7 +139,7 @@ skips rows already on disk.
 - `results/p2_verdicts.json` `positive_control.<isotherm>.n_success` and `.n_ident` are the NUMBERS OF ROWS
   evaluated (estimation replicates at the lowest Da, sigma = eps = 0), not the numbers that succeeded; the
   fractions are `success_fraction` and `identifiable_fraction`.
-- Exploratory and post-verdict analyses (E1-E8) are declared in `EXPLORATORY_P2.md`, each before it ran.
+- Exploratory and post-verdict analyses (E1-E9) are declared in `EXPLORATORY_P2.md`, each before it ran.
 
 ## Licence and citation
 

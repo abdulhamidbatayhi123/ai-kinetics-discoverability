@@ -246,6 +246,14 @@ def bindings():
             ("E8 verdict words at 400", "discovery still failed" if all(
                 v["words"] == "discovery fails before identifiability" for k, v in e8.items()
                 if v["da_ident"] is not None) else "E8 words differ")]
+    # review round 2 (M3): E9, E6 with noise-free forcing; the pre-declared two-thirds / one-third reading
+    s9 = load("results/p2_e9_summary.json")
+    rescued = sorted({k.split("|")[0] for k, v in s9.items() if v["frac_clean"] >= 2 / 3 and v["frac_e6"] < 2 / 3})
+    hi = max(v["frac_clean"] for k, v in s9.items() if not k.split("|")[0].endswith("da31.6"))
+    out += [("E9 rescued cells", "rescued" + "\n" + "it only for the Langmuir sorbent at $" + BS + "Da = 31.6$"
+             if rescued == ["langmuir_L1_pe1_da31.6"] else f"E9 rescued {rescued}"),
+            ("E9 at most above 31.6", f"chosen in at most {round(hi * 100)}" + BS + "," + BS + "% of replicates"
+             if hi <= 1 / 3 else "E9 above one third")]
     e3 = load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
     out += [("E3 coverage", f"only about {round(e3 * 100)}{BS},{BS}%")]
     return out
@@ -268,6 +276,20 @@ def e7_bias(da, shifts=("-0.01", "0.01")):
                    and k.split("|")[1] == s and k.split("|")[2] == sh and cells[k.split("|")[0]]["Da"] == da]
             med.append(statistics.median(est))
     return med
+
+
+def e9_rows():
+    """E9 table: LDF fraction with noise-free forcing and, in brackets, E6's, per (isotherm, sigma) and Da."""
+    s9 = load("results/p2_e9_summary.json")
+    f = lambda x: "0" if x == 0 else f"{x:.2f}"
+    rows = []
+    for iso in ("langmuir", "step"):
+        for sg in ("0.005", "0.02"):
+            cells_txt = " & ".join(f"{f(s9[k]['frac_clean'])} ({f(s9[k]['frac_e6'])})" for k in
+                                   (f"{iso}_L1_pe1_da{d}|{sg}" for d in ("31.6", "100", "316", "1e+03")))
+            rows.append(f"{'Langmuir' if iso == 'langmuir' else 'step'} & {float(sg) * 100:g}" + BS + "," + BS
+                        + f"% & {cells_txt} " + BS + BS)
+    return rows
 
 
 def e7_rows():
@@ -326,6 +348,10 @@ def si_bindings():
                     f"{'Langmuir' if iso == 'langmuir' else 'step'} & {float(sg[6:]) * 100:g}{BS},{BS}% & {nt[4:]} & "
                     f"{mn.get(v['best_method'], v['best_method'])} & {f8(v['da_disc'])} & {f8(v['da_select'])} & "
                     f"{f8(v['da_ident'])} & {g} " + BS + BS))
+    out += [(f"E9 table row {i}", r) for i, r in enumerate(e9_rows())]
+    s9 = load("results/p2_e9_summary.json")
+    out.append(("E9 no errors", "No row had an" + "\n" + "error. The table gives the fraction with noise-free"
+                if sum(v["errors"] for v in s9.values()) == 0 and sum(v["n"] for v in s9.values()) == 720 else "E9 errors"))
     e7r, e7err = e7_rows()
     out += [(f"E7 table row {i}", r) for i, r in enumerate(e7r)]
     out.append(("E7 error rows", f"these {_thou(e7err)} rows raise an error"))

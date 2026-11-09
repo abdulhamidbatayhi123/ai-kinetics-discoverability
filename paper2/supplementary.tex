@@ -658,11 +658,11 @@ before kept its verdict, and every new slice has the same verdict.
 % H2b_overall, H2a, H2c); results/p2_extra_o1ident_asrun.json vs results/p2_extra_o1ident.json
 % (row flips: step +2900 / -7, langmuir +24 / -17); p2_compare_verdicts.py.
 
-\section*{Supplementary Note 3: exploratory analyses E2 to E8}
+\section*{Supplementary Note 3: exploratory analyses E2 to E9}
 Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
 enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
-corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results. E4 to E8
-are post hoc and are labelled so wherever they are used. E1 (M1 at full scale) needs a graphics
+corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results; E9 after
+a second review. E4 to E9 are post hoc and are labelled so wherever they are used. E1 (M1 at full scale) needs a graphics
 processor and has not run.
 
 \subsection*{E2: the Kolmogorov--Arnold network on its declared subgrid}
@@ -809,9 +809,13 @@ step & 2\,\%, 2\,\% & 1.00 & 1.00 & 1.00 & 1.00 & 0.78 & 0.16 & 0 & 0 & 0 \\
 With an exact isotherm the choice was unanimous at every level: the LDF law up to $\Da = 10$, the
 quadratic driving force at $\Da = 31.6$ (except 31 of 45 replicates for the Langmuir sorbent at
 0.5\,\% noise, which chose the LDF law), the quadratic driving force or the pseudo-second-order
-law at 100, and the pseudo-second-order law at 316 and 1000. Since the choice did not depend on
-the noise level, it reflects the systematic misfit of the integrated laws on the sampled data, not
-noise; E8 tests whether the sampling rate is its cause.
+law at 100, and the pseudo-second-order law at 316 and 1000. Except for the Langmuir sorbent at
+$\Da = 31.6$, the choice did not depend on the noise level; E9 tests whether noise in the forcing
+$\qsm(t)$ is nevertheless the cause, and E8 whether the sampling rate is. With 2\,\% isotherm
+error the LDF law was chosen in some replicates where the exact isotherm gave none, most often
+for the Langmuir sorbent at 0.5\,\% noise and $\Da = 100$. Since E9 shows that the exact-isotherm
+choice there is set by a systematic misfit, not by noise, we read these choices as one systematic
+error offsetting part of another, not as evidence for the law.
 % source: results/p2_e6_modelselect.json (B91-corrected, 3,240 rows, 0 errors; success = LDF chosen;
 % success_k equal to success at Da <= 31.6; at Da >= 100: langmuir 0.5/2 % Da 100 23 -> 21, 316 2 -> 0,
 % 1000 4 -> 0; step 0.5/2 % Da 100 1 -> 1, 316 2 -> 0: 32 chosen, 22 within); kaggle_e6/, p2_e6_merge.py (6 of 6 sampled rows recomputed locally match);
@@ -900,5 +904,41 @@ the time resolution explains the failure of the choice at $\Da = 31.6$ but not a
 % source: results/p2_e8_summary.json, results/p2_e8_sampling.json (kaggle_e8/, p2_e8_merge.py,
 % p2_e8_merge.log: 4 of 4 sampled rows match); p2_e8_sampling.py; EXPLORATORY_P2 E8. A crossing
 % between two levels with all-to-none success (e.g. 56.6 between 31.6 and 100) is interval-censored.
+
+\subsection*{E9: noise in the forcing of the choice among laws (post hoc)}
+E6 drives each law with $\qsm(t)$ computed from the noisy observed $c$ and $T$, so its likelihood
+carries errors in the variables. E9 repeated E6 unchanged on its exact-isotherm rows at
+$\Da = 31.6$ to 1000 ($\Pe \approx 94$, both isotherms, $\sigma \in \{0.5, 2\}\,\%$, estimation
+replicates 15 to 59; 720 fits of each law), with $\qsm(t)$ computed from the noise-free $c$ and $T$
+at the same probes and times and $q$ observed with noise as before. One row was run to time the
+check before it was declared; it is recomputed here. The reading was fixed in advance: where the
+fraction of replicates choosing the LDF law rises to at least two thirds, the failure is
+attributed to noise in the forcing; where it stays at or below one third, it is not. No row had an
+error. The table gives the fraction with noise-free forcing and, in brackets, E6's.
+\begin{center}
+\small
+\begin{tabular}{@{}llllll@{}}
+\toprule
+& & \multicolumn{4}{c}{$\Da$} \\
+Isotherm & $\sigma$ & 31.6 & 100 & 316 & 1000 \\
+\midrule
+Langmuir & 0.5\,\% & 1.00 (0.69) & 0 (0) & 0 (0) & 0 (0) \\
+Langmuir & 2\,\% & 0.69 (0) & 0.11 (0) & 0.22 (0) & 0.20 (0) \\
+step & 0.5\,\% & 0 (0) & 0 (0) & 0 (0) & 0 (0) \\
+step & 2\,\% & 0 (0) & 0 (0) & 0 (0) & 0 (0) \\
+\bottomrule
+\end{tabular}
+\end{center}
+Noise in the forcing explains the failure only for the Langmuir sorbent at $\Da = 31.6$, where
+twice the sampling rate also restored the choice at 0.5\,\% noise (E8). For the step isotherm at
+every level, and for both isotherms from $\Da = 100$ on, the wrong law was still chosen. A
+diagnostic made after E9 and not declared (\texttt{p2\_diag\_e9\_noisefree.py}, replicate 15) removed
+the noise from $q$ as well: the LDF law was still not chosen at $\Da = 100$ or 1000, although its
+fitted $k$ lay within 2\,\% of the true value at $\Da = 100$ for both isotherms. The failure from
+$\Da = 100$ on is therefore a deterministic misfit between the integrated laws and the sampled data, which twice the sampling
+rate did not remove (E8), not an effect of noise.
+% source: results/p2_e9_summary.json, results/p2_e9_cleanforcing.json; p2_e9_cleanforcing.py;
+% EXPLORATORY_P2 E9. Diagnostic: p2_diag_e9_noisefree.py (sigma = eps = 0 in q, c, T; replicate 15):
+% chosen law langmuir Da 31.6 ldf, Da 100 qdf (LDF k_hat/k 0.984), step Da 100 qdf (1.007), langmuir Da 1000 pso.
 
 
