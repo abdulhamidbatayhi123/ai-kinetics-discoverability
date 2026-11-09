@@ -807,6 +807,44 @@ noise; E8 tests whether the sampling rate is its cause.
 % 1000 4 -> 0; step 0.5/2 % Da 100 1 -> 1, 316 2 -> 0: 32 chosen, 22 within); kaggle_e6/, p2_e6_merge.py (6 of 6 sampled rows recomputed locally match);
 % p2_e6_modelselect.py; results/p2_e6_modelselect_v1.json (first rows, before B91).
 
+\subsection*{E7: a shifted isotherm step (post hoc)}
+The pre-registered isotherm error is a smooth random multiplicative function. A real water isotherm
+is more often wrong in where its step lies. For the step isotherm (O1, $\Pe \approx 94$, all nine
+$\Da$, $\sigma \in \{0.5, 2\}\,\%$, replicates 0 to 59), the measured isotherm was given a step
+shifted by $\pm 1$ and $\pm 2\,\%$ relative humidity, with the fields unchanged; discovery (the six
+sparse solvers in both forms, best method chosen on replicates 0 to 14) and O1 identifiability
+were computed as on the grid. The identifiability rows were recomputed after correction B90.
+\begin{center}
+\small
+\begin{tabular}{@{}rrrrr@{}}
+\toprule
+$\sigma$ & step shift (\% RH) & best discovery success, any $\Da$ & $\Da^{*}_{\mathrm{ident}}$ & median $\hat{k}/k$ at $\Da = 10$ \\
+\midrule
+0.5\,\% & -2 & 0.00 & 5.6 & 0.48 \\
+0.5\,\% & -1 & 0.00 & 57 & 0.67 \\
+0.5\,\% & +1 & 0.00 & 17 & 1.76 \\
+0.5\,\% & +2 & 0.00 & 5.6 & 4.98 \\
+2\,\% & -2 & 0.00 & 5.6 & 0.48 \\
+2\,\% & -1 & 0.31 & 27 & 0.67 \\
+2\,\% & +1 & 0.27 & 17 & 1.74 \\
+2\,\% & +2 & 0.00 & 5.6 & 4.31 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent Discovery reached 50\,\% at no rate under any shift. Identifiability held only to
+$\Da \approx 17$ to 57 with a 1\,\% shift and to $\Da \approx 5.6$ with a 2\,\% shift (all-to-none
+between $\Da = 3.16$ and 10, so interval-censored), against $\Da \approx 172$ to 562 for the same
+noise levels with an exact isotherm (E8, 200 samples). The intervals did not widen: the estimate
+was biased, downwards when the step was placed too low and upwards when too high, by a factor that
+grew with $\Da$. For positive shifts at high $\Da$ the likelihood peaked on the upper edge of the
+$k$ grid ($k = 10$\,s$^{-1}$); these 839 rows raise an error and count as not identifiable.
+A systematic error in the isotherm therefore limits the estimate of $k$ as well as discovery,
+unlike the random isotherm error of the grid, which moved $\Da^{*}_{\mathrm{ident}}$ by less than
+0.2 decade.
+% source: results/p2_e7_summary.json, results/p2_e7_stepshift.json (identifiability recomputed with B90,
+% p2_e7_parallel.sh, 2026-11-09; results/p2_e7_*_preB90.json kept); p2_e7_stepshift.py; EXPLORATORY_P2 E7.
+% Error rows: shift +1 % at Da 100, 316, 1000 (119, 120, 120); +2 % at Da 31.6 to 1000 (120 each).
+
 \subsection*{E8: sampling rate (post hoc)}
 E6 chose the wrong law at $\Da \ge 31.6$ with an exact isotherm, at both noise levels. E8 asks
 whether the time resolution is the cause. On O1 ($\Pe \approx 94$, both isotherms, all nine

@@ -190,8 +190,7 @@ The identifiability boundaries at the top of the grid need one caution, found in
 descriptive check made after the verdicts were seen. With exact data the
 O1 profile recovered $k$ to within 5\,\% at every $\Da$ up to 100, but at $\Da = 316$ and
 1000 its median estimate was 0.75 to 0.91 and 0.39 to 0.54 times $k$: there the adsorption front
-crosses a probe in only a few of the 200 observation times. Identifiability there is limited by the
-time resolution of the data as well as by their information content. This does not affect H2b: in
+crosses a probe in only a few of the 200 observation times. This does not affect H2b: in
 all 37 slices with a verdict, $k$ was identifiable in at least 95\,\% of replicates at every
 $\Da \le 31.6$, and the highest $\Da \le 100$ at which it was identifiable in half the
 replicates lay at least 0.9 decades above the discovery boundary (Extended Data Fig.~3).
@@ -349,8 +348,9 @@ identifiability did. For practice this sets an order of operations. Where the is
 of 0.5\,\% with 0.5\,\% noise already confined discovery to $\Da \le 0.2$) and the uptake is slow compared with the
 passage of the front ($\Da$ of order one or below), sparse regression in the weak form can
 propose the law. Up to $\Da \approx 10$ the law can still be chosen among a few
-candidates by likelihood, in our post hoc test even with 2\,\% isotherm error. Beyond that it has to be
-assumed, and the data are then still good for its coefficient, from interior probes up to one
+candidates by likelihood, even with 2\,\% isotherm error (E6). Beyond that it has to be
+assumed, and the data are then still good for its coefficient, unless the isotherm is
+systematically wrong (below), from interior probes up to one
 and a half to nearly four decades of $\Da$ beyond the discovery boundary,
 and, in the few conditions tested, somewhat beyond the discovery range from the outlet alone.
 
@@ -398,7 +398,7 @@ depends on loading at the isotherm step \citep{lassitter2024,hastings2024}, the 
 the law remains open: our library could not represent a sigmoidal $k(q)$, so the H2d test measured
 the selection of polynomial terms more than that.
 
-The study has limits that bound these conclusions. All data were simulated by one validated
+All data were simulated by one validated
 column model with the LDF law as the truth, so the boundaries hold for that model, the two
 isotherms and the error models used; real columns add errors in geometry, dispersion and heat
 transfer that were held exact here. Observation through interior probes of uptake (O1) is a
@@ -424,10 +424,11 @@ and raised the number of slices with a verdict from 30 to 37. All earlier result
 % exploratory only). results/p2_verdicts_preB90.json (30 slices) vs results/p2_verdicts.json (37).
 
 Three directions follow. Discovery would gain most from better isotherms: the boundaries moved
-more with isotherm error than with noise, and in a post hoc test, shifting the step of the
-MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,\% at every rate.
-An isotherm whose step is placed to better than 1\,\% relative humidity is worth more to discovery
-than quieter sensors. Experiments can also be designed to discriminate among candidate laws,
+more with isotherm error than with noise, and in a post hoc test (E7), shifting the step of the
+MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,\% at every rate
+and, by biasing the fitted $k$, lowered the identifiability boundary to $\Da \approx 17$ to 57.
+An isotherm whose step is placed to better than 1\,\% relative humidity is worth more than quieter
+sensors, to discovery and to the estimate of $k$ alike. Experiments can also be designed to discriminate among candidate laws,
 choosing probe positions and sampling rates that widen the range where the LDF law is
 distinguishable from its alternatives; doubling the sampling rate widened it by 0.2 to 0.5 decade
 (E8). And the map should be tested on experimental breakthrough
@@ -435,6 +436,8 @@ data with interior probes at moderate $\Da$, where it predicts that discovery fi
 possible.
 % results/p2_e7_summary.json (EXPLORATORY_P2 E7; discovery part, unaffected by B90): best-method
 % success at any Da <= 0.31 (sigma 2 %, shift -1 % RH), 0.27 (+1 %), 0.00 otherwise.
+% Identifiability (B90-corrected, p2_e7_parallel.sh 2026-11-09): da_ident at |shift| 1 % 17.1 to 56.6,
+% at 2 % 5.6 in all four; median khat/k (sigma 0.5 %, estimation reps) at Da 31.6: 0.51 (-1 %), 3.78 (+1 %).
 % Numbers: see Results source comments; E3 coverage results/p2_e3_coverage.json per_model O1
 % coverage 0.099; accuracy results/p2_ident_robustness.json. The isotherm-error effect on ident
 % (sigma 0.005, eps 0 -> 0.005, same isotherm and Pe): langmuir -0.045, -0.041, -0.027 decade;

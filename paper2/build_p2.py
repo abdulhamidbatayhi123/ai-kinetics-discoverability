@@ -16,6 +16,7 @@ Gates (pattern of pinn-machining revision_eaai/build/gates.py; rules from PRESEN
 """
 import json
 import math
+import statistics
 import os
 import re
 import subprocess
@@ -190,6 +191,13 @@ def bindings():
                 for v in alt)
     out += [("E4 every verdict kept", "the point estimate alone kept every verdict" if e4_ok else "E4 verdict differs"),
             ("E4 gap range", f"with gaps of {min(-v['gap_max'] for v in alt):.1f} to {max(-v['gap_min'] for v in alt):.1f} decades")]
+    e7 = load("results/p2_e7_summary.json")
+    e7_1 = [v["da_ident"] for k, v in e7.items() if abs(float(k.split("shift=")[1])) == 0.01]
+    e7_disc = max(max(v["disc_by_da"].values()) for k, v in e7.items() if abs(float(k.split("shift=")[1])) == 0.01)
+    out += [("E7 identifiability boundary at 1 % shift",
+             f"identifiability boundary to $" + BS + f"Da " + BS + f"approx {min(e7_1):.0f}$ to {max(e7_1):.0f}"
+             if all(e7_1) else "E7 ident missing"),
+            ("E7 discovery at 1 % shift", f"at or below {math.floor(e7_disc * 100 + 0.5):.0f}" + BS + "," + BS + "% at every rate")]
     e8 = load("results/p2_e8_summary.json")
     sh = {"disc": [], "select": [], "ident": []}
     beyond, gap400, sel100 = 0, [], []
@@ -222,6 +230,25 @@ def bindings():
 def _thou(n):
     s = f"{n:,}"
     return s.replace(",", BS + ",") if n >= 10000 else s.replace(",", BS + ",") if n >= 1000 else s
+
+
+def e7_rows():
+    """SI Note 3 E7 table rows and the error-row count, from results/p2_e7_*.json."""
+    cells = load("data/p2/manifest.json")["cells"]
+    summ = load("results/p2_e7_summary.json")
+    rows = load("results/p2_e7_stepshift.json")["rows"]
+    out, n_err = [], sum("error" in r["ident"] for r in rows.values())
+    for key in sorted(summ, key=lambda k: (float(k.split("|")[0][6:]), float(k.split("shift=")[1]))):
+        v = summ[key]
+        s, sh = key.split("|")[0][6:], key.split("shift=")[1]
+        est = [math.sqrt(r["ident"]["lo"] * r["ident"]["hi"]) / cells[k.split("|")[0]]["k_LDF"]
+               for k, r in rows.items() if "error" not in r["ident"] and int(k.split("|")[3]) >= 15
+               and k.split("|")[1] == s and k.split("|")[2] == sh and cells[k.split("|")[0]]["Da"] == 10.0]
+        di = v["da_ident"]
+        out.append(f"{float(s) * 100:g}{BS},{BS}% & {float(sh) * 100:+g} & {max(v['disc_by_da'].values()):.2f} & "
+                   f"{'--' if di is None else (f'{di:.1f}' if di < 10 else f'{di:.0f}')} & "
+                   f"{statistics.median(est):.2f} " + BS + BS)
+    return out, n_err
 
 
 def si_bindings():
@@ -261,6 +288,9 @@ def si_bindings():
                     f"{'Langmuir' if iso == 'langmuir' else 'step'} & {float(sg[6:]) * 100:g}{BS},{BS}% & {nt[4:]} & "
                     f"{mn.get(v['best_method'], v['best_method'])} & {f8(v['da_disc'])} & {f8(v['da_select'])} & "
                     f"{f8(v['da_ident'])} & {g} " + BS + BS))
+    e7r, e7err = e7_rows()
+    out += [(f"E7 table row {i}", r) for i, r in enumerate(e7r)]
+    out.append(("E7 error rows", f"these {_thou(e7err)} rows raise an error"))
     out.append(("O1 rows identifiable, corrected", f"& {_thou(sum(bool(v.get('success')) for v in cor.values()))} " + BS + BS))
     return out
 

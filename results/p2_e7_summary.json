@@ -60,7 +60,7 @@
  "sigma=0.005|shift=0.01": {
   "best_method": "stlsq|weak",
   "da_disc": null,
-  "da_ident": 75.75373675702339,
+  "da_ident": 17.10404437976546,
   "gap_decades": null,
   "words": "no boundary on the grid for one of the two; reported as the range tested",
   "disc_by_da": {
@@ -83,13 +83,13 @@
    "31.622776601683793": 0.0,
    "100.0": 0.0,
    "316.22776601683796": 0.0,
-   "1000.0": 1.0
+   "1000.0": 0.0
   }
  },
  "sigma=0.005|shift=0.02": {
   "best_method": "best_subset|strong",
   "da_disc": null,
-  "da_ident": 386.71569374315663,
+  "da_ident": 5.558783969465897,
   "gap_decades": null,
   "words": "no boundary on the grid for one of the two; reported as the range tested",
   "disc_by_da": {
@@ -111,8 +111,8 @@
    "10.0": 0.0,
    "31.622776601683793": 0.0,
    "100.0": 0.0,
-   "316.22776601683796": 1.0,
-   "1000.0": 1.0
+   "316.22776601683796": 0.0,
+   "1000.0": 0.0
   }
  },
  "sigma=0.02|shift=-0.02": {
@@ -147,7 +147,7 @@
  "sigma=0.02|shift=-0.01": {
   "best_method": "best_subset|weak",
   "da_disc": null,
-  "da_ident": 27.565094085299002,
+  "da_ident": 27.138040118530515,
   "gap_decades": null,
   "words": "no boundary on the grid for one of the two; reported as the range tested",
   "disc_by_da": {
@@ -167,7 +167,7 @@
    "1.0": 1.0,
    "3.1622776601683795": 1.0,
    "10.0": 1.0,
-   "31.622776601683793": 0.26666666666666666,
+   "31.622776601683793": 0.2222222222222222,
    "100.0": 0.0,
    "316.22776601683796": 0.0,
    "1000.0": 0.0
@@ -176,7 +176,7 @@
  "sigma=0.02|shift=0.01": {
   "best_method": "best_subset|weak",
   "da_disc": null,
-  "da_ident": 37.36774340823464,
+  "da_ident": 17.10404437976546,
   "gap_decades": null,
   "words": "no boundary on the grid for one of the two; reported as the range tested",
   "disc_by_da": {
@@ -198,14 +198,14 @@
    "10.0": 1.0,
    "31.622776601683793": 0.0,
    "100.0": 0.0,
-   "316.22776601683796": 0.6222222222222222,
+   "316.22776601683796": 0.0,
    "1000.0": 0.0
   }
  },
  "sigma=0.02|shift=0.02": {
   "best_method": "best_subset|strong",
   "da_disc": null,
-  "da_ident": 20.451537143686846,
+  "da_ident": 5.558783969465897,
   "gap_decades": null,
   "words": "no boundary on the grid for one of the two; reported as the range tested",
   "disc_by_da": {
@@ -228,7 +228,7 @@
    "31.622776601683793": 0.0,
    "100.0": 0.0,
    "316.22776601683796": 0.0,
-   "1000.0": 1.0
+   "1000.0": 0.0
   }
  }
 }
