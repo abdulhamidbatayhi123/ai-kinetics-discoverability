@@ -258,7 +258,9 @@ identifiable.
 % langmuir s0.5 e0 31.6 vs 356 (1.05); step s0.5 e0 31.6 vs 562 (1.25); langmuir s2 e0 3.16 vs 73.5
 % (1.37); step s2 e0 10 vs 172 (1.23).
 % M7's falling-logistic crossings on the estimation set are 0.12 and 0.39 (da_disc_by_method) or absent;
-% select_best (largest crossing on replicates 0-14) chose best_subset|weak in all four slices. The neural-network pipeline of the closest prior work (M1), run as a
+% select_best (largest crossing on replicates 0-14) chose best_subset|weak in all four slices.
+
+The neural-network pipeline of the closest prior work (M1), run as a
 declared demonstration at one noise level, recovered the law in one of its nine fits, at
 $\Da = 3.16$. Slow-manifold discovery (M9), which targets the isotherm rather than the rate law,
 recovered its own target only at the highest rate and without noise (67\,\% of replicates at
@@ -427,7 +429,8 @@ MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,
 An isotherm whose step is placed to better than 1\,\% relative humidity is worth more to discovery
 than quieter sensors. Experiments can also be designed to discriminate among candidate laws,
 choosing probe positions and sampling rates that widen the range where the LDF law is
-distinguishable from its alternatives. And the map should be tested on experimental breakthrough
+distinguishable from its alternatives; doubling the sampling rate widened it by 0.2 to 0.5 decade
+(E8). And the map should be tested on experimental breakthrough
 data with interior probes at moderate $\Da$, where it predicts that discovery first becomes
 possible.
 % results/p2_e7_summary.json (EXPLORATORY_P2 E7; discovery part, unaffected by B90): best-method

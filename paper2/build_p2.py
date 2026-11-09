@@ -206,6 +206,7 @@ def bindings():
     f1 = lambda x: f"{math.floor(x * 10 + 0.5) / 10:.1f}"
     out += [("E8 discovery shift", f"discovery by {f1(min(sh['disc']))} to {f1(max(sh['disc']))} decade"),
             ("E8 selection shift", f"among the laws by {f1(min(sh['select']))} to {f1(max(sh['select']))} decade"),
+            ("E8 selection shift (Discussion)", f"sampling rate widened it by {f1(min(sh['select']))} to {f1(max(sh['select']))} decade"),
             ("E8 identifiability shift", f"identifiability by up to {f1(max(sh['ident']))} decade"
              + (" or beyond the grid" if beyond else "")),
             ("E8 no LDF choice at Da 100", "no\nreplicate chose the LDF law at" if not any(sel100) else "E8 LDF chosen at 100"),
@@ -281,6 +282,12 @@ def main():
     for desc, lit in bindings():
         if norm(lit) not in flat:
             fail("G3", f"{desc}: expected {lit!r} in the text")
+    # G3b: prose joined onto a comment line disappears from the PDF and leaves a paragraph that starts
+    # mid-sentence (found 2026-11-09: the M1 sentence had been lost this way)
+    for name, txt in (("article", body), ("SI", si_body)):
+        for p in re.split(r"\n\s*\n", txt):
+            if re.match(r"[a-z]", p.strip()):
+                fail("G3", f"{name}: a paragraph starts mid-sentence (text after a % comment?): {p.strip()[:80]!r}")
     si_flat = norm(si_body)
     for desc, lit in si_bindings():
         if norm(lit) not in si_flat:
