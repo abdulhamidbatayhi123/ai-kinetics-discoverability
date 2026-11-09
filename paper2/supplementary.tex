@@ -820,22 +820,22 @@ were computed as on the grid. The identifiability rows were recomputed after cor
 \toprule
 $\sigma$ & step shift (\% RH) & best discovery success, any $\Da$ & $\Da^{*}_{\mathrm{ident}}$ & median $\hat{k}/k$ at $\Da = 10$ \\
 \midrule
-0.5\,\% & -2 & 0.00 & 5.6 & 0.48 \\
-0.5\,\% & -1 & 0.00 & 57 & 0.67 \\
-0.5\,\% & +1 & 0.00 & 17 & 1.76 \\
-0.5\,\% & +2 & 0.00 & 5.6 & 4.98 \\
-2\,\% & -2 & 0.00 & 5.6 & 0.48 \\
-2\,\% & -1 & 0.31 & 27 & 0.67 \\
-2\,\% & +1 & 0.27 & 17 & 1.74 \\
-2\,\% & +2 & 0.00 & 5.6 & 4.31 \\
+0.5\,\% & $-2$ & 0.00 & 5.6 & 0.48 \\
+0.5\,\% & $-1$ & 0.00 & 57 & 0.67 \\
+0.5\,\% & $+1$ & 0.00 & 17 & 1.76 \\
+0.5\,\% & $+2$ & 0.00 & 5.6 & 4.98 \\
+2\,\% & $-2$ & 0.00 & 5.6 & 0.48 \\
+2\,\% & $-1$ & 0.31 & 27 & 0.67 \\
+2\,\% & $+1$ & 0.27 & 17 & 1.74 \\
+2\,\% & $+2$ & 0.00 & 5.6 & 4.31 \\
 \bottomrule
 \end{tabular}
 \end{center}
 \noindent Discovery reached 50\,\% at no rate under any shift. Identifiability held only to
 $\Da \approx 17$ to 57 with a 1\,\% shift and to $\Da \approx 5.6$ with a 2\,\% shift (all-to-none
 between $\Da = 3.16$ and 10, so interval-censored), against $\Da \approx 172$ to 562 for the same
-noise levels with an exact isotherm (E8, 200 samples). The intervals did not widen: the estimate
-was biased, downwards when the step was placed too low and upwards when too high, by a factor that
+noise levels with an exact isotherm (E8, 200 samples). The intervals stayed narrow (upper over lower
+bound at most 1.16 at $\Da \le 31.6$); the estimate was biased, downwards when the step was placed too low and upwards when too high, by a factor that
 grew with $\Da$. For positive shifts at high $\Da$ the likelihood peaked on the upper edge of the
 $k$ grid ($k = 10$\,s$^{-1}$); these 839 rows raise an error and count as not identifiable.
 A systematic error in the isotherm therefore limits the estimate of $k$ as well as discovery,
@@ -844,6 +844,8 @@ unlike the random isotherm error of the grid, which moved $\Da^{*}_{\mathrm{iden
 % source: results/p2_e7_summary.json, results/p2_e7_stepshift.json (identifiability recomputed with B90,
 % p2_e7_parallel.sh, 2026-11-09; results/p2_e7_*_preB90.json kept); p2_e7_stepshift.py; EXPLORATORY_P2 E7.
 % Error rows: shift +1 % at Da 100, 316, 1000 (119, 120, 120); +2 % at Da 31.6 to 1000 (120 each).
+% Interval width, median hi/lo over estimation reps at Da <= 31.6: 1.002-1.161 (largest: sigma 2 %, +1 %,
+% Da 31.6); exact isotherm (E8 rows, 200 samples) 1.003-1.084.
 
 \subsection*{E8: sampling rate (post hoc)}
 E6 chose the wrong law at $\Da \ge 31.6$ with an exact isotherm, at both noise levels. E8 asks

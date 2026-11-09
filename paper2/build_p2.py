@@ -245,7 +245,7 @@ def e7_rows():
                for k, r in rows.items() if "error" not in r["ident"] and int(k.split("|")[3]) >= 15
                and k.split("|")[1] == s and k.split("|")[2] == sh and cells[k.split("|")[0]]["Da"] == 10.0]
         di = v["da_ident"]
-        out.append(f"{float(s) * 100:g}{BS},{BS}% & {float(sh) * 100:+g} & {max(v['disc_by_da'].values()):.2f} & "
+        out.append(f"{float(s) * 100:g}{BS},{BS}% & ${float(sh) * 100:+g}$ & {max(v['disc_by_da'].values()):.2f} & "
                    f"{'--' if di is None else (f'{di:.1f}' if di < 10 else f'{di:.0f}')} & "
                    f"{statistics.median(est):.2f} " + BS + BS)
     return out, n_err
