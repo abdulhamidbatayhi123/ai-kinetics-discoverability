@@ -97,11 +97,32 @@ def main():
     cells = json.load(open("data/p2/manifest.json"))["cells"]
     names = sorted(n for n, c in cells.items() if c["iso"] == "step" and c["law"] == "L1"
                    and c["pe_mult"] == 1.0 and not c.get("refined"))
+    if "--merge-parts" in sys.argv:     # B90 parallel parts: rows recomputed in --part files replace OUT's rows
+        res = json.load(open(OUT))
+        for p in sys.argv[sys.argv.index("--merge-parts") + 1:]:
+            part = json.load(open(p))["rows"]
+            if not all(r["ident"].get("b90") for r in part.values()) or not set(part) <= set(res["rows"]):
+                sys.exit(f"FAIL: {p} has rows without the B90 flag or unknown keys")
+            res["rows"].update(part)
+        left = sum(not r["ident"].get("b90") for r in res["rows"].values())
+        if left:
+            sys.exit(f"FAIL: {left} rows still without the B90 identifiability")
+        write_atomic(res, OUT)
+        write_atomic(summarise(cells, res["rows"]), SUMMARY)
+        print("E7 ident-only done (merged parts)", flush=True)
+        return
     if "--ident-only" in sys.argv:      # B90: recompute only the identifiability part of every row
         from p2.identifiability import identifiable, profile_interval_o1
         res = json.load(open(OUT))
+        part_i = part_n = None
+        if "--part" in sys.argv:        # --part i n PATH: every n-th pending row from i, written to PATH only
+            j = sys.argv.index("--part")
+            part_i, part_n, part_out = int(sys.argv[j + 1]), int(sys.argv[j + 2]), sys.argv[j + 3]
+            done = json.load(open(part_out))["rows"] if os.path.exists(part_out) else {}   # resumable
         for i, (key, r) in enumerate(sorted(res["rows"].items())):
-            if r["ident"].get("b90"):
+            if r["ident"].get("b90") or (part_n and key in done):
+                continue
+            if part_n and i % part_n != part_i:
                 continue
             n, s, sh, rep = key.split("|")
             obs = shifted_obs(n, int(rep), float(s), float(sh))
@@ -113,9 +134,19 @@ def main():
                 r["ident"] = {"lo": lo, "hi": hi, "success": bool(identifiable(lo, hi, cells[n]["k_LDF"])), "b90": True}
             except Exception as ex:
                 r["ident"] = {"success": False, "error": f"{type(ex).__name__}: {ex}", "b90": True}
+            if part_n:
+                done[key] = r
+                if len(done) % 60 == 0:
+                    write_atomic({"rows": done}, part_out)
+                    print(f"part {part_i}: {len(done)} rows", flush=True)
+                continue
             if i % 120 == 119:
                 write_atomic(res, OUT)
                 print(f"ident {i + 1}/{len(res['rows'])}", flush=True)
+        if part_n:
+            write_atomic({"rows": done}, part_out)
+            print(f"part {part_i} done: {len(done)} rows", flush=True)
+            return
         write_atomic(res, OUT)
         write_atomic(summarise(cells, res["rows"]), SUMMARY)
         print("E7 ident-only done", flush=True)

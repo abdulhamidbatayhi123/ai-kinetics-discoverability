@@ -31,6 +31,13 @@ correction, B90 (`results/p2_verdicts_preB90.json`, 30 slices with a verdict), a
 them; the corrections are listed below and in `RETRACTIONS_P2.md`. No correction changed a
 verdict word.
 
+Post hoc checks, each declared before it ran (`EXPLORATORY_P2.md`), leave the H2b word unchanged
+under four alternative success rules (E4, `results/p2_e4_criteria.json`: gaps 0.9 to 3.8 decades)
+and at twice the sampling rate (E8, `results/p2_e8_summary.json`: every boundary moves up, the gap
+stays at least 1.25 decades). Choosing among three candidate laws by likelihood (E6) finds the
+LDF law in every replicate up to Da = 10 with an exact isotherm, further than open discovery, but
+in none from Da = 100 on.
+
 ## Pre-registration and amendments
 
 `PREREG_P2_discoverability.md` was frozen before any discovery method ran on any grid cell.
@@ -83,8 +90,9 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `p2_figdata.py` | per-level fractions behind the figures (`results/p2_figdata.json`) |
 | `p2_e2_m8.py`, `p2_e3_coverage.py` | exploratory analyses E2 and E3 (declared in `EXPLORATORY_P2.md` before they ran) |
 | `p2_e4_criteria.py`, `p2_e5_conditioning.py`, `p2_e6_modelselect.py`, `p2_e7_stepshift.py`, `p2_e8_sampling.py` | post-verdict analyses E4 to E8, each declared in `EXPLORATORY_P2.md` before it ran |
-| `p2_rerun_B90.sh`, `kaggle_b90/`, `p2_b90_merge.py` | the B90 recomputation of every O1 identifiability row (Kaggle) and its local validation |
-| `kaggle_e6/`, `p2_e6_merge.py`, `kaggle_e8/` | E6 and E8 on Kaggle: kits, kernels, queues and merges with local spot checks |
+| `p2_rerun_B90.sh`, `kaggle_b90/`, `p2_b90_merge.py` | the B90 recomputation of every O1 identifiability row (Kaggle) and its local validation, then everything downstream |
+| `p2_e4_parallel.sh`, `p2_e7_parallel.sh` | the last two steps of `p2_rerun_B90.sh` (E4, E7 identifiability) split into parallel parts and merged, after the machine ran out of process slots on 2026-11-09; same computation |
+| `kaggle_e6/`, `p2_e6_merge.py`, `kaggle_e8/`, `p2_e8_merge.py` | E6 and E8 on Kaggle: kits, kernels, queues and merges with local spot checks |
 | `p2_ident_robustness.py` | descriptive checks made after the verdicts were seen (labelled so in the paper) |
 | `p2_figstyle.py` | one figure style built to Nature Portfolio's artwork rules; the save step asserts them |
 | `fig_p2_overview.py`, `fig_p2_results.py`, `fig_p2_extended.py` | Figure 1, Figures 2 to 4, Extended Data figures |
