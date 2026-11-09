@@ -1,0 +1,5 @@
+ok   langmuir_L1_pe1_da31.6|0.02|200|34
+ok   step_L1_pe1_da10|0.02|200|24
+ok   step_L1_pe1_da10|0.02|400|42
+ok   langmuir_L1_pe1_da1e+03|0.005|400|42
+MERGED 4320 rows (0 rows with an error), 4 sampled rows match -> results/p2_e8_sampling.json, results/p2_e8_summary.json
