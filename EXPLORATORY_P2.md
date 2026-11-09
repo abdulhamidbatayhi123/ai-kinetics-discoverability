@@ -121,3 +121,22 @@ quantity at both rates, and the boundary shift from 200 to 400 samples; descript
 defined in samples (the 21-sample Savitzky-Golay derivative, the weak-form supports), so at
 N_T = 400 they span half the time they span at 200; this is what applying the methods as published
 to faster-sampled data does, and it is reported as such.
+
+## E9. Noise in the forcing of E6 (declared 2026-11-09, after review round 2, BEFORE running)
+
+**Why.** Review round 2 (M3) noted that with an exact isotherm E6 never chose the LDF law at Da >= 100,
+yet with 2 % isotherm error it chose it in 23 of 45 replicates (Langmuir, sigma 0.5 %, Da 100), and
+asked whether the failure belongs to the data or to the likelihood. The likelihood drives each law
+with q*(t) computed from the NOISY observed c and T (errors in variables). One row was run to time
+this check before this declaration (Langmuir, Da 100, sigma 0.5 %, replicate 15): it chose the
+quadratic driving force with both forcings, and every law's log-likelihood rose from about -3,365
+with the observed forcing to about -2,000 with the clean one. That row is recomputed below, not
+reported separately. **What.** E6 unchanged (p2_e6_modelselect.select: same laws, k grid, Brent
+refinement, NSUB, noise SD rule) except that q*(t) is computed from the noise-free c and T at the
+same probes and times (p2_observe.observe with sigma = 0, same replicate), while q is observed with
+noise as in E6. Subgrid: O1, both isotherms, Pe ~94, Da 31.6, 100, 316 and 1000, sigma 0.5 and 2 %,
+eps 0, replicates 15..59 (720 rows). Reported: the fraction choosing the LDF law per cell, beside
+E6's eps = 0 fractions, and each law's median log-likelihood. **Reading fixed in advance.** Where the
+LDF fraction rises from E6's to at least two thirds, the failure there is attributed to noise in the
+forcing (a property of the likelihood, not of the data); where it stays at or below one third, it is
+not; otherwise mixed. Descriptive, no verdict; it changes no confirmatory result.
