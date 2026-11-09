@@ -1,0 +1,125 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\.venv\Scripts\python.exe
+rootdir: C:\Users\abdulhamid batayhi\Desktop\ai-kinetics-discoverability
+plugins: jaxtyping-0.3.11, anyio-4.13.0, cov-7.1.0
+collecting ... collected 93 items
+
+tests/test_e3.py::test_interval_inside_band_missing_k_is_identifiable_but_not_covering PASSED [  1%]
+tests/test_e3.py::test_error_row_counts_as_neither PASSED                [  2%]
+tests/test_e3.py::test_wide_interval_covers_but_is_not_identifiable PASSED [  3%]
+tests/test_e6_modelselect.py::test_selects_the_generating_law[ldf] PASSED [  4%]
+tests/test_e6_modelselect.py::test_selects_the_generating_law[qdf] PASSED [  5%]
+tests/test_e6_modelselect.py::test_selects_the_generating_law[pso] PASSED [  6%]
+tests/test_e6_modelselect.py::test_k_refined_off_grid PASSED             [  7%]
+tests/test_e6_modelselect.py::test_ldf_substeps_match_exact_update PASSED [  8%]
+tests/test_e8_sampling.py::test_nt200_is_observe PASSED                  [  9%]
+tests/test_e8_sampling.py::test_nt400_every_stored_time_same_noise_sd PASSED [ 10%]
+tests/test_fig_p2.py::test_figures_from_handbuilt_verdicts PASSED        [ 11%]
+tests/test_fig_p2.py::test_figures_handle_withheld_and_empty_verdicts PASSED [ 12%]
+tests/test_fig_p2.py::test_figures_from_the_real_analysis_on_a_planted_grid PASSED [ 13%]
+tests/test_fig_p2.py::test_slice_key_round_trips PASSED                  [ 15%]
+tests/test_ldf_exact.py::test_one_interval_matches_ode[0.0001] PASSED    [ 16%]
+tests/test_ldf_exact.py::test_one_interval_matches_ode[0.01] PASSED      [ 17%]
+tests/test_ldf_exact.py::test_one_interval_matches_ode[0.1] PASSED       [ 18%]
+tests/test_ldf_exact.py::test_one_interval_matches_ode[1.0] PASSED       [ 19%]
+tests/test_ldf_exact.py::test_one_interval_matches_ode[3.0] PASSED       [ 20%]
+tests/test_ldf_exact.py::test_one_interval_matches_ode[10.0] PASSED      [ 21%]
+tests/test_ldf_exact.py::test_one_interval_matches_ode[100.0] PASSED     [ 22%]
+tests/test_ldf_exact.py::test_many_intervals_match_ode PASSED            [ 23%]
+tests/test_m1_train.py::test_train_converges_without_failure PASSED      [ 24%]
+tests/test_m1_train.py::test_solver_failure_keeps_best_parameters PASSED [ 25%]
+tests/test_m1_train.py::test_failure_on_first_evaluation_is_still_an_error PASSED [ 26%]
+tests/test_odr_bindy.py::test_lorenz_example_reproduces_reported_accuracy XFAIL [ 27%]
+tests/test_p2.py::test_ldf_series_obeys_its_law PASSED                   [ 29%]
+tests/test_p2.py::test_derivative_exact_on_smooth_series PASSED          [ 30%]
+tests/test_p2.py::test_lib_b_contains_measured_equilibrium_and_named_terms PASSED [ 31%]
+tests/test_p2.py::test_success_requires_exact_support_signs_and_ratio PASSED [ 32%]
+tests/test_p2.py::test_k_accuracy_is_relative_error_of_minus_q_coefficient PASSED [ 33%]
+tests/test_p2.py::test_best_subset_recovers_ldf_at_zero_noise PASSED     [ 34%]
+tests/test_p2.py::test_stlsq_and_ensemble_recover_ldf_at_zero_noise PASSED [ 35%]
+tests/test_p2.py::test_profile_interval_brackets_truth_and_is_narrow_at_low_noise PASSED [ 36%]
+tests/test_p2.py::test_weak_form_recovers_ldf_at_zero_and_under_noise PASSED [ 37%]
+tests/test_p2.py::test_strong_form_fails_where_weak_form_succeeds_under_noise PASSED [ 38%]
+tests/test_p2.py::test_discover_o1_recovers_law_in_both_forms_and_all_solvers PASSED [ 39%]
+tests/test_p2.py::test_mass_balance_inversion_recovers_q_from_dense_concentration PASSED [ 40%]
+tests/test_p2.py::test_discover_o2_recovers_law_from_concentration_only PASSED [ 41%]
+tests/test_p2.py::test_jax_column_matches_verified_solver PASSED         [ 43%]
+tests/test_p2.py::test_outlet_profile_likelihood_brackets_k_in_kinetic_regime PASSED [ 44%]
+tests/test_p2.py::test_boundary_ci_has_nominal_coverage_and_no_bias PASSED [ 45%]
+tests/test_p2.py::test_boundary_reports_none_when_no_crossing PASSED     [ 46%]
+tests/test_p2.py::test_slow_manifold_finds_equilibrium_when_fast_and_not_when_slow PASSED [ 47%]
+tests/test_p2.py::test_sindy_pi_finds_implicit_langmuir_ldf_without_an_isotherm PASSED [ 48%]
+tests/test_p2.py::test_kan_symbolic_recovers_ldf_at_zero_noise XFAIL     [ 49%]
+tests/test_p2.py::test_r_collapse_words_follow_the_spread PASSED         [ 50%]
+tests/test_p2.py::test_disc_vs_ident_uses_the_declared_mde PASSED        [ 51%]
+tests/test_p2.py::test_ode_profile_with_temperature_brackets_k_on_nonisothermal_probe PASSED [ 52%]
+tests/test_p2.py::test_success_L2_detects_a_rate_that_falls_with_loading PASSED [ 53%]
+tests/test_p2.py::test_lib_a_fidelity_is_relative_rms_on_held_out_probes PASSED [ 54%]
+tests/test_p2.py::test_probe_profile_likelihood_brackets_k_in_kinetic_regime PASSED [ 55%]
+tests/test_p2.py::test_success_M6_requires_the_implicit_langmuir_ldf_structure_and_signs PASSED [ 56%]
+tests/test_p2.py::test_grid_extra_m6_recovers_the_implicit_law_on_the_isothermal_system PASSED [ 58%]
+tests/test_p2.py::test_grid_extra_m9_recovers_the_slow_manifold_near_equilibrium PASSED [ 59%]
+tests/test_p2.py::test_eiv_best_subset_recovers_ldf_and_matches_m4_at_zero_error PASSED [ 60%]
+tests/test_p2.py::test_mixed_ls_tls_removes_the_attenuation_bias_ols_suffers PASSED [ 61%]
+tests/test_p2.py::test_grid_extra_m5_matches_m4_at_zero_noise_through_the_grid_wrapper PASSED [ 62%]
+tests/test_p2.py::test_r_collapse_handles_success_rising_with_R PASSED   [ 63%]
+tests/test_p2.py::test_best_method_boundary_carries_the_selection PASSED [ 64%]
+tests/test_p2.py::test_h2c_words_cover_every_outcome PASSED              [ 65%]
+tests/test_p2.py::test_o1_exact_ldf_likelihood_matches_the_ode_reference PASSED [ 66%]
+tests/test_p2.py::test_o1_profile_over_all_probes_brackets_k PASSED      [ 67%]
+tests/test_p2.py::test_p2_analyze_recovers_planted_verdicts PASSED       [ 68%]
+tests/test_p2.py::test_pysr_safe_names_are_valid_identifiers PASSED      [ 69%]
+tests/test_p2.py::test_select_best_uses_only_what_it_is_given PASSED     [ 70%]
+tests/test_p2.py::test_aggregate_h2b_two_thirds_rule PASSED              [ 72%]
+tests/test_p2.py::test_positive_control_threshold PASSED                 [ 73%]
+tests/test_p2.py::test_h2c_holds_on_a_detectable_upward_shift PASSED     [ 74%]
+tests/test_p2.py::test_p2_analyze_selection_split_and_k_sensitivity PASSED [ 75%]
+tests/test_p2.py::test_refine_levels_are_strictly_inside_half_a_decade PASSED [ 76%]
+tests/test_p2.py::test_refined_cells_enter_h2c_only PASSED               [ 77%]
+tests/test_p2.py::test_error_rows_count_as_failures_never_dropped PASSED [ 78%]
+tests/test_p2.py::test_m5_oracle_never_becomes_the_h2b_best_method PASSED [ 79%]
+tests/test_p2.py::test_boundary_without_bootstrap_draws_does_not_crash PASSED [ 80%]
+tests/test_p2.py::test_shift_interval_and_spread_interval PASSED         [ 81%]
+tests/test_p2.py::test_a_method_run_on_part_of_a_slice_cannot_be_selected PASSED [ 82%]
+tests/test_p2.py::test_paired_shift_keeps_the_pairing PASSED             [ 83%]
+tests/test_p2.py::test_h2b_counts_by_axis PASSED                         [ 84%]
+tests/test_p2.py::test_h2c_withheld_and_strict_falsification PASSED      [ 86%]
+tests/test_p2.py::test_descriptive_o23_runs_on_planted_rows PASSED       [ 87%]
+tests/test_p2.py::test_h2c_words_follow_the_hold_and_falsify_rules PASSED [ 88%]
+tests/test_p2.py::test_extra_rows_of_one_method_do_not_exclude_the_others PASSED [ 89%]
+tests/test_p2.py::test_positive_control_without_discovery_rows_is_not_evaluated PASSED [ 90%]
+tests/test_p2.py::test_m1_demo_trains_and_reads_out_on_a_fresh_known_answer_column PASSED [ 91%]
+tests/test_profile_range.py::test_o1_profile_brackets_every_design_k[3.220569086049949e-06] PASSED [ 92%]
+tests/test_profile_range.py::test_o1_profile_brackets_every_design_k[1.3888e-05] PASSED [ 93%]
+tests/test_profile_range.py::test_o1_profile_brackets_every_design_k[0.13888] PASSED [ 94%]
+tests/test_profile_range.py::test_o1_profile_refuses_a_peak_on_the_grid_edge PASSED [ 95%]
+tests/test_profile_range.py::test_o1_profile_refines_with_41_points_as_preregistered PASSED [ 96%]
+tests/test_solve_cap.py::test_capped_solve_scores_minus_inf_and_is_recorded PASSED [ 97%]
+tests/test_solve_cap.py::test_cap_leaves_an_uncapped_solve_unchanged PASSED [ 98%]
+tests/test_solve_cap.py::test_profile_passes_the_cap_through PASSED      [100%]
+
+============================== warnings summary ===============================
+tests/test_fig_p2.py: 356 warnings
+tests/test_p2.py: 18015 warnings
+  C:\Users\abdulhamid batayhi\AppData\Local\Programs\Python\Python312\Lib\site-packages\sklearn\linear_model\_logistic.py:1135: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', and C=np.inf instead of penalty=None.
+    warnings.warn(
+
+tests/test_p2.py::test_kan_symbolic_recovers_ldf_at_zero_noise
+  C:\Users\abdulhamid batayhi\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\core\sympify.py:475: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:839.)
+    return sympify(float(a))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================ slowest 10 durations =============================
+1862.37s call     tests/test_p2.py::test_ode_profile_with_temperature_brackets_k_on_nonisothermal_probe
+650.78s call     tests/test_odr_bindy.py::test_lorenz_example_reproduces_reported_accuracy
+601.33s call     tests/test_p2.py::test_probe_profile_likelihood_brackets_k_in_kinetic_regime
+506.10s call     tests/test_p2.py::test_outlet_profile_likelihood_brackets_k_in_kinetic_regime
+313.83s call     tests/test_p2.py::test_m1_demo_trains_and_reads_out_on_a_fresh_known_answer_column
+101.42s call     tests/test_solve_cap.py::test_profile_passes_the_cap_through
+83.98s call     tests/test_p2.py::test_r_collapse_handles_success_rising_with_R
+68.10s call     tests/test_p2.py::test_boundary_ci_has_nominal_coverage_and_no_bias
+66.42s call     tests/test_fig_p2.py::test_figures_from_handbuilt_verdicts
+66.35s call     tests/test_p2.py::test_profile_interval_brackets_truth_and_is_narrow_at_low_noise
+========= 91 passed, 2 xfailed, 18372 warnings in 4585.70s (1:16:25) ==========
+EXIT 0
