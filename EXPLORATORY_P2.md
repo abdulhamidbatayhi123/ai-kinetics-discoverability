@@ -148,3 +148,21 @@ E6): not attributed. Step isotherm, all four Da and both sigma: 0 (0): not attri
 afterwards and NOT declared (p2_diag_e9_noisefree.py, replicate 15, q, c and T all noise-free): the LDF
 law was still not chosen at Da 100 (both isotherms; LDF k_hat/k 0.984 and 1.007) or 1000 (Langmuir), so
 the misfit there is deterministic. Reported in Supplementary Note 3 (E9), labelled as such.
+
+## E10. Time resolution of the forcing behind E6's deterministic misfit (declared 2026-11-09, after E9, BEFORE running)
+
+**Why.** E9 and its undeclared noise-free diagnostic showed that at Da 100 and 1000 the integrated LDF law
+(the truth) loses to another law even on fully noise-free O1 data, while its k is within 2 %. At the grid's
+200 observation times k h is about 2 at Da 100 and 20 at Da 1000 (h = t_horizon / 199), so q lags q* by
+less than one sampling interval and every law is driven by q*(t) reconstructed (PCHIP) between samples.
+E8 doubled the sampling (400) without restoring the choice at Da 100. **What.** Four cells (O1 geometry,
+Pe ~94, L1; Langmuir and step; Da 100 and 1000) are re-solved with the unchanged solver and settings
+(p2_generate.solve_cell) but 3,991 stored times (every 10th equals one of the grid's 400; checked against
+the stored fields). On noise-free c, q, T at the 20 O1 probes, E6's select() (unchanged; sigma =
+1e-4 x range of q, as in the E9 diagnostic) is run at 200, 400, 1,996 and 3,991 evenly spaced times.
+Reported: the chosen law, each law's log-likelihood relative to the best, and LDF k_hat/k, per cell and
+resolution. **Reading fixed in advance.** If the LDF law is chosen at 3,991 times in a cell where it is
+not at 200, the misfit there is attributed to the reconstruction of q* between samples (a property of
+the sampling); if it is not chosen even at 3,991, the cause lies elsewhere and is reported as unresolved.
+Descriptive, no verdict; it changes no confirmatory result. Fields are written to a scratch directory,
+not to data/p2.
