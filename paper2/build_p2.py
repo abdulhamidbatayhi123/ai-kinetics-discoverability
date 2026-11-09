@@ -238,7 +238,6 @@ def bindings():
             ("E8 selection shift (Discussion)", f"sampling rate widened it by {f1(min(sh['select']))} to {f1(max(sh['select']))} decade"),
             ("E8 identifiability shift", f"identifiability by up to {f1(max(sh['ident']))} decade"
              + (" or beyond the grid" if beyond else "")),
-            ("E8 no LDF choice at Da 100", "no\nreplicate chose the LDF law at" if not any(sel100) else "E8 LDF chosen at 100"),
             ("E8 every boundary up or unchanged", "moved to higher $" + BS + "Da$ or stayed"
              if min(min(v) for v in sh.values()) >= 0 and min(min(v) for v in sh.values()) == 0
              else "E8 a boundary moved down, or none stayed"),
@@ -254,7 +253,14 @@ def bindings():
              if rescued == ["langmuir_L1_pe1_da31.6"] else f"E9 rescued {rescued}"),
             ("E9 at most above 31.6", f"chosen in at most {round(hi * 100)}" + BS + "," + BS + "% of replicates"
              if hi <= 1 / 3 else "E9 above one third")]
-    e3 = load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
+    # E10: the LDF law wins at the finest sampling (3,991 times) where it lost at the grid's own 200 times
+    r10 = load("results/p2_e10_resolution.json")["rows"]
+    cells10 = sorted({k.split("|")[0] for k in r10})
+    won = [c for c in cells10 if r10[f"{c}|3991"]["best"] == "ldf" and r10[f"{c}|grid200"]["best"] != "ldf"]
+    words = {1: "one", 2: "two", 3: "three", 4: "four"}
+    out.append(("E10 cells won", f"LDF law won in {words.get(len(won), len(won))} of the {words[len(cells10)]} cells tested"
+                if all(r10[f"{c}|grid200"]["best"] != "ldf" for c in cells10) else "E10 LDF already won at grid 200"))
+    e3 =load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
     out += [("E3 coverage", f"only about {round(e3 * 100)}{BS},{BS}%")]
     return out
 
@@ -289,6 +295,19 @@ def e9_rows():
                                    (f"{iso}_L1_pe1_da{d}|{sg}" for d in ("31.6", "100", "316", "1e+03")))
             rows.append(f"{'Langmuir' if iso == 'langmuir' else 'step'} & {float(sg) * 100:g}" + BS + "," + BS
                         + f"% & {cells_txt} " + BS + BS)
+    return rows
+
+
+def e10_rows():
+    """E10 table: chosen law and LDF k_hat/k per cell at the grid's 200 and 400 times, 1,996 and 3,991 times."""
+    r10 = load("results/p2_e10_resolution.json")["rows"]
+    lab = {"ldf": "LDF", "qdf": "QDF", "pso": "PSO"}
+    rows = []
+    for c in ("langmuir_L1_pe1_da100", "step_L1_pe1_da100", "langmuir_L1_pe1_da1e+03", "step_L1_pe1_da1e+03"):
+        iso, da = c.split("_")[0], c.split("_da")[1].replace("1e+03", "1000")
+        cells_txt = " & ".join(f"{lab[r10[f'{c}|{n}']['best']]} ({r10[f'{c}|{n}']['k_ldf_over_k']:.2f})"
+                               for n in ("grid200", "grid400", "1996", "3991"))
+        rows.append(f"{'Langmuir' if iso == 'langmuir' else 'step'} & {da} & {cells_txt} " + BS + BS)
     return rows
 
 
@@ -349,6 +368,13 @@ def si_bindings():
                     f"{mn.get(v['best_method'], v['best_method'])} & {f8(v['da_disc'])} & {f8(v['da_select'])} & "
                     f"{f8(v['da_ident'])} & {g} " + BS + BS))
     out += [(f"E9 table row {i}", r) for i, r in enumerate(e9_rows())]
+    out += [(f"E10 table row {i}", r) for i, r in enumerate(e10_rows())]
+    r10 = load("results/p2_e10_resolution.json")
+    out.append(("E10 fields match", "agreed exactly with the stored fields"
+                if all(v == 0.0 for ch in r10["checks"].values() for v in ch.values()) else "E10 fields differ"))
+    out.append(("E10 even 200 at Langmuir 1000", "chose the LDF law by "
+                + f"{-r10['rows']['langmuir_L1_pe1_da1e+03|200']['dll']['qdf']:.0f} log-likelihood units"
+                if r10["rows"]["langmuir_L1_pe1_da1e+03|200"]["best"] == "ldf" else "E10 even 200 not LDF"))
     s9 = load("results/p2_e9_summary.json")
     out.append(("E9 no errors", "No row had an" + "\n" + "error. The table gives the fraction with noise-free"
                 if sum(v["errors"] for v in s9.values()) == 0 and sum(v["n"] for v in s9.values()) == 720 else "E9 errors"))

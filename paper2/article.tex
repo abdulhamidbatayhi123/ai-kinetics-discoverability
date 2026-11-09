@@ -186,8 +186,7 @@ most clearly for symbolic regression (M7; next section).
 % Checked on results/p2_figdata.json h2b ident: every zero-width da_ident_ci is all-to-none
 % between the two adjacent levels around it.
 
-The identifiability boundaries at the top of the grid need one caution, found in a second
-descriptive check made after the verdicts were seen. With exact data the
+A second descriptive check made after the verdicts adds one caution. With exact data the
 O1 profile recovered $k$ to within 5\,\% at every $\Da$ up to 100, but at $\Da = 316$ and
 1000 its median estimate was 0.75 to 0.91 and 0.39 to 0.54 times $k$: there the adsorption front
 crosses a probe in only a few of the 200 observation times. This does not affect H2b: in
@@ -267,24 +266,25 @@ the highest rate (67\,\% of replicates at $\Da = 1000$) and in at most 17\,\% el
 % 0.17 (sigma 0.5 %, eps 0, Da 1000); 0.00 at every Da <= 31.6.
 
 Where open discovery fails, a law can still be chosen among candidates. In a post hoc
-check (E6), the LDF law, the quadratic driving force and the pseudo-second-order law, the three
-most used in adsorption practice, were each fitted by the likelihood used for identifiability and
-the best fit chosen ($\Pe \approx 94$, noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%). Choice
-carried further than open discovery: the LDF law was chosen in all 45 replicates at every
+check (E6), the LDF law, the quadratic driving force and the pseudo-second-order law were each
+fitted by the likelihood used for identifiability and the best fit chosen ($\Pe \approx 94$,
+noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%). The LDF law was chosen in all 45 replicates at every
 $\Da \le 10$ with an exact isotherm, and in at least 78\,\% with 2\,\% isotherm error, where
 sparse regression failed at every rate (Fig.~4d). It did not reach the identifiability boundary:
 with an exact isotherm, the LDF law was chosen in only 31 of 180 replicates at $\Da = 31.6$ and
-in none from $\Da = 100$ on. Noise-free forcing (E9, post hoc) rescued
+in none from $\Da = 100$ on. Computing $\qsm$ from noise-free $c$ and $T$ (E9, post hoc) rescued
 it only for the Langmuir sorbent at $\Da = 31.6$; from $\Da = 100$ on, the LDF law was
-chosen in at most 22\,\% of replicates.
+chosen in at most 22\,\% of replicates. The rest is mainly sampling: on noise-free data the
+LDF law won in three of the four cells tested at $\Da \ge 100$ with up to 20 times more samples
+(E10, post hoc).
 % results/p2_e9_summary.json (EXPLORATORY_P2 E9): LDF fraction with noise-free q*, E6 in brackets:
 % Langmuir Da 31.6 sigma 0.5 % 1.00 (0.69), 2 % 0.69 (0); Da >= 100 at most 0.22 (Langmuir 2 %, Da 316);
-% step 0 in all eight cells.
-Sampling explains part of the rest. With twice as many observation times (E8, post hoc;
+% step 0 in all eight cells. results/p2_e10_resolution.json (EXPLORATORY_P2 E10): at the grid's 200 times
+% the wrong law in all four cells; at 3,991 times LDF for Langmuir Da 100, 1000 and step Da 100; step Da 1000 qdf.
+With twice as many observation times (E8, post hoc;
 exact isotherm), every boundary moved to higher $\Da$ or stayed: discovery by 0.4 to 0.7 decade, choice
-among the laws by 0.2 to 0.5 decade, identifiability by up to 0.3 decade or beyond the grid. Yet no
-replicate chose the LDF law at $\Da = 100$, and discovery still failed at least 1.2 decades
-before identifiability.
+among the laws by 0.2 to 0.5 decade, identifiability by up to 0.3 decade or beyond the grid, and
+discovery still failed at least 1.2 decades before identifiability.
 % results/p2_e8_summary.json (EXPLORATORY_P2 E8; kaggle_e8/, p2_e8_merge.py, 4 of 4 sampled rows
 % recomputed locally match): 200 -> 400 observation times, Pe ~94, sigma 0.5 and 2 %, eps 0.
 % da_disc shift log10 0.40 (step 0.5 %) to 0.67 (langmuir 2 %); da_select 0.21 to 0.52; da_ident
@@ -756,13 +756,14 @@ Every exploratory analysis was declared in writing, with what it would compute, 
 and none enters a confirmatory test. Three were declared before the verdicts: M1 trained at the
 scale a universal differential equation needs (E1), the Kolmogorov--Arnold network on its
 declared subgrid (E2), and how often an interval that meets $[k/2, 2k]$ misses the true $k$
-(E3). E1 needs a graphics processor and has not run; it is not reported here. Six more were
+(E3). E1 needs a graphics processor and has not run; it is not reported here. Seven more were
 declared after the verdicts, prompted by a review of the draft, and are labelled post hoc: H2b
 with matched success criteria for the two tasks (E4), the conditioning of the library against
 $\Da$ (E5), choice among three candidate laws by likelihood (E6), a systematic shift of the step
 of the measured isotherm (E7), the sampling rate, 200 against 400 observation times (E8,
-declared after E6's results), and E6 with $\qsm$ computed from noise-free $c$ and $T$
-(E9, declared after a second review). E6 fits each law by implicit Euler along the same upsampled path
+declared after E6's results), E6 with $\qsm$ computed from noise-free $c$ and $T$
+(E9, declared after a second review), and E6 on noise-free data sampled up to 20 times more finely
+(E10, declared after E9). E6 fits each law by implicit Euler along the same upsampled path
 of $\qsm$ as the identifiability profile, with its rate constant profiled on a logarithmic grid
 and refined by a bounded one-dimensional search; all three laws have one parameter, so the
 Bayesian information criterion picks the largest likelihood. In E8 every method runs unchanged,

@@ -166,3 +166,13 @@ not at 200, the misfit there is attributed to the reconstruction of q* between s
 the sampling); if it is not chosen even at 3,991, the cause lies elsewhere and is reported as unresolved.
 Descriptive, no verdict; it changes no confirmatory result. Fields are written to a scratch directory,
 not to data/p2.
+
+**Outcome (2026-11-09, results/p2_e10_resolution.json).** Re-solved fields equal the stored ones at the shared
+times (max difference 0). Chosen law (LDF k_hat/k) at the grid's own 200 / 400 times, 1,996, 3,991: Langmuir
+Da 100 QDF (0.98) / LDF (1.05) / LDF (1.01) / LDF (1.01); step Da 100 QDF (1.01) / QDF (1.08) / LDF / LDF;
+Langmuir Da 1000 PSO (0.51) / LDF (0.96) / LDF / LDF; step Da 1000 QDF at every resolution (unresolved; k h
+still ~1 at 3,991). Reading: the misfit is attributed to the reconstruction of q* between samples in three of
+four cells. Deviation, disclosed: the declared 200 and 400 times were spaced evenly on the fine grid and
+differ by up to half a grid interval from the grid's own; the grid's exact 200 and 400 times were added after
+the first rows (keys grid200, grid400). The evenly spaced rows agree with them except Langmuir Da 1000 at
+200 (LDF by 38 log-likelihood units vs PSO at the grid times). Reported in Supplementary Note 3 (E10).

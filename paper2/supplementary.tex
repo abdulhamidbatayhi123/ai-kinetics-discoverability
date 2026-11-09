@@ -658,11 +658,11 @@ before kept its verdict, and every new slice has the same verdict.
 % H2b_overall, H2a, H2c); results/p2_extra_o1ident_asrun.json vs results/p2_extra_o1ident.json
 % (row flips: step +2900 / -7, langmuir +24 / -17); p2_compare_verdicts.py.
 
-\section*{Supplementary Note 3: exploratory analyses E2 to E9}
+\section*{Supplementary Note 3: exploratory analyses E2 to E10}
 Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
 enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
 corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results; E9 after
-a second review. E4 to E9 are post hoc and are labelled so wherever they are used. E1 (M1 at full scale) needs a graphics
+a second review; E10 after E9. E4 to E10 are post hoc and are labelled so wherever they are used. E1 (M1 at full scale) needs a graphics
 processor and has not run.
 
 \subsection*{E2: the Kolmogorov--Arnold network on its declared subgrid}
@@ -935,10 +935,48 @@ every level, and for both isotherms from $\Da = 100$ on, the wrong law was still
 diagnostic made after E9 and not declared (\texttt{p2\_diag\_e9\_noisefree.py}, replicate 15) removed
 the noise from $q$ as well: the LDF law was still not chosen at $\Da = 100$ or 1000, although its
 fitted $k$ lay within 2\,\% of the true value at $\Da = 100$ for both isotherms. The failure from
-$\Da = 100$ on is therefore a deterministic misfit between the integrated laws and the sampled data, which twice the sampling
-rate did not remove (E8), not an effect of noise.
+$\Da = 100$ on is therefore a deterministic misfit between the integrated laws and the sampled data, not an effect
+of noise; E10 asks whether finer sampling removes it.
 % source: results/p2_e9_summary.json, results/p2_e9_cleanforcing.json; p2_e9_cleanforcing.py;
 % EXPLORATORY_P2 E9. Diagnostic: p2_diag_e9_noisefree.py (sigma = eps = 0 in q, c, T; replicate 15):
 % chosen law langmuir Da 31.6 ldf, Da 100 qdf (LDF k_hat/k 0.984), step Da 100 qdf (1.007), langmuir Da 1000 pso.
+
+\subsection*{E10: time resolution behind the misfit (post hoc)}
+At the grid's 200 observation times $k h$ is about 2 at $\Da = 100$ and 20 at $\Da = 1000$, so $q$
+lags $\qsm$ by less than one sampling interval, and every law is driven by $\qsm(t)$ reconstructed
+between samples. Four cells ($\Pe \approx 94$; both isotherms; $\Da = 100$ and 1000) were solved
+again with the same solver and settings but 3\,991 stored times, every tenth of which is one of the
+grid's 400; at those times the fields agreed exactly with the stored fields. E6's choice
+(unchanged, as in the diagnostic above) was then made on noise-free data at the 20 probes at
+increasing time resolution. The reading was fixed in advance: where the LDF law is chosen at
+3\,991 times but not at 200, the misfit is attributed to the reconstruction of $\qsm$ between
+samples. The table gives the chosen law and, in brackets, the LDF law's fitted $k$ over the true
+value.
+\begin{center}
+\small
+\begin{tabular}{@{}llllll@{}}
+\toprule
+Isotherm & $\Da$ & 200 (grid) & 400 (grid) & 1\,996 & 3\,991 \\
+\midrule
+Langmuir & 100 & QDF (0.98) & LDF (1.05) & LDF (1.01) & LDF (1.01) \\
+step & 100 & QDF (1.01) & QDF (1.08) & LDF (1.01) & LDF (1.01) \\
+Langmuir & 1000 & PSO (0.51) & LDF (0.96) & LDF (1.02) & LDF (1.04) \\
+step & 1000 & QDF (0.45) & QDF (1.12) & QDF (1.08) & QDF (1.04) \\
+\bottomrule
+\end{tabular}
+\end{center}
+At $\Da = 100$ the LDF law won once sampling was fine enough, from 400 times for the Langmuir
+sorbent and from 1\,996 for the step isotherm; for the Langmuir sorbent at $\Da = 1000$ it won
+from 400 times. In these three cells the misfit is a matter of sampling. For the step isotherm at
+$\Da = 1000$ the quadratic driving force was still chosen at 3\,991 times, where $k h$ is still
+about 1; there the cause is unresolved. The declared design spaced 200 and 400 times evenly on the
+finer grid, which shifts them by up to half a grid interval from the grid's own times, so the
+grid's exact times were added after the first rows. The evenly spaced rows agree with the grid's
+except for the Langmuir sorbent at $\Da = 1000$ and 200 times, which chose the LDF law by 38
+log-likelihood units against the grid times' pseudo-second-order law: at that resolution the
+choice turns on where the samples fall. These are noise-free data; with noise, twice the
+sampling rate did not restore the choice at $\Da = 100$ (E8).
+% source: results/p2_e10_resolution.json (24 rows: 4 cells x {200, 400, 1996, 3991, grid200, grid400});
+% p2_e10_resolution.py (fields in scratch_e10/, not tracked); EXPLORATORY_P2 E10.
 
 
