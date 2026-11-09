@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 title: >-
-  Code, results and pre-registration for: When can AI discover adsorption kinetics?
+  Code, results and pre-registration for: Equation discovery fails long before adsorption rate
+  constants become unidentifiable
 message: If you use this software or its results, please cite it.
 type: software
 authors:

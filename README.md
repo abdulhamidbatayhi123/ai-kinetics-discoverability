@@ -1,6 +1,7 @@
 # When can AI discover adsorption kinetics?
 
-Code, pre-registration, results and manuscript of a pre-registered computational study by
+Code, pre-registration, results and manuscript of "Equation discovery fails long before adsorption
+rate constants become unidentifiable", a pre-registered computational study by
 Abdulhamid Batayhi (Yıldız Technical University, ORCID
 [0009-0007-0374-6755](https://orcid.org/0009-0007-0374-6755)).
 
@@ -32,7 +33,7 @@ them; the corrections are listed below and in `RETRACTIONS_P2.md`. No correction
 verdict word.
 
 Post hoc checks, each declared before it ran (`EXPLORATORY_P2.md`), leave the H2b word unchanged
-under four alternative success rules (E4, `results/p2_e4_criteria.json`: gaps 0.9 to 3.8 decades)
+under four alternative success rules (E4, `results/p2_e4_criteria.json`: gaps 0.89 to 3.75 decades)
 and at twice the sampling rate (E8, `results/p2_e8_summary.json`: every boundary moves up, the gap
 stays at least 1.25 decades). Choosing among three candidate laws by likelihood (E6) finds the
 LDF law in every replicate up to Da = 10 with an exact isotherm, further than open discovery, but
