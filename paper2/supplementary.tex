@@ -461,8 +461,10 @@ $\varepsilon \in \{0, 2\}\,\%$, with 3 replicates (216 rows per observation mode
 % _solve_scored; p2_grid_o23.py SOLVE_CAP_S = 600, COARSE_STEP = 10 ** (6 / 24), run_o3, run_o2_ident
 % (n_z = 100, product((0.005, 0.02), (0.0, 0.02), range(3))); PREREG_P2 s.9 A5.
 
-\paragraph{Known-answer tests.} The exact O1 update agrees with the ODE-solver likelihood
-within $2\times10^{-3}$ relative (plus 0.2) at $k \in \{0.005, 0.02, 0.05\}$. The O1 profile over 20
+\paragraph{Known-answer tests.} The exact O1 update agrees with \texttt{solve\_ivp} on a
+piecewise-linear $\qs$ for $kh$ from $10^{-4}$ to 100 (a test added with the B90 correction;
+the earlier test, against the ODE-solver likelihood at $k \in \{0.005, 0.02, 0.05\}$, had too
+small a $kh$ to detect the error). The O1 profile over 20
 noisy probes ($\sigma = 2\,\%$) contains $k = 0.02$ and is identifiable. After A6, it contains $k$
 at $3.22\times10^{-6}$, $1.39\times10^{-5}$ and $0.139$\,s$^{-1}$, and it raises an error on a
 grid whose edge holds the peak. The single-probe profile on a fresh non-isothermal run
@@ -470,7 +472,7 @@ grid whose edge holds the peak. The single-probe profile on a fresh non-isotherm
 profiles on a fresh low-$\Da$ run ($k = 2\times10^{-4}$\,s$^{-1}$) contain $k$ with
 $\mathrm{hi}/\mathrm{lo} < 2$. The solve cap scores a capped solve as $-\infty$, records it, and
 leaves an uncapped solve unchanged.
-% source: tests/test_p2.py:test_o1_exact_ldf_likelihood_matches_the_ode_reference,
+% source: tests/test_ldf_exact.py (B90); tests/test_p2.py:test_o1_exact_ldf_likelihood_matches_the_ode_reference,
 % test_o1_profile_over_all_probes_brackets_k, test_ode_profile_with_temperature_brackets_k_on_nonisothermal_probe,
 % test_outlet_profile_likelihood_brackets_k_in_kinetic_regime, test_probe_profile_likelihood_brackets_k_in_kinetic_regime,
 % test_profile_interval_brackets_truth_and_is_narrow_at_low_noise; tests/test_profile_range.py (A6);
@@ -485,10 +487,10 @@ ledger (\texttt{RETRACTIONS\_P2.md}) with its cause, its fix and how it was foun
 B76 and B79 to B84 were found before any grid result existed and reached no result; they
 corrected the analysis code, one method's inclusion gate, cost statements, citations and
 descriptions of the ground truth. B85, a provenance field missing from three results files, was
-found while the grid ran and affects no result. Four entries were found while the grid ran or
-after its first verdicts and changed what was computed. Each is described here with what it
-changed.
-% source: RETRACTIONS_P2.md (B76, B79-B89); PREREG_P2 s.9 (A5 97150f6, A6 375552b).
+found while the grid ran and affects no result. Six entries were found while the grid ran or
+after its first verdicts and changed what was computed (B86 to B91); five changed confirmatory
+results and one an exploratory analysis. Each is described here with what it changed.
+% source: RETRACTIONS_P2.md (B76, B79-B91); PREREG_P2 s.9 (A5 97150f6, A6 375552b, A7 539d9a7).
 
 \subsection*{A5: a cap on each column solve (B86)}
 On O2 and O3, every point of the identifiability profile is a full column solve. With an
@@ -534,6 +536,51 @@ corrected O1 row uses the declared settings.
 % source: RETRACTIONS_P2 B89; p2/identifiability.py (_profile n_fine; profile_interval_o1 n_fine = 41);
 % results/p2_extra_o1ident_asrun.json (count of rows near the limits, computed 2026-11-01).
 
+\subsection*{The exact update of the O1 likelihood (B90)}
+The O1 likelihood integrates the LDF law $\mathrm{d}q/\mathrm{d}t = k(\qs - q)$ over each interval
+$h$ between upsampled observations, with $\qs$ linear in time across the interval. The exact
+update is
+\[
+q_{1} = e\,q_{0} + (1 - e)\,q^{*}_{1} - (q^{*}_{1} - q^{*}_{0})\,(g - e), \qquad
+e = \mathrm{e}^{-kh},\quad g = (1 - e)/(kh).
+\]
+The code subtracted $(q^{*}_{1} - q^{*}_{0})(1 - g)$ where the exact solution needs
+$(q^{*}_{1} - q^{*}_{0})(g - e)$. Both coefficients equal $kh/2$ to first order and differ by
+$(kh)^{2}/6$ at the next, so the original
+comparison with an ODE-solver likelihood, made at small $kh$, passed. At $kh = 1$ the error of a
+single update was 0.22, and at $kh = 10$ it was 1.68, on a $\qs$ range of 2.1; as $kh$ grows the
+update lags $\qs$ by one step. The likelihood therefore misfit the data at high $\Da$: with exact
+data the estimate at $\Da = 316$ was 1.1 to 24 times $k$, which an earlier draft had attributed
+to the time resolution of the data. The error was found in a later review of the code, derived,
+and confirmed against an ODE solver. The update was corrected and is now tested against
+\texttt{solve\_ivp} for $kh$ from $10^{-4}$ to 100. Because the pre-registration states that the
+O1 likelihood is integrated exactly, the correction brings the code into line with it;
+amendment A7 records it. All 51\,840 O1 identifiability rows were recomputed with the corrected
+code (on cloud CPU sessions; 24 rows drawn at random were recomputed locally and agreed to a
+relative $10^{-6}$), and the analysis was rerun unchanged. 916 rows became identifiable and 1\,834
+non-identifiable, all at $\Da \ge 31.6$. With exact data the estimate is now within 5\,\% of $k$
+up to $\Da = 100$ and 0.39 to 0.91 times $k$ at $\Da = 316$ and 1000; that remaining bias is the
+time resolution. Most identifiability boundaries moved to lower $\Da$, seven more slices gained
+both boundaries, and every verdict word was unchanged (table below).
+% source: RETRACTIONS_P2 B90; p2/identifiability.py:_ldf_exact; tests/test_ldf_exact.py;
+% kaggle_b90/, p2_b90_merge.py ("MERGED 51840 rows (807 error rows), 24 sampled rows match");
+% results/p2_extra_o1ident_preB90.json vs results/p2_extra_o1ident.json (gain 916, loss 1834, all
+% Da >= 31.6); results/p2_ident_robustness.json accuracy (0.969-1.045 up to Da 100; 0.393-0.908 at
+% 316 and 1000); PREREG_P2 A7.
+
+\subsection*{The rate constants of the model-selection check (B91)}
+The exploratory model-selection check (E6) first took each candidate law's rate constant from a
+grid of 10 points per decade without refinement. At 0.5\,\% noise a $k$ 10\,\% from a law's
+optimum costs about $10^{5}$ log-likelihood units, far more than the differences between laws, so
+the chosen law followed which law had a grid point near its optimum: for the Langmuir sorbent at
+$\Da = 0.1$ with an exact isotherm, the pseudo-second-order law was chosen in all 45 replicates
+although the data were generated by the LDF law. Each law's $k$ is now refined by a bounded
+one-dimensional search between the grid neighbours of the grid optimum, and each law is integrated
+with four implicit-Euler substeps per interval. E6 was rerun; its first rows are kept.
+% source: RETRACTIONS_P2 B91; p2_e6_modelselect.py (minimize_scalar bounded, xatol 1e-6, NSUB 4);
+% tests/test_e6_modelselect.py (test_k_refined_off_grid, test_ldf_substeps_match_exact_update);
+% results/p2_e6_modelselect_v1.json (first rows); kaggle_e6/, p2_e6_merge.py (6 of 6 rows match).
+
 \subsection*{M1 kept its best parameters (B88)}
 Amendment A4 says the M1 demonstration keeps the best parameters seen during training. In four
 of its nine fits ($\Da = 31.6$, 100, 316 and 1000), a solve of the differentiable column
@@ -550,48 +597,65 @@ enters no confirmatory test, so no verdict depends on it.
 % source: PREREG_P2 A4; RETRACTIONS_P2 B88; p2_grid_extra.py (_train_lbfgs);
 % results/p2_extra_m1_asrun.json; results/p2_extra_m1.json; tests/test_m1_train.py.
 
-\subsection*{As-run and corrected verdicts}
-Both sets of verdicts are public (\texttt{results/p2\_verdicts\_asrun.json} and
-\texttt{results/p2\_verdicts.json}). As first run, the Langmuir positive control passed
+\subsection*{As-run, intermediate and corrected verdicts}
+All three sets of verdicts are public (\texttt{results/p2\_verdicts\_asrun.json},
+\texttt{results/p2\_verdicts\_preB90.json} and \texttt{results/p2\_verdicts.json}). As first run, the Langmuir positive control passed
 (discovery and identifiability 135 of 135) and the step control failed, so the step isotherm was
 withheld from all 48 of its H2b slices. Among the 48 Langmuir slices, 20 had a verdict, and in
 all 20 discovery failed before identifiability; 28 had no boundary on the grid for discovery or
-identifiability. H2a and H2c had no verdict. The corrected verdicts are the primary result,
-because the first run did not compute the pre-registered estimand, the 95\,\% profile interval,
-for the affected cells.
+identifiability. H2a and H2c had no verdict. The intermediate verdicts, after A6 and B89 but
+before B90, are those an earlier draft reported. The corrected verdicts are the primary result,
+because only they compute the pre-registered estimand, the 95\,\% profile interval of the exactly
+integrated likelihood, for every cell.
 
 \begin{center}
 \small
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-& As first run & Corrected (primary) \\
+& As first run & After A6, B89 & Corrected (primary) \\
 \midrule
-Positive control, Langmuir & passed (135/135, 135/135) & passed (135/135, 135/135) \\
-Positive control, step & failed (135/135, 0/135) & passed (135/135, 135/135) \\
-O1 rows identifiable & 37\,991 of 51\,840 & 40\,891 of 51\,840 \\
-H2b slices with a verdict & 20 (Langmuir only) & 30 (20 Langmuir, 10 step) \\
-H2b overall & \verdict{discovery fails before identifiability} & \verdict{discovery fails before identifiability} \\
-H2b gap, Langmuir (decade) & $-1.60$ to $-3.43$ & $-1.60$ to $-3.43$ \\
-H2a & no verdict & no verdict \\
-H2c & no verdict & no verdict \\
+Positive control, Langmuir & passed & passed & passed \\
+Positive control, step & failed (0/135 identifiable) & passed & passed \\
+O1 rows identifiable (of 51\,840) & 37\,991 & 40\,891 & 39\,973 \\
+H2b slices with a verdict & 20 (Langmuir only) & 30 (20 + 10 step) & 37 (23 + 14 step) \\
+H2b overall & fails before & fails before & fails before \\
+H2b gap, Langmuir (decade) & $-1.60$ to $-3.43$ & $-1.60$ to $-3.43$ & $-1.60$ to $-3.36$ \\
+H2b gap, step (decade) & withheld & $-2.23$ to $-2.83$ & $-2.05$ to $-3.72$ \\
+H2a & no verdict & no verdict & no verdict \\
+H2c & no verdict & no verdict & no verdict \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\noindent The corrections changed which isotherm could be judged, not what was found. The 2\,900
-O1 rows that became identifiable are step rows, nearly all in the cells A6 corrected; among the
-Langmuir rows, the 41-point refinement (B89) turned 24 rows identifiable and 17 non-identifiable,
-and the Langmuir H2b gaps moved by at most 0.11 decade (in one slice, where the identifiability
-boundary moved from $\Da \approx 57$ to 74), with every verdict unchanged.
+\noindent Neither correction changed what was found. A6 and B89 changed which isotherm could be
+judged: the 2\,900 O1 rows that became identifiable are step rows, nearly all in the cells A6
+corrected; among the Langmuir rows, the 41-point refinement (B89) turned 24 rows identifiable and
+17 non-identifiable, and the Langmuir H2b gaps moved by at most 0.11 decade (in one slice, where
+the identifiability boundary moved from $\Da \approx 57$ to 74), with every verdict unchanged.
+B90 changed only rows at $\Da \ge 31.6$ (above). Of the 71 identifiability boundaries present in
+both runs, it moved 36 to lower $\Da$, by up to 0.8 decade where the isotherm error was largest,
+and none to higher; the gaps of the 30 slices judged before shrank by at most 0.25 decade. Seven
+slices that already had a discovery boundary gained an identifiability boundary, because $k$ was
+no longer identifiable at the highest levels (three without noise and with 0.5\,\% isotherm
+error, three at 0.5\,\% noise with an exact isotherm, one at 0.5\,\% noise and isotherm error);
+these boundaries lie between $\Da = 316$ and 1000, where the estimate is biased by the time
+resolution, and the check without those levels (main text) covers them. Every slice judged
+before kept its verdict, and every new slice has the same verdict.
+% boundary shifts: log10(da_ident corr / preB90) min -0.81 (sigma 0, eps 0.05, langmuir, Pe 94),
+% 36 of 71 < 0, none > 0; gap changes of the 30 common slices 0 to +0.25 (sigma 0.005, eps 0,
+% langmuir, Pe 19).
 % Langmuir gap changes: sigma 2 % eps 0 Pe 94: -0.114 (da_ident 56.6 -> 73.5); two others 0.02-0.03;
 % all others < 0.02.
 % source: results/p2_verdicts_asrun.json and results/p2_verdicts.json (positive_control, H2b,
 % H2b_overall, H2a, H2c); results/p2_extra_o1ident_asrun.json vs results/p2_extra_o1ident.json
 % (row flips: step +2900 / -7, langmuir +24 / -17); p2_compare_verdicts.py.
 
-\section*{Supplementary Note 3: exploratory analyses E2 and E3}
-Both analyses were declared in writing before they ran (\texttt{EXPLORATORY\_P2.md}) and enter no
-confirmatory test.
+\section*{Supplementary Note 3: exploratory analyses E2 to E8}
+Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
+enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
+corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results. E4 to E8
+are post hoc and are labelled so wherever they are used. E1 (M1 at full scale) needs a graphics
+processor and has not run.
 
 \subsection*{E2: the Kolmogorov--Arnold network on its declared subgrid}
 M8 ran in exactly the configuration declared before the freeze (raw variables $c$, $q$, $T$, $\qs$;
@@ -625,8 +689,8 @@ refit, \texttt{kan/spline.py}, \texttt{curve2coef}); it is counted as a failure.
 \subsection*{E3: precision against coverage of the identifiability criterion}
 The pre-registered criterion calls $k$ practically identifiable when the 95\,\% profile interval lies
 inside $[k/2, 2k]$. It measures precision and accuracy within a factor of two, not whether the
-interval contains the true value. On O1, 40\,891 of 51\,840 rows met the criterion, but only
-5\,158 intervals (10\,\%) contained the true $k$; 87\,\% of the rows called identifiable had an
+interval contains the true value. On O1, 39\,973 of 51\,840 rows met the criterion, but only
+5\,042 intervals (10\,\%) contained the true $k$; 87\,\% of the rows called identifiable had an
 interval that missed it. The same held on O2 (coverage 9\,\%; 157 of 216 rows identifiable) and,
 less strongly, on O3 (coverage 23\,\%; 150 of 216). The intervals are narrow because the
 likelihood treats the measured isotherm and the observed $c$ and $T$ that enter $\qsm$ as exact,
@@ -639,15 +703,148 @@ $\Da$ & identifiable (of 5\,760) & interval contains $k$ & identifiable but miss
 \midrule
 0.1 & 5\,760 & 425 & 92.6\,\% \\
 0.316 & 5\,760 & 454 & 92.1\,\% \\
-1 & 5\,760 & 646 & 88.8\,\% \\
+1 & 5\,760 & 645 & 88.8\,\% \\
 3.16 & 5\,760 & 1\,042 & 81.9\,\% \\
-10 & 5\,760 & 1\,511 & 73.8\,\% \\
-31.6 & 5\,558 & 709 & 87.2\,\% \\
-100 & 3\,308 & 205 & 93.8\,\% \\
-316 & 1\,467 & 159 & 89.6\,\% \\
-1000 & 1\,758 & 7 & 99.7\,\% \\
+10 & 5\,760 & 1\,509 & 73.8\,\% \\
+31.6 & 5\,564 & 661 & 88.1\,\% \\
+100 & 3\,318 & 226 & 93.2\,\% \\
+316 & 1\,843 & 47 & 97.4\,\% \\
+1000 & 448 & 33 & 94.0\,\% \\
 \bottomrule
 \end{tabular}
 \end{center}
-% source: results/p2_e3_coverage.json (per_model O1/O2/O3; per_model_da O1); p2_e3_coverage.py.
-% Stored-vs-recomputed mismatches: 0.
+\noindent Profiles whose likelihood peaked on the upper edge of the $k$ grid (807 rows, all at
+$\Da \ge 100$) raise an error, count as not identifiable and cover nothing.
+% source: results/p2_e3_coverage.json (per_model O1/O2/O3; per_model_da O1; n_error 94, 280, 433 at
+% Da 100, 316, 1000); p2_e3_coverage.py (B90-corrected rows). Stored-vs-recomputed mismatches: 0.
+
+\subsection*{E4: matched success criteria (post hoc)}
+Discovery must return exactly the terms $q$ and $\qsm$ with coefficients in the ratio $-1$ within
+10\,\%, while identifiability asks only for a 95\,\% interval inside $[k/2, 2k]$. To see whether this
+asymmetry makes the gap, H2b was recomputed with the pre-registered analysis unchanged except for
+the success of each row: (a) discovery relaxed to exactly the terms $\{q, \qsm\}$ with a negative
+coefficient on $q$ (the ratio test dropped; the $\qsm$ coefficient is not stored, so its sign could
+not be checked); (b) identifiability strict, interval inside $[0.9k, 1.1k]$; (c) identifiability by
+the point estimate, the interval's geometric midpoint inside $[k/2, 2k]$, which does not rely on
+the interval's calibration (E3 above); (d) (a) and (c) together. Boundaries are point estimates
+by the same logistic estimator.
+\begin{center}
+\small
+\begin{tabular}{@{}llrr@{}}
+\toprule
+& Success rule & slices with a verdict & gap (decades of $\Da$) \\
+\midrule
+pre-registered & as frozen & 37 & 1.60 to 3.72 \\
+a & discovery relaxed & 40 & 1.60 to 3.72 \\
+b & interval inside $[0.9k, 1.1k]$ & 37 & 0.89 to 2.94 \\
+c & point estimate inside $[k/2, 2k]$ & 37 & 1.79 to 3.75 \\
+d & a and c & 40 & 1.79 to 3.75 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Every slice with a verdict, under every rule, read \emph{discovery fails before identifiability},
+and both positive controls passed. Relaxing discovery added three slices, all with 5\,\% noise
+and 2\,\% isotherm error, and moved no existing gap by more than 0.16 decade; the strict interval
+shortened every gap, by 0.52 to 1.01 decade; the point-estimate rule lengthened them by at most
+0.27 decade. The gap is therefore not an artefact of the two success rules.
+% source: results/p2_e4_criteria.json (variants pre, a, b, c, d; slices; computed with B90-corrected
+% identifiability rows, 2026-11-09, p2_e4_parallel.sh); p2_e4_criteria.py; EXPLORATORY_P2 E4.
+% New slices under a and d: sigma 0.05, eps 0.02: langmuir Pe 0.2, step Pe 0.2 and 5.0.
+
+\subsection*{E5: conditioning of the library against $\Da$ (post hoc)}
+On the O1 observations without noise or isotherm error, the columns of the library were
+standardised and the singular values of the pair $\{q, \qsm\}$, the two terms of the true law,
+computed for every cell. The smaller singular value relative to the larger fell steadily with
+$\Da$, by about a factor of three per half decade: from 0.73 (Langmuir) and 0.78 to 0.79 (step) at
+$\Da = 0.1$, through 0.21 to 0.25 at $\Da = 1$ and 0.051 to 0.060 at $\Da = 10$, to 0.0007 to 0.0013
+at $\Da = 1000$, nearly the same for the three P\'eclet numbers. The condition number of the whole
+library was between about 230 and 5\,700 and was not monotone in $\Da$: it was smallest near
+$\Da = 1$ to 10 and largest at $\Da = 1000$. As $\Da$ grows the uptake follows the measured
+isotherm ever more closely, so the direction that distinguishes $q$ from $\qsm$, the one the law
+needs, carries ever less of the signal.
+% source: results/p2_e5_conditioning.json (cells: q_qstar_min_over_max_sv, cond_library; 54 cells);
+% p2_e5_conditioning.py; EXPLORATORY_P2 E5.
+
+\subsection*{E6: choosing among three candidate laws (post hoc)}
+Three one-parameter laws were fitted to each O1 observation by the output-error likelihood of the
+identifiability profile: the LDF law $k(\qsm - q)$, the quadratic driving force
+$k({\qsm}^{2} - q^{2})/(2q)$ and the pseudo-second-order law $k(\qsm - q)^{2}$. Each is integrated
+by implicit Euler with four substeps per interval along the same upsampled $\qsm(t)$ path as the
+identifiability profile; its $k$ is profiled on \texttt{logspace(-7, 1, 81)} and refined by a
+bounded one-dimensional search between the grid neighbours of the grid optimum (B91). With one
+parameter each, the Bayesian information criterion chooses the largest likelihood. The subgrid
+was $\Pe \approx 94$, both isotherms, all nine $\Da$, $\sigma \in \{0.5, 2\}\,\%$,
+$\varepsilon \in \{0, 2\}\,\%$, estimation replicates 15 to 59 (3\,240 fits of each law). The
+table gives the fraction of replicates in which the LDF law was chosen. Wherever it was chosen at
+$\Da \le 31.6$, its $k$ lay within $[k/2, 2k]$; at $\Da \ge 100$ this held in 22 of the 32
+replicates that chose it.
+\begin{center}
+\small
+\begin{tabular}{@{}llrrrrrrrrr@{}}
+\toprule
+& & \multicolumn{9}{c}{$\Da$} \\
+Isotherm & $\sigma$, $\varepsilon$ & 0.1 & 0.32 & 1 & 3.2 & 10 & 32 & 100 & 316 & 1000 \\
+\midrule
+Langmuir & 0.5\,\%, 0 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 0.69 & 0 & 0 & 0 \\
+Langmuir & 0.5\,\%, 2\,\% & 1.00 & 1.00 & 0.98 & 0.96 & 0.80 & 0.47 & 0.51 & 0.04 & 0.09 \\
+Langmuir & 2\,\%, 0 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 0 & 0 & 0 & 0 \\
+Langmuir & 2\,\%, 2\,\% & 1.00 & 1.00 & 0.98 & 0.96 & 0.82 & 0.04 & 0 & 0 & 0 \\
+step & 0.5\,\%, 0 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 0 & 0 & 0 & 0 \\
+step & 0.5\,\%, 2\,\% & 1.00 & 1.00 & 1.00 & 1.00 & 0.78 & 0.31 & 0.02 & 0.04 & 0 \\
+step & 2\,\%, 0 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 0 & 0 & 0 & 0 \\
+step & 2\,\%, 2\,\% & 1.00 & 1.00 & 1.00 & 1.00 & 0.78 & 0.16 & 0 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+With an exact isotherm the choice was unanimous at every level: the LDF law up to $\Da = 10$, the
+quadratic driving force at $\Da = 31.6$ (except 31 of 45 replicates for the Langmuir sorbent at
+0.5\,\% noise, which chose the LDF law), the quadratic driving force or the pseudo-second-order
+law at 100, and the pseudo-second-order law at 316 and 1000. Since the choice did not depend on
+the noise level, it reflects the systematic misfit of the integrated laws on the sampled data, not
+noise; E8 tests whether the sampling rate is its cause.
+% source: results/p2_e6_modelselect.json (B91-corrected, 3,240 rows, 0 errors; success = LDF chosen;
+% success_k equal to success at Da <= 31.6; at Da >= 100: langmuir 0.5/2 % Da 100 23 -> 21, 316 2 -> 0,
+% 1000 4 -> 0; step 0.5/2 % Da 100 1 -> 1, 316 2 -> 0: 32 chosen, 22 within); kaggle_e6/, p2_e6_merge.py (6 of 6 sampled rows recomputed locally match);
+% p2_e6_modelselect.py; results/p2_e6_modelselect_v1.json (first rows, before B91).
+
+\subsection*{E8: sampling rate (post hoc)}
+E6 chose the wrong law at $\Da \ge 31.6$ with an exact isotherm, at both noise levels. E8 asks
+whether the time resolution is the cause. On O1 ($\Pe \approx 94$, both isotherms, all nine
+$\Da$, $\sigma \in \{0.5, 2\}\,\%$, $\varepsilon = 0$, replicates 0 to 59), every quantity was
+computed at the grid's 200 observation times and at 400 (every stored time of the ground-truth
+fields, with the same noise per sample): discovery by the six sparse solvers in both forms, the
+best method chosen on replicates 0 to 14, O1 identifiability with the pre-registered criterion,
+and E6's choice among three laws on replicates 15 to 59. Every method ran unchanged, so windows
+defined in samples (the 21-sample derivative filter, the weak-form supports) span half the time at
+400 samples. The 4\,320 rows ran on Kaggle; four sampled rows recomputed locally agreed exactly on
+discovery and to a relative $10^{-6}$ on identifiability and model choice. No row had an error.
+The table gives the 50\,\% crossings ($\Da^{*}$) and the gap $\log_{10}(\Da^{*}_{\mathrm{ident}} /
+\Da^{*}_{\mathrm{disc}})$.
+\begin{center}
+\small
+\begin{tabular}{@{}llrlrrrr@{}}
+\toprule
+Isotherm & $\sigma$ & samples & best method & $\Da^{*}_{\mathrm{disc}}$ & $\Da^{*}_{\mathrm{choice}}$ & $\Da^{*}_{\mathrm{ident}}$ & gap \\
+\midrule
+Langmuir & 0.5\,\% & 200 & M4, weak & 7.24 & 35 & 356 & 1.69 \\
+Langmuir & 0.5\,\% & 400 & M2, weak & 32 & 57 & 562 & 1.25 \\
+Langmuir & 2\,\% & 200 & M4, weak & 1.05 & 17 & 74 & 1.84 \\
+Langmuir & 2\,\% & 400 & M4, weak & 4.93 & 30 & 141 & 1.46 \\
+step & 0.5\,\% & 200 & M4, weak & 4.18 & 17 & 562 & 2.13 \\
+step & 0.5\,\% & 400 & M4, weak & 10 & 57 & -- & -- \\
+step & 2\,\% & 200 & M4, weak & 0.85 & 17 & 172 & 2.30 \\
+step & 2\,\% & 400 & M4, weak & 3.02 & 36 & 172 & 1.75 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent With 400 samples every boundary moved to higher $\Da$ or stayed: discovery by 0.40 to
+0.67 decade, the choice among laws by 0.21 to 0.52 decade, identifiability by 0 to 0.28 decade
+(for the step isotherm at 0.5\,\% noise, beyond the grid). Discovery still failed first wherever
+both boundaries existed, by at least 1.25 decades. The LDF law was chosen in every replicate up to
+$\Da = 31.6$ at 0.5\,\% noise with 400 samples, but in none at $\Da = 100$ at either rate, so
+the time resolution explains the failure of the choice at $\Da = 31.6$ but not above it.
+% source: results/p2_e8_summary.json, results/p2_e8_sampling.json (kaggle_e8/, p2_e8_merge.py,
+% p2_e8_merge.log: 4 of 4 sampled rows match); p2_e8_sampling.py; EXPLORATORY_P2 E8. A crossing
+% between two levels with all-to-none success (e.g. 56.6 between 31.6 and 100) is interval-censored.
+
+

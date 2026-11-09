@@ -15,6 +15,7 @@ Gates (pattern of pinn-machining revision_eaai/build/gates.py; rules from PRESEN
     python paper2/build_p2.py            # all gates
 """
 import json
+import math
 import os
 import re
 import subprocess
@@ -72,11 +73,32 @@ def bindings():
     med = lambda xs: (xs[len(xs) // 2] + xs[(len(xs) - 1) // 2]) / 2
     lo, hi = min(-g for g in gaps.values()), max(-g for g in gaps.values())
     pc = V["positive_control"]
+    # Review P2: a zero-width bootstrap interval on Da*_ident means perfect separation (interval-censored
+    # between two grid levels, Methods). Conservative gap: that boundary placed at the lower level.
+    levels = [10 ** (i / 2) for i in range(-2, 7)]
+    cons, n_cens = [], 0
+    for k, s in h2b.items():
+        if s["gap_decades"] is None:
+            continue
+        a, b = s["da_ident_ci"]
+        if a == b:
+            n_cens += 1
+            low = max(x for x in levels if x < s["da_ident"] * (1 - 1e-9))
+            cons.append(math.log10(low) - math.log10(s["da_disc"]))
+        else:
+            cons.append(-s["gap_decades"])
+    cons_min = math.floor(min(cons) * 100) / 100
     out = [("H2b slices with a verdict", f"Of the {len(h2b)} slices, {len(gaps)} had both"),
+           ("H2b slices without a verdict", f"The {len(h2b) - len(gaps)} slices without a verdict"),
+           ("H2b slices with a verdict (abstract)", f"In all {len(gaps)} of {len(h2b)} conditions"),
+           ("H2b slices with a verdict (Fig. 3 legend)", f"for the {len(gaps)} slices with both boundaries"),
            ("H2b gap range (Results)", f"from {lo:.1f} to {hi:.1f} decades"),
            ("H2b gap range (abstract)", f"by {lo:.1f} to {hi:.1f} decades"),
            ("H2b median gap, Langmuir", f"median of {med(lang):.1f} decades for the"),
            ("H2b median gap, step", f"{med(step):.1f} for the step"),
+           ("H2b censored identifiability boundaries", f"identifiability boundary in {n_cens} of the {len(gaps)} slices"),
+           ("H2b censoring-aware smallest gap (Results)", f"every gap is at least {cons_min:.2f} decades (Methods)"),
+           ("H2b censoring-aware smallest gap (Methods)", f"every gap is still at least {cons_min:.2f}"),
            ("positive control (both isotherms pass, all replicates)",
             f"in {pc['langmuir']['n_success']} of {pc['langmuir']['n_success']} replicates"
             if all(pc[i]["passed"] and pc[i]["success_fraction"] == 1.0 and pc[i]["identifiable_fraction"] == 1.0
@@ -111,9 +133,13 @@ def bindings():
     always = sum(n for k, n in cls.items() if "discovery missing, always >= 50" in k)
     strad = sum(n for k, n in cls.items() if "discovery missing, straddles" in k)
     only_id = sum(n for k, n in cls.items() if k.startswith("discovery present"))
-    out += [("no-verdict: discovery missing", f"missing in {miss}"), ("never 50 %", f"In {never},"),
-            ("never below 50 %", f"In {always}, all"), ("straddles", f"other {strad},"),
-            ("only identifiability missing", f"remaining {only_id} slices")]
+    out += [("no-verdict: discovery missing", f"missing in all {miss}" if only_id == 0 else f"missing in {miss}"),
+            ("never 50 %", f"In {never},"), ("never below 50 %", f"In {always}, all"), ("straddles", f"other {strad},")]
+    if only_id:
+        out += [("only identifiability missing", f"remaining {only_id} slices")]
+    no_ident = sum(n for k, n in cls.items() if "identifiability missing" in k)
+    out += [("identifiability boundary present among no-verdict slices",
+             f"on the grid in {miss + only_id - no_ident} of the {miss + only_id}")]
     m1 = load("results/p2_extra_m1.json")["rows"]
     n_ok = sum(bool(v.get("success")) for v in m1.values())
     names = {1: "one", 2: "two", 3: "three"}
@@ -130,13 +156,111 @@ def bindings():
         if last:
             m7gaps.append(__import__("math").log10(s["da_ident"] / last))
     if m7gaps:
-        out += [("M7 last level vs Da*_ident", f"that level lay {min(m7gaps):.1f} to {max(m7gaps):.1f} decades")]
+        out += [("M7 last level vs Da*_ident", f"that level lay {min(m7gaps):.1f} to {max(m7gaps):.1f} decades"),
+                ("Table 1 envelope: M7 range", f"{min(m7gaps):.1f} to {max(m7gaps):.1f} decades below"),
+                ("Table 1 envelope: M7 slices", f"symbolic regression ({ {4: 'four', 3: 'three', 5: 'five'}.get(len(m7gaps), len(m7gaps))} slices")]
+    # Review P4: the selected method equals each slice's best monotone method on the estimation replicates
+    env_same = all(s["da_disc"] is not None and abs(math.log10(max(x for x in s["da_disc_by_method"].values() if x)
+                                                                  / s["da_disc"])) < 1e-9
+                   for s in h2b.values() if s["gap_decades"] is not None)
+    out += [("Table 1 envelope equals selection", f"gives the same {len(gaps)} gaps" if env_same else "envelope differs")]
     fig = load("results/p2_figdata.json")["h2b"]
     eps2 = [k for k in h2b if "eps=0.02" in k]
     reach = sum(any(a / n >= 0.5 for _, a, n in (fig[k]["disc"] or [])) for k in eps2)
-    out += [("eps 2 %: slices reaching 50 % at any level", f"in only {reach} of {len(eps2)} slices")]
+    out += [("eps 2 %: slices reaching 50 % at any level", f"only {reach} of {len(eps2)} slices reached it")]
+    e6 = load("results/p2_e6_modelselect.json")["rows"]
+    cells = load("data/p2/manifest.json")["cells"]
+    e6c = {}   # per condition (isotherm, sigma, eps, Da)
+    for key, r in e6.items():
+        n, s, e, _ = key.split("|")
+        e6c.setdefault((cells[n]["iso"], float(s), float(e), cells[n]["Da"]), []).append(r["success"])
+    lo10 = [x for (i, s, e, d), v in e6c.items() if e == 0 and d <= 10 for x in v]
+    lo10e = min(sum(v) / len(v) for (i, s, e, d), v in e6c.items() if e > 0 and d <= 10)
+    d31 = [x for (i, s, e, d), v in e6c.items() if e == 0 and 30 < d < 32 for x in v]
+    hi = [x for (i, s, e, d), v in e6c.items() if e == 0 and d >= 100 for x in v]
+    out += [("E6 all LDF at Da <= 10, exact isotherm", "chosen in all 45 replicates at every" if all(lo10) else "E6 not all"),
+            ("E6 min with isotherm error", f"at least {round(lo10e * 100)}" + BS + "," + BS + "% with 2"),
+            ("E6 Da 31.6", f"in only {sum(d31)} of {len(d31)} replicates at"),
+            ("E6 none from Da 100", "in none from" if not any(hi) else "E6 some at Da >= 100")]
+    e4 = load("results/p2_e4_criteria.json")["variants"]
+    alt = [v for k, v in e4.items() if k != "pre"]
+    e4_ok = all(v["overall"] == "discovery fails before identifiability" and all(p for p in v["positive_control"].values())
+                and set(v["word_counts"]) <= {"discovery fails before identifiability",
+                                               "no boundary on the grid for one of the two; reported as the range tested"}
+                for v in alt)
+    out += [("E4 every verdict kept", "the point estimate alone kept every verdict" if e4_ok else "E4 verdict differs"),
+            ("E4 gap range", f"with gaps of {min(-v['gap_max'] for v in alt):.1f} to {max(-v['gap_min'] for v in alt):.1f} decades")]
+    e8 = load("results/p2_e8_summary.json")
+    sh = {"disc": [], "select": [], "ident": []}
+    beyond, gap400, sel100 = 0, [], []
+    for key in {k.rsplit("|", 1)[0] for k in e8}:
+        a, b = e8[key + "|n_t=200"], e8[key + "|n_t=400"]
+        for q in ("disc", "select"):
+            sh[q].append(math.log10(b["da_" + q] / a["da_" + q]))
+        if b["da_ident"] is None:
+            beyond += 1
+        else:
+            sh["ident"].append(math.log10(b["da_ident"] / a["da_ident"]))
+            gap400.append(math.log10(b["da_ident"] / b["da_disc"]))
+        sel100 += [a["select_by_da"]["100.0"], b["select_by_da"]["100.0"]]
+    f1 = lambda x: f"{math.floor(x * 10 + 0.5) / 10:.1f}"
+    out += [("E8 discovery shift", f"discovery by {f1(min(sh['disc']))} to {f1(max(sh['disc']))} decade"),
+            ("E8 selection shift", f"among the laws by {f1(min(sh['select']))} to {f1(max(sh['select']))} decade"),
+            ("E8 identifiability shift", f"identifiability by up to {f1(max(sh['ident']))} decade"
+             + (" or beyond the grid" if beyond else "")),
+            ("E8 no LDF choice at Da 100", "no\nreplicate chose the LDF law at" if not any(sel100) else "E8 LDF chosen at 100"),
+            ("E8 smallest gap at 400", f"still failed at least {math.floor(min(gap400) * 10) / 10:.1f} decades"),
+            ("E8 verdict words at 400", "discovery still failed" if all(
+                v["words"] == "discovery fails before identifiability" for k, v in e8.items()
+                if v["da_ident"] is not None) else "E8 words differ")]
     e3 = load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
     out += [("E3 coverage", f"only about {round(e3 * 100)}{BS},{BS}%")]
+    return out
+
+
+def _thou(n):
+    s = f"{n:,}"
+    return s.replace(",", BS + ",") if n >= 10000 else s.replace(",", BS + ",") if n >= 1000 else s
+
+
+def si_bindings():
+    """G3 for the Supplementary Information: tables and counts recomputed from the results files."""
+    out = []
+    cells = load("data/p2/manifest.json")["cells"]
+    e6 = load("results/p2_e6_modelselect.json")["rows"]
+    by = {}
+    for key, r in e6.items():
+        n, s, e, _ = key.split("|")
+        by.setdefault((cells[n]["iso"], float(s), float(e)), {}).setdefault(cells[n]["Da"], []).append(r["success"])
+    pct = lambda x: f"{x:g}" + BS + "," + BS + "%"
+    for (iso, s, e), d in sorted(by.items()):
+        vals = [sum(v) / len(v) for _, v in sorted(d.items())]
+        cells_txt = " & ".join("0" if v == 0 else f"{v:.2f}" for v in vals)
+        out.append((f"E6 table row {iso} {s} {e}",
+                    f"{'Langmuir' if iso == 'langmuir' else 'step'} & {pct(s * 100)}, "
+                    f"{'0' if e == 0 else pct(e * 100)} & {cells_txt} " + BS + BS))
+    cov = load("results/p2_e3_coverage.json")["per_model"]["O1"]
+    out.append(("E3 O1 identifiable and covering", f"On O1, {_thou(cov['identifiable'])} of 51" + BS + ",840 rows met the "
+                f"criterion, but only {_thou(cov['covers'])} intervals"))
+    pre = load("results/p2_extra_o1ident_preB90.json")["rows"]
+    cor = load("results/p2_extra_o1ident.json")["rows"]
+    gain = sum(bool(cor[k].get("success")) and not bool(pre[k].get("success")) for k in cor)
+    loss = sum(bool(pre[k].get("success")) and not bool(cor[k].get("success")) for k in cor)
+    out.append(("B90 row flips", f"{_thou(gain)} rows became identifiable and {_thou(loss)}"))
+    e4 = load("results/p2_e4_criteria.json")["variants"]
+    for name, v in e4.items():
+        out.append((f"E4 table row {name}", f"& {v['n_with_verdict']} & {-v['gap_max']:.2f} to {-v['gap_min']:.2f} " + BS + BS))
+    e8 = load("results/p2_e8_summary.json")
+    mn = {"best_subset|weak": "M4, weak", "stlsq|weak": "M2, weak", "ensemble|weak": "M3, weak"}
+    f8 = lambda x: "--" if x is None else (f"{x:.2f}" if x < 10 else f"{x:.0f}")
+    for key, v in e8.items():
+        iso, sg, nt = key.split("|")
+        g = "--" if v["da_ident"] is None else f"{math.log10(v['da_ident'] / v['da_disc']):.2f}"
+        out.append((f"E8 table row {key}",
+                    f"{'Langmuir' if iso == 'langmuir' else 'step'} & {float(sg[6:]) * 100:g}{BS},{BS}% & {nt[4:]} & "
+                    f"{mn.get(v['best_method'], v['best_method'])} & {f8(v['da_disc'])} & {f8(v['da_select'])} & "
+                    f"{f8(v['da_ident'])} & {g} " + BS + BS))
+    out.append(("O1 rows identifiable, corrected", f"& {_thou(sum(bool(v.get('success')) for v in cor.values()))} " + BS + BS))
     return out
 
 
@@ -157,6 +281,10 @@ def main():
     for desc, lit in bindings():
         if norm(lit) not in flat:
             fail("G3", f"{desc}: expected {lit!r} in the text")
+    si_flat = norm(si_body)
+    for desc, lit in si_bindings():
+        if norm(lit) not in si_flat:
+            fail("G3", f"SI {desc}: expected {lit!r}")
     abst = body[body.index(BS + "begin{abstract}") + 16:body.index(BS + "end{abstract}")]
     if len(abst.split()) > 150:
         fail("G4", f"abstract {len(abst.split())} words > 150")

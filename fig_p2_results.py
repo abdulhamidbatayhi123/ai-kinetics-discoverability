@@ -584,7 +584,7 @@ def _e6_panel(ax, FD, da_levels, sigma=0.02, eps=0.0, pe=DISPLAY_PE):
         das = sorted(by)
         x = np.log10(das)
         ax.plot(x, [np.mean(by[d]) for d in das], color=OI["black"], ls="-.", marker=mk, ms=3, lw=1.0,
-                mfc="white" if iso == "step" else OI["black"])
+                mfc="white" if iso == "step" else OI["black"], zorder=5)   # on top where it meets k identifiable at 1
         fd = (FD or {}).get("h2b", {}).get(_key(sigma, eps, iso, pe), {})
         if fd.get("disc"):
             xx, p = _frac(fd["disc"])

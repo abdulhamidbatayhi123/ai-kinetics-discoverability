@@ -8,12 +8,12 @@
   5.6,
   8.0
  ],
- "made": "2026-11-05 10:04:02",
+ "made": "2026-11-08 20:34:46",
  "style_sha256": "f69868eda5a7b118e22266695e3f2c3b8770bb5a3bc4df93008cb0a5b4fab875",
  "script": "fig_p2_examples.py",
  "script_sha256": "a085d808ec501b3cf221c162221da4d623e359eebe4f715bcb30890bd7e19e41",
  "inputs": {
-  "results/p2_figdata.json": "c265d1b3e9f2bdf9faa6f5771e5d16410952afa72b83fc4f6d6c614b08fe4583",
+  "results/p2_figdata.json": "2af9c6d321a3dd7e157a0fc9a970ce21d29504db38ca50ca92e0d1fbfd449d1b",
   "results/p2_o1.json": "b92ae87bfcf78661acc7c6543309541835cd0081df83f78ef078b45e011ab7a6",
   "data/p2/manifest.json": "2742ff22b55f0fa6302e0707a2bfcef9949a809104c853755b3dd4bb325bf270"
  }

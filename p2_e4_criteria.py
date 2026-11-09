@@ -11,11 +11,14 @@ criteria. p2_analyze.verdicts is called UNCHANGED; only each row's 'success' is 
 Boundaries are point estimates (n_boot = 0): the verdict words depend only on them.
 Writes results/p2_e4_criteria.json.
 
-    python p2_e4_criteria.py
+    python p2_e4_criteria.py                      # all variants -> results/p2_e4_criteria.json
+    python p2_e4_criteria.py --only c,d OUT.json  # a subset (run in parallel), then:
+    python p2_e4_criteria.py --merge A.json B.json  # -> results/p2_e4_criteria.json
 """
 import collections
 import json
 import math
+import sys
 
 import p2_analyze as A
 from p2.io_utils import write_atomic
@@ -78,13 +81,33 @@ def main():
     idb, idc = rescore_ident(ident, cells, "b"), rescore_ident(ident, cells, "c")
     runs = {"pre": (o1, ident), "a": (o1a, ident), "b": (o1, idb), "c": (o1, idc), "d": (o1a, idc)}
     out = {"_what": __doc__.splitlines()[0], "variants": {}}
+    only, dest = None, "results/p2_e4_criteria.json"
+    if len(sys.argv) > 2 and sys.argv[1] == "--only":
+        only, dest = sys.argv[2].split(","), sys.argv[3]
     for name, (d, i) in runs.items():
+        if only and name not in only:
+            continue
         v = A.verdicts(cells, d, o2, i, rstats, n_boot=0)
         out["variants"][name] = summarise(v)
         s = out["variants"][name]
         print(f"{name}: {s['overall']} | {s['word_counts']} | gaps {s['gap_min']} .. {s['gap_max']}", flush=True)
+    write_atomic(out, dest)
+
+
+def merge(paths):
+    out = {"_what": __doc__.splitlines()[0], "variants": {}}
+    for p in paths:
+        out["variants"].update(json.load(open(p))["variants"])
+    order = ["pre", "a", "b", "c", "d"]
+    if sorted(out["variants"]) != sorted(order):
+        sys.exit(f"FAIL: variants {sorted(out['variants'])}")
+    out["variants"] = {k: out["variants"][k] for k in order}
     write_atomic(out, "results/p2_e4_criteria.json")
+    print("merged ->", "results/p2_e4_criteria.json")
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == "--merge":
+        merge(sys.argv[2:])
+    else:
+        main()

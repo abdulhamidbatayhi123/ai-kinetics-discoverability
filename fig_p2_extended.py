@@ -12,7 +12,7 @@ otherwise (M8 and M1 were run only at reps 0-2 and rep 0, and their panel says s
   ED4 paper2/fig_ed4_coverage       E3: identifiable vs interval contains k
   ED5 paper2/fig_ed5_methods        every method against Da, plus M9, M8 and M1
   ED6 paper2/fig_ed6_h2d            H2d (exploratory): best success, loading-dependent rate
-  ED7 paper2/fig_ed7_asrun          as-run against corrected verdicts
+  ED7 paper2/fig_ed7_asrun          as-run and intermediate (pre-B90) against corrected verdicts
 
     python fig_p2_extended.py            # from the repo root; loads one large JSON at a time
 """
@@ -40,6 +40,7 @@ OUT = "paper2"
 F_V, F_FD = "results/p2_verdicts.json", "results/p2_figdata.json"
 F_ROB, F_COV = "results/p2_ident_robustness.json", "results/p2_e3_coverage.json"
 F_ASRUN, F_M1 = "results/p2_verdicts_asrun.json", "results/p2_extra_m1.json"
+F_PRE = "results/p2_verdicts_preB90.json"   # after A6 and B89, before B90
 F_M9, F_M8, F_MAN = "results/p2_extra_m9.json", "results/p2_e2_m8.json", "data/p2/manifest.json"
 EST_REP = 15
 PES = (0.2, 1.0, 5.0)
@@ -401,9 +402,9 @@ def _classes(H):
     return out
 
 
-def fig_asrun(A, V, stem):
-    """Positive control, verdict counts and per-slice gaps of the first (as-run) analysis
-    against the corrected one."""
+def fig_asrun(A, V, stem, P=None):
+    """Positive control, verdict counts and per-slice gaps of the first (as-run) analysis and the
+    intermediate one (after A6 and B89, before B90; P) against the corrected one."""
     S.apply()
     fig = plt.figure(figsize=(S.W2, 70 * MM), layout="constrained")
     gs = fig.add_gridspec(1, 3, width_ratios=[1.15, 0.9, 1.0])
@@ -438,11 +439,11 @@ def fig_asrun(A, V, stem):
              loc="upper center", ncol=4, fontsize=5.5, bbox_to_anchor=(0.5, 1.2), handlelength=1.4,
              columnspacing=0.8)
     # b: verdict counts, stacked
-    ca, cv = _classes(A["H2b"]), _classes(V["H2b"])
+    runs = [("as run", A)] + ([("A6, B89", P)] if P else []) + [("corrected", V)]
     face = {"fails before": S.WORD[H2B_WORDS[0]], "fails with": S.WORD[H2B_WORDS[1]],
             "outlives": S.WORD[H2B_WORDS[2]], "withheld": "#ffffff", "no boundary": S.NO_VERDICT}
-    for j, cl in enumerate((ca, cv)):
-        bottom = 0
+    for j, (_, src) in enumerate(runs):
+        cl, bottom = _classes(src["H2b"]), 0
         for name, n in cl.items():
             if not n:
                 continue
@@ -452,10 +453,10 @@ def fig_asrun(A, V, stem):
                    color="#ffffff" if name == "fails before" else "#000000",
                    bbox=dict(facecolor="white", edgecolor="none", pad=0.6) if name == "withheld" else None)
             bottom += n
-    b.set_xticks([0, 1])
-    b.set_xticklabels(["as run", "corrected"])
+    b.set_xticks(range(len(runs)))
+    b.set_xticklabels([r[0] for r in runs], fontsize=5.5)
     b.tick_params(axis="x", length=0)
-    b.set_xlim(-0.6, 1.6)
+    b.set_xlim(-0.6, len(runs) - 0.4)
     b.set_ylim(0, 96)
     b.set_yticks([0, 24, 48, 72, 96])
     b.set_ylabel("O1 H2b slices")
@@ -468,28 +469,42 @@ def fig_asrun(A, V, stem):
     c.plot([lo, hi], [lo, hi], color=GREY, lw=0.6)
     c.axhline(-MDE, color=DARK, lw=0.6, ls="--")
     c.axvline(-MDE, color=DARK, lw=0.6, ls="--")
-    nd = 0
+    nd, nnew = 0, 0
+    earlier = [(A, "as run", 0.35)] + ([(P, "after A6, B89", 1.0)] if P else [])
     for k in sorted(V["H2b"]):
-        ga, gv = A["H2b"].get(k, {}).get("gap_decades"), V["H2b"][k].get("gap_decades")
-        if ga is None or gv is None:
+        gv = V["H2b"][k].get("gap_decades")
+        if gv is None:
             continue
         iso = _parse_slice(k)[2]
-        nd += abs(ga - gv) > 1e-9
-        c.plot(ga, gv, ISO_MARKER[iso], ms=3.4, color=S.WORD[H2B_WORDS[0]],
-               mfc="white" if iso == "step" else S.WORD[H2B_WORDS[0]], mew=0.8)
+        def gap(src):   # a withheld slice (failed positive control) has no verdict, so no gap is shown
+            s = src["H2b"].get(k, {})
+            return None if (s.get("words") or "").startswith("withheld") else s.get("gap_decades")
+        if all(gap(src) is None for src, _, _ in earlier):
+            nnew += 1
+        for src, _, alpha in earlier:
+            ga = gap(src)
+            if ga is None:
+                continue
+            if src is earlier[-1][0]:
+                nd += abs(ga - gv) > 1e-9
+            c.plot(ga, gv, ISO_MARKER[iso], ms=3.4, color=S.WORD[H2B_WORDS[0]] if alpha == 1.0 else GREY,
+                   mfc="white" if iso == "step" else (S.WORD[H2B_WORDS[0]] if alpha == 1.0 else GREY), mew=0.8)
     c.set_xlim(lo, hi)
     c.set_ylim(lo, hi)
-    c.set_xlabel("gap as run (decade)")
+    c.set_xlabel("gap in the earlier run (decade)")
     c.set_ylabel("gap corrected (decade)")
-    c.text(lo + 0.1, hi - 0.15, f"{nd} of 30 slices change", fontsize=5.5, va="top")
-    c.legend(handles=[Line2D([], [], lw=0, marker="o", ms=3.4, color=S.WORD[H2B_WORDS[0]], label="Langmuir"),
-                      Line2D([], [], lw=0, marker="s", ms=3.4, mfc="white", color=S.WORD[H2B_WORDS[0]],
-                             label="step (as run: withheld)"),
+    n_prev = sum(v.get("gap_decades") is not None for v in earlier[-1][0]["H2b"].values())
+    c.text(lo + 0.1, hi - 0.15, f"{nd} of {n_prev} gaps change from the {earlier[-1][1]} run;
+"
+           f"{nnew} slices have a gap only when corrected", fontsize=5.5, va="top")
+    c.legend(handles=[Line2D([], [], lw=0, marker="o", ms=3.4, color=S.WORD[H2B_WORDS[0]], label=f"vs {earlier[-1][1]}"),
+                      Line2D([], [], lw=0, marker="o", ms=3.4, color=GREY, label="vs as run (Langmuir only)"),
+                      Line2D([], [], lw=0, marker="s", ms=3.4, mfc="white", color=DARK, label="step isotherm"),
                       Line2D([], [], color=GREY, lw=0.6, label="identity")],
              loc="lower right", fontsize=5.5)
     for ax, s_ in zip((a, b, c), "abc"):
         S.letter(ax, s_, y=1.12)
-    return S.save(fig, stem, inputs=[F_ASRUN, F_V])
+    return S.save(fig, stem, inputs=[F_ASRUN, F_V] + ([F_PRE] if P else []))
 
 
 def main():
@@ -514,7 +529,7 @@ def main():
     out += fig_methods(FD, m9, m8, m8reps, m1, da, os.path.join(OUT, "fig_ed5_methods"))
     del FD
     gc.collect()
-    out += fig_asrun(_load(F_ASRUN), vslim, os.path.join(OUT, "fig_ed7_asrun"))
+    out += fig_asrun(_load(F_ASRUN), vslim, os.path.join(OUT, "fig_ed7_asrun"), P=_load(F_PRE))
     for p in out:
         print("wrote", p)
 
