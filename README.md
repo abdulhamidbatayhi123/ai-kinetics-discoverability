@@ -118,7 +118,11 @@ Python 3.12 with the packages in `requirements_p2_venv.txt` (PySR also needs Jul
 ```bash
 python p2_generate.py                 # ground-truth fields from the manifest
 bash launch_p2_grid_detached.sh       # the confirmatory grid, one job at a time, resumable
-bash p2_rerun_A6.sh                   # corrected O1 identifiability, then the verdicts
+bash p2_rerun_A6.sh                   # corrected O1 identifiability (A6 + B89), then the verdicts
+bash p2_rerun_B90.sh                  # O1 identifiability with the B90 fix, verdicts, figdata, robustness, E3, E4, E7
+                                      # (the O1 rows ran on Kaggle: kaggle_b90/, then python p2_b90_merge.py)
+python p2_e5_conditioning.py          # post hoc analyses E5 and E6 (E6 and E8 ran on Kaggle:
+python p2_e6_modelselect.py           #   kaggle_e6/, kaggle_e8/, merged by p2_e6_merge.py, p2_e8_merge.py)
 python p2_figdata.py                  # per-level fractions for the figures
 python fig_p2_overview.py && python fig_p2_results.py && python fig_p2_extended.py
 python paper2/build_p2.py             # article + SI, with every gate
