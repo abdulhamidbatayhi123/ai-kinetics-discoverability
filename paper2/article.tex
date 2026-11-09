@@ -151,7 +151,7 @@ Langmuir sorbent (23 slices) and 2.5 for the step isotherm (14 slices); allowing
 known only to lie between two levels, every gap is at least 1.35 decades (Methods). Discovery failed between
 $\Da = 0.11$ and 13, while $k$ stayed identifiable up to $\Da$ between 43 and 994. The best
 discovery method was exact best-subset selection in the weak form in 34 of the 37 slices and the
-weak-form ensemble in the other three, all without noise and with 0.5\,\% isotherm error.
+weak-form ensemble in the other three, all three without noise and with 0.5\,\% isotherm error.
 % results/p2_verdicts.json H2b, H2b_overall (counts: 37 fails before, 0 with, 0 outlives);
 % gaps -1.60 to -3.72; medians -2.23 (langmuir, n 23), -2.50 (step, n 14); da_disc 0.110 to 12.8;
 % da_ident 42.7 to 994; best_method best_subset|weak in 34, ensemble|weak in sigma 0, eps 0.005,
@@ -170,14 +170,12 @@ to 300--320; step, from 560--740 to 690--870).
 % step 562-740; (0.005, 0.005) disc 0.13-0.23 (3 slices), ident langmuir 299-324, step 692-870;
 % (0.02, 0) disc 0.85-1.41, ident 57-172; (0.05, 0) disc 0.12-0.30, ident 57.
 
-The 59 slices without a verdict are not missing data: in each, one probability had no 50\,\%
-crossing on the grid (pre-registered words \verdict{no boundary on the grid for one of the two}).
-In a descriptive check made after the verdicts, the discovery boundary was missing in all 59, and
-the identifiability boundary was on the grid in 56 of the 59. In 40, discovery never reached
-50\,\% at any $\Da$: all 24 slices with 5\,\% isotherm error, 15 with 2\,\% and one with 0.5\,\%.
-In 8, all without noise, it never fell below 50\,\%. In the other 11, success crossed 50\,\% more
-than once, which no single logistic crossing describes (Fig.~3), most clearly for symbolic
-regression (M7; next section).
+The 59 slices without a verdict (\verdict{no boundary on the grid for one of the two}) are not
+missing data. In a descriptive check made after the verdicts, the discovery boundary was missing
+in all 59, and the identifiability boundary was on the grid in 56 of the 59. In 40, discovery
+never reached 50\,\% at any $\Da$, including all 24 slices with 5\,\% isotherm error. In 8, all
+without noise, it never fell below 50\,\%. In the other 11, success crossed 50\,\% more than once,
+most clearly for symbolic regression (M7; next section).
 % results/p2_ident_robustness.json h2b_no_verdict_classes: discovery missing 59 (always < 50 %: 40;
 % always >= 50 %: 5 + 3 = 8, all sigma = 0; straddles: 11); identifiability missing only in the 3
 % "always >= 50 %" slices (sigma = eps = 0, langmuir Pe 94 and 19, step Pe 19); discovery present
@@ -194,7 +192,7 @@ O1 profile recovered $k$ to within 5\,\% at every $\Da$ up to 100, but at $\Da =
 crosses a probe in only a few of the 200 observation times. This does not affect H2b: in
 all 37 slices with a verdict, $k$ was identifiable in at least 95\,\% of replicates at every
 $\Da \le 31.6$, and the highest $\Da \le 100$ at which it was identifiable in half the
-replicates lay at least 0.9 decades above the discovery boundary (Extended Data Fig.~3).
+replicates lay at least 0.89 decades above the discovery boundary (Extended Data Fig.~3).
 % results/p2_ident_robustness.json accuracy_median_khat_over_k_sigma0_eps0 (0.969 to 1.045 up to
 % Da 100; Da 316: 0.755 to 0.908; Da 1000: 0.393 to 0.536); h2b_without_da_316_1000_summary
 % (n_slices 37; min_p_ident_da_le_31.6 0.956; min_gap_lower_bound_decades 0.89, the three
@@ -262,9 +260,8 @@ identifiable.
 
 The neural-network pipeline of the closest prior work (M1), run as a
 declared demonstration at one noise level, recovered the law in one of its nine fits, at
-$\Da = 3.16$. Slow-manifold discovery (M9), which targets the isotherm rather than the rate law,
-recovered its own target only at the highest rate and without noise (67\,\% of replicates at
-$\Da = 1000$, pooled over isotherms and P\'eclet numbers), and in at most 17\,\% elsewhere.
+$\Da = 3.16$. Slow-manifold discovery (M9), which targets the isotherm, recovered it only without noise at
+the highest rate (67\,\% of replicates at $\Da = 1000$) and in at most 17\,\% elsewhere.
 % results/p2_extra_m9.json (estimation replicates): sigma = eps = 0, Da 1000: 0.67; max elsewhere
 % 0.17 (sigma 0.5 %, eps 0, Da 1000); 0.00 at every Da <= 31.6.
 
@@ -278,7 +275,7 @@ sparse regression failed at every rate (Fig.~4d). It did not reach the identifia
 with an exact isotherm, the LDF law was chosen in only 31 of 180 replicates at $\Da = 31.6$ and
 in none from $\Da = 100$ on, at both noise levels alike, so the failure is systematic, not
 statistical. Sampling explains part of it. With twice as many observation times (E8, post hoc;
-exact isotherm), every boundary moved to higher $\Da$: discovery by 0.4 to 0.7 decade, choice
+exact isotherm), every boundary moved to higher $\Da$ or stayed: discovery by 0.4 to 0.7 decade, choice
 among the laws by 0.2 to 0.5 decade, identifiability by up to 0.3 decade or beyond the grid. Yet no
 replicate chose the LDF law at $\Da = 100$, and discovery still failed at least 1.2 decades
 before identifiability.
@@ -346,12 +343,12 @@ The rate law of a fixed-bed column could be discovered only over a narrow part o
 which its rate constant could be measured. In every slice of the design where both boundaries
 existed, discovery failed between 1.6 and 3.7 decades of Damk\"ohler number before
 identifiability did. For practice this sets an order of operations. Where the isotherm is known almost exactly (an error
-of 0.5\,\% with 0.5\,\% noise already confined discovery to $\Da \le 0.2$) and the uptake is slow compared with the
+of 0.5\,\% with 0.5\,\% noise already confined discovery to $\Da \le 0.23$) and the uptake is slow compared with the
 passage of the front ($\Da$ of order one or below), sparse regression in the weak form can
 propose the law. Up to $\Da \approx 10$ the law can still be chosen among a few
 candidates by likelihood, even with 2\,\% isotherm error (E6). Beyond that it has to be
-assumed, and the data are then still good for its coefficient, unless the isotherm is
-systematically wrong (below), from interior probes up to one
+assumed, and the data are then still good for its coefficient, unless the step of the isotherm
+is misplaced (below), from interior probes up to one
 and a half to nearly four decades of $\Da$ beyond the discovery boundary,
 and, in the few conditions tested, somewhat beyond the discovery range from the outlet alone.
 
@@ -360,13 +357,13 @@ Identifiability asks whether a known law with one free coefficient fits well onl
 value. Discovery asks the data to choose that law among many, and, in the success rule used
 here, to return the coefficients of $\qsm$ and $q$ in the ratio $-1$ within 10\,\%. An isotherm
 error enters discovery as an error in a regressor, which biases exactly that ratio. In the
-identifiability fit the same error is absorbed into $k$, and the estimate stays within a factor of
-two of the truth. The observation that an isotherm error of 0.5\,\% moved the discovery boundary
+identifiability fit the same smooth error is absorbed into $k$, and the estimate stays within a
+factor of two of the truth. The observation that an isotherm error of 0.5\,\% moved the discovery boundary
 by more than a decade, while it moved the identifiability boundary by less than 0.2 decade, is
 consistent with this reading, although the study was not designed to separate the mechanisms.
 The asymmetry of the two success rules does not make the gap: in a post hoc check (E4), dropping
 the ratio test from discovery, requiring the interval to lie within 10\,\% of $k$, or judging
-identifiability by the point estimate alone kept every verdict, with gaps of 0.9 to 3.8 decades.
+identifiability by the point estimate alone kept every verdict, with gaps of 0.89 to 3.75 decades.
 % results/p2_e4_criteria.json (EXPLORATORY_P2 E4; p2_e4_criteria.py): variants a (discovery relaxed)
 % 40 slices, gaps 1.60-3.72; b (interval in [0.9k, 1.1k]) 37, 0.89-2.94; c (point estimate in
 % [k/2, 2k]) 37, 1.79-3.75; d (a and c) 40, 1.79-3.75; every slice "fails before"; controls pass.
@@ -407,7 +404,8 @@ ceiling that experiments rarely reach. The identifiability criterion asks whethe
 profile interval lies within a factor of two of $k$; it is a criterion of precision and accuracy,
 not of calibration. In an exploratory check the intervals contained the true $k$ in only about
 10\,\% of O1 rows (23\,\% on O3; Extended Data Fig.~4), because they are narrower than the small biases from time resolution and from
-errors in the inputs to $\qsm$. At the two highest $\Da$ levels the time resolution also biased
+errors in the inputs to $\qsm$; judged by the point estimate alone, which does not use the
+interval, every verdict holds (E4). At the two highest $\Da$ levels the time resolution also biased
 the estimate itself, downwards by up to a factor of 2.5, so identifiability there is partly a property of
 the sampling; H2b does not depend on those levels. Symbolic regression ran on a subgrid, the
 neural pipeline only as a demonstration, and a Kolmogorov--Arnold network only in an exploratory
@@ -416,8 +414,8 @@ by cost rules declared before the grid ran. Combining method families was not te
 errors-in-variables fitting in the weak form.
 % results/p2_e2_m8.json (216 rows, 0 success, 1 pykan-internal error counted as a failure).
 Finally, five errors in our own code and one solver setting were found and corrected during the
-study. The one that mattered most, a wrong coefficient in the exact update of the O1 likelihood
-found in a later review of the code, moved half of the identifiability boundaries to lower $\Da$
+study. The one that mattered most, a wrong coefficient in the O1 likelihood found by a later
+review, moved half of the identifiability boundaries to lower $\Da$
 and raised the number of slices with a verdict from 30 to 37. All earlier results are public
 (Supplementary Note~2); no correction changed a pre-registered verdict word.
 % RETRACTIONS_P2 B86 (solve stall, A5), B87 (O1 k range), B88 (M1 best parameters), B89 (refinement
@@ -427,7 +425,8 @@ and raised the number of slices with a verdict from 30 to 37. All earlier result
 Three directions follow. Discovery would gain most from better isotherms: the boundaries moved
 more with isotherm error than with noise, and in a post hoc test (E7), shifting the step of the
 MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,\% at every rate
-and, by biasing the fitted $k$, lowered the identifiability boundary to $\Da \approx 17$ to 57.
+and biased the fitted $k$, by 10 to 15\,\% at $\Da = 1$ and by a factor of 1.5 to 1.8 at $\Da = 10$,
+with intervals too narrow to show it; the identifiability boundary fell to $\Da \approx 17$ to 57.
 An isotherm whose step is placed to better than 1\,\% relative humidity is worth more than quieter
 sensors, to discovery and to the estimate of $k$ alike. Experiments can also be designed to discriminate among candidate laws,
 choosing probe positions and sampling rates that widen the range where the LDF law is
@@ -680,7 +679,12 @@ For each slice the boundary $\Da^{*}$ was the 50\,\% crossing of an unpenalised 
 regression of replicate outcomes on $\log_{10}\Da$, with a percentile bootstrap interval
 (2000 resamples within each $\Da$ level). No boundary was reported, and no verdict issued,
 when the fitted curve did not cross 50\,\% inside the tested range or rose with $\Da$ instead
-of falling; the range was reported instead. Before the freeze the estimator's coverage on planted boundaries was 0.94 for a
+of falling; the range was reported instead. The boundary is the crossing of the fitted curve, so
+a slice whose observed success stays just below 50\,\% can still have one: in one slice
+(Langmuir, $\Pe \approx 19$, 2\,\% noise and isotherm error) success was 0.49 at the two lowest
+levels and the curve crosses 50\,\% at $\Da = 0.16$. In all, 10 of the 37 discovery boundaries lie
+within 0.25 decade of the lowest level, $\Da = 0.1$; their slices have gaps of 2.3 to 3.7
+decades, so the narrowest gaps do not depend on them. Before the freeze the estimator's coverage on planted boundaries was 0.94 for a
 nominal 0.95, with a bias of $+0.012$ decade. The best discovery method of each slice was
 chosen on replicates 0--14 and its boundary estimated on replicates 15--59, which removes the
 inflation that choosing and estimating on the same replicates causes (0.07 decade in

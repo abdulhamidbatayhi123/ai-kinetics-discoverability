@@ -491,8 +491,10 @@ B76 and B79 to B84 were found before any grid result existed and reached no resu
 corrected the analysis code, one method's inclusion gate, cost statements, citations and
 descriptions of the ground truth. B85, a provenance field missing from three results files, was
 found while the grid ran and affects no result. Six entries were found while the grid ran or
-after its first verdicts and changed what was computed (B86 to B91); five changed confirmatory
-results and one an exploratory analysis. Each is described here with what it changed.
+after its first verdicts and changed what was computed (B86 to B91): three changed confirmatory
+identifiability rows (B87, B89, B90), one capped the O2 and O3 solves without changing a finished
+row (B86), one the M1 demonstration (B88) and one an exploratory analysis (B91). Each is described
+here with what it changed.
 % source: RETRACTIONS_P2.md (B76, B79-B91); PREREG_P2 s.9 (A5 97150f6, A6 375552b, A7 539d9a7).
 
 \subsection*{A5: a cap on each column solve (B86)}
@@ -551,7 +553,8 @@ The code subtracted $(q^{*}_{1} - q^{*}_{0})(1 - g)$ where the exact solution ne
 $(q^{*}_{1} - q^{*}_{0})(g - e)$. Both coefficients equal $kh/2$ to first order and differ by
 $(kh)^{2}/6$ at the next, so the original
 comparison with an ODE-solver likelihood, made at small $kh$, passed. At $kh = 1$ the error of a
-single update was 0.22, and at $kh = 10$ it was 1.68, on a $\qs$ range of 2.1; as $kh$ grows the
+single update was 0.22, and at $kh = 10$ it was 1.68, for a worst case in which $\qs$ changes by
+2.1 within one interval; as $kh$ grows the
 update lags $\qs$ by one step. The likelihood therefore misfit the data at high $\Da$: with exact
 data the estimate at $\Da = 316$ was 1.1 to 24 times $k$, which an earlier draft had attributed
 to the time resolution of the data. The error was found in a later review of the code, derived,
@@ -776,7 +779,9 @@ identifiability profile: the LDF law $k(\qsm - q)$, the quadratic driving force
 $k({\qsm}^{2} - q^{2})/(2q)$ and the pseudo-second-order law $k(\qsm - q)^{2}$. Each is integrated
 by implicit Euler with four substeps per interval along the same upsampled $\qsm(t)$ path as the
 identifiability profile; its $k$ is profiled on \texttt{logspace(-7, 1, 81)} and refined by a
-bounded one-dimensional search between the grid neighbours of the grid optimum (B91). With one
+bounded one-dimensional search between the grid neighbours of the grid optimum. The declared
+procedure read $k$ off the grid and took one implicit step per upsampled interval; the refinement and the substeps were
+added after the first rows (B91, Supplementary Note~2), and every row was recomputed. With one
 parameter each, the Bayesian information criterion chooses the largest likelihood. The subgrid
 was $\Pe \approx 94$, both isotherms, all nine $\Da$, $\sigma \in \{0.5, 2\}\,\%$,
 $\varepsilon \in \{0, 2\}\,\%$, estimation replicates 15 to 59 (3\,240 fits of each law). The
@@ -813,8 +818,8 @@ noise; E8 tests whether the sampling rate is its cause.
 % p2_e6_modelselect.py; results/p2_e6_modelselect_v1.json (first rows, before B91).
 
 \subsection*{E7: a shifted isotherm step (post hoc)}
-The pre-registered isotherm error is a smooth random multiplicative function. A real water isotherm
-is more often wrong in where its step lies. For the step isotherm (O1, $\Pe \approx 94$, all nine
+The pre-registered isotherm error is a smooth random multiplicative ripple. A real water isotherm
+can also be wrong in where its step lies, an error of a different shape. For the step isotherm (O1, $\Pe \approx 94$, all nine
 $\Da$, $\sigma \in \{0.5, 2\}\,\%$, replicates 0 to 59), the measured isotherm was given a step
 shifted by $\pm 1$ and $\pm 2\,\%$ relative humidity, with the fields unchanged; discovery (the six
 sparse solvers in both forms, best method chosen on replicates 0 to 14) and O1 identifiability
@@ -839,13 +844,16 @@ $\sigma$ & step shift (\% RH) & best discovery success, any $\Da$ & $\Da^{*}_{\m
 \noindent Discovery reached 50\,\% at no rate under any shift. Identifiability held only to
 $\Da \approx 17$ to 57 with a 1\,\% shift and to $\Da \approx 5.6$ with a 2\,\% shift (all-to-none
 between $\Da = 3.16$ and 10, so interval-censored), against $\Da \approx 172$ to 562 for the same
-noise levels with an exact isotherm (E8, 200 samples). The intervals stayed narrow (upper over lower
-bound at most 1.16 at $\Da \le 31.6$); the estimate was biased, downwards when the step was placed too low and upwards when too high, by a factor that
+noise levels with an exact isotherm (E8, 200 samples). The intervals stayed narrow (median upper over lower
+bound at most 1.16 per level, and at most 1.19 in any replicate, at $\Da \le 31.6$), while the
+median estimate at a 1\,\% shift was off by 10 to 15\,\% at $\Da = 1$ and 20 to 33\,\% at
+$\Da = 3.16$, at both noise levels: precise, but wrong. The estimate was biased, downwards when the step was placed too low and upwards when too high, by a factor that
 grew with $\Da$. For positive shifts at high $\Da$ the likelihood peaked on the upper edge of the
 $k$ grid ($k = 10$\,s$^{-1}$); these 839 rows raise an error and count as not identifiable.
-A systematic error in the isotherm therefore limits the estimate of $k$ as well as discovery,
-unlike the random isotherm error of the grid, which moved $\Da^{*}_{\mathrm{ident}}$ by less than
-0.2 decade.
+A misplaced step therefore limits the estimate of $k$ as well as discovery. The grid's smooth
+isotherm error moved $\Da^{*}_{\mathrm{ident}}$ by less than 0.2 decade at $\varepsilon = 0.5\,\%$
+but by 0.43 to 0.92 decade at 5\,\% ($\sigma = 0.5\,\%$), so the shape of the error matters as
+well as its size.
 % source: results/p2_e7_summary.json, results/p2_e7_stepshift.json (identifiability recomputed with B90,
 % p2_e7_parallel.sh, 2026-11-09; results/p2_e7_*_preB90.json kept); p2_e7_stepshift.py; EXPLORATORY_P2 E7.
 % Error rows: shift +1 % at Da 100, 316, 1000 (119, 120, 120); +2 % at Da 31.6 to 1000 (120 each).
@@ -853,7 +861,8 @@ unlike the random isotherm error of the grid, which moved $\Da^{*}_{\mathrm{iden
 % Da 31.6); exact isotherm (E8 rows, 200 samples) 1.003-1.084.
 
 \subsection*{E8: sampling rate (post hoc)}
-E6 chose the wrong law at $\Da \ge 31.6$ with an exact isotherm, at both noise levels. E8 asks
+E6 chose the wrong law at $\Da \ge 100$ with an exact isotherm at both noise levels, and at
+$\Da = 31.6$ in every case but the Langmuir sorbent at 0.5\,\% noise. E8 asks
 whether the time resolution is the cause. On O1 ($\Pe \approx 94$, both isotherms, all nine
 $\Da$, $\sigma \in \{0.5, 2\}\,\%$, $\varepsilon = 0$, replicates 0 to 59), every quantity was
 computed at the grid's 200 observation times and at 400 (every stored time of the ground-truth

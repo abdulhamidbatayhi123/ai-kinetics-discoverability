@@ -128,7 +128,7 @@ def bindings():
     out += [("estimator accuracy up to Da 100",
              f"within {int(-(-max(abs(a - 1) for a in acc) * 100 // 1))}{BS},{BS}% at every"),
             ("min P(ident) at Da <= 31.6", f"at least {int(summ['min_p_ident_da_le_31.6'] * 100)}{BS},{BS}% of replicates"),
-            ("gap lower bound", f"at least {summ['min_gap_lower_bound_decades']:.1f} decades")]
+            ("gap lower bound", f"at least {math.floor(summ['min_gap_lower_bound_decades'] * 100) / 100:.2f} decades")]
     cls = rob["h2b_no_verdict_classes"]
     miss = sum(n for k, n in cls.items() if k.startswith("discovery missing"))
     never = sum(n for k, n in cls.items() if "discovery missing, always < 50" in k)
@@ -191,14 +191,34 @@ def bindings():
                                                "no boundary on the grid for one of the two; reported as the range tested"}
                 for v in alt)
     out += [("E4 every verdict kept", "the point estimate alone kept every verdict" if e4_ok else "E4 verdict differs"),
-            ("E4 gap range", f"with gaps of {min(-v['gap_max'] for v in alt):.1f} to {max(-v['gap_min'] for v in alt):.1f} decades")]
+            ("E4 gap range", f"with gaps of {math.floor(min(-v['gap_max'] for v in alt) * 100) / 100:.2f} to "
+             f"{max(-v['gap_min'] for v in alt):.2f} decades")]
+    # review round 2 (m2, m4, referee 6): bounds rounded outwards; the borderline verdict slice; boundaries near
+    # the bottom of the grid
+    h2b_all = load("results/p2_verdicts.json")["H2b"]
+    d55 = [s["da_disc"] for k, s in h2b_all.items() if k.startswith("sigma=0.005|eps=0.005|") and s["gap_decades"] is not None]
+    out.append(("discovery at 0.5 % noise and error", f"confined discovery to $" + BS + f"Da " + BS + f"le {math.ceil(max(d55) * 100) / 100:.2f}$"))
+    near = [s["gap_decades"] for s in h2b_all.values()
+            if s["gap_decades"] is not None and math.log10(s["da_disc"] / 0.1) <= 0.25]
+    out.append(("boundaries near the grid bottom", f"{len(near)} of the 37 discovery boundaries lie within 0.25 decade"))
+    out.append(("their gaps", f"gaps of {math.floor(-max(near) * 10) / 10:.1f} to {-min(near):.1f} decades"))
+    fdb = load("results/p2_figdata.json")["h2b"]["sigma=0.02|eps=0.02|langmuir|pe=5.0"]
+    lo2 = [n / m for _, n, m in fdb["disc"][:2]]
+    out.append(("borderline slice", f"success was {lo2[0]:.2f} at the two lowest levels" if lo2[0] == lo2[1] < 0.5
+                else "borderline slice changed"))
+    out.append(("borderline crossing", f"crosses 50" + BS + "," + BS + f"% at $" + BS + f"Da = {h2b_all['sigma=0.02|eps=0.02|langmuir|pe=5.0']['da_disc']:.2f}$"))
     e7 = load("results/p2_e7_summary.json")
     e7_1 = [v["da_ident"] for k, v in e7.items() if abs(float(k.split("shift=")[1])) == 0.01]
     e7_disc = max(max(v["disc_by_da"].values()) for k, v in e7.items() if abs(float(k.split("shift=")[1])) == 0.01)
     out += [("E7 identifiability boundary at 1 % shift",
-             f"identifiability boundary to $" + BS + f"Da " + BS + f"approx {min(e7_1):.0f}$ to {max(e7_1):.0f}"
+             f"identifiability boundary fell to $" + BS + f"Da " + BS + f"approx {min(e7_1):.0f}$ to {max(e7_1):.0f}"
              if all(e7_1) else "E7 ident missing"),
             ("E7 discovery at 1 % shift", f"at or below {math.floor(e7_disc * 100 + 0.5):.0f}" + BS + "," + BS + "% at every rate")]
+    # review round 2 (M1): the bias of k under a 1 % step shift, medians over estimation replicates per (sigma, shift)
+    b1, b10 = e7_bias(1.0), e7_bias(10.0)
+    out += [("E7 bias at Da 1", f"by {round((1 - min(b1)) * 100)} to {round((max(b1) - 1) * 100)}" + BS + "," + BS + "% at $" + BS + "Da = 1$"
+             if min(b1) < 1 < max(b1) else "E7 bias Da 1 one-sided"),
+            ("E7 bias at Da 10", f"by a factor of {1 / max(x for x in b10 if x < 1):.1f} to {max(b10):.1f} at $" + BS + "Da = 10$")]
     e8 = load("results/p2_e8_summary.json")
     sh = {"disc": [], "select": [], "ident": []}
     beyond, gap400, sel100 = 0, [], []
@@ -219,6 +239,9 @@ def bindings():
             ("E8 identifiability shift", f"identifiability by up to {f1(max(sh['ident']))} decade"
              + (" or beyond the grid" if beyond else "")),
             ("E8 no LDF choice at Da 100", "no\nreplicate chose the LDF law at" if not any(sel100) else "E8 LDF chosen at 100"),
+            ("E8 every boundary up or unchanged", "moved to higher $" + BS + "Da$ or stayed"
+             if min(min(v) for v in sh.values()) >= 0 and min(min(v) for v in sh.values()) == 0
+             else "E8 a boundary moved down, or none stayed"),
             ("E8 smallest gap at 400", f"still failed at least {math.floor(min(gap400) * 10) / 10:.1f} decades"),
             ("E8 verdict words at 400", "discovery still failed" if all(
                 v["words"] == "discovery fails before identifiability" for k, v in e8.items()
@@ -231,6 +254,20 @@ def bindings():
 def _thou(n):
     s = f"{n:,}"
     return s.replace(",", BS + ",") if n >= 10000 else s.replace(",", BS + ",") if n >= 1000 else s
+
+
+def e7_bias(da, shifts=("-0.01", "0.01")):
+    """Median k_hat/k (geometric midpoint of the interval) over estimation replicates 15..59, per (sigma, shift)."""
+    cells = load("data/p2/manifest.json")["cells"]
+    rows = load("results/p2_e7_stepshift.json")["rows"]
+    med = []
+    for s in ("0.005", "0.02"):
+        for sh in shifts:
+            est = [math.sqrt(r["ident"]["lo"] * r["ident"]["hi"]) / cells[k.split("|")[0]]["k_LDF"]
+                   for k, r in rows.items() if "error" not in r["ident"] and int(k.split("|")[3]) >= 15
+                   and k.split("|")[1] == s and k.split("|")[2] == sh and cells[k.split("|")[0]]["Da"] == da]
+            med.append(statistics.median(est))
+    return med
 
 
 def e7_rows():
@@ -292,6 +329,24 @@ def si_bindings():
     e7r, e7err = e7_rows()
     out += [(f"E7 table row {i}", r) for i, r in enumerate(e7r)]
     out.append(("E7 error rows", f"these {_thou(e7err)} rows raise an error"))
+    # review round 2 (M1, M2, m5): E7 interval widths and bias; the grid's isotherm-error shift of Da*_ident
+    e7 = load("results/p2_e7_stepshift.json")["rows"]
+    rat = {}
+    for k, r in e7.items():
+        name, s, sh, rep = k.split("|")
+        if int(rep) >= 15 and "error" not in r["ident"] and cells[name]["Da"] <= 31.7:
+            rat.setdefault((s, sh, cells[name]["Da"]), []).append(r["ident"]["hi"] / r["ident"]["lo"])
+    med_w = max(statistics.median(v) for v in rat.values())
+    max_w = max(max(v) for v in rat.values())
+    out.append(("E7 widths", f"bound at most {med_w:.2f} per level, and at most {max_w:.2f} in any replicate"))
+    b1, b3 = e7_bias(1.0), e7_bias(3.1622776601683795)
+    out.append(("E7 bias Da 1 and 3.16", f"off by {round((1 - min(b1)) * 100)} to {round((max(b1) - 1) * 100)}" + BS + "," + BS
+                + f"% at $" + BS + f"Da = 1$ and {round((1 - max(x for x in b3 if x < 1)) * 100)} to "
+                f"{round((max(b3) - 1) * 100)}" + BS + "," + BS + "% at"))
+    h2b = load("results/p2_verdicts.json")["H2b"]
+    d5 = [math.log10(h2b[f"sigma=0.005|eps=0.05|{i}|pe={p}"]["da_ident"] / h2b[f"sigma=0.005|eps=0.0|{i}|pe={p}"]["da_ident"])
+          for i in ("langmuir", "step") for p in ("0.2", "1.0", "5.0")]
+    out.append(("eps 5 % ident shift", f"but by {-max(d5):.2f} to {-min(d5):.2f} decade at 5"))
     out.append(("O1 rows identifiable, corrected", f"& {_thou(sum(bool(v.get('success')) for v in cor.values()))} " + BS + BS))
     return out
 

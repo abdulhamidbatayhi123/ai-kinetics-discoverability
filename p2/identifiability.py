@@ -66,9 +66,9 @@ def _ldf_exact(k, tf, qs, q0):
     q1 = e q0 + (1 - e) qs0 + (qs1 - qs0) (1 - g) = e q0 + (1 - e) qs1 - (qs1 - qs0) (g - e),
     e = exp(-k h), g = (1 - e) / (k h); vectorised over k (array). Exact for the interpolated q*,
     no ODE solver; tested against solve_ivp for k h from 1e-4 to 100 (tests/test_ldf_exact.py).
-    B90: the version used until 2026-11-08 subtracted (qs1 - qs0)(1 - g) instead of (g - e), which
-    agrees only to second order in k h and lags one step as k h grows (found by an independent
-    review, RETRACTIONS_P2 B90)."""
+    B90: the version used until 2026-11-08 subtracted (qs1 - qs0)(1 - g) instead of (g - e); both
+    coefficients equal k h / 2 to first order and differ by (k h)^2 / 6 at second order, and the old
+    update lags one step as k h grows (found by an independent review, RETRACTIONS_P2 B90)."""
     k = np.atleast_1d(np.asarray(k, float))[:, None]
     h = np.diff(tf)[None, :]
     e = np.exp(-k * h)
