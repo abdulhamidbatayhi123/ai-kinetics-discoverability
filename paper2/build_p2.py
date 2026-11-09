@@ -2,7 +2,8 @@
 
 Gates (pattern of pinn-machining revision_eaai/build/gates.py; rules from PRESENTATION_PLAN.md):
   G1  the bibliography is regenerated from bib_p2.tex (make_article_bib.py) and nothing is missing
-  G2  article.tex and supplementary_main.tex compile with no error and no undefined reference
+  G2  article.tex and supplementary_main.tex compile with no error and no undefined reference,
+      and no line or table runs more than 2 pt past the margin (overfull boxes, read from the logs)
   G3  key numbers in the text are recomputed from the results files and must appear verbatim
   G4  abstract <= 150 words; main text (Introduction + Results + Discussion) <= 3,500 words
   G5  <= 6 display items (figures + tables) in the main text
@@ -301,10 +302,16 @@ def main():
     if r.returncode or "missing: []" not in r.stdout:
         fail("G1", r.stdout + r.stderr)
     for doc in ("article.tex", "supplementary_main.tex"):
-        r = subprocess.run([TECTONIC, "-X", "compile", doc], capture_output=True, text=True)
+        r = subprocess.run([TECTONIC, "-X", "compile", "--keep-logs", doc], capture_output=True, text=True)
         log = r.stdout + r.stderr
         if r.returncode or re.search(r"^error|undefined", log, re.M | re.I):
             fail("G2", f"{doc}: " + "; ".join(l for l in log.splitlines() if re.search("error|undefined", l, re.I))[:400])
+        # G2b: nothing may print past the margin (found 2026-11-09: the Unit column of Supplementary
+        # Table 1 was 210 pt off the page)
+        texlog = open(doc[:-4] + ".log", encoding="utf-8", errors="replace").read()
+        over = [float(x) for x in re.findall(r"Overfull \\hbox \(([\d.]+)pt too wide\)", texlog)]
+        if any(x > 2.0 for x in over):
+            fail("G2", f"{doc}: overfull box(es) of {', '.join(f'{x:.0f}' for x in over if x > 2)} pt; see {doc[:-4]}.log")
     tex = open("article.tex", encoding="utf-8").read()
     si = open("supplementary.tex", encoding="utf-8").read()
     body, si_body = strip_comments(tex), strip_comments(si)
