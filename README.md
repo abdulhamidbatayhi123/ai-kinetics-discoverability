@@ -36,7 +36,10 @@ under four alternative success rules (E4, `results/p2_e4_criteria.json`: gaps 0.
 and at twice the sampling rate (E8, `results/p2_e8_summary.json`: every boundary moves up, the gap
 stays at least 1.25 decades). Choosing among three candidate laws by likelihood (E6) finds the
 LDF law in every replicate up to Da = 10 with an exact isotherm, further than open discovery, but
-in none from Da = 100 on.
+in none from Da = 100 on. A systematic isotherm error limits the rate constant too: shifting the
+step of the MOF-303-like isotherm by 1 % relative humidity (E7, `results/p2_e7_summary.json`)
+biases the fitted k and lowers the identifiability boundary to Da = 17 to 57, while discovery
+stays at or below 31 % at every rate.
 
 ## Pre-registration and amendments
 
