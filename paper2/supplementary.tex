@@ -18,7 +18,7 @@ from the code that built each solve, and the per-cell values from the ground-tru
 \textbf{Supplementary Table 1.} Parameters of the two simulated columns. ``Langmuir'' is the
 default physics; ``step'' is water on a MOF-303-like framework with a Type V isotherm.
 \par\medskip
-\begin{tabular}{@{}llll@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xlll@{}}
 \toprule
 Quantity & Langmuir & Step & Unit \\
 \midrule
@@ -77,9 +77,9 @@ Stoichiometric time $t_{\mathrm{stoich}}$ & 7200.4 & 31\,050.4 & s \\
 $\Da = k\,t_{\mathrm{stoich}}$, 9 levels & \multicolumn{2}{l}{$10^{-1}$ to $10^{3}$, half-decade spacing} & -- \\
 LDF coefficient $k$ & $1.389\times10^{-5}$ to $0.1389$ & $3.221\times10^{-6}$ to $0.03221$ & s$^{-1}$ \\
 Residence-time form $k L/u$ & $5.56\times10^{-6}$ to $0.0556$ & $1.13\times10^{-6}$ to $0.0113$ & -- \\
-Default $D_L = 0.7 D_m + 0.5\,d_p u$, $D_m = 2.5\times10^{-5}$\,m$^2$\,s$^{-1}$ & $2.675\times10^{-4}$ & $3.032\times10^{-4}$ & m$^2$\,s$^{-1}$ \\
+Default axial dispersion $D_L$ (note) & $2.675\times10^{-4}$ & $3.032\times10^{-4}$ & m$^2$\,s$^{-1}$ \\
 $D_L$ multiplier (``$\Pe$'' level) & \multicolumn{2}{l}{$\times 0.2$, $\times 1$, $\times 5$} & -- \\
-$D_L$ at the three levels & $5.35\times10^{-5}$, $2.675\times10^{-4}$, $1.338\times10^{-3}$ & $6.06\times10^{-5}$, $3.032\times10^{-4}$, $1.516\times10^{-3}$ & m$^2$\,s$^{-1}$ \\
+$D_L$ at the three levels & \begin{tabular}[t]{@{}l@{}}$5.35\times10^{-5}$\\ $2.675\times10^{-4}$\\ $1.338\times10^{-3}$\end{tabular} & \begin{tabular}[t]{@{}l@{}}$6.06\times10^{-5}$\\ $3.032\times10^{-4}$\\ $1.516\times10^{-3}$\end{tabular} & m$^2$\,s$^{-1}$ \\
 $\Pe = uL/D_L$ at the three levels & 467, 93.5, 18.7 & 471, 94.2, 18.8 & -- \\
 L2 rate drop and width & -- & 0.8, 0.05 & -- \\
 % source: data/p2/manifest.json keys t_stoich_s (7200.4 and 31050.41), k_LDF (min, max per iso),
@@ -100,7 +100,10 @@ Horizon (until outlet $c/c_{\mathrm{in}} > 0.95$) & 4 or 8 $t_{\mathrm{stoich}}$
 Time integrator & \multicolumn{2}{l}{BDF, rtol $10^{-6}$, atol $10^{-10}$, upwind advection} & -- \\
 Cells (L1, L2, isothermal control) & 27, 0, 9 & 27, 27, 0 & -- \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
+\par\smallskip
+\raggedright Note: the default axial dispersion is $D_L = 0.7 D_m + 0.5\,d_p u$ with
+$D_m = 2.5\times10^{-5}$\,m$^2$\,s$^{-1}$.
 \end{table}
 % source: p2_generate.py N_Z = 400, N_SNAP = 400, HORIZON = 4.0, solve_cell (horizon doubled up to
 % 4 times until c[-1,-1]/c_in > 0.95), cells(); solver_fd.py:generate_breakthrough_data defaults
@@ -598,8 +601,9 @@ enters no confirmatory test, so no verdict depends on it.
 % results/p2_extra_m1_asrun.json; results/p2_extra_m1.json; tests/test_m1_train.py.
 
 \subsection*{As-run, intermediate and corrected verdicts}
-All three sets of verdicts are public (\texttt{results/p2\_verdicts\_asrun.json},
-\texttt{results/p2\_verdicts\_preB90.json} and \texttt{results/p2\_verdicts.json}). As first run, the Langmuir positive control passed
+\begin{sloppypar}
+All three sets of verdicts are public (\texttt{results/\allowbreak p2\_verdicts\_asrun.json},
+\texttt{results/\allowbreak p2\_verdicts\_preB90.json} and \texttt{results/\allowbreak p2\_verdicts.json}). As first run, the Langmuir positive control passed
 (discovery and identifiability 135 of 135) and the step control failed, so the step isotherm was
 withheld from all 48 of its H2b slices. Among the 48 Langmuir slices, 20 had a verdict, and in
 all 20 discovery failed before identifiability; 28 had no boundary on the grid for discovery or
@@ -607,6 +611,7 @@ identifiability. H2a and H2c had no verdict. The intermediate verdicts, after A6
 before B90, are those an earlier draft reported. The corrected verdicts are the primary result,
 because only they compute the pre-registered estimand, the 95\,\% profile interval of the exactly
 integrated likelihood, for every cell.
+\end{sloppypar}
 
 \begin{center}
 \small
