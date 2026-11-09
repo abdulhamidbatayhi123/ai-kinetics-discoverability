@@ -26,6 +26,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
+import matplotlib.ticker  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch, Rectangle  # noqa: E402
 
@@ -158,7 +159,10 @@ def fig_ident(R, V, da, stem):
             a.plot(x, y, ls=ls, marker=PE_MARKER[pe], color=S.IDENT_SHADES[i], ms=3,
                    mfc="white" if iso == "step" else S.IDENT_SHADES[i], mew=0.8, lw=0.9)
     a.set_yscale("log")
-    a.set_ylim(0.3, 60)
+    a.set_ylim(0.25, 8)
+    a.set_yticks([0.25, 0.5, 1, 2, 4])
+    a.set_yticklabels(["0.25", "0.5", "1", "2", "4"])
+    a.yaxis.set_minor_locator(matplotlib.ticker.NullLocator())
     _da_ticks(a, da)
     a.set_xlabel(LOG_DA)
     a.set_ylabel(r"median $\hat{k}/k$, $\sigma$ = $\varepsilon$ = 0" + "\n(estimation replicates)")
@@ -494,8 +498,7 @@ def fig_asrun(A, V, stem, P=None):
     c.set_xlabel("gap in the earlier run (decade)")
     c.set_ylabel("gap corrected (decade)")
     n_prev = sum(v.get("gap_decades") is not None for v in earlier[-1][0]["H2b"].values())
-    c.text(lo + 0.1, hi - 0.15, f"{nd} of {n_prev} gaps change from the {earlier[-1][1]} run;
-"
+    c.text(lo + 0.1, hi - 0.15, f"{nd} of {n_prev} earlier gaps changed;\n"
            f"{nnew} slices have a gap only when corrected", fontsize=5.5, va="top")
     c.legend(handles=[Line2D([], [], lw=0, marker="o", ms=3.4, color=S.WORD[H2B_WORDS[0]], label=f"vs {earlier[-1][1]}"),
                       Line2D([], [], lw=0, marker="o", ms=3.4, color=GREY, label="vs as run (Langmuir only)"),
