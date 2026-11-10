@@ -9,7 +9,8 @@ Archived on Zenodo: [doi:10.5281/zenodo.23325994](https://doi.org/10.5281/zenodo
 (all versions); release v0.1-prereg, the state before the confirmatory grid, is
 [doi:10.5281/zenodo.23325995](https://doi.org/10.5281/zenodo.23325995), and release v1.0-submitted,
 the state of the submitted manuscript, is
-[doi:10.5281/zenodo.24090779](https://doi.org/10.5281/zenodo.24090779).
+[doi:10.5281/zenodo.24090779](https://doi.org/10.5281/zenodo.24090779); release v1.0.1-submitted,
+which adds Supplementary Table 2, is [doi:10.5281/zenodo.24101317](https://doi.org/10.5281/zenodo.24101317).
 
 ## The question and the answer in brief
 
