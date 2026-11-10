@@ -160,6 +160,7 @@ def bindings():
     if m7gaps:
         out += [("M7 last level vs Da*_ident", f"that level lay {min(m7gaps):.1f} to {max(m7gaps):.1f} decades"),
                 ("Table 1 envelope: M7 range", f"{min(m7gaps):.1f} to {max(m7gaps):.1f} decades below"),
+                ("M7 conservative gap", f"and at least {math.floor((min(m7gaps) - 0.5) * 10) / 10:.1f} if"),
                 ("Table 1 envelope: M7 slices", f"symbolic regression ({ {4: 'four', 3: 'three', 5: 'five'}.get(len(m7gaps), len(m7gaps))} slices")]
     # Review P4: the selected method equals each slice's best monotone method on the estimation replicates
     env_same = all(s["da_disc"] is not None and abs(math.log10(max(x for x in s["da_disc_by_method"].values() if x)
@@ -197,7 +198,6 @@ def bindings():
     # the bottom of the grid
     h2b_all = load("results/p2_verdicts.json")["H2b"]
     d55 = [s["da_disc"] for k, s in h2b_all.items() if k.startswith("sigma=0.005|eps=0.005|") and s["gap_decades"] is not None]
-    out.append(("discovery at 0.5 % noise and error", f"confined discovery to $" + BS + f"Da " + BS + f"le {math.ceil(max(d55) * 100) / 100:.2f}$"))
     near = [s["gap_decades"] for s in h2b_all.values()
             if s["gap_decades"] is not None and math.log10(s["da_disc"] / 0.1) <= 0.25]
     out.append(("boundaries near the grid bottom", f"{len(near)} of the 37 discovery boundaries lie within 0.25 decade"))
@@ -249,10 +249,8 @@ def bindings():
     s9 = load("results/p2_e9_summary.json")
     rescued = sorted({k.split("|")[0] for k, v in s9.items() if v["frac_clean"] >= 2 / 3 and v["frac_e6"] < 2 / 3})
     hi = max(v["frac_clean"] for k, v in s9.items() if not k.split("|")[0].endswith("da31.6"))
-    out += [("E9 rescued cells", "rescued" + "\n" + "it only for the Langmuir sorbent at $" + BS + "Da = 31.6$"
-             if rescued == ["langmuir_L1_pe1_da31.6"] else f"E9 rescued {rescued}"),
-            ("E9 at most above 31.6", f"chosen in at most {round(hi * 100)}" + BS + "," + BS + "% of replicates"
-             if hi <= 1 / 3 else "E9 above one third")]
+    out += [("E9 rescued cells", "explained this only for the Langmuir sorbent at $" + BS + "Da = 31.6$"
+             if rescued == ["langmuir_L1_pe1_da31.6"] and hi <= 1 / 3 else f"E9 rescued {rescued}, above 31.6 {hi}")]
     # E10: the LDF law wins at the finest sampling (3,991 times) where it lost at the grid's own 200 times
     r10 = load("results/p2_e10_resolution.json")["rows"]
     cells10 = sorted({k.split("|")[0] for k in r10})
@@ -267,7 +265,29 @@ def bindings():
     out.append(("practical Da physisorbent", f"between ${BS}Da {BS}approx {plo}$ and {phi}"))
     out.append(("practical Da chemisorbent", f"at ${BS}Da {BS}approx {chem['Da_low']:.0f}$ to {chem['Da_high']:.0f}"))
     top = max(s["da_disc"] for s in h2b.values() if s.get("da_disc"))
-    out.append(("highest discovery boundary", f"(${BS}Da {BS}approx {top:.0f}$)"))
+    topn = max(s["da_disc"] for k, s in h2b.items() if s.get("da_disc") and not k.startswith("sigma=0.0|"))
+    out.append(("highest discovery boundary", f"(${BS}Da {BS}approx {topn:.0f}$ with noise, {top:.0f} without)"))
+    # fresh review 2026-11-10 (M1): noise-free slices where discovery never fell below 50 % but k failed
+    fig = load("results/p2_figdata.json")["h2b"]
+    held = [k for k, s in fig.items() if h2b[k]["gap_decades"] is None and min(a / n for _, a, n in s["disc"]) >= 0.5]
+    held_k = [h2b[k]["da_ident"] for k in held if h2b[k]["da_ident"] is not None]
+    out.append(("no-noise slices: k failed, discovery held",
+                f"In {len(held)}, all without noise, it never fell below 50" + BS + "," + BS + f"%; in "
+                f"{ {5: 'five', 4: 'four', 6: 'six'}.get(len(held_k), len(held_k))} of these $k$ did become unidentifiable, at "
+                f"${BS}Da {BS}ge {math.floor(min(held_k) / 10) * 10}$" if all(k.startswith("sigma=0.0|") for k in held)
+                else "held slices with noise"))
+    # (M3) success not monotone in noise at 2 % isotherm error
+    mx = lambda sg: max(max(a for _, a, n in s["disc"]) for k, s in fig.items() if k.startswith(f"sigma={sg}|eps=0.02|"))
+    out.append(("non-monotone in noise", f"reached at most {mx('0.0')} of 45 replicates without noise but up to "
+                f"{max(mx('0.005'), mx('0.02'), mx('0.05'))} with noise"))
+    # (M4) 0.5 % noise and 0.5 % isotherm error: slices with a boundary and its largest value
+    b55 = [s["da_disc"] for k, s in h2b.items() if k.startswith("sigma=0.005|eps=0.005|") and s["da_disc"]]
+    out.append(("0.5/0.5 slices with a boundary", f"in the {({3: 'three'}).get(len(b55), len(b55))} slices that kept one"))
+    out.append(("0.5/0.5 largest boundary", f"every discovery boundary lay at ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
+    # (M5) E7: a 2 % shift of the step
+    e7s = load("results/p2_e7_summary.json")
+    d2 = {round(v["da_ident"], 1) for k, v in e7s.items() if k.endswith("shift=0.02") or k.endswith("shift=-0.02")}
+    out.append(("E7 2 % shift", f"and with a 2{BS},{BS}% shift to ${BS}Da {BS}approx {d2.pop()}$" if len(d2) == 1 else "E7 2% differs"))
     return out
 
 
