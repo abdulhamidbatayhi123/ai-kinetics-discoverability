@@ -176,3 +176,30 @@ four cells. Deviation, disclosed: the declared 200 and 400 times were spaced eve
 differ by up to half a grid interval from the grid's own; the grid's exact 200 and 400 times were added after
 the first rows (keys grid200, grid400). The evenly spaced rows agree with them except Langmuir Da 1000 at
 200 (LDF by 38 log-likelihood units vs PSO at the grid times). Reported in Supplementary Note 3 (E10).
+
+## E11. The boundaries at about 2,000 samples per run (declared 2026-11-11, after an independent review, BEFORE running)
+
+**Why.** An independent review (2026-11-10) noted that every boundary assumes the grid's 200 observation
+times, that E8 at 400 moved discovery up by 0.4 to 0.7 decade and identifiability by 0 to 0.3, and that
+real breakthrough rigs sample more finely; it asked whether the gap survives much finer sampling.
+**What.** As E8, at about ten times the grid's rate. Cells: O1, both isotherms, Pe ~94, L1, all nine Da,
+sigma 0.5 and 2 %, eps 0, replicates 0..59 (2,160 rows). Each cell is re-solved with the unchanged solver
+(p2_generate.solve_cell, as in E10) with 3,991 stored times; observations use every second stored time
+(1,996 times, which include the grid's 200), the same probes and the same noise SD per sample, with a noise
+stream of its own. Per row:
+(a) discovery by the six sparse solvers in both forms, run unchanged (windows in samples, so the
+    weak-form supports 31/61/121 and the 21-sample derivative span a tenth of the time they span at 200);
+(b) the same twelve, with windows matched in time to the grid's (supports 309/609/1,209, derivative 209);
+(c) O1 identifiability (profile_interval_o1, the pre-registered criterion);
+(d) for replicates 15..59, E6's choice among three laws.
+The best discovery method is chosen on replicates 0..14 among the 24 candidates of (a) and (b), and the
+logistic 50 % crossings are taken on replicates 15..59, as in E8. (a) and (b) are also reported
+separately.
+**Reading fixed in advance.** For each of the four (isotherm, sigma) slices with both boundaries:
+- if log10(Da*_ident / Da*_disc) stays at or above 0.25 decade (the pre-registered verdict threshold),
+  "discovery fails before identifiability" holds at about 2,000 samples;
+- if the gap falls below 0.25 or reverses in any slice, that is reported in the abstract and Results as a
+  limit of the main finding;
+- a slice without one of the boundaries is reported as such.
+Descriptive, no verdict; it changes no confirmatory result. Fields go to a scratch directory, not data/p2.
+One row may be run first to time the job; it is recomputed with the rest.
