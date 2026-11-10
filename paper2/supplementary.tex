@@ -118,6 +118,56 @@ isotherm at $T_{\mathrm{in}}$ is the same as in the Langmuir cells and the bed s
 $T_{\mathrm{in}}$.
 % source: p2_generate.py:make_physics branch "langmuir_iso"; cells() (9 Da levels, Pe x1, L1).
 
+\section*{Supplementary Table 2: where real columns sit on the Da map}
+
+The Discussion places real columns on the map with $\Da = k\,t_{\mathrm{stoich}}$, computed from
+inputs printed in four published studies. Where a study gives no stoichiometric time,
+$t_{\mathrm{stoich}} = W q / \dot n$ is computed from the bed mass $W$, the uptake $q$ at the
+feed and the molar feed of the adsorbate $\dot n$; where it does not say whether its volumetric
+flow is at column conditions or at 273.15\,K and 1\,atm, both are used and the range is given.
+``Rate constant'' means different things in these studies: fitted to the breakthrough curves,
+computed from a macropore-diffusion correlation, or measured independently by frequency response
+and converted with the factor 15 of Glueckauf. The values are therefore order-of-magnitude
+estimates.
+% source: data/practical_da_sources.csv (every input with its location in the paper);
+% p2_practical_da.py -> results/p2_practical_da.json. Sources compiled by the Claude Science
+% literature task T3 (AgentHub, 2026-11-10); every input checked by the author against the papers
+% (Lassitter author PDF Sec. 3.6 and Figs. 4, 10; Dantas SciELO PDF Tables 1, 2, 5, 7 and p. 534;
+% Krishnamurthy and Stampi-Bombelli Europe PMC full text, Tables 2, 6 and 6, 8); Crossref 2026-11-10.
+
+\begin{table}[htbp]
+\centering
+\small
+\textbf{Supplementary Table 2.} Damk\"ohler number of published laboratory columns.
+\par\medskip
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X r@{}}
+\toprule
+Study & System and conditions & $k$ and $t_{\mathrm{stoich}}$ & $\Da$ \\
+\midrule
+Lassitter et al.\ 2024, \url{https://doi.org/10.1016/j.ces.2023.119430} & water on MOF-303 pellets, packed bed,
+  air at about 32\,\% relative humidity & $k$ from frequency response (Fig.~4, read off), from the
+  minimum at the isotherm step to the feed humidity; $t_{\mathrm{stoich}}$ from the first moment of
+  the effluent curve (Fig.~10, read off) & 96 to 3,100 \\
+Dantas et al.\ 2011, \url{https://doi.org/10.1590/S0104-66322011000300018} & CO$_2$ on zeolite 13X, two packed
+  beds, 12 runs at 301 to 423\,K & $k$ computed from a macropore correlation (Table~7);
+  $t_{\mathrm{stoich}}$ from $W$, $q$ and flow (Tables 1, 2, 5) & 200 to 23{,}000 \\
+Krishnamurthy et al.\ 2025, \url{https://doi.org/10.1021/acs.iecr.5c00734} & CO$_2$ (15\,\%) on MIL-91(Ti) pellets,
+  two carrier gases & $k$ fitted to breakthrough (Table~6); $t_{\mathrm{stoich}}$ from $W$, $q$ and
+  flow & 280 to 560 \\
+Stampi-Bombelli et al.\ 2024, \url{https://doi.org/10.1021/acs.iecr.4c01392} & CO$_2$ (400\,ppm and 5.6\,\%) on an
+  amine sorbent, packed bed for direct air capture & $k_1$ fitted to breakthrough (Table~8);
+  $t_{50}$ as reported (Table~6) & 7.6 to 9.7 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Two further sources were read but not used for a number. For its coated tube,
+Lassitter et al.\ give no rate constant or stoichiometric time, but state that their group
+$k\rho n^{*}L/(vC_0)$, which is $\Da$, was always very large in the cases they examined
+(Sec.~3.6). Büchner and Pini (2026, doi:10.1021/acs.langmuir.6c00250) imaged a 13X bed by X-ray
+tomography; their rate constant is computed from a correlation, and the form that sets its basis is
+given only in their supporting information, so it was not converted.
+
 \section*{Supplementary Note 1: methods, settings and known-answer tests}
 
 \subsection*{Observation models}

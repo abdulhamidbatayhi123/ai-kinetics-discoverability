@@ -262,6 +262,12 @@ def bindings():
                 if all(r10[f"{c}|grid200"]["best"] != "ldf" for c in cells10) else "E10 LDF already won at grid 200"))
     e3 =load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
     out += [("E3 coverage", f"only about {round(e3 * 100)}{BS},{BS}%")]
+    # Discussion: where real columns sit (Supplementary Table 2) and the highest discovery boundary
+    _, plo, phi, chem = practical_da()
+    out.append(("practical Da physisorbent", f"between ${BS}Da {BS}approx {plo}$ and {phi}"))
+    out.append(("practical Da chemisorbent", f"at ${BS}Da {BS}approx {chem['Da_low']:.0f}$ to {chem['Da_high']:.0f}"))
+    top = max(s["da_disc"] for s in h2b.values() if s.get("da_disc"))
+    out.append(("highest discovery boundary", f"(${BS}Da {BS}approx {top:.0f}$)"))
     return out
 
 
@@ -330,6 +336,21 @@ def e7_rows():
     return out, n_err
 
 
+def sig(x, n=2):
+    """x rounded to n significant figures, as text with a thousands separator ({,}) above 9,999."""
+    r = float(f"{x:.{n}g}")
+    s = f"{r:,.0f}" if r >= 10 else f"{r:g}"
+    return s.replace(",", "{,}") if r >= 1e4 else s
+
+
+def practical_da():
+    """Supplementary Table 2 and the Discussion: Da = k t_stoich of published columns (results/p2_practical_da.json)."""
+    d = load("results/p2_practical_da.json")
+    rng = {k: f"{sig(v['Da_low'])} to {sig(v['Da_high'])}" for k, v in d["by_source"].items()}
+    s = d["summary"]
+    return rng, sig(s["physisorbent_Da_low"], 1), sig(s["physisorbent_Da_high"]), s["chemisorbent_Da"]
+
+
 def si_bindings():
     """G3 for the Supplementary Information: tables and counts recomputed from the results files."""
     out = []
@@ -369,6 +390,10 @@ def si_bindings():
                     f"{f8(v['da_ident'])} & {g} " + BS + BS))
     out += [(f"E9 table row {i}", r) for i, r in enumerate(e9_rows())]
     out += [(f"E10 table row {i}", r) for i, r in enumerate(e10_rows())]
+    rng, _, _, _ = practical_da()
+    for src, tag in (("Lassitter et al. 2024", "(Fig.~10, read off) &"), ("Dantas et al. 2011", "(Tables 1, 2, 5) &"),
+                     ("Krishnamurthy et al. 2025", "flow &"), ("Stampi-Bombelli et al. 2024", "(Table~6) &")):
+        out.append((f"SI Table 2 {src}", f"{tag} {rng[src]} " + BS + BS))
     r10 = load("results/p2_e10_resolution.json")
     out.append(("E10 fields match", "agreed exactly with the stored fields"
                 if all(v == 0.0 for ch in r10["checks"].values() for v in ch.values()) else "E10 fields differ"))
