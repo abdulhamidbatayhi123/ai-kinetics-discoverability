@@ -1,7 +1,6 @@
 # When can AI discover adsorption kinetics?
 
-Code, pre-registration, results and manuscript of "Equation discovery fails long before adsorption
-rate constants become unidentifiable", a pre-registered computational study by
+Code, pre-registration, results and manuscript of "Equation discovery fails long before rate constants become unidentifiable in simulated adsorption columns", a pre-registered computational study by
 Abdulhamid Batayhi (Yıldız Technical University, ORCID
 [0009-0007-0374-6755](https://orcid.org/0009-0007-0374-6755)).
 
