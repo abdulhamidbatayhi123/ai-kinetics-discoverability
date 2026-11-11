@@ -35,6 +35,13 @@ def main():
            "observation_horizon_over_t_stoich": T_OBS_MIN / t_st,
            "n_samples": int(T_OBS_MIN * F_SAMPLE_PER_MIN), "noise": NOISE, "observation": "outlet only (O3-like)",
            "pe": 21.0, "isotherm_given_exactly": True}
+    # Their Sips case (Appendix A, eq. A.5: q* = 55.54 x 1.8 c^1.5 / (1 + 1.8 c^1.5)), same column and feed.
+    qs_sips = QMAX * B * C_IN ** 1.5 / (1 + B * C_IN ** 1.5)
+    t_sips = tau * (1 + (1 - EPS) / EPS * qs_sips / C_IN)
+    out.update({"sips_qstar_cin_mg_g": qs_sips, "sips_t_stoich_min": t_sips, "sips_Da": K_PER_MIN * t_sips,
+                "readouts": {"langmuir_ldf_sparse_and_symbolic": "-0.535 - 0.225 q + 0.234 q* (Tables 4, 5)",
+                             "sips_ldf_symbolic": "0.198 q* - 0.200 q (Table 5)",
+                             "sips_ldf_sparse": "-0.275 - 0.210 q + 0.214 q* (Table 4)"}})
     write_atomic(out, "results/p2_s1_anchor.json")
     print(json.dumps(out, indent=1))
 

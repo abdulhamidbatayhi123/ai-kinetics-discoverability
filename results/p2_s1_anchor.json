@@ -10,5 +10,13 @@
  "noise": 0.05,
  "observation": "outlet only (O3-like)",
  "pe": 21.0,
- "isotherm_given_exactly": true
+ "isotherm_given_exactly": true,
+ "sips_qstar_cin_mg_g": 53.24662260932815,
+ "sips_t_stoich_min": 41.887074944262494,
+ "sips_Da": 9.21515648773775,
+ "readouts": {
+  "langmuir_ldf_sparse_and_symbolic": "-0.535 - 0.225 q + 0.234 q* (Tables 4, 5)",
+  "sips_ldf_symbolic": "0.198 q* - 0.200 q (Table 5)",
+  "sips_ldf_sparse": "-0.275 - 0.210 q + 0.214 q* (Table 4)"
+ }
 }

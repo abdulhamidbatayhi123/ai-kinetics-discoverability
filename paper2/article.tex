@@ -79,7 +79,8 @@ regression over a library of candidate terms \citep{brunton2016,rudy2016} and it
 neural networks embedded in the governing equations \citep{santana2023}. For adsorption, one
 study has tried this from column data, training a neural uptake term on noisy outlet curves with
 the isotherm given exactly, at one rate and one noise level; for a Langmuir isotherm its readout
-held the two LDF terms and a constant the true law lacks \citep{santana2023}. Where such a result
+held the two LDF terms and a constant the true law lacks, and for a Sips isotherm symbolic
+regression returned the exact LDF form \citep{santana2023}. Where such a result
 holds, and where it stops, is not known. The natural scale is the Damk\"ohler number,
 $\Da = k\,t_{\mathrm{stoich}}$, the number of kinetic time constants in one passage of the
 adsorption front: at low $\Da$ uptake lags far behind equilibrium, at high $\Da$ it nearly keeps up.
@@ -185,8 +186,9 @@ it, and two-term laws then win (post hoc).
 % (0.02, 0) disc 0.85-1.41, ident 57-172; (0.05, 0) disc 0.12-0.30, ident 57.
 
 The 59 slices without a verdict lack a discovery boundary, not data (post hoc): in 40, discovery never reached 50\,\% at any $\Da$, including all 24 slices
-with 5\,\% isotherm error; in 8, all without noise, it never fell below 50\,\%; in the other 11 it
-crossed 50\,\% more than once, most clearly for symbolic regression (next section).
+with 5\,\% isotherm error; in 8, all without noise, it never fell below 50\,\%; in the other 11 the observed
+success crossed 50\,\% but the falling fit placed no crossing in range, most clearly for symbolic
+regression (next section).
 % results/p2_ident_robustness.json h2b_no_verdict_classes: discovery missing 59 (always < 50 %: 40;
 % always >= 50 %: 5 + 3 = 8, all sigma = 0; straddles: 11); identifiability missing only in the 3
 % "always >= 50 %" slices.
@@ -365,9 +367,9 @@ identifiability fit the same smooth error is absorbed into $k$, and the estimate
 factor of two of the truth. The response to a 0.5\,\% isotherm error, more than a decade for
 discovery and under 0.2 decade for identifiability, is consistent with this reading, though the
 study was not designed to separate the two.
-The asymmetry of the two success rules does not make the gap: in a post hoc check, dropping
-the ratio test from discovery, requiring the interval to lie within 10\,\% of $k$, or judging
-identifiability by the point estimate alone kept every verdict, with gaps of 0.89 to 3.75 decades.
+The asymmetry of the two success rules does not make the gap: dropping the ratio test, requiring
+the interval to lie within 10\,\% of $k$, or judging by the point estimate alone kept every verdict,
+with gaps of 0.89 to 3.75 decades (post hoc).
 % results/p2_e4_criteria.json (EXPLORATORY_P2 E4; p2_e4_criteria.py): variants a (discovery relaxed)
 % 40 slices, gaps 1.60-3.72; b (interval in [0.9k, 1.1k]) 37, 0.89-2.94; c (point estimate in
 % [k/2, 2k]) 37, 1.79-3.75; d (a and c) 40, 1.79-3.75; every slice "fails before"; controls pass.
@@ -395,12 +397,14 @@ lies beyond the range tested here.
 % 2026-11-05) omitted Dantas runs 3, 4, 7, 8, 11, 12 and claimed coated layers lower, which
 % Lassitter et al. Sec. 3.6 contradicts.
 
-The closest prior work \citep{santana2023} sits near the edge of this map. Computed from its
-published equations, its column ran at $\Da \approx 8.8$, with 5\,\% noise on the outlet curve
-alone and the isotherm given exactly. That is above every discovery boundary we found with
-noise, and its Langmuir readout, the LDF terms plus a constant, would count as a failure under
-our rule. Our one-replicate demonstration of its pipeline succeeded at $\Da = 3.2$; at 10 its
-training stopped early.
+The closest prior work \citep{santana2023} is one point against this map. From its published
+equations (pre-registered, computed after the verdicts), its columns ran at $\Da \approx 8.8$
+(Langmuir) and 9.2 (Sips) with 5\,\% outlet noise and an exact isotherm, above every discovery
+boundary we found with noise. Under our rule its Langmuir readout (the LDF terms plus a constant)
+fails, but its Sips readout, $0.198\,\qs - 0.200\,q$, succeeds. That is one realisation of an
+isothermal model with its own error model; our one-replicate demonstration of its pipeline
+succeeded at $\Da = 3.2$, and at 10 its training stopped early. A replicated test at that point
+would show whether the difference lies in the model, the errors or chance.
 % results/p2_s1_anchor.json (p2_s1_anchor.py; PREREG_P2 s.5; Da 8.78, residence form 0.86, 55 samples
 % over 2.8 t_stoich); highest Da*_disc with noise 7.24 (results/p2_verdicts.json H2b, sigma 0.5 %);
 % santana2023 Tables 4 and 5 (Langmuir LDF: -0.535 - 0.225 q + 0.234 q*). results/p2_extra_m1.json.
@@ -435,15 +439,13 @@ Errors found in our own code were corrected and are reported beside the results 
 
 Three directions follow. Discovery would gain most from better isotherms, because the boundaries
 moved more with isotherm error than with noise. In a post hoc test, shifting the step of the
-MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,\% at every rate. It
-biased the fitted $k$ by 10 to 15\,\% at $\Da = 1$ and by a factor of 1.5 to 1.8 at $\Da = 10$,
-with intervals too narrow to show it, and the identifiability boundary fell to $\Da \approx 17$ to
-57, and with a 2\,\% shift to $\Da \approx 5.6$.
+MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,\% at every rate,
+biased the fitted $k$ by a factor of 1.5 to 1.8 at $\Da = 10$ with intervals too narrow to show
+it, and lowered the identifiability boundary to $\Da \approx 17$ to 57 (5.6 with a 2\,\% shift).
 An isotherm whose step is placed to better than 1\,\% relative humidity is worth more than quieter
-sensors. Experiments can also be designed to discriminate among candidate laws; doubling the
-sampling rate widened the range of the choice among laws by 0.2 to 0.5 decade. And the map should
-be tested on experimental breakthrough data with interior probes at moderate $\Da$, where it
-predicts that discovery first becomes possible.
+sensors. Experiments can also be designed to discriminate among candidate laws, for example by
+denser sampling. And the map should be tested on experimental breakthrough data with interior
+probes at moderate $\Da$, where it predicts that discovery first becomes possible.
 % results/p2_e7_summary.json (EXPLORATORY_P2 E7; discovery part, unaffected by B90): best-method
 % success at any Da <= 0.31 (sigma 2 %, shift -1 % RH), 0.27 (+1 %), 0.00 otherwise.
 % Identifiability (B90-corrected, p2_e7_parallel.sh 2026-11-09): da_ident at |shift| 1 % 17.1 to 56.6,
@@ -543,7 +545,7 @@ slices with both boundaries; gap $-1.60$ to $-3.72$ decades (median $-2.23$ Lang
 step) & \verdict{discovery fails before identifiability} (37 of 37 slices) \\
 H2b, $k$-aware & As H2b, with success also requiring $\hat{k}$ within a factor of 2 &
 39 of 96 slices with both boundaries; the 37 verdicts unchanged & \verdict{discovery fails before identifiability} (39 of 39) \\
-H2b, any method (exploratory) & How small a gap does any method allow? & Each slice's best
+H2b, any method (post hoc) & How small a gap does any method allow? & Each slice's best
 method judged on the estimation replicates gives the same 37 gaps and two more ($\sigma =
 \varepsilon = 0.5\,\%$; $-3.22$ and $-3.73$), all \verdict{fails before}; symbolic regression
 (four slices, success in a window of $\Da$) last reached 50\,\% 1.0 to 1.4 decades below
@@ -766,8 +768,8 @@ present in both runs to lower $\Da$ (none higher), brought 22 more onto the grid
 number of slices with a verdict from 30 to 37. The verdicts as first run, before the last
 correction and corrected are all public, and the paper reports them (Extended Data Fig.~8,
 Supplementary Note~2); no correction changed a pre-registered verdict word. Every deviation of
-the code from the pre-registration, two pre-registered analyses that were run only after the
-verdicts and one that was not run are listed in Supplementary Note~3.
+the code from the pre-registration, and every pre-registered analysis that was run only after the
+verdicts or not run as declared, is listed in Supplementary Note~3.
 % PREREG_P2 s.9 (A1 ef3ade8, A2 397d9ea, A3 d892ab9, A4 ffc8d88, A5 97150f6, A6 375552b, A7 539d9a7);
 % p2_grid_o1.py frozen(); results/p2_verdicts_asrun.json, results/p2_verdicts_preB90.json.
 
@@ -791,7 +793,8 @@ Bayesian information criterion picks the largest likelihood. In E8 every method 
 so its windows, defined in samples, span half the time at 400 samples. Descriptive checks made
 after the verdicts are labelled post hoc wherever they are used: the accuracy of the O1 profile with
 exact data, H2b without the two highest $\Da$ levels, a classification of the slices without a
-verdict, the last level at which symbolic regression reached 50\,\%, the O3 identifiability
+verdict, each slice's best method judged on the estimation replicates, the last level at which
+symbolic regression reached 50\,\%, the O3 identifiability
 boundaries against the last level of O1 discovery, the boundaries in units of $kh$, and the number
 of terms selected against noise. All are reported in Supplementary Note~1.
 % EXPLORATORY_P2.md (E1-E3 committed 787bb29 before any of them ran; E4-E7 declared 2026-11-05,

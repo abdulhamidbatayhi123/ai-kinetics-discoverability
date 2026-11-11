@@ -137,7 +137,7 @@ def bindings():
     out += [("no-verdict: discovery missing", f"The {miss} slices without a verdict lack a discovery boundary"
              if only_id == 0 else f"missing in {miss}"),
             ("never 50 %", f"in {never}, discovery"), ("never below 50 %", f"in {always}, all"),
-            ("straddles", f"in the other {strad} it")]
+            ("straddles", f"in the other {strad} the observed")]
     if only_id:
         out += [("only identifiability missing", f"remaining {only_id} slices")]
     m1 = load("results/p2_extra_m1.json")["rows"]
@@ -212,14 +212,12 @@ def bindings():
     e7_1 = [v["da_ident"] for k, v in e7.items() if abs(float(k.split("shift=")[1])) == 0.01]
     e7_disc = max(max(v["disc_by_da"].values()) for k, v in e7.items() if abs(float(k.split("shift=")[1])) == 0.01)
     out += [("E7 identifiability boundary at 1 % shift",
-             f"identifiability boundary fell to $" + BS + f"Da " + BS + f"approx {min(e7_1):.0f}$ to {max(e7_1):.0f}"
+             f"identifiability boundary to $" + BS + f"Da " + BS + f"approx {min(e7_1):.0f}$ to {max(e7_1):.0f}"
              if all(e7_1) else "E7 ident missing"),
             ("E7 discovery at 1 % shift", f"at or below {math.floor(e7_disc * 100 + 0.5):.0f}" + BS + "," + BS + "% at every rate")]
     # review round 2 (M1): the bias of k under a 1 % step shift, medians over estimation replicates per (sigma, shift)
     b1, b10 = e7_bias(1.0), e7_bias(10.0)
-    out += [("E7 bias at Da 1", f"by {round((1 - min(b1)) * 100)} to {round((max(b1) - 1) * 100)}" + BS + "," + BS + "% at $" + BS + "Da = 1$"
-             if min(b1) < 1 < max(b1) else "E7 bias Da 1 one-sided"),
-            ("E7 bias at Da 10", f"by a factor of {1 / max(x for x in b10 if x < 1):.1f} to {max(b10):.1f} at $" + BS + "Da = 10$")]
+    out += [("E7 bias at Da 10", f"by a factor of {1 / max(x for x in b10 if x < 1):.1f} to {max(b10):.1f} at $" + BS + "Da = 10$")]
     e8 = load("results/p2_e8_summary.json")
     sh = {"disc": [], "select": [], "ident": []}
     beyond, gap400, sel100 = 0, [], []
@@ -236,7 +234,6 @@ def bindings():
     f1 = lambda x: f"{math.floor(x * 10 + 0.5) / 10:.1f}"
     out += [("E8 discovery shift", f"discovery by {f1(min(sh['disc']))} to {f1(max(sh['disc']))} decade"),
             ("E8 selection shift", f"among the laws by {f1(min(sh['select']))} to {f1(max(sh['select']))} decade"),
-            ("E8 selection shift (Discussion)", f"choice among laws by {f1(min(sh['select']))} to {f1(max(sh['select']))} decade"),
             ("E8 identifiability shift", f"identifiability by up to {f1(max(sh['ident']))} decade"
              + (" or beyond the grid" if beyond else "")),
             ("E8 every boundary up or unchanged", "moved to higher $" + BS + "Da$ or stayed"
@@ -298,10 +295,11 @@ def bindings():
              else "M6 succeeded"),
             ("M6 six terms", "every fit kept six" if list(m6["support_size_counts"]) == ["6"] else "M6 sizes differ")]
     s1 = load("results/p2_s1_anchor.json")
-    out += [("S1 on the map", f"its column ran at ${BS}Da {BS}approx {s1['Da']:.1f}$"),
-            ("S1 above every noisy boundary", "That is above every discovery boundary we found with"
-             if s1["Da"] > max(s["da_disc"] for k, s in h2b.items() if s.get("da_disc") and not k.startswith("sigma=0.0|"))
-             else "S1 not above")]
+    top_noisy = max(s["da_disc"] for k, s in h2b.items() if s.get("da_disc") and not k.startswith("sigma=0.0|"))
+    out += [("S1 on the map", f"its columns ran at ${BS}Da {BS}approx {s1['Da']:.1f}$"),
+            ("S1 Sips", f"and {s1['sips_Da']:.1f} (Sips)"),
+            ("S1 above every noisy boundary", "above every discovery boundary we found with noise"
+             if min(s1["Da"], s1["sips_Da"]) > top_noisy else "S1 not above")]
     pre = load("results/p2_verdicts_preB90.json")["H2b"]
     both = [k for k in h2b if pre.get(k, {}).get("da_ident") and h2b[k].get("da_ident")]
     down = sum(h2b[k]["da_ident"] < pre[k]["da_ident"] * (1 - 1e-9) for k in both)
@@ -312,7 +310,7 @@ def bindings():
     # (M5) E7: a 2 % shift of the step
     e7s = load("results/p2_e7_summary.json")
     d2 = {round(v["da_ident"], 1) for k, v in e7s.items() if k.endswith("shift=0.02") or k.endswith("shift=-0.02")}
-    out.append(("E7 2 % shift", f"and with a 2{BS},{BS}% shift to ${BS}Da {BS}approx {d2.pop()}$" if len(d2) == 1 else "E7 2% differs"))
+    out.append(("E7 2 % shift", f"({d2.pop()} with a 2{BS},{BS}% shift)" if len(d2) == 1 else "E7 2% differs"))
     return out
 
 
