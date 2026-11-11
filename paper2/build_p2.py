@@ -159,7 +159,7 @@ def bindings():
         m7lo, m7hi = math.floor(min(m7gaps) * 10) / 10, math.ceil(max(m7gaps) * 10) / 10   # a range of lower bounds
         out += [("M7 last level vs Da*_ident", f"that level lay {m7lo:.1f} to {m7hi:.1f}"),
                 ("Table 1 envelope: M7 range", f"{m7lo:.1f} to {m7hi:.1f} decades below"),
-                ("M7 conservative gap", f"and at least {math.floor((min(m7gaps) - 0.5) * 10) / 10:.1f} if"),
+                ("M7 conservative gap", f"at least {math.floor((min(m7gaps) - 0.5) * 10) / 10:.1f} decade below it if"),
                 ("Table 1 envelope: M7 slices", f"symbolic regression ({ {4: 'four', 3: 'three', 5: 'five'}.get(len(m7gaps), len(m7gaps))} slices")]
     # Review P4: the selected method equals each slice's best monotone method on the estimation replicates
     env_same = all(s["da_disc"] is not None and abs(math.log10(max(x for x in s["da_disc_by_method"].values() if x)
@@ -280,19 +280,19 @@ def bindings():
                 f"{max(mx('0.005'), mx('0.02'), mx('0.05'))} with noise"))
     # (M4) 0.5 % noise and 0.5 % isotherm error: slices with a boundary and its largest value
     b55 = [s["da_disc"] for k, s in h2b.items() if k.startswith("sigma=0.005|eps=0.005|") and s["da_disc"]]
-    out.append(("0.5/0.5 slices with a boundary", f"in the {({3: 'three'}).get(len(b55), len(b55))} slices that kept one"))
-    out.append(("0.5/0.5 largest boundary", f"kept every discovery boundary at ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
+    out.append(("0.5/0.5 slices with a boundary", f"in the {({3: 'three'}).get(len(b55), len(b55))} slices that kept a boundary"))
+    out.append(("0.5/0.5 largest boundary", f"every discovery boundary fell to ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
     # pre-submission revision 2026-11-11: new descriptive checks, M6, S1 on the map, corrections counts
     kh = load("results/p2_kh.json")
     out += [("kh at discovery boundaries", f"was at most {math.ceil(kh['kh_at_disc_max'] * 100) / 100:.2f} at every discovery"),
             ("kh at identifiability boundaries", f"and {math.floor(kh['kh_at_ident_min'] * 100) / 100:.2f} to "
              f"{math.ceil(kh['kh_at_ident_max']):.0f} at the identifiability"),
-            ("kh at Da 316 and 1000", f"where $kh = {kh['kh_by_level']['316.227766']:.1f}$ and "
-             f"{kh['kh_by_level']['1000.0']:.0f}")]
+            ("kh at Da 316", f"($kh = {kh['kh_by_level']['316.227766']:.1f}$)"),
+            ("kh at Da 1000", f"($kh = {kh['kh_by_level']['1000.0']:.0f}$)")]
     ns = load("results/p2_noise_support.json")["summary_da_le_10"]["eps0.02|sigma0.0"]
     out += [("support size without noise at 2 % isotherm error",
              f"kept on average {math.floor(ns['mean_support_size_min'] * 10) / 10:.1f} to "
-             f"{math.ceil(ns['mean_support_size_max'] * 10) / 10:.1f} of its at most")]
+             f"{math.ceil(ns['mean_support_size_max'] * 10) / 10:.1f} terms (four is")]
     m6 = load("results/p2_m6_summary.json")
     out += [("M6 grid", f"recovered it in none of {m6['n_rows']:,} fits".replace(",", "{,}", 1) if m6["n_success"] == 0
              else "M6 succeeded"),
