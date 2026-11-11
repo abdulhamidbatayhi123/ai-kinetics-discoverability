@@ -42,7 +42,8 @@ ROLE = {"disc": OI["blue"], "ident": OI["vermilion"], "neutral": OI["dark"], "mu
 C = {"dark": OI["dark"], "grey": ROLE["muted"]}   # names the figure scripts use for neutral ink
 SOLVER = {"stlsq": OI["sky"], "ensemble": OI["green"], "best_subset": OI["blue"],
           "eiv_best_subset": OI["black"], "m7": OI["purple"], "slow_manifold": OI["grey"]}
-WORD = {"discovery fails before identifiability": OI["orange"],
+WORD = {"discovery fails before identifiability": "#4D4D4D",   # verdict: a neutral hue used for nothing else
+
         "discovery fails with identifiability": OI["sky"],
         "discovery outlives identifiability": OI["green"]}
 NO_VERDICT = OI["light"]

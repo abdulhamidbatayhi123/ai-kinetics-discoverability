@@ -9,10 +9,10 @@ otherwise (M8 and M1 were run only at reps 0-2 and rep 0, and their panel says s
   ED1 paper2/fig_ed1_h2b_langmuir   all 48 Langmuir H2b slices: P(discovery), P(identifiable)
   ED2 paper2/fig_ed2_h2b_step       all 48 step H2b slices
   ED3 paper2/fig_ed3_ident          identifiability estimator accuracy and robustness of H2b
-  ED4 paper2/fig_ed4_coverage       E3: identifiable vs interval contains k
+  ED4 paper2/fig_ed7_coverage       E3: identifiable vs interval contains k
   ED5 paper2/fig_ed5_methods        every method against Da, plus M9, M8 and M1
   ED6 paper2/fig_ed6_h2d            H2d (exploratory): best success, loading-dependent rate
-  ED7 paper2/fig_ed7_asrun          as-run and intermediate (pre-B90) against corrected verdicts
+  ED7 paper2/fig_ed8_asrun          as-run and intermediate (pre-B90) against corrected verdicts
 
     python fig_p2_extended.py            # from the repo root; loads one large JSON at a time
 """
@@ -291,24 +291,26 @@ def fig_methods(FD, m9, m8, m8reps, m1, da, stem):
     fig = plt.figure(figsize=(S.W2, 165 * MM), layout="constrained")
     gs = fig.add_gridspec(3, 2, height_ratios=[1, 1, 0.9])
     hs = None
-    for r, e in enumerate((0.0, 0.02)):
+    # rows: (sigma, eps) = (2 %, 0) and (0.5 %, 2 %); the main Fig. 4a,b shows (2 %, 2 %), so nothing repeats
+    for r, (sg, e) in enumerate(((0.02, 0.0), (0.005, 0.02))):
         for c, iso in enumerate(ISOS):
             ax = fig.add_subplot(gs[r, c])
-            d = FD["methods"][_key(0.02, e, iso, 1.0)]
+            d = FD["methods"][_key(sg, e, iso, 1.0)]
             for m in _order(d):
                 x, p = _frac(d[m])
                 ax.plot(x, p, ls=_method_style(m), color=_method_colour(m), marker="o", ms=2.2,
                         lw=1.5 if m.startswith("eiv") else 1.0, label=METHOD_LABEL.get(m, m))
-            ax.text(0.98, 0.97, f"{ISO_LABEL[iso]}, {pe_label(1.0)}\nσ = 2 %, ε = {_pct(e)}",
+            ax.text(0.98, 0.97, f"{ISO_LABEL[iso]}, {pe_label(1.0)}\nσ = {_pct(sg)}, ε = {_pct(e)}",
                     transform=ax.transAxes, ha="right", va="top", fontsize=6)
-            zero = [METHOD_SHORT.get(m, m) for m in _order(d) if not any(n for _, n, _ in d[m])]
-            if zero:
-                ax.text(0.98, 0.80, "no success at any Da\n(lines overlap at 0):\n" + ", ".join(zero),
+            zero = [METHOD_SHORT.get(m, m).replace("\n", " ") for m in _order(d) if not any(n for _, n, _ in d[m])]
+            if zero:   # lower right, where every curve is at zero; two names per line
+                names = [", ".join(zero[i:i + 2]) for i in range(0, len(zero), 2)]
+                ax.text(0.98, 0.84, "no success at any Da\n(lines overlap at 0):\n" + ",\n".join(names),
                         transform=ax.transAxes, ha="right", va="top", fontsize=5.5)
             ax.set_ylim(-0.03, 1.03)
             _da_ticks(ax, da)
             ax.set_xlabel(LOG_DA)
-            ax.set_ylabel("P(success)")
+            ax.set_ylabel("probability")
             S.letter(ax, "abcd"[2 * r + c])
             if hs is None:
                 hs = ax.get_legend_handles_labels()
@@ -325,7 +327,7 @@ def fig_methods(FD, m9, m8, m8reps, m1, da, stem):
     ax.set_ylim(-0.03, 1.03)
     _da_ticks(ax, da)
     ax.set_xlabel(LOG_DA)
-    ax.set_ylabel("P(success), M9\nagainst its own target")
+    ax.set_ylabel("probability, slow manifold\nagainst its own target")
     ax.text(0.02, 0.62, f"pooled over σ, ε, Pe;\nn = {n9[0]} estimation replicates\nper point",
             transform=ax.transAxes, fontsize=5.5, va="top")
     ax.legend(loc="upper left", fontsize=5.8)
@@ -337,20 +339,20 @@ def fig_methods(FD, m9, m8, m8reps, m1, da, stem):
         x = np.log10([p[0] for p in pts])
         ax.plot(x, [p[1][0] / p[1][1] for p in pts], ls="-" if iso == "langmuir" else "--",
                 marker=ISO_MARKER[iso], color=DARK, mfc="white" if iso == "step" else DARK, ms=3,
-                lw=0.8, label=f"M8, {ISO_LABEL[iso]}")
+                lw=0.8, label=f"KAN, {ISO_LABEL[iso]}")
     pts = sorted(m1.items())
     ax.plot(np.log10([p[0] for p in pts]), [p[1] for p in pts], lw=0, marker="D", ms=3.4,
-            mfc="white", mec=DARK, mew=0.8, label="M1 UDE, Langmuir (O3, 1 replicate)")
+            mfc="white", mec=DARK, mew=0.8, label="neural pipeline, Langmuir (O3, 1 replicate)")
     n8 = sorted({v[1] for v in m8.values()})
     ax.set_ylim(-0.08, 1.12)
     _da_ticks(ax, da)
     ax.set_xlabel(LOG_DA)
     ax.set_ylabel("success\n(fraction or 0/1)")
-    ax.text(0.98, 0.40, f"M8: {sum(v[0] for v in m8.values())} successes in "
+    ax.text(0.98, 0.40, f"KAN: {sum(v[0] for v in m8.values())} successes in "
             f"{sum(v[1] for v in m8.values())} rows;\nn = {n8[0]} per point (σ 0.5, 2 %; ε 0, 2 %;\n"
-            f"reps {m8reps[0]}–{m8reps[-1]}), {pe_label(1.0)}\nM1: σ 2 %, ε 0, rep 0, {pe_label(1.0)}",
+            f"replicates {m8reps[0]}–{m8reps[-1]}), {pe_label(1.0)}\nneural pipeline: σ 2 %, ε 0, replicate 0, {pe_label(1.0)}",
             transform=ax.transAxes, fontsize=5.5, ha="right", va="center")
-    ax.legend(loc="upper right", fontsize=5.8)
+    ax.legend(loc="upper right", bbox_to_anchor=(1.0, 0.86), fontsize=5.8)
     S.letter(ax, "f")
     return S.save(fig, stem, inputs=[F_FD, F_M9, F_M8, F_M1, F_MAN])
 
@@ -377,16 +379,16 @@ def fig_h2d(V, stem):
             ax.text(j, i, f"{M[i, j]:.2f}", ha="center", va="center", fontsize=5,
                     color="#000000" if M[i, j] > 0.55 else "#ffffff")
     ax.set_xticks(range(len(das)))
-    ax.set_xticklabels([f"{np.log10(d):.1f}" for d in das])
+    ax.set_xticklabels([f"{np.log10(d):.1f}".replace("-", "\u2212") for d in das])
     ax.set_yticks(range(len(rows)))
-    ax.set_yticklabels([f"σ {_pct(s)}, ε {_pct(e)}" for s, e in rows], fontsize=5.5)
+    ax.set_yticklabels([f"σ = {_pct(s)}, ε = {_pct(e)}" for s, e in rows], fontsize=5.5)
     ax.tick_params(length=0)
     for sp in ax.spines.values():
         sp.set_visible(False)
     ax.set_xlabel(LOG_DA)
     cb = fig.colorbar(im, ax=ax, shrink=0.8, pad=0.02)
-    cb.set_label("best P(success) over the 6 sparse-regression\nmethods and the 3 Pe "
-                 "(all replicates in the file)", fontsize=6)
+    cb.set_label("best success over the 6 sparse-regression\nmethods and the 3 Pe (upper bound, 60 replicates)",
+                 fontsize=6)
     cb.ax.tick_params(labelsize=5.5)
     cb.outline.set_linewidth(0.5)
     return S.save(fig, stem, inputs=[F_V])
@@ -443,7 +445,7 @@ def fig_asrun(A, V, stem, P=None):
              loc="upper center", ncol=4, fontsize=5.5, bbox_to_anchor=(0.5, 1.2), handlelength=1.4,
              columnspacing=0.8)
     # b: verdict counts, stacked
-    runs = [("as run", A)] + ([("A6, B89", P)] if P else []) + [("corrected", V)]
+    runs = [("as run", A)] + ([("range and\nrefinement fixed", P)] if P else []) + [("corrected", V)]
     face = {"fails before": S.WORD[H2B_WORDS[0]], "fails with": S.WORD[H2B_WORDS[1]],
             "outlives": S.WORD[H2B_WORDS[2]], "withheld": "#ffffff", "no boundary": S.NO_VERDICT}
     for j, (_, src) in enumerate(runs):
@@ -474,7 +476,7 @@ def fig_asrun(A, V, stem, P=None):
     c.axhline(-MDE, color=DARK, lw=0.6, ls="--")
     c.axvline(-MDE, color=DARK, lw=0.6, ls="--")
     nd, nnew = 0, 0
-    earlier = [(A, "as run", 0.35)] + ([(P, "after A6, B89", 1.0)] if P else [])
+    earlier = [(A, "as run", 0.35)] + ([(P, "range and refinement fixed", 1.0)] if P else [])
     for k in sorted(V["H2b"]):
         gv = V["H2b"][k].get("gap_decades")
         if gv is None:
@@ -491,8 +493,8 @@ def fig_asrun(A, V, stem, P=None):
                 continue
             if src is earlier[-1][0]:
                 nd += abs(ga - gv) > 1e-9
-            c.plot(ga, gv, ISO_MARKER[iso], ms=3.4, color=S.WORD[H2B_WORDS[0]] if alpha == 1.0 else GREY,
-                   mfc="white" if iso == "step" else (S.WORD[H2B_WORDS[0]] if alpha == 1.0 else GREY), mew=0.8)
+            col = S.WORD[H2B_WORDS[0]] if alpha == 1.0 else "#B5B5B5"   # as run: clearly lighter
+            c.plot(ga, gv, ISO_MARKER[iso], ms=3.4, color=col, mfc="white" if iso == "step" else col, mew=0.8)
     c.set_xlim(lo, hi)
     c.set_ylim(lo, hi)
     c.set_xlabel("gap in the earlier run (decade)")
@@ -501,7 +503,7 @@ def fig_asrun(A, V, stem, P=None):
     c.text(lo + 0.1, hi - 0.15, f"{nd} of {n_prev} earlier gaps changed;\n"
            f"{nnew} slices have a gap only when corrected", fontsize=5.5, va="top")
     c.legend(handles=[Line2D([], [], lw=0, marker="o", ms=3.4, color=S.WORD[H2B_WORDS[0]], label=f"vs {earlier[-1][1]}"),
-                      Line2D([], [], lw=0, marker="o", ms=3.4, color=GREY, label="vs as run (Langmuir only)"),
+                      Line2D([], [], lw=0, marker="o", ms=3.4, color="#B5B5B5", label="vs as run (Langmuir only)"),
                       Line2D([], [], lw=0, marker="s", ms=3.4, mfc="white", color=DARK, label="step isotherm"),
                       Line2D([], [], color=GREY, lw=0.6, label="identity")],
              loc="lower right", fontsize=5.5)
@@ -520,7 +522,7 @@ def main():
     R = _load(F_ROB)
     out += fig_ident(R, V, da, os.path.join(OUT, "fig_ed3_ident"))
     del R
-    out += fig_coverage(_load(F_COV), os.path.join(OUT, "fig_ed4_coverage"))
+    out += fig_coverage(_load(F_COV), os.path.join(OUT, "fig_ed7_coverage"))
     out += fig_h2d(V, os.path.join(OUT, "fig_ed6_h2d"))
     # ED5: the row files are loaded one at a time and released; figdata is kept (0.5 MB)
     vslim = {"H2b": V["H2b"], "positive_control": V["positive_control"]}
@@ -532,7 +534,7 @@ def main():
     out += fig_methods(FD, m9, m8, m8reps, m1, da, os.path.join(OUT, "fig_ed5_methods"))
     del FD
     gc.collect()
-    out += fig_asrun(_load(F_ASRUN), vslim, os.path.join(OUT, "fig_ed7_asrun"), P=_load(F_PRE))
+    out += fig_asrun(_load(F_ASRUN), vslim, os.path.join(OUT, "fig_ed8_asrun"), P=_load(F_PRE))
     for p in out:
         print("wrote", p)
 

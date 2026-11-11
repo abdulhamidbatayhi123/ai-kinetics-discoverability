@@ -59,17 +59,19 @@ NO_BOUNDARY, WITHHELD_FACE = figstyle.NO_VERDICT, "#ffffff"
 NO_BOUNDARY_WORDS = "no boundary on the grid for one of the two"   # p2_analyze's own words
 DISC_SHADES = figstyle.DISC_SHADES     # discovery: light to dark = low to high noise
 IDENT_SHADES = figstyle.IDENT_SHADES   # identifiability
+GREY_SHADES = ("#c4c4c4", "#7f7f7f", "#2f2f2f")   # legend key for the noise lightness, shared by both hues
 
 METHOD_ORDER = ("stlsq|weak", "stlsq|strong", "ensemble|weak", "ensemble|strong", "best_subset|weak",
                 "best_subset|strong", "eiv_best_subset|strong", "m7|strong", "slow_manifold|strong")
-METHOD_LABEL = {"stlsq|weak": "M2 weak-form STLSQ", "stlsq|strong": "M2b strong-form STLSQ",
-                "ensemble|weak": "M3 ensemble, weak", "ensemble|strong": "M3 ensemble, strong",
-                "best_subset|weak": "M4 best subset, weak", "best_subset|strong": "M4 best subset, strong",
-                "eiv_best_subset|strong": "M5 EIV best subset (oracle)", "m7|strong": "M7 PySR",
-                "slow_manifold|strong": "M9 slow manifold (own target)"}
-METHOD_SHORT = {"stlsq|weak": "M2", "stlsq|strong": "M2b", "ensemble|weak": "M3 w",
-                "ensemble|strong": "M3 s", "best_subset|weak": "M4 w", "best_subset|strong": "M4 s",
-                "eiv_best_subset|strong": "M5", "m7|strong": "M7", "slow_manifold|strong": "M9"}
+METHOD_LABEL = {"stlsq|weak": "thresholding, weak", "stlsq|strong": "thresholding, strong",
+                "ensemble|weak": "ensemble, weak", "ensemble|strong": "ensemble, strong",
+                "best_subset|weak": "best subset, weak", "best_subset|strong": "best subset, strong",
+                "eiv_best_subset|strong": "errors-in-variables (oracle)", "m7|strong": "symbolic regression",
+                "slow_manifold|strong": "slow manifold (own target)"}
+METHOD_SHORT = {"stlsq|weak": "thresh.\nweak", "stlsq|strong": "thresh.\nstrong", "ensemble|weak": "ens.\nweak",
+                "ensemble|strong": "ens.\nstrong", "best_subset|weak": "subset\nweak",
+                "best_subset|strong": "subset\nstrong", "eiv_best_subset|strong": "EIV\noracle",
+                "m7|strong": "symbolic", "slow_manifold|strong": "slow\nmanifold"}
 SOLVER_COLOUR = figstyle.SOLVER
 ISO_LABEL = {"langmuir": "Langmuir", "step": "MOF-303-like step"}
 
@@ -219,9 +221,8 @@ def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
                         mfc="white", mec=ci, ecolor=ci, ms=4, capsize=2, lw=1, zorder=4)
         wc = _word_class(v)
         word = WORD_SHORT.get(wc, "withheld" if wc == "withheld" else "no verdict")
-        handles.append(Line2D([], [], color=figstyle.C["dark"], lw=0, marker="o",
-                              mfc=DISC_SHADES[i % 3], mec=IDENT_SHADES[i % 3], mew=1.4, ms=5,
-                              label=f"$\\sigma$ = {_pct(s)}, $\\varepsilon$ = {_pct(e)}: {word}"))
+        handles.append(Patch(facecolor=GREY_SHADES[i % 3], edgecolor="none",
+                             label=f"noise $\\sigma$ = {_pct(s)}: {word}"))
     ax.axhline(0.5, color=figstyle.C["grey"], lw=0.6, zorder=1)
     _da_axis(ax, da_levels)
     ax.set_ylim(-0.03, 1.03)
@@ -263,11 +264,11 @@ def _h2b_scatter(ax, V, da_levels):
     ax.set_xlim(lo, hi)
     ax.set_ylim(lo, hi)
     ax.set_aspect("equal", adjustable="box")
-    ax.set_xlabel(r"$\log_{10} Da^{*}_{ident}$ (dimensionless)")
-    ax.set_ylabel(r"$\log_{10} Da^{*}_{disc}$, best method (dimensionless)")
+    ax.set_xlabel(r"$\log_{10} Da^{*}_{ident}$")
+    ax.set_ylabel(r"$\log_{10} Da^{*}_{disc}$, best method")
     ax.text(0.03, 0.90, f"not shown: {n_missing} of {len(V['H2b'])} slices\nwith no boundary for one of the two",
             transform=ax.transAxes, ha="left", va="top", fontsize=6.0, color=figstyle.C["dark"])
-    ax.text(0.03, 0.97, f"band: $\\pm${MDE} decade (MDE)", transform=ax.transAxes, ha="left",
+    ax.text(0.03, 0.97, f"band: $\\pm${MDE} decade (decision threshold)", transform=ax.transAxes, ha="left",
             va="top", fontsize=6.3, color=figstyle.C["dark"])
     isos = sorted({_parse_slice(k)[2] for k in V["H2b"]})
     ax.legend(handles=[Line2D([], [], lw=0, marker=ISO_MARKER.get(i, "o"), mfc="white",
@@ -288,7 +289,7 @@ def _h2b_wordmap(ax, V):
                                edgecolor="#777777" if wc == "withheld" else "white",
                                hatch="////" if wc == "withheld" else None))
         g = v.get("gap_decades")
-        txt = f"{g:+.2f}" if g is not None else "–"
+        txt = f"{g:+.2f}".replace("-", "−") if g is not None else "–"
         ax.text(c + 0.5, r + 0.5, txt, ha="center", va="center", fontsize=5.6,
                 color="white" if wc in H2B_WORDS else figstyle.C["dark"])
     ax.set_xlim(0, len(cols))
@@ -304,11 +305,13 @@ def _h2b_wordmap(ax, V):
         sp.set_visible(False)
     ax.set_xlabel("isotherm, Péclet number (dimensionless)")
     ax.set_ylabel(r"noise $\sigma$, isotherm error $\varepsilon$ (% of range)")
+    present = {_word_class(v) for v in V["H2b"].values()}          # key only the classes that occur
     patches = [Patch(facecolor=WORD_COLOUR[w], label=f"discovery {WORD_SHORT[w]} identifiability")
-               for w in H2B_WORDS]
-    patches += [Patch(facecolor=NO_BOUNDARY, label=NO_BOUNDARY_WORDS),
-                Patch(facecolor=WITHHELD_FACE, edgecolor=figstyle.C["dark"], hatch="////",
-                      label="withheld (positive control failed)")]
+               for w in H2B_WORDS if w in present]
+    patches += [Patch(facecolor=NO_BOUNDARY, label=NO_BOUNDARY_WORDS)]
+    if "withheld" in present:
+        patches += [Patch(facecolor=WITHHELD_FACE, edgecolor=figstyle.C["dark"], hatch="////",
+                          label="withheld (positive control failed)")]
     ov = V.get("H2b_overall", {}).get("words")
     return patches, ("cell numbers: gap $\\log_{10}Da^{*}_{disc} - \\log_{10}Da^{*}_{ident}$ (decade)"
                      + (f";  overall (two-thirds rule): {ov}" if ov else ""))
@@ -343,7 +346,7 @@ def fig2(V, FD, da_levels, stem, noise=DISPLAY_NOISE, pe=DISPLAY_PE):
 # ---- Figure 3: H2a collapse ------------------------------------------------------------
 def _cond_label(cond):
     obs, iso, pe, m = _parse_cond(cond)
-    return f"{obs}, {ISO_LABEL.get(iso, iso).replace('MOF-303-like ', '')}, {pe_label(pe)}, {METHOD_SHORT.get(m, m)}"
+    return f"{obs}, {ISO_LABEL.get(iso, iso).replace('MOF-303-like ', '')}, {pe_label(pe)}, {METHOD_LABEL.get(m, m)}"
 
 
 def _cond_style(cond):
@@ -390,7 +393,7 @@ def fig3(V, FD, stem):
     else:
         _note(a, "per-level fractions not available (run p2_figdata.py)" if conds else h.get("words", "no H2a data"))
     a.set_xlabel(r"$\log_{10} R$, $R = \delta/\varepsilon_{eff}$ (dimensionless)")
-    a.set_ylabel("P(success), best method\n(fraction of estimation replicates)")
+    a.set_ylabel("probability, best method\n(fraction of estimation replicates)")
     hd = [Line2D([], [], color=OBS_COLOUR[o], label=o) for o in ("O1", "O2")]
     hd += [Line2D([], [], color=figstyle.C["dark"], ls=ls, label=ISO_LABEL[i])
            for i, ls in (("langmuir", "-"), ("step", "--"))]
@@ -403,7 +406,7 @@ def fig3(V, FD, stem):
         lr = [_log(rstar[k][0]) for k in order]
         mn = min(lr)
         b.axvspan(mn, mn + SPREAD_OK, color="#e5f2ec", lw=0, zorder=0)
-        b.axvline(mn + SPREAD_FAIL, color=OI["verm"], lw=0.9, ls="--", zorder=1)
+        b.axvline(mn + SPREAD_FAIL, color=figstyle.C["dark"], lw=0.9, ls="--", zorder=1)
         b.text(mn + SPREAD_OK, 1.0, f" {SPREAD_OK:g} decade", transform=b.get_xaxis_transform(),
                fontsize=6, va="bottom", ha="right")
         b.text(mn + SPREAD_FAIL, 1.0, f"{SPREAD_FAIL:g} decade", transform=b.get_xaxis_transform(),
@@ -459,16 +462,21 @@ def _methods_panel(ax, FD, iso, s, e, pe, da_levels):
     if not d:
         _note(ax, "per-level fractions not available\n(run p2_figdata.py)")
     else:
+        n_zero = 0
         for m in _order(d):
             x, p = _frac(d[m])
+            n_zero += int(np.max(p) == 0)
             ax.plot(x, p, ls=_method_style(m), color=_method_colour(m), marker="o", ms=2.4,
                     lw=1.6 if m.startswith("eiv") else 1.1, label=METHOD_LABEL.get(m, m))
+        if n_zero:
+            ax.text(0.02, 0.97, f"{n_zero} methods at zero\nat every Da\n(lines overlap)", transform=ax.transAxes,
+                    ha="left", va="top", fontsize=6.0, color=figstyle.C["dark"])
         ax.text(0.98, 0.98, f"{ISO_LABEL.get(iso, iso)}, {pe_label(pe)}\n$\\sigma$ = {_pct(s)}, "
                 f"$\\varepsilon$ = {_pct(e)}", transform=ax.transAxes, ha="right", va="top", fontsize=6.5)
     _da_axis(ax, da_levels)
     ax.set_ylim(-0.03, 1.03)
     ax.set_xlabel(LOG_DA)
-    ax.set_ylabel("P(success)\n(fraction of estimation replicates)")
+    ax.set_ylabel(P_LAB)
 
 
 def _by_method_strip(ax, V, da_levels):
@@ -497,8 +505,8 @@ def _by_method_strip(ax, V, da_levels):
     ax.set_xticklabels([METHOD_SHORT.get(m, m) for m in ms], fontsize=6.5)
     ax.set_xlim(-0.6, len(ms) - 0.4)
     ax.set_ylim(lo, np.log10(da_levels[-1]) + 1.0)          # head room for the legend
-    ax.set_xlabel("method (grey numbers: O1 slices without a crossing)")
-    ax.set_ylabel(r"$\log_{10} Da^{*}_{disc}$ per slice (dimensionless)")
+    ax.set_xlabel("method (grey numbers: slices without a crossing, of 96; of 8 for symbolic regression)")
+    ax.set_ylabel(r"$\log_{10} Da^{*}_{disc}$ per slice")
     isos = sorted({iso for v in per.values() for _, iso in v})
     ax.legend(handles=[Line2D([], [], lw=0, marker=ISO_MARKER.get(i, "o"), ms=3.5, mec=figstyle.C["dark"],
                               mfc="white" if i == "step" else figstyle.C["dark"], label=ISO_LABEL.get(i, i))
@@ -628,7 +636,7 @@ def fig4(V, FD, da_levels, stem, noise=DISPLAY_METHODS_NOISE, pe=DISPLAY_PE):
     _by_method_strip(axc, V, da_levels)
     # H2c has no verdict and an empty panel says nothing; d shows the post-hoc comparator E6
     # instead (H2c stays in Table 1 and the text)
-    _e6_panel(axd, FD, da_levels)
+    _e6_panel(axd, FD, da_levels, eps=0.02)   # 2 % isotherm error: where sparse regression fails at every Da
     _letter(axc, "c")
     _letter(axd, "d")
     return _save(fig, stem)
@@ -637,7 +645,7 @@ def fig4(V, FD, da_levels, stem, noise=DISPLAY_METHODS_NOISE, pe=DISPLAY_PE):
 def make_all(V, FD, da_levels, out_dir="paper2"):
     return (fig2(V, FD, da_levels, os.path.join(out_dir, "fig_p2_map"))
             # H2a (no verdict) is Extended Data Fig. 8; main Fig. 2 is the example data (fig_p2_examples.py)
-            + fig3(V, FD, os.path.join(out_dir, "fig_ed8_h2a"))
+            + fig3(V, FD, os.path.join(out_dir, "fig_ed4_h2a"))
             + fig4(V, FD, da_levels, os.path.join(out_dir, "fig_p2_methods")))
 
 

@@ -28,7 +28,8 @@ EDGE = S.OI["dark"]
 TINT = {"truth": "#F2F2F2", "disc": "#E3EEF7", "ident": "#FBE6DA", "out": "#FFFFFF"}
 TAG = {"confirmatory": ("confirmatory", EDGE, "white"),
        "exploratory": ("exploratory", "white", "#000000"),
-       "descriptive": ("descriptive", "#CFCFCF", "#000000")}
+       "descriptive": ("descriptive", "#CFCFCF", "#000000"),
+       "post hoc": ("post hoc", "#EFEFEF", "#000000")}
 
 
 class Canvas:
@@ -116,7 +117,7 @@ def isotherm_inset(ax):
     ax.set_xticks([])
     ax.set_yticks([])
     ax.set_xlabel(r"$c/c_{in}$", fontsize=FS_S, labelpad=0.5)
-    ax.set_ylabel(r"$q^{*}/q_{max}$", fontsize=FS_S, labelpad=0.5)
+    ax.set_ylabel(r"q*/$q_{max}$", fontsize=FS_S, labelpad=0.5)
 
 
 def column_sketch(c, x, y, w, h):
@@ -167,7 +168,7 @@ def main():
 
     # tier 1: what was simulated, varied and observed
     y1, h1 = H - 30.0, 25.5
-    gt = c.titled(L, y1, 57, h1, "Ground truth", "Validated non-isothermal\ncolumn model\n"
+    gt = c.titled(L, y1, 57, h1, "Ground truth", "Verified non-isothermal\ncolumn model\n"
                   "(companion study)\nRate law: LDF (L1) or\nloading-dependent k(q) (L2)", TINT["truth"], "1")
     isotherm_inset(c.inset(L + 37.5, y1 + 3.5, 17.5, 15.5))
     dg = c.titled(67, y1, 50, h1, "Design grid", "Damköhler number Da: 0.1 to 1000,\nnine levels\n"
@@ -176,7 +177,7 @@ def main():
     ob = c.titled(123, y1, R - 123, h1, "Observation models", "O1  probes of c, q, T\n"
                   "O2  probes of c, T (q rebuilt)\nO3  outlet c(t), T(t) only", TINT["truth"], "3")
     column_sketch(c, 131.0, y1 + 5.6, 34.0, 4.0)
-    c.text(R - 2.6, y1 + 5.6 + 2.0, "O3", box=ob, fs=FS_S, ha="right", va="bottom")
+    c.text(131.0 + 34.0 + 4.6, y1 + 5.6 + 2.0, "O3", box=ob, fs=FS_S, ha="left", va="center")
     c.text(123 + 1.6, y1 + 1.2, "methods get a measured isotherm", box=ob, fs=FS_S, va="bottom")
     c.arrow((gt[2], y1 + h1 / 2), (dg[0], y1 + h1 / 2))
     c.arrow((dg[2], y1 + h1 / 2), (ob[0], y1 + h1 / 2))
@@ -190,10 +191,10 @@ def main():
     c.arrow((xd, bus), (xd, y2 + h2))
     c.arrow((xi, bus), (xi, y2 + h2))
     c.titled(L, y2, 86, h2, "Can the rate law be discovered?",
-             "Sparse regression, weak and strong forms: STLSQ (M2),\nensemble (M3), exact best subset (M4)\n"
-             "Errors-in-variables best subset (M5, oracle); PySR (M7);\nneural network in the column model "
-             "(M1, demonstration);\nslow manifold (M9); SINDy-PI (M6, isothermal control)\n"
-             "Success: exactly the true terms, signs, and q* : q = -1 ± 10 %", TINT["disc"], "4")
+             "Sparse regression (thresholding, ensemble, exact best\nsubset), weak and strong forms; errors-in-variables\n"
+             "(oracle); symbolic regression; neural network in the\ncolumn model (demonstration); slow manifold;\n"
+             "implicit regression without an isotherm (isothermal)\n"
+             "Success: exactly the true terms, signs, and q* : q = −1 ± 10 %", TINT["disc"], "4")
     c.titled(96, y2, R - 96, h2, "Is the rate constant identifiable?",
              "The true law is given; only k is fitted, on the same\nobservations with the same measured isotherm\n"
              "Profile likelihood of k (O1 exact; O2 and O3 by\nfull column solves)\n"
@@ -204,16 +205,17 @@ def main():
     c.arrow((xd, y2), (xd, y3 + h3))
     c.arrow((110.0, y2), (110.0, y3 + h3))
     res = c.box(L, y3, 120, h3, fc=TINT["out"])
-    c.text(L + 1.6, y3 + h3 - 1.3, "6  Boundaries and the analyses that use them (Results subsection)",
+    c.text(L + 1.6, y3 + h3 - 1.3, "6  Boundaries and the analyses that use them",
            box=res, fs=FS_T, fontweight="bold")
-    rows = [("H2b", "discovery against identifiability boundary, 96 slices (1)", "confirmatory"),
-            ("H2a", "does one error ratio place the boundary? (2)", "confirmatory"),
-            ("H2c", "does errors-in-variables fitting move it? (2)", "confirmatory"),
-            ("", "which methods discover the law, and where (3)", "descriptive"),
-            ("", "O2 and O3: probes without uptake, outlet only (4)", "descriptive"),
-            ("H2d", "loading-dependent rate, step isotherm (5)", "exploratory")]
+    rows = [("H2b", "discovery against identifiability boundary, 96 slices", "confirmatory"),
+            ("H2a", "does one error ratio place the boundary?", "confirmatory"),
+            ("H2c", "does errors-in-variables fitting move it?", "confirmatory"),
+            ("", "which methods discover the law, and where", "descriptive"),
+            ("", "choice among three candidate laws by likelihood", "post hoc"),
+            ("", "O2 and O3: probes without uptake, outlet only", "descriptive"),
+            ("H2d", "loading-dependent rate, step isotherm", "exploratory")]
     for i, (h, txt, kind) in enumerate(rows):
-        yy = y3 + h3 - 7.3 - i * 3.7
+        yy = y3 + h3 - 7.0 - i * 3.25
         c.text(L + 1.6, yy, h, box=res, fs=FS, va="center", fontweight="bold")
         c.text(L + 10.5, yy, txt, box=res, fs=FS, va="center")
         c.tag(L + 93.0, yy, kind, res)

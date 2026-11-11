@@ -1,0 +1,26 @@
+{
+ "n_rows": 2160,
+ "n_success": 0,
+ "support_size_counts": {
+  "6": 2160
+ },
+ "success_by_sigma": {
+  "0.0": {
+   "success": 0,
+   "n": 540
+  },
+  "0.005": {
+   "success": 0,
+   "n": 540
+  },
+  "0.02": {
+   "success": 0,
+   "n": 540
+  },
+  "0.05": {
+   "success": 0,
+   "n": 540
+  }
+ },
+ "n_distinct_supports": 13
+}
