@@ -1,0 +1,88 @@
+{
+ "source": "results/p2_liba_fidelity.json",
+ "commit_at_start": "e21052c15f17412d12970767b0aaad438bb21dd4",
+ "n_cells": 54,
+ "solver": "best_subset (strong form)",
+ "groups": {
+  "A|sigma=0.0|Da<=10": {
+   "n": 600,
+   "median_fid_obs": 0.08795696083623107,
+   "median_fid_true": 0.08795696083623107
+  },
+  "A|sigma=0.0|Da>=31.6": {
+   "n": 480,
+   "median_fid_obs": 0.5006428450825359,
+   "median_fid_true": 0.5006428450825359
+  },
+  "A|sigma=0.005|Da<=10": {
+   "n": 600,
+   "median_fid_obs": 0.12372800735908579,
+   "median_fid_true": 0.09481200171893917
+  },
+  "A|sigma=0.005|Da>=31.6": {
+   "n": 480,
+   "median_fid_obs": 0.577865720128577,
+   "median_fid_true": 0.5773996080094959
+  },
+  "A|sigma=0.02|Da<=10": {
+   "n": 600,
+   "median_fid_obs": 0.3667388539437304,
+   "median_fid_true": 0.15608016182391393
+  },
+  "A|sigma=0.02|Da>=31.6": {
+   "n": 480,
+   "median_fid_obs": 0.6279788865357867,
+   "median_fid_true": 0.6086945875008976
+  },
+  "A|sigma=0.05|Da<=10": {
+   "n": 600,
+   "median_fid_obs": 0.67061593223192,
+   "median_fid_true": 0.28303841865143653
+  },
+  "A|sigma=0.05|Da>=31.6": {
+   "n": 480,
+   "median_fid_obs": 0.7314218375583282,
+   "median_fid_true": 0.6580728882890869
+  },
+  "B|sigma=0.0|Da<=10": {
+   "n": 600,
+   "median_fid_obs": 0.07934998675035199,
+   "median_fid_true": 0.07934998675035199
+  },
+  "B|sigma=0.0|Da>=31.6": {
+   "n": 480,
+   "median_fid_obs": 0.19113357086547295,
+   "median_fid_true": 0.19113357086547295
+  },
+  "B|sigma=0.005|Da<=10": {
+   "n": 600,
+   "median_fid_obs": 0.12205845746774693,
+   "median_fid_true": 0.0934574338087095
+  },
+  "B|sigma=0.005|Da>=31.6": {
+   "n": 480,
+   "median_fid_obs": 0.523220616005372,
+   "median_fid_true": 0.522373774715565
+  },
+  "B|sigma=0.02|Da<=10": {
+   "n": 600,
+   "median_fid_obs": 0.354425568934269,
+   "median_fid_true": 0.14569915055983484
+  },
+  "B|sigma=0.02|Da>=31.6": {
+   "n": 480,
+   "median_fid_obs": 0.6157018655553481,
+   "median_fid_true": 0.5960707943152471
+  },
+  "B|sigma=0.05|Da<=10": {
+   "n": 600,
+   "median_fid_obs": 0.6671518607830048,
+   "median_fid_true": 0.26756160984067523
+  },
+  "B|sigma=0.05|Da>=31.6": {
+   "n": 480,
+   "median_fid_obs": 0.7309417644639471,
+   "median_fid_true": 0.6572348857938402
+  }
+ }
+}

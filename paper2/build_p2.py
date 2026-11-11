@@ -468,6 +468,17 @@ def si_bindings():
           for i in ("langmuir", "step") for p in ("0.2", "1.0", "5.0")]
     out.append(("eps 5 % ident shift", f"but by {-max(d5):.2f} to {-min(d5):.2f} decade at 5"))
     out.append(("O1 rows identifiable, corrected", f"& {_thou(sum(bool(v.get('success')) for v in cor.values()))} " + BS + BS))
+    # Lib-A held-out fidelity (PREREG s.3, s.4.3; computed after the verdicts)
+    g = load("results/p2_liba_summary.json")["groups"]
+    t = lambda lib, s, grp, f="median_fid_true": g[f"{lib}|sigma={s}|{grp}"][f]
+    out.append(("Lib-A cells", f"on all {load('results/p2_liba_summary.json')['n_cells']} L1 cells"))
+    out.append(("Lib-A no noise, low Da", f"was {t('A', '0.0', 'Da<=10'):.3f} for Lib-A and\n{t('B', '0.0', 'Da<=10'):.3f} for Lib-B"))
+    out.append(("Lib-A no noise, high Da", f"but {t('A', '0.0', 'Da>=31.6'):.2f} against {t('B', '0.0', 'Da>=31.6'):.2f} at"))
+    dmax = max(abs(t("A", s, grp, "median_fid_obs") - t("B", s, grp, "median_fid_obs"))
+               for s in ("0.005", "0.02", "0.05") for grp in ("Da<=10", "Da>=31.6"))
+    out.append(("Lib-A with noise, largest difference", f"differed by at most {math.ceil(dmax * 100) / 100:.2f} in median"))
+    out.append(("Lib-A 2 % noise", f"{t('A', '0.02', 'Da<=10', 'median_fid_obs'):.2f} against "
+                f"{t('B', '0.02', 'Da<=10', 'median_fid_obs'):.2f})"))
     return out
 
 

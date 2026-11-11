@@ -694,7 +694,7 @@ cells; the pre-registration names one easiest cell.
 \item \emph{Order of reporting.} The pre-registration says O3 is reported first; the paper leads
 with O1, where the confirmatory test lives.
 \item \emph{Analyses run late or not run.} The held-out fidelity of the isotherm-free library
-(Lib-A) was declared but computed only after the verdicts (below). Placing the closest prior
+(Lib-A) was declared but computed only after the verdicts (reported below in this Note). Placing the closest prior
 study on the map was done only after the verdicts (Discussion; its Damk\"ohler number from its
 published equations). Applying the best method to measured MOF-303 data (declared exploratory)
 was not done: no method discovered the law from outlet data alone in the simulations, so an
@@ -756,6 +756,21 @@ $c(t) = 1/(1 + \exp(-(t - 0.4\,t_{\mathrm{end}})/(0.05\,t_{\mathrm{end}})))$,
 $t_{\mathrm{end}} = 600$\,s, constant $T = 298$\,K, and 400 samples unless a test says
 otherwise. It is solved with rtol $10^{-10}$ and atol $10^{-12}$.
 % source: p2/synthetic.py:ldf_series (defaults n = 400, t_end = 600, qmax = 5, b = 3).
+
+\subsection*{Held-out fidelity of the isotherm-free library (Lib-A)}
+Lib-A, the library without $\qsm$, cannot represent the true law, so the pre-registration reports
+it as held-out fidelity only: the relative root-mean-square error of the predicted
+$\mathrm{d}q/\mathrm{d}t$ on the held-out probes (every fifth), per cell. It was computed after the
+verdicts by a script committed before its first run, for exact best-subset selection in the strong
+form on all 54 L1 cells, four noise levels and 20 replicates, with Lib-B fitted the same way for
+comparison. Without noise, the median error against the noise-free rate was 0.088 for Lib-A and
+0.079 for Lib-B at $\Da \le 10$, but 0.50 against 0.19 at $\Da \ge 31.6$. With noise the two
+libraries differed by at most 0.06 in median error against the observed rate (at 2\,\% noise and
+$\Da \le 10$, 0.37 against 0.35). Where uptake lags equilibrium, which is where discovery works, a
+polynomial library predicts the uptake rate nearly as well as one holding the true structure, so
+held-out prediction does not single out the law.
+% source: results/p2_liba_summary.json (p2_liba_summary.py from results/p2_liba_fidelity.json, written by
+% p2_liba_fidelity.py, committed 98f8fab/e21052c before its first complete run); groups A|B, sigma, Da<=10 / Da>=31.6.
 
 \subsection*{Shared settings: library, derivative and selection floor}
 Lib-B is $\{1, c, q, T, cq, q^2, c^2, \qsm\}$, with $\qsm$ evaluated at the observed $c$ and
