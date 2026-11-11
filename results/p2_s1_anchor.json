@@ -1,0 +1,14 @@
+{
+ "source": "Santana et al. 2023, doi:10.1016/j.ces.2023.119223; arXiv:2303.13555v3 Table 1, Appendix A",
+ "tau_s_min": 3.9215686274509802,
+ "qstar_cin_mg_g": 50.444587155963305,
+ "t_stoich_min": 39.88918870300414,
+ "Da": 8.77562151466091,
+ "Da_residence": 0.8627450980392156,
+ "observation_horizon_over_t_stoich": 2.7576394400750415,
+ "n_samples": 55,
+ "noise": 0.05,
+ "observation": "outlet only (O3-like)",
+ "pe": 21.0,
+ "isotherm_given_exactly": true
+}
