@@ -91,12 +91,12 @@ def main():
                             "fid_obs": fo, "fid_true": ft, "support": sup}
         print(name, f"{time.process_time() - t0:.0f} CPU s", flush=True)
         if not smoke:
-            write_atomic(OUT, res)
+            write_atomic(res, OUT)
     if smoke:
         for k, v in list(res["rows"].items())[:12]:
             print(k, v)
         return
-    write_atomic(OUT, res)
+    write_atomic(res, OUT)
 
 
 if __name__ == "__main__":
