@@ -9,7 +9,8 @@ Archived on Zenodo: [doi:10.5281/zenodo.23325994](https://doi.org/10.5281/zenodo
 [doi:10.5281/zenodo.23325995](https://doi.org/10.5281/zenodo.23325995), and release v1.0-submitted,
 the state of the submitted manuscript, is
 [doi:10.5281/zenodo.24090779](https://doi.org/10.5281/zenodo.24090779); release v1.0.1-submitted,
-which adds the table of published columns (now Supplementary Table 1), is [doi:10.5281/zenodo.24101317](https://doi.org/10.5281/zenodo.24101317).
+which adds the table of published columns (now Supplementary Table 1), is [doi:10.5281/zenodo.24101317](https://doi.org/10.5281/zenodo.24101317); release v1.0.2-submitted, the version submitted to Nature Computational Science
+(with E11, Figure 5 and Source Data), is [doi:10.5281/zenodo.24149951](https://doi.org/10.5281/zenodo.24149951).
 
 ## The question and the answer in brief
 
