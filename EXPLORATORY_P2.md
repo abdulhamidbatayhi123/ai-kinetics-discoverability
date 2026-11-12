@@ -214,3 +214,41 @@ reports the 2,000-sample gaps in the abstract anyway because the shift is large.
 Counting note: the declaration above says "the 24 candidates of (a) and (b)"; there are 12 (three solvers x two
 forms, each with unchanged and time-matched windows), which the code pooled as declared. The slip is in the
 count, not in the procedure.
+
+## E12. A second physical system: a reversible reaction in a stirred tank (declared 2026-11-12, BEFORE any code for it exists)
+
+**Why.** A simulated pre-submission review (editor and two referees, 2026-11-12) judged one physical system too narrow
+for the journal and asked whether the asymmetry between discovery and identifiability holds outside adsorption, in a
+system whose law also needs an imperfectly known constitutive input. Exploratory; no hypothesis of the
+pre-registration rests on it.
+**System.** A continuously stirred tank, residence time tau, feed A_in = B_in = 1, C_in = 0, empty at t = 0, with the
+reversible reaction A + B <-> C at rate r = k (A B - C / K(T)):
+dA/dt = (A_in - A)/tau - r, dB/dt = (B_in - B)/tau - r, dC/dt = -C/tau + r. The temperature is imposed (jacketed),
+rising linearly from 300 K to 340 K over the horizon of 8 tau; K(T) = 5 exp(-(dH/R)(1/T - 1/300)) with
+dH = -50 kJ/mol (so K falls from 5 to about 0.47 and C/K is not collinear with C). The equilibrium constant plays the
+role of the isotherm. Da = k tau at the main study's nine levels, 10^-1 to 10^3 at half-decade spacing. Solved by
+scipy solve_ivp (BDF, rtol 1e-9, atol 1e-12).
+**Observation.** A, B, C at 200 equally spaced times over the horizon, independent Gaussian noise with standard
+deviation sigma times each channel's true range, sigma in {0.5, 2} %; T exact. The equilibrium constant given to the
+methods is K_meas(T) = K(T) (1 + eps g(T)), eps in {0, 2} %, g a smooth random function of four Fourier modes on the
+normalised temperature, unit root-mean-square, drawn per replicate (the main study's form). 60 replicates per cell,
+every draw seeded by a hash of (Da, sigma, eps, replicate, purpose).
+**Discovery.** Library {1, A, B, C, A B, A^2, T, C/K_meas}; target the reaction rate, dC/dt + C/tau (the flow term
+is known). Solvers: exact best-subset selection (BIC with the main study's floor), sequentially thresholded least
+squares and the bagged ensemble, each in the strong form (Savitzky-Golay derivative, window 21, order 3) and the weak
+form (the main study's test functions, support 61 samples, flow term moved to the target), with the main study's
+settings (p2.methods, p2.weak). Success: the selected terms are exactly {A B, C/K_meas}, the A B coefficient is
+positive, and the ratio of the C/K_meas to the A B coefficient is -1 within 10 %.
+**Identifiability.** The true law with K_meas, fitted to the observed A, B, C by a Gaussian likelihood with the
+noise standard deviation known; the likelihood of k on a fixed logarithmic grid of 161 points from k/100 to 100 k;
+the 95 % interval is the set with 2 (LL_max - LL) <= 3.84; k is practically identifiable when the interval lies in
+[k/2, 2k] and the maximum is not at a grid edge.
+**Analysis (as the main study).** Per slice (sigma, eps): the best of the six method-form pairs chosen on replicates
+0-14 by p2.analysis.select_best; boundaries are the 50 % crossings of p2.analysis.boundary on replicates 15-59;
+gap = log10(Da*_ident / Da*_disc).
+**Reading fixed in advance.** Positive control: at Da = 0.1, sigma 0.5 %, eps 0, discovery and identifiability must
+both succeed in at least 90 % of replicates 15-59, otherwise no reading is made and the failure is reported. Then, in
+each of the four slices with both boundaries: gap >= 0.25 decade, "discovery fails before identifiability" holds in
+the second system; |gap| < 0.25, it fails with identifiability; gap <= -0.25, discovery outlives identifiability.
+Slices without one of the boundaries are reported as such. The result is reported in the paper whatever it is.
+**Before running,** the script is committed with a smoke test on two rows; the smoke rows are recomputed with the rest.
