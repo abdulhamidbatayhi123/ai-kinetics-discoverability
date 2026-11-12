@@ -496,7 +496,7 @@ def _by_method_strip(ax, V, da_levels):
             ax.plot(i + rng.uniform(-0.22, 0.22), _log(d), ISO_MARKER.get(iso, "o"), ms=2.6,
                     mfc="white" if iso == "step" else _method_colour(m), mec=_method_colour(m),
                     mew=0.7, alpha=0.85)
-        if vals:
+        if len(vals) >= 3:   # no median for one or two points
             ax.plot([i - 0.3, i + 0.3], [np.median([_log(d) for d, _ in vals])] * 2,
                     color=figstyle.C["dark"], lw=1.4)
         ax.text(i, lo + 0.05, f"{len(per[m]) - len(vals)}", ha="center", va="bottom", fontsize=5.8,

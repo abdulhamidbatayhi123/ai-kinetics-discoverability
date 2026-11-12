@@ -1,5 +1,5 @@
 {
- "figure": "fig_ed8_h2a",
+ "figure": "fig_ed4_h2a",
  "size_mm": [
   183.0,
   80.0
@@ -8,10 +8,10 @@
   5.8,
   8.0
  ],
- "made": "2026-11-11 08:17:03",
+ "made": "2026-11-12 19:15:26",
  "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
  "script": "fig_p2_results.py",
- "script_sha256": "7ee54706266aa96b0f14a4fb302155700ed4d12751c26f191d90dd83d6ca6b0f",
+ "script_sha256": "d1df516c20c9cc62cc90615d1542a2f49788686a0283458f57ccd2ef78ab47a3",
  "inputs": {
   "results/p2_verdicts.json": "04bc6f4aa4be68549480c76809071d4ba51191bba0d6a261f857a7ed915eaea7",
   "results/p2_figdata.json": "2af9c6d321a3dd7e157a0fc9a970ce21d29504db38ca50ca92e0d1fbfd449d1b",

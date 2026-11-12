@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: >-
-  Code, results and pre-registration for: Equation discovery fails long before rate constants become unidentifiable in simulated adsorption columns
+  Code, results and pre-registration for: Equation discovery fails before rate constants become unidentifiable in simulated adsorption columns
 message: If you use this software or its results, please cite it.
 type: software
 authors:

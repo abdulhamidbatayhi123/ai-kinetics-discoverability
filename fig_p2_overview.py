@@ -105,7 +105,7 @@ def isotherm_inset(ax):
     concentration over its feed value (from p2_generate.make_physics and isotherm.q_star_np)."""
     from isotherm import q_star_np
     from p2_generate import make_physics
-    for iso, ls, lab, xy in (("langmuir", "-", "Langmuir", (0.06, 0.93)), ("step", "--", "step", (0.97, 0.06))):
+    for iso, ls, lab, xy in (("langmuir", "-", "Langmuir", (0.97, 0.26)), ("step", "--", "step", (0.42, 0.95))):
         p, c_in = make_physics(iso)
         c = np.linspace(0, c_in, 300)
         q = q_star_np(c, np.full_like(c, p.T_in), p) / p.q_max

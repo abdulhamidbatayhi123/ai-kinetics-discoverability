@@ -201,7 +201,7 @@ def bindings():
     near = [s["gap_decades"] for s in h2b_all.values()
             if s["gap_decades"] is not None and math.log10(s["da_disc"] / 0.1) <= 0.25]
     out.append(("boundaries near the grid bottom", f"{len(near)} of the 37 discovery boundaries lie within 0.25 decade"))
-    out.append(("their gaps", f"gaps of {math.floor(-max(near) * 10) / 10:.1f} to {-min(near):.1f} decades"))
+    out.append(("their gaps", f"gaps of {-max(near):.1f} to {-min(near):.1f}"))
     fdb = load("results/p2_figdata.json")["h2b"]["sigma=0.02|eps=0.02|langmuir|pe=5.0"]
     lo2 = [n / m for _, n, m in fdb["disc"][:2]]
     out.append(("borderline slice", f"success was {lo2[0]:.2f} at the two lowest levels" if lo2[0] == lo2[1] < 0.5
@@ -216,7 +216,7 @@ def bindings():
             ("E7 discovery at 1 % shift", f"at or below {math.floor(e7_disc * 100 + 0.5):.0f}" + BS + "," + BS + "% at every rate")]
     # review round 2 (M1): the bias of k under a 1 % step shift, medians over estimation replicates per (sigma, shift)
     b1, b10 = e7_bias(1.0), e7_bias(10.0)
-    out += [("E7 bias at Da 10", f"by a factor of {1 / max(x for x in b10 if x < 1):.1f} to {max(b10):.1f} at $" + BS + "Da = 10$")]
+    out += [("E7 bias at Da 10", f"by {1 / max(x for x in b10 if x < 1):.1f} to {max(b10):.1f} times at $" + BS + "Da = 10$")]
     e8 = load("results/p2_e8_summary.json")
     sh = {"disc": [], "select": [], "ident": []}
     beyond, gap400, sel100 = 0, [], []
@@ -268,8 +268,12 @@ def bindings():
                 if all(k.startswith("sigma=0.0|") for k in held) else "held slices with noise"))
     # (M3) success not monotone in noise at 2 % isotherm error
     mx = lambda sg: max(max(a for _, a, n in s["disc"]) for k, s in fig.items() if k.startswith(f"sigma={sg}|eps=0.02|"))
-    out.append(("non-monotone in noise", f"reached at most {mx('0.0')} of 45 replicates without noise but up to "
-                f"{max(mx('0.005'), mx('0.02'), mx('0.05'))} with noise"))
+    meth = load("results/p2_figdata.json")["methods"]
+    bsw = [max(max(a for _, a, n in d["best_subset|weak"]) for k, d in meth.items()
+               if k.startswith(f"sigma={sg}|eps=0.02|") and "best_subset|weak" in d) for sg in ("0.0", "0.005", "0.02", "0.05")]
+    out.append(("best subset weak vs noise at 2 % isotherm error",
+                f"succeeded in at most {bsw[0]}, {bsw[1]}, {bsw[2]} and {bsw[3]}\nof 45 replicates" if bsw == sorted(bsw)
+                else "not monotone"))
     # (M4) 0.5 % noise and 0.5 % isotherm error: slices with a boundary and its largest value
     b55 = [s["da_disc"] for k, s in h2b.items() if k.startswith("sigma=0.005|eps=0.005|") and s["da_disc"]]
     out.append(("0.5/0.5 slices with a boundary", f"in the {({3: 'three'}).get(len(b55), len(b55))} slices that kept a boundary"))
@@ -306,8 +310,15 @@ def bindings():
             ("E11 slices with both", f"first in the {({3: 'three'}).get(len(g11), len(g11))} slices with both boundaries"),
             ("E11 discovery shift", f"discovery moved up by {math.floor(min(dsh) * 10) / 10:.1f} to {math.ceil(max(dsh) * 10) / 10:.1f} decades"),
             ("E11 identifiability shift", f"identifiability by {min(ish):.1f} to\n{max(ish):.1f} decade"),
-            ("E11 fourth slice", f"reached ${BS}Da {BS}approx {round(no_id[0]['da_disc'], -1):.0f}$ while $k$ stayed identifiable beyond"
+            ("E11 fourth slice", f"reached ${BS}Da {BS}approx {round(no_id[0]['da_disc'], -1):.0f}$ (26 with"
              if len(no_id) == 1 else "E11 no-ident slices != 1")]
+    rc = load("results/p2_referee_checks.json")
+    cv = [d["gap_200"] for d in rc["choice_vs_ident"].values() if d["gap_200"] is not None]
+    cv2 = [d["gap_2000"] for d in rc["choice_vs_ident"].values() if d["gap_2000"] is not None]
+    out += [("choice vs identifiability at 200", f"still lay {min(cv):.1f} to {max(cv):.1f} decades below the identifiability"),
+            ("choice vs identifiability at 2000", f"({min(cv2):.1f} to {max(cv2):.1f}\nwith 2,000 observations)"),
+            ("peak success below 0.7", f"in {rc['peak_success']['n_below_0.7']} of the {rc['peak_success']['n_slices']} slices the best"),
+            ("independent families", f"come from {({6: 'six'}).get(len(rc['independent_families']))} ground-truth families")]
     pre = load("results/p2_verdicts_preB90.json")["H2b"]
     both = [k for k in h2b if pre.get(k, {}).get("da_ident") and h2b[k].get("da_ident")]
     down = sum(h2b[k]["da_ident"] < pre[k]["da_ident"] * (1 - 1e-9) for k in both)
@@ -517,7 +528,7 @@ def main():
     # mid-sentence (found 2026-11-09: the M1 sentence had been lost this way)
     for name, txt in (("article", body), ("SI", si_body)):
         for p in re.split(r"\n\s*\n", txt):
-            if re.match(r"[a-z]", p.strip()):
+            if re.match(r"[a-z0-9]", p.strip()):   # digit too: found 2026-11-12, "2\,h per fit" after a comment
                 fail("G3", f"{name}: a paragraph starts mid-sentence (text after a % comment?): {p.strip()[:80]!r}")
     si_flat = norm(si_body)
     for desc, lit in si_bindings():
