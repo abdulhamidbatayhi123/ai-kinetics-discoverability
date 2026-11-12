@@ -203,3 +203,11 @@ separately.
 - a slice without one of the boundaries is reported as such.
 Descriptive, no verdict; it changes no confirmatory result. Fields go to a scratch directory, not data/p2.
 One row may be run first to time the job; it is recomputed with the rest.
+**Outcome (2026-11-12, results/p2_e11_summary.json, results/p2_e11_fine.json; 9 Kaggle parts, kit 00cb4c1,
+2,160 rows, 0 errors; re-solved fields equal the stored ones at grid times to 8.4e-6).** By the reading fixed
+above, "discovery fails before identifiability" holds at about 2,000 samples: gaps 0.72 (Langmuir 0.5 %), 1.50
+(Langmuir 2 %) and 2.01 (step 2 %) decades. Step 0.5 %: k identifiable beyond the grid, discovery boundary 314
+(windows matched in time; 26.4 with windows unchanged in samples), so no gap on the grid; reported as such.
+Against E8's 200-time run, discovery rose 0.72 to 1.88 decades, identifiability 0.20 to 0.52, the choice among
+laws 0.63 to 1.00. No gap fell below 0.25, so the abstract is not required to carry it as a limit; the paper
+reports the 2,000-sample gaps in the abstract anyway because the shift is large.

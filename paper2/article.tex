@@ -50,14 +50,15 @@
 
 \begin{abstract}
 Equation-discovery methods aim to learn governing laws from data, but how much more they need
-than fitting the coefficient of an assumed law is rarely measured. We measured it in a
-pre-registered computational study of fixed-bed adsorption columns. Over four decades of the
+than fitting an assumed law is rarely measured. We measured it in a pre-registered computational
+study of adsorption columns. Over four decades of the
 Damk\"ohler number Da (uptake rate relative to front passage), and across dispersion, sensor
 noise and isotherm error, we compared where the best of several sparse and symbolic regression
-methods stopped recovering the true uptake rate law with where its single rate constant stopped
-being identifiable. Wherever both limits fell within the tested range (37 conditions), discovery
-failed first, by 1.6 to 3.7 decades. A 5\,\% isotherm error prevented discovery at every rate,
-while the rate constant stayed identifiable from probes inside the bed. Column data can calibrate an assumed rate law long after
+methods stopped recovering the uptake rate law with where its rate constant stopped being
+identifiable. Wherever both limits fell within the tested range (37 conditions), discovery failed
+first, by 1.6 to 3.7 decades with 200 observations per run and still by 0.7 to 2.0 decades with
+2,000. A 5\,\% isotherm error prevented discovery at every rate, while the rate constant stayed
+identifiable. Column data can calibrate an assumed rate law long after
 they can no longer reveal it.
 \end{abstract}
 % <= 150 words (Nature Computational Science / Nature Chemical Engineering Article format).
@@ -140,7 +141,8 @@ first, 1.6 to 3.7 decades of $\Da$ before the rate constant stopped being identi
 
 \subsection*{Discovery fails long before identifiability}
 We report the pre-registered comparison first, then what moves the boundaries, which methods
-discover the law, what remains without probes of uptake, and a loading-dependent rate.
+discover the law, denser sampling, observation without probes of uptake, and a loading-dependent
+rate.
 Both isotherms passed the positive control (lowest $\Da$, no noise or isotherm error): the law
 was recovered, and $k$ identifiable, in 135 of 135 replicates for each. As $\Da$ grows, the
 driving force $\qs - q$ that distinguishes the law shrinks below the noise, while the curves still
@@ -159,7 +161,8 @@ for boundaries known only to lie between two levels, every gap is at least 1.35 
 Discovery failed between $\Da = 0.11$ and 13, while $k$ stayed identifiable up to $\Da$ between 43
 and 994. Uptake was still well resolved in time where discovery failed: $kh$, the rate constant
 times the interval between observations, was at most 0.26 at every discovery boundary and 0.85 to
-20 at the identifiability boundaries (post hoc). The best
+20 at the identifiability boundaries (post hoc), although more samples did help discovery (below).
+The best
 discovery method was weak-form exact best-subset selection in 34 of the 37 slices and the
 weak-form ensemble in the other three.
 % results/p2_kh.json (p2_kh.py; kh_at_disc_max 0.258, kh_at_ident_min 0.859, kh_at_ident_max 19.98).
@@ -176,10 +179,9 @@ did. At 0.5\,\% noise, adding a 0.5\,\% isotherm error moved $\Da^{*}_{\mathrm{d
 to about 0.1 to 0.2 (in the three slices that kept a boundary), while $\Da^{*}_{\mathrm{ident}}$
 moved by less than 0.2 decade. With isotherm error, success was not monotone in noise: at 2\,\%
 isotherm error the best method reached at most 18 of 45 replicates without noise but up to 43 with
-noise. Without noise, weak-form best-subset selection kept on average 3.6 to 4.0 terms (four is
-the maximum) at $\Da \le 10$, and the extra terms absorbed the isotherm error. The information
-criterion that picks the terms has a floor on the residual variance; noise lifts the residual above
-it, and two-term laws then win (post hoc).
+noise: without noise, weak-form best-subset selection kept on average 3.6 to 4.0 terms (four is
+the maximum) at $\Da \le 10$, absorbing the isotherm error, until noise lifted the residual above
+the selection criterion's floor (post hoc).
 % results/p2_noise_support.json summary_da_le_10 eps0.02|sigma0.0 mean_support_size 3.62-4.00
 % (p2_noise_support.py; best_subset|weak, estimation replicates); p2/methods.py best_subset floor.
 % results/p2_verdicts.json H2b by (sigma, eps): (0.005, 0) disc 4.18-7.24, ident langmuir 318-357,
@@ -194,12 +196,10 @@ regression (next section).
 % always >= 50 %: 5 + 3 = 8, all sigma = 0; straddles: 11); identifiability missing only in the 3
 % "always >= 50 %" slices.
 
-Two checks support the verdict. First, the identifiability estimator is accurate except at the two
-highest rates, where a biased estimate could misplace $\Da^{*}_{\mathrm{ident}}$. With exact data
-it recovered $k$ to within 5\,\% at every $\Da$ up to 100, but its median estimate was 0.75 to 0.91
-times $k$ at $\Da = 316$ ($kh = 6.4$) and 0.39 to 0.54 times $k$ at $\Da = 1000$ ($kh = 20$).
-Without those two levels every slice still has a gap of at least 0.89 decade
-(post hoc; Extended Data Fig.~3). Second, when success
+Two checks support the verdict. First, with exact data the identifiability estimator recovered $k$
+to within 5\,\% at every $\Da$ up to 100 but was biased low at $\Da = 316$ ($kh = 6.4$) and 1000
+($kh = 20$), with median estimates of 0.39 to 0.91 times $k$; without those two levels every slice
+still has a gap of at least 0.89 decade (post hoc; Extended Data Fig.~3). Second, when success
 also required the fitted $k$ within a factor of two of the truth (a pre-registered sensitivity
 analysis), all 37 verdicts held and two more slices gained the same verdict.
 % results/p2_ident_robustness.json accuracy_median_khat_over_k_sigma0_eps0 (0.969 to 1.045 up to
@@ -281,8 +281,18 @@ won in three of the four cells tested at $\Da \ge 100$ (post hoc; Supplementary 
 % Langmuir Da 31.6 sigma 0.5 % 1.00 (0.69), 2 % 0.69 (0); Da >= 100 at most 0.22 (Langmuir 2 %, Da 316);
 % step 0 in all eight cells. results/p2_e10_resolution.json (EXPLORATORY_P2 E10): at the grid's 200 times
 % the wrong law in all four cells; at 3,991 times LDF for Langmuir Da 100, 1000 and step Da 100; step Da 1000 qdf.
-With twice as many observation times (post hoc), every boundary moved to higher $\Da$ or stayed,
-and discovery still failed at least 1.2 decades before identifiability.
+
+\subsection*{Ten times more observations narrow the gap but do not close it}
+The boundaries above assume 200 observation times per run. With 400 (post hoc), every boundary
+moved to higher $\Da$ or stayed, and discovery still failed at least 1.2 decades first. With about
+2,000, on the $\Pe \approx 94$ cells of both isotherms at 0.5 and 2\,\% noise (declared before it
+ran; Supplementary Note~1), discovery moved up by 0.7 to 1.9 decades and identifiability by 0.2 to
+0.5 decade. Discovery still failed first in the three slices with both boundaries, by 0.7 to 2.0
+decades, above the 0.25-decade threshold; in the fourth (step isotherm, 0.5\,\% noise) discovery
+reached $\Da \approx 310$ while $k$ stayed identifiable beyond the grid.
+% results/p2_e11_summary.json (p2_e11_fine.py; EXPLORATORY_P2 E11, declared 45e6e77): pool "both",
+% gaps 0.72 (langmuir 0.5 %), 1.50 (langmuir 2 %), 2.01 (step 2 %); step 0.5 % da_disc 314, da_ident none;
+% shifts against E8's own 200-time run (results/p2_e8_summary.json n_t=200): disc 0.72-1.88, ident 0.20-0.52.
 % results/p2_e8_summary.json (EXPLORATORY_P2 E8; kaggle_e8/, p2_e8_merge.py, 4 of 4 sampled rows
 % recomputed locally match): 200 -> 400 observation times, Pe ~94, sigma 0.5 and 2 %, eps 0.
 % da_disc shift log10 0.40 (step 0.5 %) to 0.67 (langmuir 2 %); da_select 0.21 to 0.52; da_ident
@@ -306,8 +316,8 @@ succeeded in more than 29\,\% of the replicates at any level of any slice.
 Identifiability, computed on the subgrid where every point of the profile is a full column
 solve ($\Pe \approx 94$, noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%), held to
 $\Da \approx 57$ to 286 from probes without uptake, and to $\Da \approx 38$ to 172 from the
-outlet alone (O3). These profiles are costly, so they used three replicates per level, and
-most of their boundaries are known only to lie between two levels. In the same slices, the last
+outlet alone (O3). With three replicates per level, most of these boundaries are known only to lie
+between two levels. In the same slices, the last
 level at which any method discovered the law from probes of $c$, $q$ and $T$, a far richer
 observation, lay at $\Da = 3$ to 32 (post hoc). The outlet curve
 alone therefore still determined $k$ at least as far as that level in every slice, and up to 1.5
@@ -387,9 +397,9 @@ Real columns sit mostly beyond the discovery boundaries. Published data for wate
 \citep{krishnamurthy2025} place physisorbent packed beds between $\Da \approx 100$ and 23{,}000
 (order-of-magnitude estimates; Supplementary Table~1). An amine bed for
 direct air capture lay at $\Da \approx 8$ to 10 \citep{stampi2024}, within reach of the highest
-discovery boundaries ($\Da \approx 7$ with noise, 13 without). For physisorbent beds the law must
-be chosen or assumed; at the lower end of their range the data still give $k$, and the upper end
-lies beyond the range tested here.
+discovery boundaries ($\Da \approx 7$ with noise, 13 without). With 200 observations per run the
+law must be chosen or assumed for physisorbent beds; with 2,000 and 0.5\,\% noise, discovery
+reached the lower end of their range.
 % source: results/p2_practical_da.json (p2_practical_da.py from data/practical_da_sources.csv; every
 % input checked against the papers 2026-11-10; Claude Science task T3); highest Da*_disc:
 % results/p2_verdicts.json H2b (12.8). The earlier estimate (WRITEUP_NOTES "Practical Da",
@@ -401,9 +411,8 @@ equations (pre-registered, computed after the verdicts), its columns ran at $\Da
 (Langmuir) and 9.2 (Sips) with 5\,\% outlet noise and an exact isotherm, above every discovery
 boundary we found with noise. Under our rule its Langmuir readout (the LDF terms plus a constant)
 fails, but its Sips readout, $0.198\,\qs - 0.200\,q$, succeeds. That is one realisation of an
-isothermal model with its own error model; our one-replicate demonstration of its pipeline
-succeeded at $\Da = 3.2$, and at 10 its training stopped early. A replicated test at that point
-would show whether the difference lies in the model, the errors or chance.
+isothermal model with its own error model, and a replicated test at that point would show whether
+the difference lies in the model, the errors or chance.
 % results/p2_s1_anchor.json (p2_s1_anchor.py; PREREG_P2 s.5; Da 8.78, residence form 0.86, 55 samples
 % over 2.8 t_stoich); highest Da*_disc with noise 7.24 (results/p2_verdicts.json H2b, sigma 0.5 %);
 % santana2023 Tables 4 and 5 (Langmuir LDF: -0.535 - 0.225 q + 0.234 q*). results/p2_extra_m1.json.
@@ -421,7 +430,8 @@ lower the discovery boundaries, as would a larger candidate library. Interior pr
 (O1) are a ceiling that experiments rarely reach. The identifiability criterion measures precision
 and accuracy, not calibration: the intervals contained the true $k$ in only about 10\,\% of O1 rows
 (23\,\% on O3; exploratory; Extended Data Fig.~7), yet judged by the point estimate alone every
-verdict holds. All boundaries assume 200 observation times per run.
+verdict holds. Discovery gains most from denser sampling, so the boundaries at 200 observations per
+run understate what a densely sampled experiment can discover.
 Symbolic regression ran on a subgrid, the neural pipeline only as a demonstration, and a
 Kolmogorov--Arnold network only in an exploratory run, where it recovered the law in none of 216
 fits; each limit was set by cost rules declared before the grid ran, on the one computer
@@ -437,14 +447,12 @@ Errors found in our own code were corrected and are reported beside the results 
 % points), B90 (exact LDF update coefficient; found by an independent review), B91 (E6 coarse k grid,
 % exploratory only). results/p2_verdicts_preB90.json (30 slices) vs results/p2_verdicts.json (37).
 
-Three directions follow. Discovery would gain most from better isotherms, because the boundaries
-moved more with isotherm error than with noise. In a post hoc test, shifting the step of the
+Three directions follow. Discovery would gain most from better isotherms and denser sampling. In a post hoc test, shifting the step of the
 MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,\% at every rate,
 biased the fitted $k$ by a factor of 1.5 to 1.8 at $\Da = 10$ with intervals too narrow to show
 it, and lowered the identifiability boundary to $\Da \approx 17$ to 57 (5.6 with a 2\,\% shift).
 An isotherm whose step is placed to better than 1\,\% relative humidity is worth more than quieter
-sensors. Experiments can also be designed to discriminate among candidate laws, for example by
-denser sampling. And the map should be tested on experimental breakthrough data with interior
+sensors. And the map should be tested on experimental breakthrough data with interior
 probes at moderate $\Da$, where it predicts that discovery first becomes possible.
 % results/p2_e7_summary.json (EXPLORATORY_P2 E7; discovery part, unaffected by B90): best-method
 % success at any Da <= 0.31 (sigma 2 %, shift -1 % RH), 0.27 (+1 %), 0.00 otherwise.
@@ -532,7 +540,8 @@ error; circles, Langmuir; open squares, step isotherm.}
 uptake, O1), bars run from the bottom of the grid ($\Da = 0.1$) to the 50\,\% boundary, and the
 darker end spans that boundary over the isotherms and P\'eclet numbers: discovery by the best method
 (blue), practical identifiability of $k$ (vermilion), and choice of the LDF law among three
-candidate laws in every replicate (black, dash-dotted; post hoc, $\Pe \approx 94$, exact isotherm).
+candidate laws in every replicate (black, dash-dotted; post hoc, $\Pe \approx 94$, exact isotherm);
+all with 200 observation times per run (denser sampling raises discovery most, Results).
 Below, the $\Da$ ranges of published packed beds (Supplementary Table~1) and the two simulated
 columns of the closest prior study \citep{santana2023}, computed from its published equations, with
 the outcome of its readout under this study's success rule. Shaded, outside the tested range.}
@@ -796,14 +805,16 @@ and none enters a confirmatory test; the descriptive checks listed at the end of
 not declared in advance. Three were declared before the verdicts: M1 trained at the
 scale a universal differential equation needs (E1), the Kolmogorov--Arnold network on its
 declared subgrid (E2), and how often an interval that meets $[k/2, 2k]$ misses the true $k$
-(E3). E1 needs a graphics processor and has not run; it is not reported here. Seven more were
+(E3). E1 needs a graphics processor and has not run; it is not reported here. Eight more were
 declared after the verdicts, prompted by a review of the draft, and are labelled post hoc: H2b
 with matched success criteria for the two tasks (E4), the conditioning of the library against
 $\Da$ (E5), choice among three candidate laws by likelihood (E6), a systematic shift of the step
 of the measured isotherm (E7), the sampling rate, 200 against 400 observation times (E8,
 declared after E6's results), E6 with $\qsm$ computed from noise-free $c$ and $T$
-(E9, declared after a second review), and E6 on noise-free data sampled up to 20 times more finely
-(E10, declared after E9). E6 fits each law by implicit Euler along the same upsampled path
+(E9, declared after a second review), E6 on noise-free data sampled up to 20 times more finely
+(E10, declared after E9), and every boundary at about 2,000 observation times per run, with the
+fields re-solved at finer time resolution (E11, declared after a third review, with its reading
+fixed in advance). E6 fits each law by implicit Euler along the same upsampled path
 of $\qsm$ as the identifiability profile, with its rate constant profiled on a logarithmic grid
 and refined by a bounded one-dimensional search; all three laws have one parameter, so the
 Bayesian information criterion picks the largest likelihood. In E8 every method runs unchanged,

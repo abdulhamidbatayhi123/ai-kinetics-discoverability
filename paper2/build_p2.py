@@ -232,11 +232,7 @@ def bindings():
             gap400.append(math.log10(b["da_ident"] / b["da_disc"]))
         sel100 += [a["select_by_da"]["100.0"], b["select_by_da"]["100.0"]]
     f1 = lambda x: f"{math.floor(x * 10 + 0.5) / 10:.1f}"
-    out += [("E8 discovery shift", f"discovery by {f1(min(sh['disc']))} to {f1(max(sh['disc']))} decade"),
-            ("E8 selection shift", f"among the laws by {f1(min(sh['select']))} to {f1(max(sh['select']))} decade"),
-            ("E8 identifiability shift", f"identifiability by up to {f1(max(sh['ident']))} decade"
-             + (" or beyond the grid" if beyond else "")),
-            ("E8 every boundary up or unchanged", "moved to higher $" + BS + "Da$ or stayed"
+    out += [("E8 every boundary up or unchanged", "moved to higher $" + BS + "Da$ or stayed"
              if min(min(v) for v in sh.values()) >= 0 and min(min(v) for v in sh.values()) == 0
              else "E8 a boundary moved down, or none stayed"),
             ("E8 smallest gap at 400", f"still failed at least {math.floor(min(gap400) * 10) / 10:.1f} decades"),
@@ -300,6 +296,22 @@ def bindings():
             ("S1 Sips", f"and {s1['sips_Da']:.1f} (Sips)"),
             ("S1 above every noisy boundary", "above every discovery boundary we found with noise"
              if min(s1["Da"], s1["sips_Da"]) > top_noisy else "S1 not above")]
+    # E11: about 2,000 observation times (declared 45e6e77 before running)
+    e11, e8b = load("results/p2_e11_summary.json"), load("results/p2_e8_summary.json")
+    pairs = [(e11[f"{i}|sigma={sg}|both"], e8b[f"{i}|sigma={sg}|n_t=200"]) for i in ("langmuir", "step")
+             for sg in ("0.005", "0.02")]
+    g11 = [math.log10(b["da_ident"] / b["da_disc"]) for b, _ in pairs if b["da_disc"] and b["da_ident"]]
+    dsh = [math.log10(b["da_disc"] / a["da_disc"]) for b, a in pairs]
+    ish = [math.log10(b["da_ident"] / a["da_ident"]) for b, a in pairs if b["da_ident"] and a["da_ident"]]
+    no_id = [b for b, _ in pairs if b["da_ident"] is None]
+    out += [("E11 gaps (abstract)", f"still by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} decades with" if min(g11) >= 0.25
+             else "E11 gap below threshold"),
+            ("E11 gaps (Results)", f"by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f}\ndecades, above the 0.25-decade threshold"),
+            ("E11 slices with both", f"first in the {({3: 'three'}).get(len(g11), len(g11))} slices with both boundaries"),
+            ("E11 discovery shift", f"discovery moved up by {math.floor(min(dsh) * 10) / 10:.1f} to {math.ceil(max(dsh) * 10) / 10:.1f} decades"),
+            ("E11 identifiability shift", f"identifiability by {min(ish):.1f} to\n{max(ish):.1f} decade"),
+            ("E11 fourth slice", f"reached ${BS}Da {BS}approx {round(no_id[0]['da_disc'], -1):.0f}$ while $k$ stayed identifiable beyond"
+             if len(no_id) == 1 else "E11 no-ident slices != 1")]
     pre = load("results/p2_verdicts_preB90.json")["H2b"]
     both = [k for k in h2b if pre.get(k, {}).get("da_ident") and h2b[k].get("da_ident")]
     down = sum(h2b[k]["da_ident"] < pre[k]["da_ident"] * (1 - 1e-9) for k in both)

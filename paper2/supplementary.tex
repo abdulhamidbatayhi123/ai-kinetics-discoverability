@@ -168,7 +168,7 @@ isotherm at $T_{\mathrm{in}}$ is the same as in the Langmuir cells and the bed s
 $T_{\mathrm{in}}$.
 % source: p2_generate.py:make_physics branch "langmuir_iso"; cells() (9 Da levels, Pe x1, L1).
 
-\section*{Supplementary Note 1: exploratory analyses E2 to E10}
+\section*{Supplementary Note 1: exploratory analyses E2 to E11}
 Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
 enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
 corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results; E9 after
@@ -491,6 +491,45 @@ fall. These are noise-free data; with noise, twice the
 sampling rate did not restore the choice at $\Da = 100$ (E8).
 % source: results/p2_e10_resolution.json (24 rows: 4 cells x {200, 400, 1996, 3991, grid200, grid400});
 % p2_e10_resolution.py (fields in scratch_e10/, not tracked); EXPLORATORY_P2 E10.
+
+\subsection*{E11: about 2,000 observation times per run (declared before it ran)}
+Declared after an independent review asked whether the gap survives much finer sampling, and
+before any row ran. The $\Pe \approx 94$ cells of both isotherms (L1, all nine $\Da$ levels) were
+re-solved with the unchanged solver at 3,991 stored times; observations used every second stored
+time (1,996, which include the grid's 200), the same probes and the same noise standard deviation
+per sample, at 0.5 and 2\,\% noise, exact isotherm, 60 replicates (2,160 rows). The re-solved
+fields equal the stored ones at the grid's times to a relative $8.4\times10^{-6}$, and no row raised
+an error. Discovery ran with the sparse solvers in both forms twice, with their windows unchanged in
+samples and with windows matched in time to the grid's; the best of the 24 candidates was chosen on
+replicates 0--14 and the boundaries estimated on 15--59, as in E8. The reading was fixed in advance:
+a gap of at least 0.25 decade in every slice with both boundaries means that ``discovery fails
+before identifiability'' holds at about 2,000 samples.
+
+\begin{center}
+\small
+\begin{tabular}{llrrrrrr}
+\toprule
+& & \multicolumn{3}{c}{200 times (E8)} & \multicolumn{3}{c}{about 2,000 times (E11)} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Isotherm & $\sigma$ & $\Da^{*}_{\mathrm{disc}}$ & $\Da^{*}_{\mathrm{ident}}$ & choice & $\Da^{*}_{\mathrm{disc}}$ & $\Da^{*}_{\mathrm{ident}}$ & choice \\
+\midrule
+Langmuir & 0.5\,\% & 7.24 & 356 & 35.0 & 107 & 562 & 172 \\
+Langmuir & 2\,\% & 1.05 & 73.5 & 17.1 & 5.47 & 172 & 73.5 \\
+step & 0.5\,\% & 4.18 & 562 & 17.1 & 314 & -- & 172 \\
+step & 2\,\% & 0.851 & 172 & 17.1 & 5.47 & 562 & 103 \\
+\bottomrule
+\end{tabular}
+\end{center}
+``choice'': the 50\,\% boundary of choosing the LDF law among three candidates; ``--'': $k$
+identifiable beyond the grid. The gap held in all three slices with both boundaries (0.72, 1.50
+and 2.01 decades), so by the reading fixed in advance the verdict holds at about 2,000 samples; in
+the step slice at 0.5\,\% noise no gap exists on the grid. Denser sampling raised every boundary,
+discovery most: by 0.7 to 1.9 decades, against 0.2 to 0.5 decade for identifiability and 0.6 to 1.0
+decade for the choice among laws. Windows matched in time mattered in one slice: for the step
+isotherm at 0.5\,\% noise, windows unchanged in samples gave $\Da^{*}_{\mathrm{disc}} = 26.4$ and
+matched windows 314.
+% source: results/p2_e11_summary.json (pools both, disc, disc_tm), results/p2_e11_fine.json (rows, checks),
+% results/p2_e8_summary.json (n_t=200); p2_e11_fine.py; kaggle_e11/ (kit 00cb4c1, 9 kernels); EXPLORATORY_P2 E11.
 
 
 \section*{Supplementary Note 2: corrections made during the study}
