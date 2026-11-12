@@ -37,7 +37,9 @@ verdict word.
 Post hoc checks, each declared before it ran (`EXPLORATORY_P2.md`), leave the H2b word unchanged
 under four alternative success rules (E4, `results/p2_e4_criteria.json`: gaps 0.89 to 3.75 decades)
 and at twice the sampling rate (E8, `results/p2_e8_summary.json`: every boundary moves up, the gap
-stays at least 1.25 decades). Choosing among three candidate laws by likelihood (E6) finds the
+stays at least 1.25 decades), and at about ten times the sampling rate (E11, declared before it ran,
+`results/p2_e11_summary.json`: discovery rises 0.7 to 1.9 decades, the gap stays 0.72 to 2.01 decades
+where both boundaries exist). Choosing among three candidate laws by likelihood (E6) finds the
 LDF law in every replicate up to Da = 10 with an exact isotherm, further than open discovery, but
 in none from Da = 100 on; noise-free forcing (E9, `results/p2_e9_summary.json`) restores
 the choice only for the Langmuir sorbent at Da = 31.6; on noise-free data, finer sampling restores it in three of four cells at
@@ -97,7 +99,7 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `p2_compare_verdicts.py` | as-run against corrected verdicts |
 | `p2_figdata.py` | per-level fractions behind the figures (`results/p2_figdata.json`) |
 | `p2_e2_m8.py`, `p2_e3_coverage.py` | exploratory analyses E2 and E3 (declared in `EXPLORATORY_P2.md` before they ran) |
-| `p2_e4_criteria.py`, `p2_e5_conditioning.py`, `p2_e6_modelselect.py`, `p2_e7_stepshift.py`, `p2_e8_sampling.py`, `p2_e9_cleanforcing.py`, `p2_e10_resolution.py` | post-verdict analyses E4 to E10, each declared in `EXPLORATORY_P2.md` before it ran |
+| `p2_e4_criteria.py`, `p2_e5_conditioning.py`, `p2_e6_modelselect.py`, `p2_e7_stepshift.py`, `p2_e8_sampling.py`, `p2_e9_cleanforcing.py`, `p2_e10_resolution.py`, `p2_e11_fine.py` | post-verdict analyses E4 to E11, each declared in `EXPLORATORY_P2.md` before it ran |
 | `p2_practical_da.py`, `data/practical_da_sources.csv` | Da of published laboratory columns (Supplementary Table 1), from inputs printed in four studies, each with its location in the paper |
 | `p2_rerun_B90.sh`, `kaggle_b90/`, `p2_b90_merge.py` | the B90 recomputation of every O1 identifiability row (Kaggle) and its local validation, then everything downstream |
 | `p2_e4_parallel.sh`, `p2_e7_parallel.sh` | the last two steps of `p2_rerun_B90.sh` (E4, E7 identifiability) split into parallel parts and merged, after the machine ran out of process slots on 2026-11-09; same computation |
@@ -163,7 +165,7 @@ skips rows already on disk.
 - `results/p2_verdicts.json` `positive_control.<isotherm>.n_success` and `.n_ident` are the NUMBERS OF ROWS
   evaluated (estimation replicates at the lowest Da, sigma = eps = 0), not the numbers that succeeded; the
   fractions are `success_fraction` and `identifiable_fraction`.
-- Exploratory and post-verdict analyses (E1-E10) are declared in `EXPLORATORY_P2.md`, each before it ran.
+- Exploratory and post-verdict analyses (E1-E11) are declared in `EXPLORATORY_P2.md`, each before it ran.
 
 ## Licence and citation
 
@@ -171,7 +173,8 @@ MIT (see `LICENSE`). Citation metadata is in `CITATION.cff`.
 
 ## Use of AI
 
-The author used a generative AI assistant (Claude, Anthropic) as a tool to assist with
+The author used a generative AI assistant (Claude, Anthropic; through the Claude Code and Claude desktop
+applications, September to November 2026) as a tool to assist with
 drafting and language editing, with writing and checking code, and with checking
 bibliographic records. The author designed the study, made every scientific decision,
 reviewed and edited all content, and takes full responsibility for it.

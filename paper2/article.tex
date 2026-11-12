@@ -100,8 +100,7 @@ Equation discovery has limits of its own. On a single transient that settles ont
 manifold, as a breakthrough run does, the candidate terms become nearly collinear
 \citep{stanhope2014,gallo2026,delgado2025}. Noise induces phase transitions in what can be
 recovered \citep{klishin2024,fajardo2023}, some classes of dynamics cannot be discovered at all
-\citep{shumaylov2025}, and success maps of equation learning against sampling and noise exist for
-biological data \citep{nardini2020}. Discovery has been coupled to identifiability by keeping
+\citep{shumaylov2025}, and success maps against sampling and noise exist for biological data \citep{nardini2020}. Discovery has been coupled to identifiability by keeping
 only identifiable models \citep{massonis2023}, identifiability has been extended from parameters
 to unknown functions \citep{loman2026}, and kinetic rate laws have been discovered in reaction
 engineering \citep{servia2024}. How much harder discovery is, where, for which methods, and from which measurements
@@ -131,7 +130,8 @@ the $\Da$ at which discovery and identifiability fall to 50\,\% success, and cal
 in decades the gap.
 The design, thresholds and verdict words were frozen before any method ran on the grid;
 analyses chosen after the verdicts are labelled post hoc. In all 37 of the 96 slices in which both boundaries fell within the tested range, discovery failed
-first, 1.6 to 3.7 decades of $\Da$ before the rate constant stopped being identifiable.
+first, 1.6 to 3.7 decades of $\Da$ before the rate constant stopped being identifiable, and it
+still failed first with ten times more observations.
 % results/p2_figdata.json h2b disc fractions, eps 0.02: a level >= 0.5 in 8 of 24 slices (4 x m7|strong
 % at Pe 94, Da 1-10; 4 x best_subset|weak at sigma 5 %, Da 0.316).
 % results/p2_verdicts.json H2b (37/37 "fails before"; gaps -1.60 to -3.72); results/p2_ident_robustness.json
@@ -219,8 +219,7 @@ discovery boundary at the same $R^{*}$ in every condition. Only one of twelve co
 % 122.85 [112.60, 135.09]; no_crossing: 11 conditions; words "no verdict: fewer than two
 % conditions have a crossing"). pe=5.0 is the D_L x 5 level, Pe about 19.
 
-The third (H2c) asked whether an errors-in-variables estimator, which treats the measured
-isotherm as a regressor with error, moves the discovery boundary upward relative to the best
+The third (H2c) asked whether an errors-in-variables estimator moves the discovery boundary upward relative to the best
 strong-form comparator (18 slices at 2\,\% noise; Methods). No slice had a boundary for both, so
 the test has no verdict at any isotherm error and is neither supported nor falsified: in 16 of
 the slices the comparator succeeded in no replicate at any $\Da$, and the errors-in-variables
