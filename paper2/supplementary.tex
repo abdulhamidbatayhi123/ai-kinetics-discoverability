@@ -500,7 +500,7 @@ time (1,996, which include the grid's 200), the same probes and the same noise s
 per sample, at 0.5 and 2\,\% noise, exact isotherm, 60 replicates (2,160 rows). The re-solved
 fields equal the stored ones at the grid's times to a relative $8.4\times10^{-6}$, and no row raised
 an error. Discovery ran with the sparse solvers in both forms twice, with their windows unchanged in
-samples and with windows matched in time to the grid's; the best of the 24 candidates was chosen on
+samples and with windows matched in time to the grid's; the best of the 12 candidates (three solvers, two forms, two window choices) was chosen on
 replicates 0--14 and the boundaries estimated on 15--59, as in E8. The reading was fixed in advance:
 a gap of at least 0.25 decade in every slice with both boundaries means that ``discovery fails
 before identifiability'' holds at about 2,000 samples.
@@ -523,11 +523,15 @@ step & 2\,\% & 0.851 & 172 & 17.1 & 5.47 & 562 & 103 \\
 ``choice'': the 50\,\% boundary of choosing the LDF law among three candidates; ``--'': $k$
 identifiable beyond the grid. The gap held in all three slices with both boundaries (0.72, 1.50
 and 2.01 decades), so by the reading fixed in advance the verdict holds at about 2,000 samples; in
-the step slice at 0.5\,\% noise no gap exists on the grid. Denser sampling raised every boundary,
+the step slice at 0.5\,\% noise $k$ stayed identifiable beyond the grid, so the gap exceeds
+0.5 decade but cannot be measured. Denser sampling raised every boundary,
 discovery most: by 0.7 to 1.9 decades, against 0.2 to 0.5 decade for identifiability and 0.6 to 1.0
-decade for the choice among laws. Windows matched in time mattered in one slice: for the step
-isotherm at 0.5\,\% noise, windows unchanged in samples gave $\Da^{*}_{\mathrm{disc}} = 26.4$ and
-matched windows 314.
+decade for the choice among laws. Windows matched in time changed the boundary by more than 0.25 decade in two slices (step
+isotherm, 0.5\,\% noise: 26.4 with windows unchanged in samples, 314 matched; 2\,\% noise: 5.47 and
+2.70). For the Langmuir sorbent at 0.5\,\% noise the selected method (the weak-form ensemble,
+windows unchanged) failed in every replicate at $\Da = 0.1$ and succeeded from 0.32 to 31.6, so
+its boundary of 107 comes from a curve that rises before it falls; weak-form best-subset selection
+succeeded at $\Da = 0.1$.
 % source: results/p2_e11_summary.json (pools both, disc, disc_tm), results/p2_e11_fine.json (rows, checks),
 % results/p2_e8_summary.json (n_t=200); p2_e11_fine.py; kaggle_e11/ (kit 00cb4c1, 9 kernels); EXPLORATORY_P2 E11.
 

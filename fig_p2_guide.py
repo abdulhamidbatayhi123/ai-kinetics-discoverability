@@ -61,7 +61,7 @@ def main():
     fig, ax = plt.subplots(figsize=(S.W2, 88 * S.MM), layout="constrained")
     ax.axvspan(X0, np.log10(LO), color="#f2f2f2", lw=0, zorder=0)
     ax.axvspan(np.log10(HI), X1, color="#f2f2f2", lw=0, zorder=0)
-    ax.text(np.log10(HI) + 0.05, 4.0, "beyond the\ntested range", fontsize=6, va="center", color=S.C["dark"])
+    ax.text(np.log10(HI) + 0.05, 5.0, "beyond the\ntested range", fontsize=6, va="center", color=S.C["dark"])
     yt, yl = [], []
     y = 7.0
     first = True
@@ -69,12 +69,14 @@ def main():
         d, i = ranges(s, e, "da_disc"), ranges(s, e, "da_ident")
         if i:
             bar(ax, y + 0.18, i, S.ROLE["ident"], 0.3, "rate constant identifiable" if first else None)
+            ax.text(np.log10(i[1]) + 0.06, y + 0.18, f"{i[2]}", fontsize=5.5, va="center", color=S.C["dark"])
         c = choice_top(s) if e == "0.0" else None
         if c:
             ax.plot([np.log10(LO), np.log10(c)], [y, y], color=S.OI["black"], lw=1.6, ls="-.",
                     label="law chosen among three candidates (post hoc)" if first else None)
         if d:
             bar(ax, y - 0.18, d, S.ROLE["disc"], 0.3, "law discovered (best method)" if first else None)
+            ax.text(np.log10(d[1]) + 0.06, y - 0.18, f"{d[2]}", fontsize=5.5, va="center", color=S.C["dark"])
         yt.append(y)
         yl.append(lab)
         y -= 1.0

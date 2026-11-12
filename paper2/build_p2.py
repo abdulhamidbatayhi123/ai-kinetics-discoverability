@@ -159,7 +159,6 @@ def bindings():
         m7lo, m7hi = math.floor(min(m7gaps) * 10) / 10, math.ceil(max(m7gaps) * 10) / 10   # a range of lower bounds
         out += [("M7 last level vs Da*_ident", f"that level lay {m7lo:.1f} to {m7hi:.1f}"),
                 ("Table 1 envelope: M7 range", f"{m7lo:.1f} to {m7hi:.1f} decades below"),
-                ("M7 conservative gap", f"at least {math.floor((min(m7gaps) - 0.5) * 10) / 10:.1f} decade below it if"),
                 ("Table 1 envelope: M7 slices", f"symbolic regression ({ {4: 'four', 3: 'three', 5: 'five'}.get(len(m7gaps), len(m7gaps))} slices")]
     # Review P4: the selected method equals each slice's best monotone method on the estimation replicates
     env_same = all(s["da_disc"] is not None and abs(math.log10(max(x for x in s["da_disc_by_method"].values() if x)
@@ -277,10 +276,7 @@ def bindings():
     out.append(("0.5/0.5 largest boundary", f"every discovery boundary fell to ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
     # pre-submission revision 2026-11-11: new descriptive checks, M6, S1 on the map, corrections counts
     kh = load("results/p2_kh.json")
-    out += [("kh at discovery boundaries", f"was at most {math.ceil(kh['kh_at_disc_max'] * 100) / 100:.2f} at every discovery"),
-            ("kh at identifiability boundaries", f"and {math.floor(kh['kh_at_ident_min'] * 100) / 100:.2f} to "
-             f"{math.ceil(kh['kh_at_ident_max']):.0f} at the identifiability"),
-            ("kh at Da 316", f"($kh = {kh['kh_by_level']['316.227766']:.1f}$)"),
+    out += [("kh at Da 316", f"($kh = {kh['kh_by_level']['316.227766']:.1f}$,"),
             ("kh at Da 1000", f"($kh = {kh['kh_by_level']['1000.0']:.0f}$)")]
     ns = load("results/p2_noise_support.json")["summary_da_le_10"]["eps0.02|sigma0.0"]
     out += [("support size without noise at 2 % isotherm error",
@@ -304,7 +300,7 @@ def bindings():
     dsh = [math.log10(b["da_disc"] / a["da_disc"]) for b, a in pairs]
     ish = [math.log10(b["da_ident"] / a["da_ident"]) for b, a in pairs if b["da_ident"] and a["da_ident"]]
     no_id = [b for b, _ in pairs if b["da_ident"] is None]
-    out += [("E11 gaps (abstract)", f"still by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} decades with" if min(g11) >= 0.25
+    out += [("E11 gaps (abstract)", f"and by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} decades in three\nconditions re-run" if min(g11) >= 0.25 and len(g11) == 3
              else "E11 gap below threshold"),
             ("E11 gaps (Results)", f"by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f}\ndecades, above the 0.25-decade threshold"),
             ("E11 slices with both", f"first in the {({3: 'three'}).get(len(g11), len(g11))} slices with both boundaries"),

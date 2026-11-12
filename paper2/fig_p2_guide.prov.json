@@ -5,13 +5,13 @@
   88.0
  ],
  "font_pt": [
-  5.8,
+  5.5,
   7.0
  ],
- "made": "2026-11-12 03:26:22",
+ "made": "2026-11-12 05:17:21",
  "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
  "script": "fig_p2_guide.py",
- "script_sha256": "23a877839e905c7693f80272d1283b2e1f8b0b8c1026bc22c3655db7d8ef2aaa",
+ "script_sha256": "c021c1fb8989f5b4f409525177315a13e1b43e625e43b9522499252ee10a583c",
  "inputs": {
   "results/p2_verdicts.json": "04bc6f4aa4be68549480c76809071d4ba51191bba0d6a261f857a7ed915eaea7",
   "results/p2_e6_modelselect.json": "c231345222f311f6bd5676debbc945516528d84155cea3620c8916eebc68f54c",
