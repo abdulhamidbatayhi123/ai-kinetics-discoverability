@@ -1,5 +1,5 @@
 {
- "figure": "fig_ed4_coverage",
+ "figure": "fig_ed7_coverage",
  "size_mm": [
   183.0,
   70.0
@@ -8,10 +8,10 @@
   5.5,
   8.0
  ],
- "made": "2026-11-11 08:19:12",
+ "made": "2026-11-12 19:00:48",
  "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
  "script": "fig_p2_extended.py",
- "script_sha256": "d22f29cd29615c086215d53e34d049592000a71413b9e57efce01afcd4f44350",
+ "script_sha256": "1519c89d5f4b832b73d99fbf17a76715bedf51344cbbe546614d0dc3ffa3dfcc",
  "inputs": {
   "results/p2_e3_coverage.json": "8ac415654ca842ed37eb6df9365413a3a62c61d6cfa69eaa29fa9379622772d7"
  }

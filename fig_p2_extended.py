@@ -131,8 +131,9 @@ def fig_h2b_slices(V, FD, iso, da, stem):
           Line2D([], [], color=S.ROLE["ident"], ls="--", marker="s", mfc="white", ms=2.5,
                  label="k identifiable"),
           Line2D([], [], color=GREY, lw=0.6, label="P = 0.5")]
+    present = {v.get("words") for v in V["H2b"].values()}          # key only the verdicts that occur
     hd += [Patch(facecolor=S.WORD[w], label=f"discovery {WORD_SHORT[w]} identifiability")
-           for w in H2B_WORDS]
+           for w in H2B_WORDS if w in present]
     hd += [Patch(facecolor=S.NO_VERDICT, label="no verdict (no boundary for one of the two)")]
     fig.legend(handles=hd, loc="lower center", bbox_to_anchor=(0.5, 0.0), ncol=4, fontsize=5.5,
                handlelength=1.8, columnspacing=1.2)

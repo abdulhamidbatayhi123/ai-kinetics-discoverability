@@ -530,7 +530,8 @@ def main():
     # their legends, Methods, references and the abstract are excluded); comments already stripped
     a, b = tex.index("---- Introduction"), tex.index("% ---- Display items")
     main_words = rendered_words(strip_comments(tex[a:b]))
-    main_part = body.split(BS + "section*{Extended Data}")[0]   # Extended Data are not display items
+    main_part = body.split(BS + "renewcommand{" + BS + "figurename}{Extended Data Fig.}")[0]   # ED are not display items
+    assert main_part != body, "Extended Data marker not found"
     disp = len(re.findall(re.escape(BS) + r"begin\{(figure|table)\}", main_part))
     if main_words > 3500:
         fail("G4", f"main text {main_words} words > 3,500")
