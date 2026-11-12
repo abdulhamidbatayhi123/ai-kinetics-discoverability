@@ -1,5 +1,5 @@
 % =====================================================================
-% Paper 2, full article (pre-registered study), Nature-family Article format:
+% Paper 2, full article (pre-registered study), NCS Analysis format (same limits as Article):
 % main text <= 3,500 words, abstract <= 150 words, <= 6 display items, ~50 references
 % (nature.com/natcomputsci and /natchemeng content types, read live 2026-10-20).
 % Status: METHODS drafted 2026-11-01 while the A6 rerun ran; Introduction, Results and
@@ -67,16 +67,18 @@ they can no longer reveal it.
 % last paragraph states the findings and is completed then; the rest does not depend on them.
 
 % ---- Introduction (no heading in the Article format; target about 550 words) ----
-A fixed-bed adsorption experiment reports concentrations and temperatures over time, most
-often at the column outlet. What an engineer needs from it is the uptake rate law, usually
-written as the linear driving force (LDF), $\partial q/\partial t = k\,(\qs(c,T) - q)$, with $q$
-the adsorbed loading, $\qs$ its equilibrium value from the isotherm, $c$ the concentration and $T$
-the temperature.
-Equation-discovery methods offer to find the law itself, not only its coefficient: sparse
-regression over a library of candidate terms \citep{brunton2016,rudy2016} and its weak-form
-\citep{messenger2021ode,reinbold2020}, ensemble \citep{fasel2022} and exact best-subset
-\citep{bertsimas2022} variants, symbolic regression \citep{cranmer2023,udrescu2020}, and
-neural networks embedded in the governing equations \citep{santana2023}. For adsorption, one
+Equation-discovery methods aim to learn a governing law itself from data, not only its
+coefficients: sparse regression over a library of candidate terms \citep{brunton2016,rudy2016}
+and its weak-form \citep{messenger2021ode,reinbold2020}, ensemble \citep{fasel2022} and exact
+best-subset \citep{bertsimas2022} variants, symbolic regression
+\citep{cranmer2023,udrescu2020,ruan2026,yu2026}, bi-level identification \citep{li2025bilevel} and
+neural networks embedded in the governing equations \citep{santana2023}. Discovering a law is a
+stricter task than estimating its coefficient, yet the two are rarely compared on the same data.
+Adsorption columns are a sharp test. A fixed-bed experiment reports concentrations and temperatures
+over time, most often at the outlet, and what an engineer needs from it is the uptake rate law,
+usually the linear driving force (LDF), $\partial q/\partial t = k\,(\qs(c,T) - q)$, with $q$ the
+adsorbed loading, $\qs$ its equilibrium value from the isotherm, $c$ the concentration and $T$ the
+temperature. For adsorption, one
 study has tried this from column data, training a neural uptake term on noisy outlet curves with
 the isotherm given exactly, at one rate and one noise level; for a Langmuir isotherm its readout
 held the two LDF terms and a constant the true law lacks, and for a Sips isotherm symbolic
@@ -89,9 +91,8 @@ Part of the answer is classical. Near local equilibrium the mass-transfer coeffi
 poorly determined by column data \citep{valocchi1985}: finite rates then act only through an
 apparent dispersion \citep{katsoulas2023,dejaco2024}, the LDF coefficient can be extracted wrongly
 from outlet breakthrough \citep{knox2016}, and most of the output variability belongs to the
-isotherm \citep{ward2022,taylor2026}. Yet a lumped rate coefficient can be recovered from
-breakthrough \citep{miyabe2000} and estimated statistically from breakthrough curves
-\citep{dejaco2025}. Batch studies warn that data near equilibrium cannot tell kinetic laws apart
+isotherm \citep{ward2022,taylor2026}. Yet lumped rate coefficients are routinely estimated from
+breakthrough curves \citep{miyabe2000,dejaco2025}. Batch studies warn that data near equilibrium cannot tell kinetic laws apart
 \citep{canzano2012,simonin2016}.
 
 Equation discovery has limits of its own. On a single transient that settles onto a slow
@@ -102,8 +103,7 @@ recovered \citep{klishin2024,fajardo2023}, some classes of dynamics cannot be di
 biological data \citep{nardini2020}. Discovery has been coupled to identifiability by keeping
 only identifiable models \citep{massonis2023}, identifiability has been extended from parameters
 to unknown functions \citep{loman2026}, and kinetic rate laws have been discovered in reaction
-engineering \citep{servia2024}. That discovering a law is harder than fitting its coefficient
-is therefore expected. How much harder, where, for which methods, and from which measurements
+engineering \citep{servia2024}. How much harder discovery is, where, for which methods, and from which measurements
 has not, to our knowledge, been measured.
 
 The question matters most where the law is not the textbook one. In the water-harvesting
@@ -115,7 +115,8 @@ We asked, in a pre-registered computational study, for which regimes the adsorpt
 can be discovered from data a column experiment can produce, and whether discovery fails at the
 same $\Da$ as the practical identifiability of the rate constant \citep{raue2009}, or
 earlier. The rate constant is practically identifiable when the data, fitted with the true law,
-confine it to within a factor of two. Ground truth came from a verified non-isothermal column model
+confine it to within a factor of two. Scoring discovery requires knowing the true law, so the data
+were simulated: ground truth came from a verified non-isothermal column model
 \citep{paper1} for a Langmuir sorbent and a MOF-303-like step isotherm. The design spanned four
 decades of $\Da$, three levels of axial dispersion (P\'eclet numbers), four noise levels and four
 levels of isotherm error. The column was observed in three ways (Fig.~1): interior probes of
@@ -199,9 +200,8 @@ it recovered $k$ to within 5\,\% at every $\Da$ up to 100, but its median estima
 times $k$ at $\Da = 316$ ($kh = 6.4$) and 0.39 to 0.54 times $k$ at $\Da = 1000$ ($kh = 20$).
 Without those two levels every slice still has a gap of at least 0.89 decade
 (post hoc; Extended Data Fig.~3). Second, when success
-also required the fitted $k$ to lie within a factor of two of the truth (a pre-registered
-sensitivity analysis), all 37 slice verdicts were unchanged, and two more slices, without noise
-and with 0.5\,\% isotherm error, gained a discovery boundary and the same verdict.
+also required the fitted $k$ within a factor of two of the truth (a pre-registered sensitivity
+analysis), all 37 verdicts held and two more slices gained the same verdict.
 % results/p2_ident_robustness.json accuracy_median_khat_over_k_sigma0_eps0 (0.969 to 1.045 up to
 % Da 100; Da 316: 0.755 to 0.908; Da 1000: 0.393 to 0.536); h2b_without_da_316_1000_summary
 % (n_slices 37; min_gap_lower_bound_decades 0.89). results/p2_verdicts.json H2b_k_sensitivity_overall
@@ -281,10 +281,8 @@ won in three of the four cells tested at $\Da \ge 100$ (post hoc; Supplementary 
 % Langmuir Da 31.6 sigma 0.5 % 1.00 (0.69), 2 % 0.69 (0); Da >= 100 at most 0.22 (Langmuir 2 %, Da 316);
 % step 0 in all eight cells. results/p2_e10_resolution.json (EXPLORATORY_P2 E10): at the grid's 200 times
 % the wrong law in all four cells; at 3,991 times LDF for Langmuir Da 100, 1000 and step Da 100; step Da 1000 qdf.
-With twice as many observation times (post hoc;
-exact isotherm), every boundary moved to higher $\Da$ or stayed: discovery by 0.4 to 0.7 decade, choice
-among the laws by 0.2 to 0.5 decade, identifiability by up to 0.3 decade or beyond the grid, and
-discovery still failed at least 1.2 decades before identifiability.
+With twice as many observation times (post hoc), every boundary moved to higher $\Da$ or stayed,
+and discovery still failed at least 1.2 decades before identifiability.
 % results/p2_e8_summary.json (EXPLORATORY_P2 E8; kaggle_e8/, p2_e8_merge.py, 4 of 4 sampled rows
 % recomputed locally match): 200 -> 400 observation times, Pe ~94, sigma 0.5 and 2 %, eps 0.
 % da_disc shift log10 0.40 (step 0.5 %) to 0.67 (langmuir 2 %); da_select 0.21 to 0.52; da_ident
@@ -345,10 +343,9 @@ are selected (Methods).
 % Da 0.1 and 0.316 at sigma 0: 0.00. NOTE: "best over methods and Pe" selects upward; say so.
 
 \section*{Discussion}
-The rate law of a fixed-bed column could be discovered only over a narrow part of the range in
-which its rate constant could be measured. In every slice of the design where both boundaries
-existed, discovery failed between 1.6 and 3.7 decades of Damk\"ohler number before
-identifiability did. For practice this sets an order of operations in three steps. First, where
+Column data can calibrate an assumed rate law long after they can no longer reveal it: the law
+could be discovered only over a narrow part of the range in which its rate constant could be
+measured, 1.6 to 3.7 decades of $\Da$ short of it. For practice this sets an order of operations in three steps. First, where
 uptake is slow compared with the passage of the front ($\Da$ of order one or below) and the
 isotherm is known almost exactly, weak-form sparse regression can propose the law; with as little
 as 0.5\,\% noise and 0.5\,\% isotherm error, every discovery boundary fell to $\Da \le 0.23$.
@@ -379,14 +376,16 @@ check, the smaller singular value of the standardised pair $\{q, \qsm\}$ fell fr
 the larger at $\Da = 0.1$ to about 0.001 at $\Da = 1000$. Exact data still separate the two terms,
 which is why discovery never failed with exact data (no noise and no isotherm error), but noise and
 isotherm error soon exceed the shrinking direction that distinguishes them. A one-parameter fit
-needs no such direction: it uses the whole curve to place $k$.
+needs no such direction: it uses the whole curve to place $k$. We expect the same asymmetry
+wherever a law is to be discovered alongside an imperfectly known constitutive input, such as an
+equation of state or a transport property, but this study tested only adsorption.
 % results/p2_e5_conditioning.json (q_qstar_min_over_max_sv 0.71-0.79 at Da 0.1; 0.00065-0.00125 at Da 1000);
 % p2_e5_conditioning.py (EXPLORATORY_P2 E5).
 
 Real columns sit mostly beyond the discovery boundaries. Published data for water on MOF-303
 \citep{lassitter2024} and carbon dioxide on zeolite 13X \citep{dantas2011} or MIL-91(Ti)
 \citep{krishnamurthy2025} place physisorbent packed beds between $\Da \approx 100$ and 23{,}000
-(Supplementary Table~1; order-of-magnitude estimates, some read from figures). An amine bed for
+(order-of-magnitude estimates; Supplementary Table~1). An amine bed for
 direct air capture lay at $\Da \approx 8$ to 10 \citep{stampi2024}, within reach of the highest
 discovery boundaries ($\Da \approx 7$ with noise, 13 without). For physisorbent beds the law must
 be chosen or assumed; at the lower end of their range the data still give $k$, and the upper end
@@ -419,16 +418,17 @@ boundaries hold for that model, the two isotherms and the error models used; no 
 system was tested. Real columns add errors in geometry, dispersion and heat transfer that were
 held exact here, and real isotherms are rarely known to 0.5 to 5\,\%; both would be expected to
 lower the discovery boundaries, as would a larger candidate library. Interior probes of uptake
-(O1) are a ceiling that experiments rarely reach. The identifiability criterion is one of
-precision and accuracy, not calibration: in an exploratory check the intervals contained the true
-$k$ in only about 10\,\% of O1 rows (23\,\% on O3; Extended Data Fig.~7), because they are
-narrower than small biases from time resolution and from errors in $\qsm$, yet judged by the point
-estimate alone every verdict holds. All boundaries assume 200 observation times per run.
+(O1) are a ceiling that experiments rarely reach. The identifiability criterion measures precision
+and accuracy, not calibration: the intervals contained the true $k$ in only about 10\,\% of O1 rows
+(23\,\% on O3; exploratory; Extended Data Fig.~7), yet judged by the point estimate alone every
+verdict holds. All boundaries assume 200 observation times per run.
 Symbolic regression ran on a subgrid, the neural pipeline only as a demonstration, and a
 Kolmogorov--Arnold network only in an exploratory run, where it recovered the law in none of 216
 fits; each limit was set by cost rules declared before the grid ran, on the one computer
 available, and the larger neural pipeline declared for a graphics processor was not run.
-Combining method families was not tested, nor was errors-in-variables fitting in the weak form.
+Combining method families was not tested, nor were errors-in-variables fitting in the weak form or
+recent methods such as parallel symbolic enumeration \citep{ruan2026} and bi-level identification
+\citep{li2025bilevel}.
 Errors found in our own code were corrected and are reported beside the results they replaced
 (Methods).
 % results/p2_e2_m8.json (216 rows, 0 success, 1 pykan-internal error counted as a failure).
@@ -482,7 +482,8 @@ and the measured isotherm evaluated on the observed $c$ and $T$ (dashed); the sh
 driving force $\qs - q$, which shrinks below the noise as $\Da$ grows. Each panel gives the
 number of the 45 estimation replicates in which the law was discovered and $k$ was identifiable,
 and the law the best method returned for one replicate. \textbf{d}--\textbf{f}, The outlet
-breakthrough curve of the same replicate.}
+breakthrough curve of the same replicate. Time axes span each run's solved horizon (8 or 4
+stoichiometric times).}
 \label{fig:examples}
 \end{figure}
 
@@ -752,7 +753,9 @@ was exploratory.
 \subsection*{Pre-registration and amendments}
 The design was frozen on 11 October 2026 (commit \texttt{7dcc2fe}) before any discovery method
 ran on any grid cell, and every confirmatory driver refused to run unless the pre-registration
-matched its latest freeze commit. (The study's history was moved from the companion project's
+matched its latest freeze commit. GitHub's server-side event log records the freeze commit reaching
+the public repository on 11 October 2026 at 08:36 UTC, 30 hours before the grid started (a copy of
+the log is archived with the results). (The study's history was moved from the companion project's
 repository into its own; the pre-registration's amendment headers cite the original commit
 identifiers, and a published table maps them to the ones given here.) Seven dated amendments
 are appended to it. A1 to A4 were made
@@ -818,6 +821,15 @@ in the main text are point estimates within these bounds.
 % and boundary_draws (resampling within each level). Checked on results/p2_figdata.json: every
 % zero-width da_ident_ci is all-to-none between the two adjacent levels (e.g. 562 between 316 and 1000).
 
+\subsection*{Statistics and reproducibility}
+The unit of analysis was a replicate, one independently seeded observation of one simulated cell.
+Each cell had 60 replicates for O1 and O2 discovery and O1 identifiability: replicates 0--14
+selected each slice's best method and replicates 15--59 estimated the boundaries. Boundaries are
+50\,\% crossings of unpenalised logistic fits with 95\,\% percentile bootstrap intervals (2,000
+resamples within levels). No replicate, cell or output was excluded; errors counted as failures.
+All random draws are seeded by hashes of their keys, so any observation can be regenerated alone,
+and the design, thresholds and verdict words were fixed before the grid ran.
+
 \subsection*{Software and computation}
 The grid ran on a single computer without a graphics processor, one job at a time, from
 12 October to 1 November 2026; the corrected O1 identifiability rows and the four M1 refits
@@ -833,16 +845,20 @@ sampling analyses ran the same way. Package versions are pinned in the repositor
 % requirements_p2_venv.txt.
 
 \subsection*{Use of AI tools}
-During the preparation of this work the author used a generative AI assistant (Claude, Anthropic;
-the versions available from September to November 2026) as a tool to assist with drafting and language editing, with writing and checking
-code, and with checking bibliographic records. The author designed the study, made every
-scientific decision, reviewed and edited all content, and takes full responsibility for the
-content of the published article.
+During the preparation of this work the author used a generative AI assistant (Claude, Anthropic,
+used through the Claude Code and Claude desktop applications from September to November 2026, most
+recently the Claude Opus 5.5 model) as a tool to assist with drafting and language editing, with
+writing and checking code, and with checking bibliographic records. All code is covered by unit and
+known-answer tests, the build script checks the numbers in the text against the results files,
+and the bibliographic records were checked against Crossref or the publisher. The author designed the
+study, made every scientific decision, reviewed and edited all content, and takes full
+responsibility for the content of the published article.
 
 \section*{Data availability}
 The ground-truth manifest, every results file, the run log and the as-run and corrected
 verdicts are public in the study repository and archived on Zenodo \citep{zenodo_p2}. The
-ground-truth fields are regenerated from the manifest by \texttt{p2\_generate.py}.
+ground-truth fields are regenerated from the manifest by \texttt{p2\_generate.py}. Source data
+for Figs.~2--4 are provided with this paper.
 
 \section*{Code availability}
 All code is public at \url{https://github.com/abdulhamidbatayhi123/ai-kinetics-discoverability}

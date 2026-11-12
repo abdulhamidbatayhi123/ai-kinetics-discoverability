@@ -1,0 +1,85 @@
+{
+ "source": "GET https://api.github.com/repos/abdulhamidbatayhi123/ai-mof-cof-dynamics/events (90-day retention), fetched by this script",
+ "freeze_commit_original": "d562f195ac7e30f0b7abe039946f4f2bd8b3ad6d",
+ "freeze_commit_here": "7dcc2fe (COMMIT_MAP.tsv)",
+ "grid_start_utc": "2026-10-12T14:59:58Z",
+ "first_push_containing_freeze": {
+  "event_id": "23820271219",
+  "created_at": "2026-10-11T08:36:26Z",
+  "ref": "refs/heads/main",
+  "head": "4ad43f06594c0e8cb08ad0e2d803a92c5cc384ff",
+  "contains_freeze_commit": true
+ },
+ "push_events": [
+  {
+   "event_id": "23820271219",
+   "created_at": "2026-10-11T08:36:26Z",
+   "ref": "refs/heads/main",
+   "head": "4ad43f06594c0e8cb08ad0e2d803a92c5cc384ff",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23820408349",
+   "created_at": "2026-10-11T08:39:16Z",
+   "ref": "refs/heads/main",
+   "head": "1bbbb5fa30b83dba4764cc29cb506730728f881e",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23849718254",
+   "created_at": "2026-10-11T18:16:17Z",
+   "ref": "refs/heads/main",
+   "head": "dcf61ca57a7b5715bd65eb93a0c00aa369bcce6d",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23855980645",
+   "created_at": "2026-10-11T18:26:04Z",
+   "ref": "refs/heads/main",
+   "head": "571589c7e96461321be597564a2dc79d03fe9013",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23862406144",
+   "created_at": "2026-10-11T19:50:17Z",
+   "ref": "refs/heads/main",
+   "head": "63bde3eeee13f5aa49c8883b9a297d5232db040f",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23865404371",
+   "created_at": "2026-10-11T20:27:40Z",
+   "ref": "refs/heads/main",
+   "head": "4d03be5685bfd7effdefb6de45fc8c99db72dfa7",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23848572379",
+   "created_at": "2026-10-12T01:29:30Z",
+   "ref": "refs/heads/main",
+   "head": "26c6e963ea76a99c70272228a0420fb48f376998",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23871528537",
+   "created_at": "2026-10-12T06:55:57Z",
+   "ref": "refs/heads/main",
+   "head": "f3710555363deb0dd824045f3e1766b5be1d3c6e",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23934558364",
+   "created_at": "2026-10-12T12:36:29Z",
+   "ref": "refs/heads/main",
+   "head": "a81be91afd78ecd61a54cf2f785acefeae8e2589",
+   "contains_freeze_commit": true
+  },
+  {
+   "event_id": "23921505912",
+   "created_at": "2026-10-12T14:42:36Z",
+   "ref": "refs/heads/main",
+   "head": "237e5f5aece801b504d6bca4116df4667d076d0d",
+   "contains_freeze_commit": true
+  }
+ ]
+}

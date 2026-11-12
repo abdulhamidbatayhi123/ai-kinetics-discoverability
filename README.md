@@ -9,7 +9,7 @@ Archived on Zenodo: [doi:10.5281/zenodo.23325994](https://doi.org/10.5281/zenodo
 [doi:10.5281/zenodo.23325995](https://doi.org/10.5281/zenodo.23325995), and release v1.0-submitted,
 the state of the submitted manuscript, is
 [doi:10.5281/zenodo.24090779](https://doi.org/10.5281/zenodo.24090779); release v1.0.1-submitted,
-which adds Supplementary Table 2, is [doi:10.5281/zenodo.24101317](https://doi.org/10.5281/zenodo.24101317).
+which adds the table of published columns (now Supplementary Table 1), is [doi:10.5281/zenodo.24101317](https://doi.org/10.5281/zenodo.24101317).
 
 ## The question and the answer in brief
 
@@ -98,7 +98,7 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `p2_figdata.py` | per-level fractions behind the figures (`results/p2_figdata.json`) |
 | `p2_e2_m8.py`, `p2_e3_coverage.py` | exploratory analyses E2 and E3 (declared in `EXPLORATORY_P2.md` before they ran) |
 | `p2_e4_criteria.py`, `p2_e5_conditioning.py`, `p2_e6_modelselect.py`, `p2_e7_stepshift.py`, `p2_e8_sampling.py`, `p2_e9_cleanforcing.py`, `p2_e10_resolution.py` | post-verdict analyses E4 to E10, each declared in `EXPLORATORY_P2.md` before it ran |
-| `p2_practical_da.py`, `data/practical_da_sources.csv` | Da of published laboratory columns (Supplementary Table 2), from inputs printed in four studies, each with its location in the paper |
+| `p2_practical_da.py`, `data/practical_da_sources.csv` | Da of published laboratory columns (Supplementary Table 1), from inputs printed in four studies, each with its location in the paper |
 | `p2_rerun_B90.sh`, `kaggle_b90/`, `p2_b90_merge.py` | the B90 recomputation of every O1 identifiability row (Kaggle) and its local validation, then everything downstream |
 | `p2_e4_parallel.sh`, `p2_e7_parallel.sh` | the last two steps of `p2_rerun_B90.sh` (E4, E7 identifiability) split into parallel parts and merged, after the machine ran out of process slots on 2026-11-09; same computation |
 | `kaggle_e6/`, `p2_e6_merge.py`, `kaggle_e8/`, `p2_e8_merge.py` | E6 and E8 on Kaggle: kits, kernels, queues and merges with local spot checks |
@@ -117,6 +117,24 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 from Paper 1 (commit `f2c960b`); the finite-difference solver is the ground truth here. Cite the
 Paper 1 archive for them.
 
+## Quick check for reviewers (no grid run needed)
+
+Every row-level result of the grid is shipped in `results/`, so the verdicts, figures and both
+documents can be rebuilt from them without solving any column:
+
+```bash
+pip install -r requirements_p2_venv.txt   # Python 3.12; a few minutes
+python -m pytest tests -q                 # unit and known-answer tests
+python p2_analyze.py                      # verdicts from the row files -> results/p2_verdicts.json (TIME_ANALYZE)
+git diff --stat results/p2_verdicts.json  # should print nothing: the shipped verdicts are reproduced
+python fig_p2_results.py                  # Figures 3, 4 and Extended Data Fig. 4 (about a minute)
+python paper2/build_p2.py                 # both PDFs and every gate (key numbers recomputed from results/)
+```
+
+Figure 2, the Extended Data figures that show fields and the Source Data of Fig. 2 need the
+ground-truth fields: `python p2_generate.py` regenerates them from `data/p2/manifest.json`.
+Source Data for Figures 2 to 4: `paper2/source_data/` (`python p2_source_data.py`).
+
 ## Reproducing
 
 Python 3.12 with the packages in `requirements_p2_venv.txt` (PySR also needs Julia).
@@ -131,7 +149,7 @@ python p2_e5_conditioning.py          # post hoc analyses E5 and E6 (E6 and E8 r
 python p2_e6_modelselect.py           #   kaggle_e6/, kaggle_e8/, merged by p2_e6_merge.py, p2_e8_merge.py)
 python p2_e9_cleanforcing.py          # post hoc E9 (E6 with noise-free forcing)
 python p2_e10_resolution.py           # post hoc E10 (finer sampling; re-solves four cells into scratch_e10/)
-python p2_practical_da.py             # Supplementary Table 2: Da of published columns
+python p2_practical_da.py             # Supplementary Table 1: Da of published columns
 python p2_figdata.py                  # per-level fractions for the figures
 python fig_p2_overview.py && python fig_p2_results.py && python fig_p2_extended.py
 python paper2/build_p2.py             # article + SI, with every gate
