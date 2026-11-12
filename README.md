@@ -125,7 +125,7 @@ documents can be rebuilt from them without solving any column:
 ```bash
 pip install -r requirements_p2_venv.txt   # Python 3.12; a few minutes
 python -m pytest tests -q                 # unit and known-answer tests
-python p2_analyze.py                      # verdicts from the row files -> results/p2_verdicts.json (TIME_ANALYZE)
+python p2_analyze.py                      # verdicts from the row files -> results/p2_verdicts.json (about 1.5 h on one laptop CPU; 2,000 bootstrap resamples per boundary)
 git diff --stat results/p2_verdicts.json  # should print nothing: the shipped verdicts are reproduced
 python fig_p2_results.py                  # Figures 3, 4 and Extended Data Fig. 4 (about a minute)
 python paper2/build_p2.py                 # both PDFs and every gate (key numbers recomputed from results/)
