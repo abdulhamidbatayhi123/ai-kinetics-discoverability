@@ -133,7 +133,7 @@ python paper2/build_p2.py                 # both PDFs and every gate (key number
 
 Figure 2, the Extended Data figures that show fields and the Source Data of Fig. 2 need the
 ground-truth fields: `python p2_generate.py` regenerates them from `data/p2/manifest.json`.
-Source Data for Figures 2 to 4: `paper2/source_data/` (`python p2_source_data.py`).
+Source Data for Figures 2 to 5: `paper2/source_data/` (`python p2_source_data.py`).
 
 ## Reproducing
 

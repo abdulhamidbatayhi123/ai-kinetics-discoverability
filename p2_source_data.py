@@ -1,10 +1,10 @@
-"""Source Data for the main data figures (Figs. 2-4), one Excel file per figure, one sheet per panel.
+"""Source Data for the main data figures (Figs. 2-5), one Excel file per figure, one sheet per panel.
 
 Every value is read from the files the figure scripts read (results/p2_figdata.json, results/p2_verdicts.json,
 results/p2_o1.json, results/p2_e6_modelselect.json, data/p2/manifest.json and the ground-truth fields); nothing is
 recomputed except the plotted series of Fig. 2, which use exactly the calls of fig_p2_examples.py.
 
-    python p2_source_data.py  ->  paper2/source_data/Source_Data_Fig{2,3,4}.xlsx
+    python p2_source_data.py  ->  paper2/source_data/Source_Data_Fig{2,3,4,5}.xlsx
 """
 import json
 import os
@@ -111,9 +111,24 @@ def fig4(w):
     pd.concat(parts).to_excel(w, sheet_name="d_discovery_identifiable", index=False)
 
 
+def fig5(w):
+    import fig_p2_guide as G
+    rows = []
+    for s, e, lab in G.CONDS:
+        d, i = G.ranges(s, e, "da_disc"), G.ranges(s, e, "da_ident")
+        rows.append({"condition": lab, "Da_disc_min": d and d[0], "Da_disc_max": d and d[1], "n_disc": d and d[2],
+                     "Da_ident_min": i and i[0], "Da_ident_max": i and i[1], "n_ident": i and i[2],
+                     "Da_choice_all_replicates_up_to": G.choice_top(s) if e == "0.0" else None})
+    pd.DataFrame(rows).to_excel(w, sheet_name="this_study", index=False)
+    pd.DataFrame([{"source": k, **v} for k, v in G.PRAC.items()]).to_excel(w, sheet_name="published_columns", index=False)
+    pd.DataFrame([{"case": "Langmuir", "Da": G.S1["Da"], "readout_under_this_rule": "fails"},
+                  {"case": "Sips", "Da": G.S1["sips_Da"], "readout_under_this_rule": "succeeds"}]
+                 ).to_excel(w, sheet_name="Santana_2023", index=False)
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for n, fn in ((2, fig2), (3, fig3), (4, fig4)):
+    for n, fn in ((2, fig2), (3, fig3), (4, fig4), (5, fig5)):
         p = os.path.join(OUT, f"Source_Data_Fig{n}.xlsx")
         with pd.ExcelWriter(p) as w:
             fn(w)

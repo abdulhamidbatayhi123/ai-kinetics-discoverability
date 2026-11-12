@@ -345,7 +345,7 @@ are selected (Methods).
 \section*{Discussion}
 Column data can calibrate an assumed rate law long after they can no longer reveal it: the law
 could be discovered only over a narrow part of the range in which its rate constant could be
-measured, 1.6 to 3.7 decades of $\Da$ short of it. For practice this sets an order of operations in three steps. First, where
+measured, 1.6 to 3.7 decades of $\Da$ short of it. For practice this sets an order of operations in three steps (Fig.~5). First, where
 uptake is slow compared with the passage of the front ($\Da$ of order one or below) and the
 isotherm is known almost exactly, weak-form sparse regression can propose the law; with as little
 as 0.5\,\% noise and 0.5\,\% isotherm error, every discovery boundary fell to $\Da \le 0.23$.
@@ -523,6 +523,20 @@ likelihood (black, dash-dotted; post hoc), recovered by the best discovery metho
 an identifiable $k$ (vermilion, dashed), at $\Pe \approx 94$, 2\,\% noise and 2\,\% isotherm
 error; circles, Langmuir; open squares, step isotherm.}
 \label{fig:methods}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{fig_p2_guide.pdf}
+\caption{\textbf{What column data allow, by Damk\"ohler number.} For each condition (probes with
+uptake, O1), bars run from the bottom of the grid ($\Da = 0.1$) to the 50\,\% boundary, and the
+darker end spans that boundary over the isotherms and P\'eclet numbers: discovery by the best method
+(blue), practical identifiability of $k$ (vermilion), and choice of the LDF law among three
+candidate laws in every replicate (black, dash-dotted; post hoc, $\Pe \approx 94$, exact isotherm).
+Below, the $\Da$ ranges of published packed beds (Supplementary Table~1) and the two simulated
+columns of the closest prior study \citep{santana2023}, computed from its published equations, with
+the outcome of its readout under this study's success rule. Shaded, outside the tested range.}
+\label{fig:guide}
 \end{figure}
 
 \begin{table}[p]
@@ -858,7 +872,7 @@ responsibility for the content of the published article.
 The ground-truth manifest, every results file, the run log and the as-run and corrected
 verdicts are public in the study repository and archived on Zenodo \citep{zenodo_p2}. The
 ground-truth fields are regenerated from the manifest by \texttt{p2\_generate.py}. Source data
-for Figs.~2--4 are provided with this paper.
+for Figs.~2--5 are provided with this paper.
 
 \section*{Code availability}
 All code is public at \url{https://github.com/abdulhamidbatayhi123/ai-kinetics-discoverability}

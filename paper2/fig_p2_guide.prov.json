@@ -1,0 +1,22 @@
+{
+ "figure": "fig_p2_guide",
+ "size_mm": [
+  183.0,
+  88.0
+ ],
+ "font_pt": [
+  5.8,
+  7.0
+ ],
+ "made": "2026-11-12 03:26:22",
+ "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
+ "script": "fig_p2_guide.py",
+ "script_sha256": "23a877839e905c7693f80272d1283b2e1f8b0b8c1026bc22c3655db7d8ef2aaa",
+ "inputs": {
+  "results/p2_verdicts.json": "04bc6f4aa4be68549480c76809071d4ba51191bba0d6a261f857a7ed915eaea7",
+  "results/p2_e6_modelselect.json": "c231345222f311f6bd5676debbc945516528d84155cea3620c8916eebc68f54c",
+  "data/p2/manifest.json": "2742ff22b55f0fa6302e0707a2bfcef9949a809104c853755b3dd4bb325bf270",
+  "results/p2_practical_da.json": "87e9c485212a62b3198b148349f5f37c26f511d2299f7223eb99f7ce6b4820ff",
+  "results/p2_s1_anchor.json": "6482a1466663c7f4b932c29133d7f05a89f7938a538e5e6c8d3b622d4deb144d"
+ }
+}
