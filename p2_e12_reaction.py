@@ -81,7 +81,7 @@ def solve(k, K_fn):
 
 def solve_many(ks, K_fn):
     """The same model for every k in ks at once (one stiff system, block-diagonal Jacobian): identical
-    trajectories to solve() per k, far less Python overhead. Returns (len(ks), 3, N_T)."""
+    trajectories to solve() per k within solver tolerance (checked to 2e-9 at three grid points), far less Python overhead. Returns (len(ks), 3, N_T)."""
     from scipy.sparse import block_diag, csr_matrix
     ks = np.asarray(ks, float)
     m = len(ks)

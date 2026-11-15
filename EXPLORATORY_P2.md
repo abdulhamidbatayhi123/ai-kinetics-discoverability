@@ -275,3 +275,13 @@ trajectories with the exact K, weak-form best-subset selection recovered the law
 (p2_e12_noisefree.py, results/p2_e12_noisefree.json). So the failure at 0.5 % noise is caused by the noise, as in the
 main study, and the twin-column explanation given for E12 above was at most part of it (the noise-free fits recover
 the law even with A = B). No further variant will be run: two declared designs, both reported.
+**Corrections to the E12/E12b outcome notes (2026-11-15, independent check of the new material).**
+(1) The statement above that "the twin-column explanation ... was at most part of it (the noise-free fits recover
+the law even with A = B)" is withdrawn: with equal feeds the A B and A^2 columns are identical and exact best-subset
+selection keeps the first of two tied subsets, which is A B by library order, while thresholding and the ensemble fail
+on exact data; E12 therefore cannot separate the causes, and only E12b can. (2) On exact data only weak-form
+best-subset selection succeeds at every Da; the strong forms fail even then, including the method selected for the
+slice with 0.5 % noise and 2 % K error. The noise-driven reading holds for weak-form best-subset selection with
+unequal feeds. (3) Procedure note: the noise draw is seeded by (Da, sigma, replicate) and the K error by
+(Da, replicate), not by every key listed in the declaration, so the eps = 0 and eps = 2 % slices share their noise
+draws (common random numbers); this changes no rule.

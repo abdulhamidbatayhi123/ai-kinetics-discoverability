@@ -31,9 +31,13 @@ def main():
         ax.plot(x, list(v["disc_by_da"].values()), "-o", color=S.ROLE["disc"], ms=2.8, lw=1.0)
         xi = np.log10([float(d) for d in v["ident_by_da"]])
         ax.plot(xi, list(v["ident_by_da"].values()), "--s", color=S.ROLE["ident"], mfc="white", ms=2.8, lw=1.0)
-        xn = np.log10([float(d) for d in NF])
-        ax.plot(xn, [1.04 if any(r.values()) else -0.04 for r in NF.values()], lw=0, marker="v", ms=3,
-                color=S.C["dark"])
+        best = v["best_method"]                     # this slice's selected method, on exact data
+        for d, r in NF.items():
+            ok = r[best]
+            ax.plot(np.log10(float(d)), 1.04 if ok else -0.04, lw=0, marker="v", ms=3, color=S.C["dark"],
+                    mfc=S.C["dark"] if ok else "white")
+        ax.text(0.47, 0.2, best.replace("_", " ").replace("|", ", "), transform=ax.transAxes, ha="center",
+                fontsize=5.5, color=S.C["dark"])
         ax.axhline(0.5, color=S.C["grey"], lw=0.5)
         ax.set_title(title, fontsize=6.5)
         ax.set_xticks(range(-1, 4))
@@ -43,8 +47,9 @@ def main():
     axs[0].set_ylabel("fraction of estimation replicates")
     hd = [Line2D([], [], color=S.ROLE["disc"], marker="o", ms=2.8, label="law discovered (best method)"),
           Line2D([], [], color=S.ROLE["ident"], ls="--", marker="s", mfc="white", ms=2.8, label="k identifiable"),
-          Line2D([], [], color=S.C["dark"], lw=0, marker="v", ms=3, label="discovered on exact data (post hoc)")]
-    fig.legend(handles=hd, loc="outside lower center", ncol=3, fontsize=6, frameon=False)
+          Line2D([], [], color=S.C["dark"], lw=0, marker="v", ms=3, label="same method on exact data: succeeds (post hoc)"),
+          Line2D([], [], color=S.C["dark"], lw=0, marker="v", mfc="white", ms=3, label="fails")]
+    fig.legend(handles=hd, loc="outside lower center", ncol=4, fontsize=6, frameon=False)
     return fig
 
 

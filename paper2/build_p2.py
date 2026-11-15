@@ -92,7 +92,7 @@ def bindings():
     cons_min = math.floor(min(cons) * 100) / 100
     out = [("H2b slices with a verdict", f"Of the {len(h2b)} slices, {len(gaps)} had both"),
            ("H2b slices without a verdict", f"The {len(h2b) - len(gaps)} slices without a verdict"),
-           ("H2b slices with a verdict (abstract)", f"tested range ({len(gaps)} conditions)"),
+           ("H2b slices with a verdict (abstract)", f"were found ({len(gaps)} conditions)"),
            ("H2b slices with a verdict (Fig. 3 legend)", f"for the {len(gaps)} slices with both boundaries"),
            ("H2b gap range (Results)", f"The gap was {lo:.1f} to {hi:.1f} decades of"),
            ("H2b gap range (abstract)", f"by {lo:.1f} to {hi:.1f} decades"),

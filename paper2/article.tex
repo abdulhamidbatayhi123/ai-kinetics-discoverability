@@ -50,11 +50,10 @@
 
 \begin{abstract}
 How much more data equation-discovery methods need than fitting an assumed law is rarely measured. We measured it in a pre-registered study of simulated adsorption columns. Across four decades of the Damk\"ohler number Da (uptake rate relative to front passage),
-dispersion, noise and isotherm error, we compared where the best of several sparse and symbolic regression
-methods stopped recovering the uptake rate law with where its rate constant stopped being
-identifiable. Wherever both limits fell within the tested range (37 conditions), discovery failed
-first, by 1.6 to 3.7 decades at 200 observations per run and by 0.7 to 2.0 decades in three
-conditions re-run at 2,000. A 5\,\% isotherm error kept discovery below 50\,\% at every rate. In a reversible reaction too, noise defeated discovery but not estimation. Column data can estimate an assumed law's rate constant long after they can no longer reveal the law.
+dispersion, noise and isotherm error, we compared where the best sparse or symbolic regression method stopped recovering the uptake rate law with where its rate constant stopped being
+identifiable. Wherever both limits were found (37 conditions), discovery failed first, by 1.6 to 3.7 decades at 200 observations per run and by 0.7 to 2.0 decades in three
+conditions re-run at 2,000. A 5\,\% isotherm error kept discovery below 50\,\% at every rate. In a reversible reaction, too, discovery failed under noise where the rate constant remained
+estimable (exploratory). Column data can estimate an assumed law's rate constant long after they can no longer reveal the law.
 \end{abstract}
 % <= 150 words (Nature Computational Science / Nature Chemical Engineering Article format).
 % Numbers: results/p2_verdicts.json H2b; results/p2_ident_robustness.json; H2b_O2_O3_descriptive.
@@ -182,8 +181,7 @@ above the selection criterion's floor (post hoc).
 
 The 59 slices without a verdict lack a discovery boundary, not data (post hoc): in 40, discovery never reached 50\,\% at any $\Da$, including all 24 slices
 with 5\,\% isotherm error; in 8, all without noise, it never fell below 50\,\%; in the other 11 the observed
-success crossed 50\,\% but the falling fit placed no crossing in range, most clearly for symbolic
-regression (next section).
+success crossed 50\,\% but the falling fit placed no crossing in range.
 % results/p2_ident_robustness.json h2b_no_verdict_classes: discovery missing 59 (always < 50 %: 40;
 % always >= 50 %: 5 + 3 = 8, all sigma = 0; straddles: 11); identifiability missing only in the 3
 % "always >= 50 %" slices.
@@ -298,15 +296,16 @@ separate the two.
 % fig_p2_methods panels a, b and the per-slice listing in paper2/WRITEUP_NOTES.md;
 % results/p2_extra_m1.json (1 of 9, Da 3.16).
 
-\subsection*{The same pattern in a second system}
-To test whether the asymmetry is particular to adsorption, we compared the two on a
+\subsection*{A second system: discovery failed throughout, estimation did not}
+We also compared the two on a
 reversible reaction A + B $\rightleftharpoons$ C in a stirred tank, whose temperature-dependent
 equilibrium constant plays the role of the isotherm (exploratory, declared before it ran;
 Extended Data Fig.~9; Supplementary Note~1). On exact data, weak-form best-subset selection
-recovered the law at every $\Da$ (post hoc). With 0.5 or 2\,\% noise, discovery reached at most
+recovered the law at every $\Da$ (post hoc), although the strong forms did not. With 0.5 or 2\,\% noise, discovery reached at most
 40\,\% of replicates at any $\Da$, in two declared designs, while $k$ stayed identifiable up to
-$\Da \approx 110$ to 870. The declared positive control, 90\,\% discovery at the lowest $\Da$
-with 0.5\,\% noise, therefore failed, and no gap was read.
+$\Da \approx 110$ to 870. The declared positive control therefore failed, and no gap was read: at low $\Da$ the reverse term is
+only a tenth of the forward term, at high $\Da$ the two become collinear, and the grid holds no regime
+where discovery succeeds under noise. The result is consistent with the asymmetry but does not test it.
 % results/p2_e12_summary.json, p2_e12b_summary.json (max disc 0.40 / 0.38; da_ident 139-865 / 114-775;
 % positive_control passed false), results/p2_e12_noisefree.json; EXPLORATORY_P2 E12, E12b.
 
@@ -319,8 +318,7 @@ succeeded in more than 29\,\% of the replicates at any level of any slice.
 Identifiability, computed on a subgrid ($\Pe \approx 94$, noise 0.5 and 2\,\%, isotherm error 0 and
 2\,\%), held to
 $\Da \approx 57$ to 286 from probes without uptake, and to $\Da \approx 38$ to 172 from the
-outlet alone (O3). With three replicates per level, most of these boundaries are known only to lie
-between two levels. In the same slices, the last
+outlet alone (O3).  In the same slices, the last
 level at which any method discovered the law from probes of $c$, $q$ and $T$, a far richer
 observation, lay at $\Da = 3$ to 32 (post hoc). The comparison is coarse, but in every slice the outlet curve alone still determined $k$ at least as
 far as that level.
@@ -384,8 +382,8 @@ check, the smaller singular value of the standardised pair $\{q, \qsm\}$ fell fr
 the larger at $\Da = 0.1$ to about 0.001 at $\Da = 1000$. Exact data still separate the two terms,
 which is why discovery never failed with exact data (no noise and no isotherm error), but noise and
 isotherm error soon exceed the shrinking direction that distinguishes them. A one-parameter fit
-needs no such direction: it uses the whole curve to place $k$. A reversible reaction with an imperfectly known equilibrium constant showed the same pattern, so we
-expect it wherever a law must be discovered alongside an imperfectly known constitutive input.
+needs no such direction: it uses the whole curve to place $k$. The reversible reaction behaved alike, so the asymmetry may arise wherever a law must be discovered
+alongside an imperfectly known constitutive input.
 % results/p2_e5_conditioning.json (q_qstar_min_over_max_sv 0.71-0.79 at Da 0.1; 0.00065-0.00125 at Da 1000);
 % p2_e5_conditioning.py (EXPLORATORY_P2 E5).
 
@@ -421,9 +419,8 @@ lower the discovery boundaries, as would a larger candidate library. Interior pr
 (O1) are a ceiling that experiments rarely reach. The identifiability criterion measures precision
 and accuracy, not calibration: the intervals contained the true $k$ in only about 10\,\% of O1 rows
 (23\,\% on O3; exploratory; Extended Data Fig.~7), yet judged by the point estimate alone every
-verdict holds. Laboratory rigs often log every few seconds, far denser than 200 observations per run; denser
-sampling raised discovery most, so these boundaries understate what such rigs can discover, though
-correlated noise would shrink the gain.
+verdict holds. Laboratory rigs log far more densely than 200 observations per run, and denser sampling raised
+discovery most, so these boundaries understate what such rigs can discover.
 Symbolic regression ran on a subgrid, the neural pipeline only as a demonstration, and a
 Kolmogorov--Arnold network only in an exploratory run, where it recovered the law in none of 216
 fits; each limit was set by cost rules declared before the grid ran, and the larger neural pipeline declared for a graphics processor was not run.
@@ -987,7 +984,8 @@ Langmuir only, the step slices having been withheld). No correction changed a ve
 the 45 estimation replicates in which the best discovery method recovered the law (blue circles)
 and in which $k$ was identifiable (vermilion open squares), against $\log_{10}\Da$ with $\Da = k\,
 \tau$, for unequal feeds (E12b); \textbf{a}--\textbf{d}, noise 0.5 or 2\,\% and an exact or 2\,\% wrong equilibrium
-constant. Triangles: discovery on the noise-free trajectory with the exact equilibrium constant
-(post hoc; the same in every panel). The declared positive control failed, so no gap is read.}
+constant. Triangles: the panel's selected method (named in the panel) on the noise-free trajectory
+with the exact equilibrium constant, filled where it recovers the law (post hoc). The declared
+positive control failed, so no gap is read.}
 \end{figure}
 \end{document}

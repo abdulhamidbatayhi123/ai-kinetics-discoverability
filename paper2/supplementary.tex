@@ -172,7 +172,9 @@ $T_{\mathrm{in}}$.
 Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
 enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
 corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results; E9 after
-a second review; E10 after E9. E4 to E10 are post hoc and are labelled so wherever they are used. E1 (M1 at full scale) needs a graphics
+a second review; E10 after E9; E11 after a third review; E12 and E12b after a simulated
+pre-submission review (E12b also after E12's result). E4 to E12b are post hoc and are labelled so
+wherever they are used. E1 (M1 at full scale) needs a graphics
 processor and has not run.
 
 \subsection*{E2: the Kolmogorov--Arnold network on its declared subgrid}
@@ -550,9 +552,15 @@ $k/100$ to $100k$ and the main criterion. With equal feeds (E12) the positive co
 (discovery 40\,\% at $\Da = 0.1$, identifiability 100\,\%). E12b, declared after that failure,
 doubled the feed of B; its control failed too (38\,\% and 100\,\%). In both designs discovery
 never reached 50\,\% at any $\Da$ (at most 40\,\%), while $k$ stayed identifiable up to
-$\Da^{*}_{\mathrm{ident}} = 114$ to 865. On the noise-free trajectories with the exact equilibrium
-constant, weak-form best-subset selection recovered the law at every $\Da$ in both designs (a check
-made after both failures), so the failure with noise is caused by the noise. By the reading fixed in
+$\Da^{*}_{\mathrm{ident}} = 114$ to 865. On the noise-free trajectories with the exact equilibrium constant, weak-form best-subset selection
+recovered the law at every $\Da$ in both designs (a check made after both failures); the strong forms,
+and with equal feeds the thresholding and ensemble solvers, did not even on exact data, and with equal
+feeds the best-subset success reflects the order of two identical library columns. For weak-form
+best-subset selection with unequal feeds, then, the failure is caused by the noise and the error in
+$K$. The design has no regime where discovery succeeds under noise: at $\Da = 0.1$ the reverse term
+$C/K$ is about 8\,\% of the forward term on average while the success rule asks for its coefficient to
+10\,\%, and at high $\Da$ the two terms become collinear; the noise is also scaled to each channel's own
+range, so the small concentration C carries relatively less noise than A and B. By the reading fixed in
 advance no gap is read; no further variant was run.
 % source: results/p2_e12_summary.json, p2_e12b_summary.json, p2_e12_rows.json, p2_e12b_rows.json,
 % p2_e12_noisefree.json; p2_e12_reaction.py, p2_e12_noisefree.py; EXPLORATORY_P2 E12, E12b.
