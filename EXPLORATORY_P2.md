@@ -252,3 +252,17 @@ each of the four slices with both boundaries: gap >= 0.25 decade, "discovery fai
 the second system; |gap| < 0.25, it fails with identifiability; gap <= -0.25, discovery outlives identifiability.
 Slices without one of the boundaries are reported as such. The result is reported in the paper whatever it is.
 **Before running,** the script is committed with a smoke test on two rows; the smoke rows are recomputed with the rest.
+
+**E12 outcome (2026-11-15, results/p2_e12_summary.json, p2_e12_rows.json; script e0438e9).** The positive control
+FAILED: at Da = 0.1, 0.5 % noise, exact K, discovery succeeded in 40 % of replicates 15-59 (identifiability 100 %),
+so by the reading fixed above no gap is read. Discovery never reached 50 % at any Da in any slice (maximum 0.40),
+while k stayed identifiable up to Da*_ident = 139 to 865. Cause, found when the failure was diagnosed: with
+A_in = B_in and 1:1 stoichiometry the declared design makes A and B identical at every time, so the library terms
+A B and A^2 are the same column and no method can separate the true law from its twin (noise breaks the tie at
+random). This is a defect of the declared design, not of the methods; the result is kept and reported as it stands.
+
+## E12b. The same system with unequal feeds (declared 2026-11-15, after the E12 failure above, BEFORE running)
+Everything as declared for E12 except the feed of B: B_in = 2 (A_in = 1), so A and B differ and A B is no longer
+equal to A^2. Same grid, noise, K error, library, methods, success rule, identifiability criterion, analysis,
+positive control and reading. Rows to results/p2_e12b_rows.json, summary to results/p2_e12b_summary.json. Both E12
+and E12b are reported in the paper.
