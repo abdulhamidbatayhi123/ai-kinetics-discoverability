@@ -285,3 +285,33 @@ slice with 0.5 % noise and 2 % K error. The noise-driven reading holds for weak-
 unequal feeds. (3) Procedure note: the noise draw is seeded by (Da, sigma, replicate) and the K error by
 (Da, replicate), not by every key listed in the declaration, so the eps = 0 and eps = 2 % slices share their noise
 draws (common random numbers); this changes no rule.
+
+## E13. Information-matched sampling: 200 times with the noise reduced by sqrt(10) (declared 2026-11-15, after a final pre-submission review, BEFORE running)
+
+**Why.** A final pre-submission review (2026-11-15) noted that E11 adds information as well as time resolution
+(ten times more samples at the same noise per sample), so it cannot say which of the two raised discovery, and
+that every discovery boundary at 200 times lies at k h <= 0.26 while every identifiability boundary lies at
+k h = 0.86 to 20. E13 separates the two by matching E11's information at the grid's resolution.
+**What.** As E8's 200-time run (p2_e8_sampling.py rows, unchanged code, the same groups "cell|sigma|n_t"), with
+the noise SD per sample divided by sqrt(10): sigma = 0.005/sqrt(10) = 0.0015811388 and 0.02/sqrt(10) =
+0.0063245553, n_t = 200. At fixed noise per sample the information about a parameter grows with n/sigma^2, so
+200 times at sigma/sqrt(10) carry about the information of E11's 1,996 times at sigma, at the grid's coarse
+resolution. Cells: O1, both isotherms, Pe ~94, L1, all nine Da, eps 0, replicates 0..59 (2,160 rows). Noise
+streams are seeded by sigma, so they are new draws. Per row, as E8: discovery by the six sparse solvers in both
+forms (windows in samples, i.e. matched in time to the grid), O1 identifiability (profile_interval_o1, the
+pre-registered criterion), and for replicates 15..59 E6's choice among three laws. Best discovery method chosen
+on replicates 0..14; logistic 50 % crossings on replicates 15..59 (p2.analysis), as in E8 and E11. Run on Kaggle
+from the E8 kit (dataset p2-e8-sampling-kit, whose code equals the repository's except one docstring), summary by
+p2_e13_infomatched.py into results/p2_e13_summary.json (rows results/p2_e13_rows.json).
+**Reading fixed in advance.** For each of the four (isotherm, sigma) pairs, compare E13's boundaries with E11's
+(pool "both", as reported in the paper) and with E8's 200-time run at sigma:
+- discovery: if E13's Da*_disc lies within 0.25 decade of E11's, the gain at 2,000 times is explained by
+  information in that pair; if it lies more than 0.25 decade below E11's, finer resolution added to discovery
+  beyond its information; if more than 0.25 decade above, coarse sampling did better at matched information.
+  The paper will say "information" if all four pairs are within 0.25 decade, "resolution" if all four lie more
+  than 0.25 decade below, and otherwise report the pairs as mixed;
+- identifiability: the same comparison of Da*_ident (a boundary beyond the grid is reported as such and compared
+  only as censored);
+- the gap: for every pair with both boundaries, whether discovery still fails at least 0.25 decade first.
+Descriptive, no verdict; it changes no confirmatory result. Whatever the outcome, it is reported in the
+Results and Supplementary Note 1.
