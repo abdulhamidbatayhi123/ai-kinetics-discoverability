@@ -1,3 +1,5 @@
+# E13 declared in EXPLORATORY_P2.md, repository commit 8c74426be20fbc17b8be9833778121c9c1050f92
+# sha256 of EXPLORATORY_P2.md at that commit: bce1daf53a1355c01187be40622dbd701c2b63b4d09210121e5bb456790d3d39
 import glob, json, os, shutil, subprocess, sys, zipfile
 GROUPS = ['langmuir_L1_pe1_da1e+03|0.006324555320336759|200', 'step_L1_pe1_da316|0.0015811388300841897|200', 'step_L1_pe1_da100|0.006324555320336759|200', 'langmuir_L1_pe1_da10|0.0015811388300841897|200', 'langmuir_L1_pe1_da3.16|0.006324555320336759|200', 'step_L1_pe1_da1|0.0015811388300841897|200', 'step_L1_pe1_da0.316|0.006324555320336759|200']
 PART = 1
