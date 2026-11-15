@@ -8,6 +8,7 @@ on the same observations? Everything below follows the declaration in EXPLORATOR
     python p2_e12_reaction.py --smoke      two rows, printed
     python p2_e12_reaction.py rows         all 2,160 rows -> results/p2_e12_rows.json (resumable, per cell)
     python p2_e12_reaction.py summary      -> results/p2_e12_summary.json
+    add --variant-b for E12b (B_in = 2; results/p2_e12b_*.json)
 """
 import hashlib
 import json
@@ -33,6 +34,9 @@ N_MODES = 4
 KGRID_REL = np.logspace(-2, 2, 161)                  # k/100 ... 100 k
 SOLVERS = {"best_subset": methods.best_subset, "stlsq": methods.stlsq, "ensemble": methods.ensemble}
 ROWS, SUMMARY = "results/p2_e12_rows.json", "results/p2_e12_summary.json"
+if "--variant-b" in sys.argv:            # E12b (declared fb2c438): unequal feeds so that A and B differ
+    B_IN = 2.0
+    ROWS, SUMMARY = "results/p2_e12b_rows.json", "results/p2_e12b_summary.json"
 T_OBS = np.linspace(0.0, HORIZON, N_T)
 
 
@@ -227,9 +231,9 @@ def main():
                 print("  max rel diff at grid", i, float(np.max(np.abs(one - preds[i])) / np.max(np.abs(one))))
             print(da, discover(obs, K_meas), identifiable(obs, sd, k, preds), f"{time.time() - t0:.1f} s")
         return
-    if sys.argv[1] == "rows":
+    if "rows" in sys.argv:
         return run_rows()
-    if sys.argv[1] == "summary":
+    if "summary" in sys.argv:
         return summarise()
 
 
