@@ -315,3 +315,32 @@ p2_e13_infomatched.py into results/p2_e13_summary.json (rows results/p2_e13_rows
 - the gap: for every pair with both boundaries, whether discovery still fails at least 0.25 decade first.
 Descriptive, no verdict; it changes no confirmatory result. Whatever the outcome, it is reported in the
 Results and Supplementary Note 1.
+
+## E14. Parallel symbolic enumeration (PSE) on the symbolic-regression subgrid (declared 2026-11-16, after a review of what the target journal asks for, BEFORE running)
+
+**Why.** Missing recent methods are the most frequent referee request at the target journal (editorial
+"What reviewers request the most", Nat. Comput. Sci. 6, 317, 2026). Two equation-discovery methods published there
+have public code: PSE (Ruan et al., Nat. Comput. Sci. 6, 53-66, 2026; MIT licence) and BILLIE (Li et al.,
+Nat. Comput. Sci. 5, 456-466, 2025). BILLIE is not run: the GitHub repository its article cites returns 404
+(checked 2026-11-16), and its only released code is a demonstration capsule that selects terms from a
+user-supplied library, so on this task it would reduce to sparse regression over a library that contains the true
+terms by construction (M2-M4 already). PSE is free-form symbolic regression and is run.
+**What.** Observations exactly as for M7 (PySR): O1, both isotherms, Pe ~94, L1, sigma in {0.5, 2} %, eps in {0, 2} %,
+all nine Da, replicates 15..29 (fifteen of M7's estimation replicates; the reduced count is set by GPU cost),
+p2_observe.observe unchanged. Features and target exactly as M7: Lib-B without its constant (c, q, T, cq, q^2,
+c^2, q*) at the observed values, stacked over the 20 probes; target the Savitzky-Golay derivative of q
+(p2.features.derivative, window 21, order 3). PSE from its official repository (github.com/intell-sci-comput/PSE,
+commit recorded in the kit), PSRN_Regressor with operators ['Add', 'Mul', 'Sub', 'Identity'] (as M7's +, -, *),
+3 symbol layers, 5 PSRN input slots, constants allowed (as M7), its default down-sampling and top_k = 10, a time limit
+of 60 s per fit, seed = replicate, on a Kaggle GPU. The expression taken is the first of PSE's returned Pareto list
+(its own ranking); it is scored by M7's strict bridge (SymPy expansion; any monomial that is not a single feature
+counts as extra support) and success_L1, unchanged. Failures and errors count as failures (A2). No probe expression
+is given to PSE (its probe option stops the search when the answer is found).
+**Reported.** Success fraction per Da in each of the eight slices, beside M7 and the best sparse method on the same
+replicates (15..29), and the last level with at least 50 % success against the slice's Da*_ident (H2b).
+**Reading fixed in advance.** If in any slice PSE succeeds in at least half the replicates at a level within
+0.25 decade of that slice's Da*_ident (or above it), the gap closes for PSE there, and the abstract and Results say
+so. Otherwise the paper reports, per slice, how far PSE's last level with at least 50 % success lies below
+Da*_ident, as it does for M7. Descriptive, no verdict; it changes no confirmatory result.
+**Pilot.** Up to three rows may be run first to time the job and check the expression parsing; they are not
+reported and are recomputed with the rest.
