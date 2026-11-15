@@ -71,7 +71,10 @@ pip install -r requirements_p2.txt --extra-index-url https://download.pytorch.or
 ```
 
 `requirements_p2.txt` pins every package the code imports; the extra index serves the CPU wheel
-of PyTorch. Two environment variables are read:
+of PyTorch. The study was developed and run on Windows 11 with Python 3.12.10; the Kaggle runs (B90, E6,
+E8, E11, E13) used Kaggle's Linux images, so the analysis code has run on both. No graphics processor is
+needed. The install time was not measured; the largest downloads are PyTorch (CPU) and JAX. These
+environment variables are read:
 
 | Variable | Read by | Default |
 |---|---|---|

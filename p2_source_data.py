@@ -128,11 +128,50 @@ def fig5(w):
                  ).to_excel(w, sheet_name="Santana_2023", index=False)
 
 
+TITLE = "Equation discovery fails before rate constants become unidentifiable in simulated adsorption columns"
+ABOUT = {
+    2: ("Fig. 2: what the data look like where discovery works, where only identifiability works, and where "
+        "neither does (Langmuir sorbent, Pe ~94, 2 % noise, exact isotherm, Da = 0.32, 31.6 and 1000)",
+        "one sheet per Da: the mid-column probe (true and observed uptake, measured isotherm) and the outlet curve "
+        "(c/c_in), time in stoichiometric times; sheet 'counts': discovered and identifiable replicates of 45",
+        "data/p2 fields (p2_generate.py), results/p2_o1.json, results/p2_figdata.json"),
+    3: ("Fig. 3: discovery fails before identifiability",
+        "a_Langmuir, b_step: fractions of the 45 estimation replicates per Da (discovery by the best method; k "
+        "identifiable); c_boundaries: the 37 slices with both boundaries and their 95 % bootstrap intervals; "
+        "d_all_slices: every slice's boundaries, gap (decades) and verdict",
+        "results/p2_verdicts.json, results/p2_figdata.json"),
+    4: ("Fig. 4: methods compared",
+        "a_Langmuir, b_step: success fraction of each method per Da (Pe ~94, 2 % noise, 2 % isotherm error); "
+        "c_per_method: each sparse method's 50 % boundary per slice; d_choice_among_laws and "
+        "d_discovery_identifiable: the choice among three laws by likelihood (post hoc) beside open discovery and "
+        "identifiability",
+        "results/p2_figdata.json, results/p2_verdicts.json, results/p2_e6_modelselect.json"),
+    5: ("Fig. 5: what column data allow, by Damkohler number",
+        "this_study: per condition, the range of boundaries over the slices (discovery, identifiability, choice "
+        "among three laws); published_columns: Da ranges of published packed beds (Supplementary Table 1); "
+        "Santana_2023: the closest prior study's two columns and their outcome under this study's success rule",
+        "results/p2_verdicts.json, results/p2_e8_summary.json, results/p2_practical_da.json, "
+        "results/p2_s1_anchor.json"),
+}
+
+
+def about(w, n):
+    """First sheet of each workbook: which figure it belongs to, what each sheet holds and where it comes from."""
+    fig, sheets, src = ABOUT[n]
+    pd.DataFrame([("article", TITLE), ("figure", fig), ("sheets", sheets),
+                  ("units", "Da = k t_stoich is dimensionless; fractions are of the 45 estimation replicates "
+                            "(replicates 15 to 59) unless a sheet says otherwise; gaps are in decades of Da"),
+                  ("source files", src + " (repository and Zenodo archive; see the README)"),
+                  ("written by", "p2_source_data.py")],
+                 columns=["item", "value"]).to_excel(w, sheet_name="about", index=False)
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for n, fn in ((2, fig2), (3, fig3), (4, fig4), (5, fig5)):
         p = os.path.join(OUT, f"Source_Data_Fig{n}.xlsx")
         with pd.ExcelWriter(p) as w:
+            about(w, n)
             fn(w)
         print("wrote", p)
 
