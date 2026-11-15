@@ -1,7 +1,8 @@
 """Figure 5: what column data allow, by Damkohler number (a summary of results already reported).
 
-Reads only results files: H2b boundaries (results/p2_verdicts.json), the choice among three laws (E6, post hoc,
-results/p2_e6_modelselect.json), where published columns sit (results/p2_practical_da.json, Supplementary
+Reads only results files: H2b boundaries (results/p2_verdicts.json), the 50 % boundary of the choice among three
+laws (post hoc; E8's 200-time run, results/p2_e8_summary.json, whose discovery and identifiability boundaries equal
+the H2b ones at Pe ~94), where published columns sit (results/p2_practical_da.json, Supplementary
 Table 1) and the closest prior study (results/p2_s1_anchor.json). For each condition the bar runs from the bottom
 of the grid to the boundary; the darker end segment spans the boundaries over the slices of that condition
 (isotherms and Peclet numbers). Nothing is estimated here.
@@ -19,8 +20,7 @@ import numpy as np  # noqa: E402
 import p2_figstyle as S  # noqa: E402
 
 V = json.load(open("results/p2_verdicts.json"))["H2b"]
-E6 = json.load(open("results/p2_e6_modelselect.json"))["rows"]
-CELLS = json.load(open("data/p2/manifest.json"))["cells"]
+E8 = json.load(open("results/p2_e8_summary.json"))
 PRAC = json.load(open("results/p2_practical_da.json"))["by_source"]
 S1 = json.load(open("results/p2_s1_anchor.json"))
 LO, HI, X0, X1 = 0.1, 1000.0, -1.25, 4.6
@@ -33,20 +33,14 @@ def ranges(s, e, key):
     return (min(xs), max(xs), len(xs)) if xs else None
 
 
-def choice_top(s):
-    """Highest Da up to which the LDF law was chosen in every replicate (E6, exact isotherm, Pe ~94)."""
-    by = {}
-    for key, r in E6.items():
-        n, ss, e, _ = key.split("|")
-        if float(ss) == float(s) and float(e) == 0.0:
-            by.setdefault(CELLS[n]["Da"], []).append(r["success"])
-    top = None
-    for d in sorted(by):
-        if all(by[d]):
-            top = d
-        else:
-            break
-    return top
+def choice_range(s):
+    """50 % boundary of the likelihood choice among three laws (logistic crossing on replicates 15-59, the rule of
+    the other bars), exact isotherm, Pe ~94, over the two isotherms: E8's 200-time run, the run behind the
+    information-matched comparison in the text (results/p2_referee_checks.json). None where it was not run."""
+    xs = [E8[f"{iso}|sigma={s}|n_t=200"]["da_select"] for iso in ("langmuir", "step")
+          if f"{iso}|sigma={s}|n_t=200" in E8]
+    xs = [x for x in xs if x]
+    return (min(xs), max(xs), len(xs)) if xs else None
 
 
 def bar(ax, y, rng, col, h, label=None):
@@ -68,15 +62,17 @@ def main():
     for s, e, lab in CONDS:
         d, i = ranges(s, e, "da_disc"), ranges(s, e, "da_ident")
         if i:
-            bar(ax, y + 0.18, i, S.ROLE["ident"], 0.3, "rate constant identifiable" if first else None)
-            ax.text(np.log10(i[1]) + 0.06, y + 0.18, f"{i[2]}", fontsize=5.5, va="center", color=S.C["dark"])
-        c = choice_top(s) if e == "0.0" else None
-        if c:
-            ax.plot([np.log10(LO), np.log10(c)], [y, y], color=S.OI["black"], lw=1.6, ls="-.",
+            bar(ax, y + 0.2, i, S.ROLE["ident"], 0.26, "rate constant identifiable" if first else None)
+            ax.text(np.log10(i[1]) + 0.06, y + 0.2, f"{i[2]}", fontsize=5.5, va="center", color=S.C["dark"])
+        c = choice_range(s) if e == "0.0" else None
+        if c:                                       # thin to the lowest boundary, heavy over the boundaries
+            ax.plot([np.log10(LO), np.log10(c[0])], [y, y], color=S.OI["black"], lw=1.1, ls="-.",
                     label="law chosen among three candidates (post hoc)" if first else None)
+            ax.plot([np.log10(c[0]), max(np.log10(c[1]), np.log10(c[0]) + 0.04)], [y, y], color=S.OI["black"],
+                    lw=2.2, solid_capstyle="butt")
         if d:
-            bar(ax, y - 0.18, d, S.ROLE["disc"], 0.3, "law discovered (best method)" if first else None)
-            ax.text(np.log10(d[1]) + 0.06, y - 0.18, f"{d[2]}", fontsize=5.5, va="center", color=S.C["dark"])
+            bar(ax, y - 0.2, d, S.ROLE["disc"], 0.26, "law discovered (best method)" if first else None)
+            ax.text(np.log10(d[1]) + 0.06, y - 0.2, f"{d[2]}", fontsize=5.5, va="center", color=S.C["dark"])
         yt.append(y)
         yl.append(lab)
         y -= 1.0
@@ -111,6 +107,6 @@ def main():
 if __name__ == "__main__":
     fig = main()
     for p in S.save(fig, "paper2/fig_p2_guide",
-                    inputs=("results/p2_verdicts.json", "results/p2_e6_modelselect.json", "data/p2/manifest.json",
+                    inputs=("results/p2_verdicts.json", "results/p2_e8_summary.json",
                             "results/p2_practical_da.json", "results/p2_s1_anchor.json")):
         print("wrote", p)

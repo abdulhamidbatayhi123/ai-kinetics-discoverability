@@ -775,8 +775,8 @@ demonstration, one replicate at $\Da = 3.2$), so an outlet-only application coul
 interpreted, and the uptake kinetics of the cited MOF-303
 study exist only as figures. The inclusion probabilities of the ensemble's terms were not stored,
 and WENDy-IRLS and ODR-BINDy were run only on their authors' published examples (NOT RUN on the
-grid). The Kolmogorov--Arnold network was not run on the grid because its fit exceeded the
-declared cost gate on this machine, a machine limit.
+grid). The Kolmogorov--Arnold network was not run on the grid because it failed its known-answer
+test and its fit exceeded the declared cost gate on this machine (M8, below).
 \end{itemize}
 % source: p2/run_o1.py choose_support (WEAK_SUPPORTS[1] when no held-out probe, WEAK_SUPPORTS[0] when
 % none admissible); p2/methods.py best_subset (floor 2e-3 x std(y)); p2/eiv.py eiv_best_subset (mean SD);

@@ -89,7 +89,8 @@ def fig4(w):
     rows = []
     for k, v in V["H2b"].items():
         for m, d in (v.get("da_disc_by_method") or {}).items():
-            rows.append({"slice": k, "method": m, "Da_disc": d})
+            if not m.startswith("m7"):   # panel c shows the sparse methods only (see fig_p2_results.py)
+                rows.append({"slice": k, "method": m, "Da_disc": d})
     pd.DataFrame(rows).to_excel(w, sheet_name="c_per_method", index=False)
     e6 = json.load(open("results/p2_e6_modelselect.json"))["rows"]
     agg = {}
@@ -116,9 +117,10 @@ def fig5(w):
     rows = []
     for s, e, lab in G.CONDS:
         d, i = G.ranges(s, e, "da_disc"), G.ranges(s, e, "da_ident")
+        c = G.choice_range(s) if e == "0.0" else None
         rows.append({"condition": lab, "Da_disc_min": d and d[0], "Da_disc_max": d and d[1], "n_disc": d and d[2],
                      "Da_ident_min": i and i[0], "Da_ident_max": i and i[1], "n_ident": i and i[2],
-                     "Da_choice_all_replicates_up_to": G.choice_top(s) if e == "0.0" else None})
+                     "Da_choice_min": c and c[0], "Da_choice_max": c and c[1], "n_choice": c and c[2]})
     pd.DataFrame(rows).to_excel(w, sheet_name="this_study", index=False)
     pd.DataFrame([{"source": k, **v} for k, v in G.PRAC.items()]).to_excel(w, sheet_name="published_columns", index=False)
     pd.DataFrame([{"case": "Langmuir", "Da": G.S1["Da"], "readout_under_this_rule": "fails"},

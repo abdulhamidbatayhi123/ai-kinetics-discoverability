@@ -10,7 +10,8 @@ Gates (pattern of pinn-machining revision_eaai/build/gates.py; rules from PRESEN
   G6  em dashes <= 5 in the article
   G7  no banned phrase (paper2/terminology.md) in the article or the SI
   G8  no unresolved placeholder (PENDING, VERIFY, [CHECK, TODO) outside comments
-  G9  every Extended Data figure that exists is cited in the article
+  G9  every Extended Data figure that exists is cited in the article, first cited in numerical order,
+      and placed in that order in the Extended Data section
   G10 every figure file the article includes exists and has a provenance file
 
     python paper2/build_p2.py            # all gates
@@ -92,7 +93,7 @@ def bindings():
     cons_min = math.floor(min(cons) * 100) / 100
     out = [("H2b slices with a verdict", f"Of the {len(h2b)} slices, {len(gaps)} had both"),
            ("H2b slices without a verdict", f"The {len(h2b) - len(gaps)} slices without a verdict"),
-           ("H2b slices with a verdict (abstract)", f"were found ({len(gaps)} conditions)"),
+           ("H2b slices with a verdict (abstract)", f"were found ({len(gaps)} of {len(h2b)} conditions)"),
            ("H2b slices with a verdict (Fig. 3 legend)", f"for the {len(gaps)} slices with both boundaries"),
            ("H2b gap range (Results)", f"The gap was {lo:.1f} to {hi:.1f} decades of"),
            ("H2b gap range (abstract)", f"by {lo:.1f} to {hi:.1f} decades"),
@@ -215,7 +216,9 @@ def bindings():
             ("E7 discovery at 1 % shift", f"at or below {math.floor(e7_disc * 100 + 0.5):.0f}" + BS + "," + BS + "% at every rate")]
     # review round 2 (M1): the bias of k under a 1 % step shift, medians over estimation replicates per (sigma, shift)
     b1, b10 = e7_bias(1.0), e7_bias(10.0)
-    out += [("E7 bias at Da 10", f"by {1 / max(x for x in b10 if x < 1):.1f} to {max(b10):.1f} times at $" + BS + "Da = 10$")]
+    lo10, hi10 = [x for x in b10 if x < 1], [x for x in b10 if x > 1]
+    out += [("E7 bias at Da 10", f"to {min(lo10):.2f} and {min(hi10):.2f} to {max(hi10):.2f} times its true value at $"
+             + BS + "Da = 10$" if f"{min(lo10):.2f}" == f"{max(lo10):.2f}" else "E7 low bias differs between noise levels")]
     e8 = load("results/p2_e8_summary.json")
     sh = {"disc": [], "select": [], "ident": []}
     beyond, gap400, sel100 = 0, [], []
@@ -286,7 +289,9 @@ def bindings():
     m6 = load("results/p2_m6_summary.json")
     out += [("M6 grid", f"recovered it in none of {m6['n_rows']:,} fits".replace(",", "{,}", 1) if m6["n_success"] == 0
              else "M6 succeeded"),
-            ("M6 six terms", "every fit kept six" if list(m6["support_size_counts"]) == ["6"] else "M6 sizes differ")]
+            # the implicit Langmuir-LDF relation has five terms; every M6 fit kept six
+            ("M6 six terms", "each keeping one term too many" if list(m6["support_size_counts"]) == ["6"]
+             else "M6 sizes differ")]
     s1 = load("results/p2_s1_anchor.json")
     top_noisy = max(s["da_disc"] for k, s in h2b.items() if s.get("da_disc") and not k.startswith("sigma=0.0|"))
     out += [("S1 on the map", f"its columns ran at ${BS}Da {BS}approx {s1['Da']:.1f}$"),
@@ -301,13 +306,15 @@ def bindings():
     dsh = [math.log10(b["da_disc"] / a["da_disc"]) for b, a in pairs]
     ish = [math.log10(b["da_ident"] / a["da_ident"]) for b, a in pairs if b["da_ident"] and a["da_ident"]]
     no_id = [b for b, _ in pairs if b["da_ident"] is None]
-    out += [("E11 gaps (abstract)", f"and by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} decades in three\nconditions re-run" if min(g11) >= 0.25 and len(g11) == 3
-             else "E11 gap below threshold"),
+    out += [("E11 gaps (abstract)", f"and {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} with 2,000 (three of four\nconditions re-run)"
+             if min(g11) >= 0.25 and len(g11) == 3 and len(pairs) == 4 else "E11 gap below threshold"),
+            ("E11 slices with both (Introduction)", "in all\nthree slices that kept both boundaries when re-run"
+             if len(g11) == 3 else "E11 slices with both differ"),
             ("E11 gaps (Results)", f"by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f}\ndecades, above the 0.25-decade threshold"),
             ("E11 slices with both", f"first in the {({3: 'three'}).get(len(g11), len(g11))} slices with both boundaries"),
             ("E11 discovery shift", f"discovery moved up by {math.floor(min(dsh) * 10) / 10:.1f} to {math.ceil(max(dsh) * 10) / 10:.1f} decades"),
             ("E11 identifiability shift", f"identifiability by {min(ish):.1f} to\n{max(ish):.1f} decade"),
-            ("E11 fourth slice", f"reached ${BS}Da {BS}approx {round(no_id[0]['da_disc'], -1):.0f}$ (26 with"
+            ("E11 fourth slice", f"reached ${BS}Da {BS}approx {round(no_id[0]['da_disc'], -1):.0f}$\nwhile"
              if len(no_id) == 1 else "E11 no-ident slices != 1")]
     rc = load("results/p2_referee_checks.json")
     cv = [d["gap_200"] for d in rc["choice_vs_ident"].values() if d["gap_200"] is not None]
@@ -584,6 +591,19 @@ def main():
             fail("G9", f"{f} exists but Extended Data Fig. {n} is not cited in the main text")
     if not ed_files:
         fail("G9", "no Extended Data figure files found (check the file-name pattern)")
+    # G9b: Extended Data figures are numbered in the order of first citation, and the Extended Data
+    # section places them in that order (file fig_edN is the N-th figure there)
+    first = []
+    for grp in re.findall(r"Extended Data Figs?\.~([0-9~, and\-]+)", main_part):
+        for n in (int(x) for x in re.findall(r"\d+", grp)):
+            if n not in first:
+                first.append(n)
+    if first != sorted(first) or first != list(range(1, len(first) + 1)):
+        fail("G9", f"Extended Data figures first cited in the order {first}, not 1, 2, 3, ...")
+    ed_part = body[len(main_part):]
+    placed = [int(m) for m in re.findall(re.escape(BS) + r"includegraphics(?:\[[^]]*\])?\{fig_ed(\d+)", ed_part)]
+    if placed != list(range(1, len(placed) + 1)):
+        fail("G9", f"Extended Data section places fig_ed files in the order {placed}")
     for inc in re.findall(re.escape(BS) + r"includegraphics(?:\[[^]]*\])?\{([^}]*)\}", body):
         stem = os.path.splitext(inc)[0]
         if not os.path.exists(inc):

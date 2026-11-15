@@ -105,7 +105,7 @@ def isotherm_inset(ax):
     concentration over its feed value (from p2_generate.make_physics and isotherm.q_star_np)."""
     from isotherm import q_star_np
     from p2_generate import make_physics
-    for iso, ls, lab, xy in (("langmuir", "-", "Langmuir", (0.97, 0.26)), ("step", "--", "step", (0.42, 0.95))):
+    for iso, ls, lab, xy in (("langmuir", "-", "Langmuir", (0.97, 0.08)), ("step", "--", "step", (0.42, 0.95))):
         p, c_in = make_physics(iso)
         c = np.linspace(0, c_in, 300)
         q = q_star_np(c, np.full_like(c, p.T_in), p) / p.q_max
@@ -143,11 +143,11 @@ def panel_b(c, x, y, w, h):
         ax.plot([xc, xc], [0, 0.5], color=col, lw=0.6, ls=":")
     ax.annotate("", xy=(2.0, 0.07), xytext=(0.3, 0.07),
                 arrowprops=dict(arrowstyle="<->", lw=0.6, color=EDGE))
-    ax.text(1.15, 0.10, "gap", ha="center", va="bottom", fontsize=FS_S)
+    ax.text(1.55, 0.10, "gap", ha="center", va="bottom", fontsize=FS_S)
     ax.text(-0.95, 0.14, "discovery\nof the law", fontsize=FS_S, va="center", ha="left")
     ax.text(2.3, 0.90, "k\nidentifiable", fontsize=FS_S, va="center", ha="left")
-    ax.text(0.22, 0.45, r"Da$^{*}_{disc}$", fontsize=FS_S, ha="right", va="top")
-    ax.text(2.08, 0.56, r"Da$^{*}_{ident}$", fontsize=FS_S, ha="left", va="bottom")
+    ax.text(0.22, 0.45, r"$\mathrm{Da}^{*}_{\mathrm{disc}}$", fontsize=FS_S, ha="right", va="top")
+    ax.text(2.08, 0.56, r"$\mathrm{Da}^{*}_{\mathrm{ident}}$", fontsize=FS_S, ha="left", va="bottom")
     ax.set_xlim(-1, 3)
     ax.set_ylim(0, 1.05)
     ax.set_xticks([-1, 0, 1, 2, 3])
@@ -161,7 +161,7 @@ def panel_b(c, x, y, w, h):
 
 def main():
     S.apply()
-    W, H = 183.0, 99.0
+    W, H = 183.0, 105.0
     c = Canvas(W, H)
     S.letter(c.ax, "a", x=0.6 / W, y=(H - 4.2) / H)
     L, R = 4.0, 179.0
@@ -183,7 +183,7 @@ def main():
     c.arrow((dg[2], y1 + h1 / 2), (ob[0], y1 + h1 / 2))
 
     # the same observations feed both questions
-    y2, h2 = 36.5, 24.5
+    y2, h2 = 42.5, 24.5
     bus = y1 - 2.6
     xo, xd, xi = 151.0, 47.0, 137.5
     c.line([xo, xo], [y1, bus])
@@ -194,14 +194,14 @@ def main():
              "Sparse regression (thresholding, ensemble, exact best\nsubset), weak and strong forms; errors-in-variables\n"
              "(oracle); symbolic regression; neural network in the\ncolumn model (demonstration); slow manifold;\n"
              "implicit regression without an isotherm (isothermal)\n"
-             "Success: exactly the true terms, signs, and q* : q = −1 ± 10 %", TINT["disc"], "4")
+             "Success: exactly the true terms and signs, with the\ncoefficient ratio of q* to q within 10 % of −1", TINT["disc"], "4")
     c.titled(96, y2, R - 96, h2, "Is the rate constant identifiable?",
              "The true law is given; only k is fitted, on the same\nobservations with the same measured isotherm\n"
              "Profile likelihood of k (O1 exact; O2 and O3 by\nfull column solves)\n"
              "Identifiable: 95 % interval inside [k/2, 2k]", TINT["ident"], "5")
 
     # tier 3: boundaries and the analyses that use them, each tagged; panel b
-    y3, h3 = 3.0, 29.0
+    y3, h3 = 3.0, 35.0
     c.arrow((xd, y2), (xd, y3 + h3))
     c.arrow((110.0, y2), (110.0, y3 + h3))
     res = c.box(L, y3, 120, h3, fc=TINT["out"])
@@ -212,6 +212,8 @@ def main():
             ("H2c", "does errors-in-variables fitting move it?", "confirmatory"),
             ("", "which methods discover the law, and where", "descriptive"),
             ("", "choice among three candidate laws by likelihood", "post hoc"),
+            ("", "ten times more observations, three slices", "exploratory"),
+            ("", "second system: reversible reaction, stirred tank", "exploratory"),
             ("", "O2 and O3: probes without uptake, outlet only", "descriptive"),
             ("H2d", "loading-dependent rate, step isotherm", "exploratory")]
     for i, (h, txt, kind) in enumerate(rows):

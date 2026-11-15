@@ -1,9 +1,9 @@
-"""Extended Data Fig. 9: the second system (E12b, reversible reaction in a stirred tank; exploratory).
+"""Extended Data Fig. 6: the second system (E12b, reversible reaction in a stirred tank; exploratory).
 
 Reads results/p2_e12b_summary.json (best discovery method and identifiability fractions per Da, replicates 15-59)
 and results/p2_e12_noisefree.json (discovery on exact data). Nothing is estimated here.
 
-    python fig_p2_ed9_reaction.py  ->  paper2/fig_ed9_reaction.{pdf,png,prov.json}
+    python fig_p2_ed6_reaction.py  ->  paper2/fig_ed6_reaction.{pdf,png,prov.json}
 """
 import json
 
@@ -55,6 +55,6 @@ def main():
 
 if __name__ == "__main__":
     fig = main()
-    for p in S.save(fig, "paper2/fig_ed9_reaction",
+    for p in S.save(fig, "paper2/fig_ed6_reaction",
                     inputs=("results/p2_e12b_summary.json", "results/p2_e12_noisefree.json")):
         print("wrote", p)

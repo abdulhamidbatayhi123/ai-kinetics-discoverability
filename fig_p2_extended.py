@@ -1,4 +1,5 @@
-"""Paper 2, Extended Data figures ED1-ED7, drawn from results files only (nothing is estimated).
+"""Paper 2, Extended Data figures ED1-ED5 and ED7-ED9, drawn from results files only (nothing is estimated).
+ED6 (the second system) is drawn by fig_p2_ed6_reaction.py. Numbers follow the order of first citation.
 
 Conventions (labels, colours, slice keys, the rule that a logistic is drawn only where the
 verdict file has a crossing) are imported from fig_p2_results.py so the two scripts agree.
@@ -9,10 +10,11 @@ otherwise (M8 and M1 were run only at reps 0-2 and rep 0, and their panel says s
   ED1 paper2/fig_ed1_h2b_langmuir   all 48 Langmuir H2b slices: P(discovery), P(identifiable)
   ED2 paper2/fig_ed2_h2b_step       all 48 step H2b slices
   ED3 paper2/fig_ed3_ident          identifiability estimator accuracy and robustness of H2b
-  ED4 paper2/fig_ed7_coverage       E3: identifiable vs interval contains k
+  ED4 paper2/fig_ed4_h2a            H2a (drawn by fig_p2_results.py)
   ED5 paper2/fig_ed5_methods        every method against Da, plus M9, M8 and M1
-  ED6 paper2/fig_ed6_h2d            H2d (exploratory): best success, loading-dependent rate
-  ED7 paper2/fig_ed8_asrun          as-run and intermediate (pre-B90) against corrected verdicts
+  ED7 paper2/fig_ed7_h2d            H2d (exploratory): best success, loading-dependent rate
+  ED8 paper2/fig_ed8_coverage       E3: identifiable vs interval contains k
+  ED9 paper2/fig_ed9_asrun          as-run and intermediate (pre-B90) against corrected verdicts
 
     python fig_p2_extended.py            # from the repo root; loads one large JSON at a time
 """
@@ -116,7 +118,7 @@ def fig_h2b_slices(V, FD, iso, da, stem):
                                    facecolor=_word_face(v), edgecolor="none", clip_on=False))
             g = v.get("gap_decades")
             if g is not None:
-                ax.text(1.085, 0.5, f"{g:+.1f}", transform=ax.transAxes, fontsize=5, va="center",
+                ax.text(1.085, 0.5, f"{g:+.1f}".replace("-", "−"), transform=ax.transAxes, fontsize=5, va="center",
                         ha="left")
             if r == 0:
                 ax.set_title(pe_label(pe), fontsize=6, loc="center", pad=3)
@@ -523,8 +525,8 @@ def main():
     R = _load(F_ROB)
     out += fig_ident(R, V, da, os.path.join(OUT, "fig_ed3_ident"))
     del R
-    out += fig_coverage(_load(F_COV), os.path.join(OUT, "fig_ed7_coverage"))
-    out += fig_h2d(V, os.path.join(OUT, "fig_ed6_h2d"))
+    out += fig_coverage(_load(F_COV), os.path.join(OUT, "fig_ed8_coverage"))
+    out += fig_h2d(V, os.path.join(OUT, "fig_ed7_h2d"))
     # ED5: the row files are loaded one at a time and released; figdata is kept (0.5 MB)
     vslim = {"H2b": V["H2b"], "positive_control": V["positive_control"]}
     del V
@@ -535,7 +537,7 @@ def main():
     out += fig_methods(FD, m9, m8, m8reps, m1, da, os.path.join(OUT, "fig_ed5_methods"))
     del FD
     gc.collect()
-    out += fig_asrun(_load(F_ASRUN), vslim, os.path.join(OUT, "fig_ed8_asrun"), P=_load(F_PRE))
+    out += fig_asrun(_load(F_ASRUN), vslim, os.path.join(OUT, "fig_ed9_asrun"), P=_load(F_PRE))
     for p in out:
         print("wrote", p)
 

@@ -33,6 +33,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
+from matplotlib.legend_handler import HandlerTuple  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch, Rectangle  # noqa: E402
 
@@ -59,7 +60,6 @@ NO_BOUNDARY, WITHHELD_FACE = figstyle.NO_VERDICT, "#ffffff"
 NO_BOUNDARY_WORDS = "no boundary on the grid for one of the two"   # p2_analyze's own words
 DISC_SHADES = figstyle.DISC_SHADES     # discovery: light to dark = low to high noise
 IDENT_SHADES = figstyle.IDENT_SHADES   # identifiability
-GREY_SHADES = ("#c4c4c4", "#7f7f7f", "#2f2f2f")   # legend key for the noise lightness, shared by both hues
 
 METHOD_ORDER = ("stlsq|weak", "stlsq|strong", "ensemble|weak", "ensemble|strong", "best_subset|weak",
                 "best_subset|strong", "eiv_best_subset|strong", "m7|strong", "slow_manifold|strong")
@@ -190,7 +190,7 @@ def _da_axis(ax, da_levels):
 def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
     x0, x1 = np.log10(da_levels[0]), np.log10(da_levels[-1])
     have_fd = bool(FD and FD.get("h2b"))
-    handles = []
+    handles, labels = [], []
     for i, (s, e) in enumerate(noise):
         k = _key(s, e, iso, pe)
         v = V["H2b"].get(k)
@@ -221,8 +221,8 @@ def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
                         mfc="white", mec=ci, ecolor=ci, ms=4, capsize=2, lw=1, zorder=4)
         wc = _word_class(v)
         word = WORD_SHORT.get(wc, "withheld" if wc == "withheld" else "no verdict")
-        handles.append(Patch(facecolor=GREY_SHADES[i % 3], edgecolor="none",
-                             label=f"noise $\\sigma$ = {_pct(s)}: {word}"))
+        handles.append((Patch(facecolor=cd, edgecolor="none"), Patch(facecolor=ci, edgecolor="none")))
+        labels.append(f"noise $\\sigma$ = {_pct(s)}: {word}")   # key: this level's two shades
     ax.axhline(0.5, color=figstyle.C["grey"], lw=0.6, zorder=1)
     _da_axis(ax, da_levels)
     ax.set_ylim(-0.03, 1.03)
@@ -235,8 +235,9 @@ def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
                    label="50 % crossing, 95 % interval")]
     # legends below the axes, never on the data
     ax.set_title(f"{ISO_LABEL.get(iso, iso)}, {pe_label(pe)}", fontsize=7)
-    ax.legend(handles=kind + handles, loc="upper center", bbox_to_anchor=(0.5, -0.24), ncol=2,
-              fontsize=6.0, handlelength=1.6, frameon=False)
+    ax.legend(kind + handles, [h.get_label() for h in kind] + labels, loc="upper center",
+              bbox_to_anchor=(0.5, -0.24), ncol=2, fontsize=6.0, handlelength=1.6, frameon=False,
+              handler_map={tuple: HandlerTuple(ndivide=None, pad=0.0)})
     if not have_fd:
         ax.text(0.02, 0.98, "per-level fractions not available\n(run p2_figdata.py)",
                 transform=ax.transAxes, fontsize=6, va="top", color=figstyle.C["grey"])
@@ -483,6 +484,8 @@ def _by_method_strip(ax, V, da_levels):
     per = {}
     for k, v in V.get("H2b", {}).items():
         for m, d in (v.get("da_disc_by_method") or {}).items():
+            if m.startswith("m7"):   # symbolic regression rises and falls with Da: a falling logistic
+                continue             # cannot describe it, so its crossings are not shown (Results)
             per.setdefault(m, []).append((d, _parse_slice(k)[2]))
     if not per:
         _note(ax, "no per-method boundaries")
@@ -505,7 +508,7 @@ def _by_method_strip(ax, V, da_levels):
     ax.set_xticklabels([METHOD_SHORT.get(m, m) for m in ms], fontsize=6.5)
     ax.set_xlim(-0.6, len(ms) - 0.4)
     ax.set_ylim(lo, np.log10(da_levels[-1]) + 1.0)          # head room for the legend
-    ax.set_xlabel("method (grey numbers: slices without a crossing, of 96; of 8 for symbolic regression)")
+    ax.set_xlabel("sparse method (grey numbers: slices without a crossing, of 96)")
     ax.set_ylabel(r"$\log_{10} Da^{*}_{disc}$ per slice")
     isos = sorted({iso for v in per.values() for _, iso in v})
     ax.legend(handles=[Line2D([], [], lw=0, marker=ISO_MARKER.get(i, "o"), ms=3.5, mec=figstyle.C["dark"],

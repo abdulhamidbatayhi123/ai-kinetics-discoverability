@@ -2,16 +2,16 @@
  "figure": "fig_p2_overview",
  "size_mm": [
   183.0,
-  99.0
+  105.0
  ],
  "font_pt": [
   5.4,
   8.0
  ],
- "made": "2026-11-12 19:16:43",
+ "made": "2026-11-15 15:05:36",
  "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
  "script": "fig_p2_overview.py",
- "script_sha256": "bbf1fac45901944d72738d6cfe20481fbe0337d6f102a1fd8d7a40c9e3b11642",
+ "script_sha256": "b4a726249b42f5b78befe5afb3d81ff4c1b7c2d8f60697d74b177059e5f9c7a1",
  "inputs": {
   "PREREG_P2_discoverability.md": "24dc33ec317e14dfff8bc9d190118e70a283400f235ad5fd34387fbfda0c112a",
   "data/p2/manifest.json": "2742ff22b55f0fa6302e0707a2bfcef9949a809104c853755b3dd4bb325bf270",
