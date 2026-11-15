@@ -21,8 +21,6 @@ import os
 import sys
 import time
 
-import numpy as np
-
 from p2.identifiability import identifiable, profile_interval_outlet
 from p2.metric import k_accuracy, success_L1
 from p2.run_o1 import SOLVERS, discover_o2

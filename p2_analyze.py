@@ -305,7 +305,6 @@ def h2c(cells, o1_rows, m5_rows, n_boot=2000, withheld=()):
                 by_eps[e][k] = sh[0]
     per_eps = {}
     for e, d in by_eps.items():
-        vals = [v for v in d.values() if v is not None]
         per_eps[e] = h2c_eps_rule(list(d.values()))
     every = [v for d in by_eps.values() for v in d.values()]
     out = {"slices": slices, "per_eps": per_eps,

@@ -40,3 +40,7 @@ kaggle_b90/out/
 kaggle_b90/queue.log
 scratch_e10/
 scratch_e11/
+
+# E13 Kaggle downloads and queue log (the registry and the merged results are the record)
+kaggle_e13/out/
+kaggle_e13/queue.log

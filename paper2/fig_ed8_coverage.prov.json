@@ -8,8 +8,8 @@
   5.5,
   8.0
  ],
- "made": "2026-11-15 21:44:44",
- "style_sha256": "14bbcd3706613ddae9db512d0459f282b547c29aaf2cd39783eb90dbbfddce4e",
+ "made": "2026-11-15 23:02:23",
+ "style_sha256": "a5aa98eb80fc2bfa01f2de6eb05585e2cc935b5ace342bf107160919e137de6c",
  "script": "fig_p2_extended.py",
  "script_sha256": "cadd75432175dbe206a1012e62a06d4fbbc5116aaf01994a03e12ce1404c7b9d",
  "inputs": {

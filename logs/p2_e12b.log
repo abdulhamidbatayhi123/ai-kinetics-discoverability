@@ -1,0 +1,19 @@
+Da 0.1 eps 0.0: 28 CPU s
+Da 0.1 eps 0.02: 76 CPU s
+Da 0.316228 eps 0.0: 28 CPU s
+Da 0.316228 eps 0.02: 71 CPU s
+Da 1 eps 0.0: 27 CPU s
+Da 1 eps 0.02: 78 CPU s
+Da 3.16228 eps 0.0: 23 CPU s
+Da 3.16228 eps 0.02: 73 CPU s
+Da 10 eps 0.0: 23 CPU s
+Da 10 eps 0.02: 83 CPU s
+Da 31.6228 eps 0.0: 24 CPU s
+Da 31.6228 eps 0.02: 90 CPU s
+Da 100 eps 0.0: 23 CPU s
+Da 100 eps 0.02: 96 CPU s
+Da 316.228 eps 0.0: 25 CPU s
+Da 316.228 eps 0.02: 115 CPU s
+Da 1000 eps 0.0: 26 CPU s
+Da 1000 eps 0.02: 104 CPU s
+E12_ROWS_DONE

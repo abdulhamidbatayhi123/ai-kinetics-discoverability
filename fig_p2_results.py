@@ -3,22 +3,24 @@
 Reads results/p2_verdicts.json (p2_analyze.py: boundaries, intervals, words), the Da levels of
 data/p2/manifest.json, and results/p2_figdata.json (p2_figdata.py: the per-level fractions the
 verdicts file does not store; see that file's docstring for what it reads). Nothing is
-estimated here; the only computation is display binning of R in Fig 3a. Every threshold drawn
+estimated here; the only computation is display binning of R in Extended Data Fig. 4a. Every threshold drawn
 is imported from the analysis code (MDE from p2_analyze, the spread thresholds from
 p2.analysis.r_collapse), never typed here. No titles inside panels: captions go in LaTeX.
 
-  Fig 2  paper2/fig_p2_map       a, b  P(success) of the best method and P(identifiable) vs
-                                       log10 Da, one isotherm each, at DISPLAY_NOISE, Pe x1,
-                                       with Da*_disc, Da*_ident and their 95 % intervals
-                                 c     Da*_disc against Da*_ident for every O1 slice, intervals,
-                                       the +-MDE band, coloured by the H2b words
-                                 d     the H2b words and gap for every slice (sigma, eps, iso, Pe)
-  Fig 3  paper2/fig_p2_collapse  a     P(success) vs log10 R for every H2a condition
-                                 b     R* per condition with its interval, half- and one-decade
-                                 c     the spread of log10 R* with its interval vs the thresholds
-  Fig 4  paper2/fig_p2_methods   a, b  P(success) by method vs log10 Da at DISPLAY_METHODS_NOISE
-                                 c     each method's Da*_disc over the O1 slices
-                                 d     the H2c EIV shift per slice with its interval, by eps
+  Fig. 3     paper2/fig_p2_map     a, b  P(success) of the best method and P(identifiable) vs
+                                         log10 Da, one isotherm each, at DISPLAY_NOISE, Pe x1,
+                                         with Da*_disc, Da*_ident and their 95 % intervals
+                                   c     Da*_disc against Da*_ident for every O1 slice, intervals,
+                                         the +-MDE band, coloured by the H2b words
+                                   d     the H2b words and gap for every slice (sigma, eps, iso, Pe)
+  ED Fig. 4  paper2/fig_ed4_h2a    a     P(success) vs log10 R for every H2a condition
+                                   b     R* per condition with its interval, half- and one-decade
+                                   c     the spread of log10 R* with its interval vs the thresholds
+  Fig. 4     paper2/fig_p2_methods a, b  P(success) by method vs log10 Da at DISPLAY_METHODS_NOISE
+                                   c     each sparse method's Da*_disc over the O1 slices (symbolic
+                                         regression rises and falls with Da, so it is not shown)
+                                   d     the choice among three laws by likelihood (E6, post hoc)
+                                         beside open discovery and identifiability
 
     python fig_p2_results.py                     # after p2_analyze.py and p2_figdata.py
     python fig_p2_results.py --out-dir somewhere

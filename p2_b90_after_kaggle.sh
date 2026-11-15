@@ -1,8 +1,8 @@
 #!/bin/bash
 # B90, after Kaggle: wait for all six outputs, merge and validate them (p2_b90_merge.py), then run the
-# rest of p2_rerun_B90.sh locally (its o1ident step skips the rows already on disk). Log: p2_rerun_B90.log.
+# rest of p2_rerun_B90.sh locally (its o1ident step skips the rows already on disk). Log: logs/p2_rerun_B90.log.
 cd "$(dirname "$0")" || exit 1
-PY="${P2_PY:-C:/Users/abdulhamid batayhi/Desktop/ai-mof-cof-dynamics/.venv/Scripts/python.exe}"
+PY="${P2_PY:-python}"
 export PYTHONIOENCODING=utf-8 OMP_NUM_THREADS=2
 until grep -q "ALL_OUTPUTS_DOWNLOADED" kaggle_b90/registry.txt 2>/dev/null; do sleep 300; done
 echo "[$(date '+%F %T')] START merge + validation of the Kaggle parts"

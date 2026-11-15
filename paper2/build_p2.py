@@ -1,6 +1,6 @@
 """Build and check Paper 2 (article + Supplementary Information). Exits 1 on any failure.
 
-Gates (pattern of pinn-machining revision_eaai/build/gates.py; rules from PRESENTATION_PLAN.md):
+Gates (limits as stated in the header of article.tex; banned phrases from paper2/terminology.md):
   G1  the bibliography is regenerated from bib_p2.tex (make_article_bib.py) and nothing is missing
   G2  article.tex and supplementary_main.tex compile with no error and no undefined reference,
       and no line or table runs more than 2 pt past the margin (overfull boxes, read from the logs)
@@ -12,9 +12,13 @@ Gates (pattern of pinn-machining revision_eaai/build/gates.py; rules from PRESEN
   G8  no unresolved placeholder (PENDING, VERIFY, [CHECK, TODO) outside comments
   G9  every Extended Data figure that exists is cited in the article, first cited in numerical order,
       and placed in that order in the Extended Data section
-  G10 every figure file the article includes exists and has a provenance file
+  G10 every figure the article includes exists and was drawn from the current style file, script and
+      inputs: the SHA-256 hashes in its paper2/<figure>.prov.json match the files (p2_figstyle.check_prov,
+      the check p2_check_prov.py runs); a figure without a provenance file fails, except the Stage-1
+      figure fig_design
 
     python paper2/build_p2.py            # all gates
+    TECTONIC=/path/to/tectonic python paper2/build_p2.py    # when tectonic is not on the PATH
 """
 import json
 import math
@@ -27,7 +31,8 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 BS = chr(92)
-TECTONIC = os.environ.get("TECTONIC", r"C:\Users\abdulhamid batayhi\Desktop\ai-mof-cof-dynamics\tools\tectonic.exe")
+# LaTeX engine: the TECTONIC environment variable if set, else "tectonic" on the PATH
+TECTONIC = os.environ.get("TECTONIC") or "tectonic"
 FAIL = []
 
 
@@ -180,7 +185,6 @@ def bindings():
         e6c.setdefault((cells[n]["iso"], float(s), float(e), cells[n]["Da"]), []).append(r["success"])
     lo10 = [x for (i, s, e, d), v in e6c.items() if e == 0 and d <= 10 for x in v]
     lo10e = min(sum(v) / len(v) for (i, s, e, d), v in e6c.items() if e > 0 and d <= 10)
-    d31 = [x for (i, s, e, d), v in e6c.items() if e == 0 and 30 < d < 32 for x in v]
     hi = [x for (i, s, e, d), v in e6c.items() if e == 0 and d >= 100 for x in v]
     out += [("E6 all LDF at Da <= 10, exact isotherm", "chosen in all 45 replicates at every" if all(lo10) else "E6 not all"),
             ("E6 min with isotherm error", f"at least {round(lo10e * 45)} of 45 with 2"),
@@ -197,7 +201,6 @@ def bindings():
     # review round 2 (m2, m4, referee 6): bounds rounded outwards; the borderline verdict slice; boundaries near
     # the bottom of the grid
     h2b_all = load("results/p2_verdicts.json")["H2b"]
-    d55 = [s["da_disc"] for k, s in h2b_all.items() if k.startswith("sigma=0.005|eps=0.005|") and s["gap_decades"] is not None]
     near = [s["gap_decades"] for s in h2b_all.values()
             if s["gap_decades"] is not None and math.log10(s["da_disc"] / 0.1) <= 0.25]
     out.append(("boundaries near the grid bottom", f"{len(near)} of the 37 discovery boundaries lie within 0.25 decade"))
@@ -214,25 +217,22 @@ def bindings():
              f"identifiability boundary to $" + BS + f"Da " + BS + f"approx {min(e7_1):.0f}$ to {max(e7_1):.0f}"
              if all(e7_1) else "E7 ident missing"),
             ("E7 discovery at 1 % shift", f"at or below {math.floor(e7_disc * 100 + 0.5):.0f}" + BS + "," + BS + "% at every rate")]
-    # review round 2 (M1): the bias of k under a 1 % step shift, medians over estimation replicates per (sigma, shift)
-    b1, b10 = e7_bias(1.0), e7_bias(10.0)
+    # review round 2 (M1): the bias of k under a 1 % step shift at Da = 10, medians over estimation replicates
+    # per (sigma, shift); the bias at Da = 1 and 3.16 is printed in the Supplementary only (si_bindings)
+    b10 = e7_bias(10.0)
     lo10, hi10 = [x for x in b10 if x < 1], [x for x in b10 if x > 1]
     out += [("E7 bias at Da 10", f"to {min(lo10):.2f} and {min(hi10):.2f} to {max(hi10):.2f} times its true value at $"
              + BS + "Da = 10$" if f"{min(lo10):.2f}" == f"{max(lo10):.2f}" else "E7 low bias differs between noise levels")]
     e8 = load("results/p2_e8_summary.json")
     sh = {"disc": [], "select": [], "ident": []}
-    beyond, gap400, sel100 = 0, [], []
+    gap400 = []
     for key in {k.rsplit("|", 1)[0] for k in e8}:
         a, b = e8[key + "|n_t=200"], e8[key + "|n_t=400"]
         for q in ("disc", "select"):
             sh[q].append(math.log10(b["da_" + q] / a["da_" + q]))
-        if b["da_ident"] is None:
-            beyond += 1
-        else:
+        if b["da_ident"] is not None:   # the slice beyond the grid at 400 is printed in the SI (si_bindings)
             sh["ident"].append(math.log10(b["da_ident"] / a["da_ident"]))
             gap400.append(math.log10(b["da_ident"] / b["da_disc"]))
-        sel100 += [a["select_by_da"]["100.0"], b["select_by_da"]["100.0"]]
-    f1 = lambda x: f"{math.floor(x * 10 + 0.5) / 10:.1f}"
     out += [("E8 every boundary up or unchanged", "moved to higher $" + BS + "Da$ or stayed"
              if min(min(v) for v in sh.values()) >= 0 and min(min(v) for v in sh.values()) == 0
              else "E8 a boundary moved down, or none stayed"),
@@ -240,17 +240,8 @@ def bindings():
             ("E8 verdict words at 400", "discovery still failed" if all(
                 v["words"] == "discovery fails before identifiability" for k, v in e8.items()
                 if v["da_ident"] is not None) else "E8 words differ")]
-    # review round 2 (M3): E9, E6 with noise-free forcing; the pre-declared two-thirds / one-third reading
-    s9 = load("results/p2_e9_summary.json")
-    rescued = sorted({k.split("|")[0] for k, v in s9.items() if v["frac_clean"] >= 2 / 3 and v["frac_e6"] < 2 / 3})
-    hi = max(v["frac_clean"] for k, v in s9.items() if not k.split("|")[0].endswith("da31.6"))
-    # E9 is reported in the Supplementary only (si_bindings)
-    # E10: the LDF law wins at the finest sampling (3,991 times) where it lost at the grid's own 200 times
-    r10 = load("results/p2_e10_resolution.json")["rows"]
-    cells10 = sorted({k.split("|")[0] for k in r10})
-    won = [c for c in cells10 if r10[f"{c}|3991"]["best"] == "ldf" and r10[f"{c}|grid200"]["best"] != "ldf"]
-    words = {1: "one", 2: "two", 3: "three", 4: "four"}
-    e3 =load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
+    # E9 and E10 are reported in the Supplementary only (si_bindings)
+    e3 = load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
     out += [("E3 coverage", f"only about {round(e3 * 100)}{BS},{BS}%")]
     # Discussion: where real columns sit (Supplementary Table 1) and the highest discovery boundary
     _, plo, phi, chem = practical_da()
@@ -259,15 +250,13 @@ def bindings():
     top = max(s["da_disc"] for s in h2b.values() if s.get("da_disc"))
     topn = max(s["da_disc"] for k, s in h2b.items() if s.get("da_disc") and not k.startswith("sigma=0.0|"))
     out.append(("highest discovery boundary", f"(${BS}Da {BS}approx {topn:.0f}$ with noise, {top:.0f} without)"))
-    # fresh review 2026-11-10 (M1): noise-free slices where discovery never fell below 50 % but k failed
+    # fresh review 2026-11-10 (M1): the slices without a verdict where discovery never fell below 50 % (all noise-free)
     fig = load("results/p2_figdata.json")["h2b"]
     held = [k for k, s in fig.items() if h2b[k]["gap_decades"] is None and min(a / n for _, a, n in s["disc"]) >= 0.5]
-    held_k = [h2b[k]["da_ident"] for k in held if h2b[k]["da_ident"] is not None]
     out.append(("no-noise slices: discovery held",
                 f"in {len(held)}, all without noise, it never fell below 50" + BS + "," + BS + "%"
                 if all(k.startswith("sigma=0.0|") for k in held) else "held slices with noise"))
-    # (M3) success not monotone in noise at 2 % isotherm error
-    mx = lambda sg: max(max(a for _, a, n in s["disc"]) for k, s in fig.items() if k.startswith(f"sigma={sg}|eps=0.02|"))
+    # (M3) at 2 % isotherm error, weak-form best subset succeeds more often as noise grows (not monotone downward)
     meth = load("results/p2_figdata.json")["methods"]
     bsw = [max(max(a for _, a, n in d["best_subset|weak"]) for k, d in meth.items()
                if k.startswith(f"sigma={sg}|eps=0.02|") and "best_subset|weak" in d) for sg in ("0.0", "0.005", "0.02", "0.05")]
@@ -276,6 +265,7 @@ def bindings():
                 else "not monotone"))
     # (M4) 0.5 % noise and 0.5 % isotherm error: slices with a boundary and its largest value
     b55 = [s["da_disc"] for k, s in h2b.items() if k.startswith("sigma=0.005|eps=0.005|") and s["da_disc"]]
+    out.append(("0.5/0.5 boundary range", f"to about {min(b55):.1f} to {max(b55):.1f} (in the"))
     out.append(("0.5/0.5 slices with a boundary", f"in the {({3: 'three'}).get(len(b55), len(b55))} slices that kept a boundary"))
     out.append(("0.5/0.5 largest boundary", f"every discovery boundary on the grid fell to ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
     # pre-submission revision 2026-11-11: new descriptive checks, M6, S1 on the map, corrections counts
@@ -444,6 +434,17 @@ def si_bindings():
         out.append((f"E6 table row {iso} {s} {e}",
                     f"{'Langmuir' if iso == 'langmuir' else 'step'} & {pct(s * 100)}, "
                     f"{'0' if e == 0 else pct(e * 100)} & {cells_txt} " + BS + BS))
+    # E6 at Da 31.6 with an exact isotherm: the quadratic driving force everywhere, except the replicates
+    # that chose the LDF law for the Langmuir sorbent at 0.5 % noise
+    ch31 = {}
+    for key, r in e6.items():
+        n, s, e, _ = key.split("|")
+        if float(e) == 0 and 30 < cells[n]["Da"] < 32:
+            ch31.setdefault((cells[n]["iso"], s), []).append(r["best"])
+    lang31 = ch31.pop(("langmuir", "0.005"))
+    out.append(("E6 at Da 31.6, exact isotherm", f"(except {lang31.count('ldf')} of {len(lang31)} replicates for the"
+                if set(lang31) <= {"ldf", "qdf"} and all(set(v) == {"qdf"} for v in ch31.values())
+                else "E6 choices at Da 31.6 differ"))
     cov = load("results/p2_e3_coverage.json")["per_model"]["O1"]
     out.append(("E3 O1 identifiable and covering", f"On O1, {_thou(cov['identifiable'])} of 51" + BS + ",840 rows met the "
                 f"criterion, but only {_thou(cov['covers'])} intervals"))
@@ -465,6 +466,13 @@ def si_bindings():
                     f"{'Langmuir' if iso == 'langmuir' else 'step'} & {float(sg[6:]) * 100:g}{BS},{BS}% & {nt[4:]} & "
                     f"{mn.get(v['best_method'], v['best_method'])} & {f8(v['da_disc'])} & {f8(v['da_select'])} & "
                     f"{f8(v['da_ident'])} & {g} " + BS + BS))
+    # E8 prose: the one slice whose identifiability boundary left the grid at 400 samples, and no LDF
+    # choice at Da 100 at either sampling rate
+    beyond = sorted(k.rsplit("|", 1)[0] for k, v in e8.items() if k.endswith("n_t=400") and v["da_ident"] is None)
+    out.append(("E8 identifiability beyond the grid at 400", "(for the step isotherm at 0.5" + BS + "," + BS
+                + "% noise, beyond the grid)" if beyond == ["step|sigma=0.005"] else "E8 slices beyond the grid differ"))
+    out.append(("E8 no LDF choice at Da 100", "but in none at $" + BS + "Da = 100$ at either rate"
+                if not any(v["select_by_da"]["100.0"] for v in e8.values()) else "E8 LDF chosen at Da 100"))
     out += [(f"E9 table row {i}", r) for i, r in enumerate(e9_rows())]
     out += [(f"E10 table row {i}", r) for i, r in enumerate(e10_rows())]
     rng, _, _, _ = practical_da()
@@ -477,9 +485,21 @@ def si_bindings():
     out.append(("E10 even 200 at Langmuir 1000", "the LDF law, "
                 + f"{-r10['rows']['langmuir_L1_pe1_da1e+03|200']['dll']['qdf']:.0f} log-likelihood units ahead of the quadratic"
                 if r10["rows"]["langmuir_L1_pe1_da1e+03|200"]["best"] == "ldf" else "E10 even 200 not LDF"))
+    # E10, the reading fixed in advance: the cells where the LDF law wins at 3,991 times but not at the grid's 200
+    won = [c for c in sorted({k.split("|")[0] for k in r10["rows"]})
+           if r10["rows"][f"{c}|3991"]["best"] == "ldf" and r10["rows"][f"{c}|grid200"]["best"] != "ldf"]
+    n_won = {1: "one", 2: "two", 3: "three", 4: "four"}.get(len(won), len(won))
+    out.append(("E10 cells where sampling explains the misfit", f"In these {n_won} cells the misfit is a matter of sampling"))
     s9 = load("results/p2_e9_summary.json")
     out.append(("E9 no errors", "No row had an" + "\n" + "error. The table gives the fraction with noise-free"
                 if sum(v["errors"] for v in s9.values()) == 0 and sum(v["n"] for v in s9.values()) == 720 else "E9 errors"))
+    # E9, the reading fixed in advance: an LDF fraction of at least two thirds with noise-free forcing (where E6
+    # had less) puts the failure down to noise in the forcing; at most one third does not
+    rescued = sorted({k.split("|")[0] for k, v in s9.items() if v["frac_clean"] >= 2 / 3 and v["frac_e6"] < 2 / 3})
+    rest = max(v["frac_clean"] for k, v in s9.items() if k.split("|")[0] not in rescued)
+    out.append(("E9 noise explains only Langmuir at Da 31.6",
+                "Noise in the forcing explains the failure only for the Langmuir sorbent at $" + BS + "Da = 31.6$"
+                if rescued == ["langmuir_L1_pe1_da31.6"] and rest <= 1 / 3 else "E9 reading differs"))
     e7r, e7err = e7_rows()
     out += [(f"E7 table row {i}", r) for i, r in enumerate(e7r)]
     out.append(("E7 error rows", f"these {_thou(e7err)} rows raise an error"))
@@ -522,7 +542,11 @@ def main():
     if r.returncode or "missing: []" not in r.stdout:
         fail("G1", r.stdout + r.stderr)
     for doc in ("article.tex", "supplementary_main.tex"):
-        r = subprocess.run([TECTONIC, "-X", "compile", "--keep-logs", doc], capture_output=True, text=True)
+        try:
+            r = subprocess.run([TECTONIC, "-X", "compile", "--keep-logs", doc], capture_output=True, text=True)
+        except FileNotFoundError:
+            fail("G2", f"tectonic not found ({TECTONIC!r}): put it on the PATH or set TECTONIC to its path")
+            break
         log = r.stdout + r.stderr
         if r.returncode or re.search(r"^error|undefined", log, re.M | re.I):
             fail("G2", f"{doc}: " + "; ".join(l for l in log.splitlines() if re.search("error|undefined", l, re.I))[:400])
@@ -604,12 +628,27 @@ def main():
     placed = [int(m) for m in re.findall(re.escape(BS) + r"includegraphics(?:\[[^]]*\])?\{fig_ed(\d+)", ed_part)]
     if placed != list(range(1, len(placed) + 1)):
         fail("G9", f"Extended Data section places fig_ed files in the order {placed}")
-    for inc in re.findall(re.escape(BS) + r"includegraphics(?:\[[^]]*\])?\{([^}]*)\}", body):
-        stem = os.path.splitext(inc)[0]
-        if not os.path.exists(inc):
-            fail("G10", f"missing figure {inc}")
-        elif not os.path.exists(stem + ".prov.json"):
-            fail("G10", f"{inc} has no provenance file")
+    # G10: every figure the article includes exists and was drawn from the current style file, script and
+    # inputs. check_prov (the check p2_check_prov.py runs) recomputes the SHA-256 hashes recorded in
+    # paper2/<figure>.prov.json; the paths in a provenance file are relative to the repository root.
+    if ROOT not in sys.path:
+        sys.path.append(ROOT)
+    from p2_figstyle import check_prov
+    os.chdir(ROOT)
+    try:
+        for inc in re.findall(re.escape(BS) + r"includegraphics(?:\[[^]]*\])?\{([^}]*)\}", body):
+            stem = "paper2/" + os.path.splitext(inc)[0]
+            files = [inc] if os.path.splitext(inc)[1] else [inc + x for x in (".pdf", ".png", ".jpg")]
+            if not any(os.path.exists("paper2/" + f) for f in files):
+                fail("G10", f"missing figure {inc}")
+            elif os.path.exists(stem + ".prov.json"):
+                bad = check_prov(stem + ".prov.json")
+                if bad:
+                    fail("G10", f"{inc} does not match its provenance file (redraw it): " + "; ".join(bad))
+            elif stem != "paper2/fig_design":   # Stage-1 figure (fig_p2_design.py writes no provenance file)
+                fail("G10", f"{inc} has no provenance file {stem}.prov.json")
+    finally:
+        os.chdir(HERE)
     print(f"main text (Introduction + Results + Discussion): {main_words} words; "
           f"display items {disp}; em dashes {nd}; abstract {len(abst.split())} words")
     if FAIL:

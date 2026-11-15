@@ -31,9 +31,7 @@ import os
 
 import numpy as np
 
-from fetch_real_mof_data import get_mof303_physics
 from isotherm import q_star_np
-from solver_fd import AdsorptionPhysicsConfig
 
 DATA = "data/p2"
 N_PROBE = 20

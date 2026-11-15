@@ -7,8 +7,7 @@ a, ground truth (with the two isotherms drawn from the study's own isotherm func
 b, what H2b compares, with ILLUSTRATIVE curves (labelled so).
 
 Every text in the canvas is registered with the box it must stay inside, and check() fails if a
-text leaves its box or any two texts anywhere in the figure overlap (pattern of pinn-machining
-revision_eaai/figures/fig_workflow.py). The facts in the boxes are the design's (PREREG_P2, the
+text leaves its box or any two texts anywhere in the figure overlap. The facts in the boxes are the design's (PREREG_P2, the
 manifest and the generator); none is a result.
 
     python fig_p2_overview.py      -> paper2/fig_p2_overview.{pdf,png,prov.json}

@@ -1,4 +1,5 @@
-"""Figures 2-4 (fig_p2_results.py) and their data helper (p2_figdata.py) on SYNTHETIC inputs.
+"""Figures 3 and 4 and Extended Data Fig. 4 (fig_p2_results.py) and their data helper (p2_figdata.py)
+on SYNTHETIC inputs.
 
 Nothing here is a result: every number is made up inside this file, and nothing is written
 outside pytest's temporary directory. Two routes:
@@ -149,6 +150,7 @@ def _check(paths):
         assert head.startswith(b"%PDF") if p.endswith(".pdf") else head.startswith(b"\x89PNG"), p
 
 
+@pytest.mark.slow   # 66 s in logs/pytest_p2.log
 def test_figures_from_handbuilt_verdicts(tmp_path):
     V = synthetic_verdicts()
     FD = synthetic_figdata(V)

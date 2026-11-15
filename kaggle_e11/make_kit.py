@@ -1,5 +1,5 @@
 """Build the E11 Kaggle kit (code from the COMMITTED tree at HEAD, the 18 ground-truth fields from data/p2 with a
-SHA-256 manifest) and the nine kernels. Hub rule: one private dataset slug per test; kit from git, never the
+SHA-256 manifest) and the nine kernels. Rules: one private dataset slug per test; kit from git, never the
 working directory; loaders accept the zip or the extracted tree (marker KIT_COMMIT).
 
     python kaggle_e11/make_kit.py     -> kaggle_e11/kit/ (dataset dir), kaggle_e11/k<N>/

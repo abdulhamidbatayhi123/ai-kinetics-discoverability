@@ -6,8 +6,8 @@ uptake q at the feed, and the feed flow from which t_stoich = W q / n_feed is co
 does not say whether its volumetric flow is at column conditions or at 273.15 K and 1 atm, both are
 used and the range is reported. Values read off figures are marked in the CSV.
 
-Sources were compiled by the Claude Science literature task T3 (AgentHub, 2026-11-10) and every input
-used here was checked by the author against the papers (Crossref records checked 2026-11-10).
+The sources come from a literature search of 2026-11-10, and every input used here was checked by the
+author against the papers (Crossref records checked 2026-11-10).
 
     python p2_practical_da.py      ->  results/p2_practical_da.json
 """

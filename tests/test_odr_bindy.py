@@ -93,6 +93,7 @@ def run_lorenz_example(seed=12, write=True):
 import pytest as _pytest
 
 
+@_pytest.mark.slow   # 651 s in logs/pytest_p2.log
 @_pytest.mark.xfail(strict=True, reason=(
     "2026-09-28: support reproduced exactly (7 terms, none extra) but relative "
     "coefficient error 5.0e-3 vs ~2.2e-3 read from the paper's Fig. 8 heatmap (a "

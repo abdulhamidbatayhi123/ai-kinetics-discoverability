@@ -101,6 +101,8 @@ sources = set(re.findall(r"(results/[A-Za-z0-9_.\-]+\.json|p2_generate\.log|test
                          r"|solver_fd\.py|fetch_real_mof_data\.py|p2_generate\.py|p2_observe\.py)", tex))
 src_text = prereg
 for s in sources:
+    if s.endswith(".log"):
+        s = "logs/" + s                                  # run logs are kept in logs/
     if os.path.exists(s):
         src_text += "\n" + open(s, encoding="utf-8", errors="replace").read()
 # Numbers traced by hand: value as printed -> where it comes from (rounded or derived).
@@ -109,8 +111,8 @@ TRACED = {
     "2.4": "tests/test_p2.py mass-balance test comment 'measured 0.024'",
     "7.5": "tests/test_p2.py success-metric test: -0.0215 against 0.02 accepted",
     "3.84": "p2/identifiability.py: 2*(max loglik - loglik) <= 3.84",
-    "414": "p2_generate.log: slowest main-grid solve 414 s",
-    "2.6": "requirements_p2_venv.txt: pysr==2.6.1 (software version, printed as 2.6.1)",
+    "414": "logs/p2_generate.log: slowest main-grid solve 414 s",
+    "2.6": "requirements_p2.txt: pysr==2.6.1 (software version, printed as 2.6.1)",
     "0.054": "results/p2_operating_characteristics.json h2b n20 gap 0: before 0.024 + outlives 0.03",
     "0.855": "results/p2_operating_characteristics.json h2c_refined n45 log10 2: 0.526 + 0.329",
     "0.997": "results/p2_operating_characteristics.json h2c_refined n45 0.40: 0.98 + 0.017; h2a n45 >= 0.9967",

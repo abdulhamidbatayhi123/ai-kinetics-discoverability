@@ -3,9 +3,9 @@
 # training loop that keeps the best parameters seen (PREREG_P2 A4). Waits for the A6 rerun to
 # finish (one job at a time). The as-run file is kept as results/p2_extra_m1_asrun.json; the
 # error rows are removed from results/p2_extra_m1.json and the driver recomputes only those.
-# Log: p2_rerun_m1_B88.log.
+# Log: logs/p2_rerun_m1_B88.log.
 cd "$(dirname "$0")" || exit 1
-PY="${P2_PY:-C:/Users/abdulhamid batayhi/Desktop/ai-mof-cof-dynamics/.venv/Scripts/python.exe}"
+PY="${P2_PY:-python}"
 export PYTHONIOENCODING=utf-8 OMP_NUM_THREADS=2
 until grep -qE "A6_RERUN_DONE|FAIL" p2_rerun_A6.log; do sleep 300; done
 grep -q "A6_RERUN_DONE" p2_rerun_A6.log || { echo "[$(date '+%F %T')] FAIL: the A6 rerun did not finish"; exit 1; }

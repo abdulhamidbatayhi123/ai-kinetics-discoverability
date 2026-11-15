@@ -1,9 +1,9 @@
 """B90 Kaggle queue: push any kernel not yet on Kaggle when a CPU slot is free (limit 5), download each
 kernel's output once it is COMPLETE, stop when all six outputs are local. Every poll result other than
-an explicit 'not found' counts as unknown (retry later), never as 'absent' (PAPER_WORKFLOW_LESSONS: a 429
-storm once made queues resubmit finished kernels). Pushes are recorded in registry.txt and never repeated.
+an explicit 'not found' counts as unknown (retry later), never as 'absent' (a storm of HTTP 429 replies
+once made queues resubmit finished kernels). Pushes are recorded in registry.txt and never repeated.
 
-    python kaggle_b90/queue.py
+    python kaggle_b90/queue.py        # the Kaggle CLI is "kaggle" on the PATH, or the path in KAGGLE_EXE
 """
 import os
 import re
@@ -11,7 +11,7 @@ import subprocess
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KAGGLE = r"C:\Users\abdulhamid batayhi\AppData\Local\Programs\Python\Python313\Scripts\kaggle.exe"
+KAGGLE = os.environ.get("KAGGLE_EXE", "kaggle")
 SLUG = "abdulhamidbatayhi/p2-b90-o1ident-{}"
 REG = os.path.join(HERE, "registry.txt")
 PARTS = range(6)

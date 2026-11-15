@@ -481,8 +481,8 @@ confirmatory result: no discovery method has seen it. (The pre-registration stat
 per solve; the log shows the range above. The figure is descriptive, no part of the design
 depends on it, and the erratum is recorded in the project's corrections ledger, entry
 B79.)
-% p2_generate.log: "done: 81 cells; without 95 % breakthrough: none"; per-solve times
-% 1-414 s, median 4 s over the 81 main-grid lines (18 above 7 s); RETRACTIONS.md B79.
+% logs/p2_generate.log: "done: 81 cells; without 95 % breakthrough: none"; per-solve times
+% 1-414 s, median 4 s over the 81 main-grid lines (18 above 7 s); RETRACTIONS_P2.md B79.
 
 \paragraph{Sample and replicates.} The unit of analysis is one replicate: one
 independent ($\sigma$, $\varepsilon$) realisation of the observation of one cell. There
@@ -539,7 +539,7 @@ those of its inclusion gate (\S\ref{sec:compet}), seeded by the replicate index.
 setting is in the public code, and the versions of all packages are pinned.
 % p2_observe.py (hashlib.sha256 of the keys -> default_rng); p2/features.py derivative(window=21,
 % order=3); p2/methods.py stlsq(threshold=0.05, alpha=1e-6), ensemble(n_models=100, frac=0.6,
-% inclusion=0.6); p2_grid_extra.py m7: pysr_sr(F, y, seed=rep); requirements_p2_venv.txt.
+% inclusion=0.6); p2_grid_extra.py m7: pysr_sr(F, y, seed=rep); requirements_p2.txt.
 
 \subsection{Candidate libraries}
 \label{sec:libs}
@@ -1180,7 +1180,7 @@ withheld one is named;
 \item removes a crash: the best-method choice no longer runs a one-draw bootstrap, which
 failed when that draw had no crossing.
 \end{enumerate}
-% PREREG_P2 s.9 (amendments A1, A2); RETRACTIONS.md B79, B81, B82.
+% PREREG_P2 s.9 (amendments A1, A2); RETRACTIONS_P2.md B79, B81, B82.
 
 \subsection{Design limitations}
 \label{sec:limits}
@@ -1269,8 +1269,8 @@ The ground-truth solves have since been generated, at 1--414\,s each (median 4\,
 reached 95\,\% breakthrough within their horizon, some after extension to
 $8\,t_{\mathrm{stoich}}$. Generating ground truth runs no discovery method and was
 permitted before the freeze.
-% p2_generate.log: "done: 81 cells; without 95 % breakthrough: none"; horizon 8 entries;
-% per-solve times 1-414 s, median 4 s (RETRACTIONS.md B79).
+% logs/p2_generate.log: "done: 81 cells; without 95 % breakthrough: none"; horizon 8 entries;
+% per-solve times 1-414 s, median 4 s (RETRACTIONS_P2.md B79).
 
 \paragraph{P2, M1 timing pilot.}
 \emph{Measured} on one cell at $\Da \approx 14$: the differentiable column matches the

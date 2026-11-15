@@ -2,8 +2,8 @@
 % Paper 2, full article (pre-registered study), NCS Analysis format (same limits as Article):
 % main text <= 3,500 words, abstract <= 150 words, <= 6 display items, ~50 references
 % (nature.com/natcomputsci and /natchemeng content types, read live 2026-10-20).
-% Status: METHODS drafted 2026-11-01 while the A6 rerun ran; Introduction, Results and
-% Discussion are written only after the corrected verdicts exist. No result appears below.
+% History: Methods drafted 2026-11-01 while the A6 rerun ran; Introduction, Results and
+% Discussion written only after the corrected verdicts existed.
 % Source of truth: PREREG_P2_discoverability.md (frozen 7dcc2fe; amendments A1-A6 in its s.9).
 % Number provenance: every number is quoted from the prereg, a results/test/log file or the
 % code, named in a comment beside it. Writing rules: plain prose, at most five em dashes in
@@ -34,10 +34,10 @@
 \newcommand{\qsm}{q^{*}_{\mathrm{meas}}}
 \newcommand{\verdict}[1]{``\textit{#1}''}
 
-% Title chosen after the verdicts (ARTICLE_PLAN.md: <= 15 words, nothing the results do not
-% support). Working title was "When can AI discover adsorption kinetics?". Shortened to 10 words
-% after review round 2 (m10); previous: "Discovering adsorption rate laws from column data fails long
-% before the rate constant is lost".
+% Title chosen after the verdicts (<= 15 words, nothing the results do not support). Working
+% title was "When can AI discover adsorption kinetics?". Shortened after review round 2 (m10);
+% previous: "Discovering adsorption rate laws from column data fails long before the rate constant
+% is lost".
 \title{Equation discovery fails before rate constants become unidentifiable in simulated adsorption columns}
 \author{Abdulhamid Batayhi\\[4pt]
 \small Department of Mechatronics Engineering, Faculty of Mechanical Engineering,\\
@@ -249,8 +249,8 @@ The neural-network pipeline of the closest prior work, run as a declared demonst
 replicate per level, recovered the law in one of its nine fits ($\Da = 3.2$). Implicit sparse
 regression without any isotherm (SINDy-PI), on an isothermal control, recovered it in none of
 2{,}160 fits, even without noise, each keeping one term too many.
-% results/p2_extra_m6.json (2160 rows, success 0; every support has 6 terms; p2_noise_support-style
-% count in REVISION_PLAN_2026-11-11.md); results/p2_extra_m9.json (sigma = eps = 0, Da 1000: 1.00 per
+% results/p2_extra_m6.json (2160 rows, success 0; every support has 6 terms: results/p2_m6_summary.json
+% support_size_counts, p2_m6_summary.py); results/p2_extra_m9.json (sigma = eps = 0, Da 1000: 1.00 per
 % cell in four cells, 0.67 pooled over Pe).
 % results/p2_extra_m9.json (estimation replicates): sigma = eps = 0, Da 1000: 0.67; max elsewhere
 % 0.17 (sigma 0.5 %, eps 0, Da 1000); 0.00 at every Da <= 31.6.
@@ -297,7 +297,7 @@ identifiability boundaries at $kh = 0.86$ to 20 (post hoc).
 % its k within [k/2, 2k]: equal counts at Da <= 31.6 (22 of 32 at Da >= 100). EXPLORATORY_P2 E6.
 % results/p2_figdata.json methods (O1 slices with a crossing: M4 weak 96-60 = 36, M2 weak 96-88 = 8,
 % M3 weak 96-89 = 7, strong forms 0; M7 2 of its 8 subgrid slices); M7 vs M4 weak per Da:
-% fig_p2_methods panels a, b and the per-slice listing in paper2/WRITEUP_NOTES.md;
+% fig_p2_methods panels a, b and paper2/WRITEUP_NOTES.md "Discovery findings beyond the verdicts";
 % results/p2_extra_m1.json (1 of 9, Da 3.16).
 
 \subsection*{A second system: discovery failed throughout, estimation did not}
@@ -400,7 +400,7 @@ discovery boundaries at 200 observations per run ($\Da \approx 7$ with noise, 13
 law must be chosen or assumed for physisorbent beds; with 2,000 and 0.5\,\% noise, discovery
 reached the lower end of their range.
 % source: results/p2_practical_da.json (p2_practical_da.py from data/practical_da_sources.csv; every
-% input checked against the papers 2026-11-10; Claude Science task T3); highest Da*_disc:
+% input checked against the papers 2026-11-10; sources from an independent literature check); highest Da*_disc:
 % results/p2_verdicts.json H2b (12.8). The earlier estimate (WRITEUP_NOTES "Practical Da",
 % 2026-11-05) omitted Dantas runs 3, 4, 7, 8, 11, 12 and claimed coated layers lower, which
 % Lassitter et al. Sec. 3.6 contradicts.
@@ -614,7 +614,7 @@ breakthrough, plus 9 isothermal solves for a control described below. The manife
 records every parameter is public.
 % data/p2/manifest.json (t_stoich_s 7200.4 and 31050.4; k_LDF 1.3888e-05..0.13888 and
 % 3.2206e-06..0.032206); p2_generate.py N_Z = 400, N_SNAP = 400, 95 % breakthrough rule;
-% p2_generate.log "done: 81 cells; without 95 % breakthrough: none".
+% logs/p2_generate.log "done: 81 cells; without 95 % breakthrough: none".
 
 \subsection*{Observation models, noise and isotherm error}
 Every method and every identifiability calculation read the data through one function,
@@ -858,12 +858,12 @@ were computed from 1 to 4 November. After the last correction, the O1 identifiab
 recomputed on 8 November on cloud CPU sessions (Kaggle) with the same code, and a random sample
 of rows recomputed locally agreed to a relative $10^{-6}$; the exploratory model-selection and
 sampling analyses ran the same way. Package versions are pinned in the repository.
-% p2_grid_chain.log (start 2026-10-12 17:59:58, P2_GRID_CHAIN_DONE 2026-11-01 03:07:21);
-% p2_rerun_A6.log (A6_RERUN_DONE 2026-11-04 10:28:06); p2_rerun_m1_B88.log (2026-11-04 17:16:30);
-% kaggle_b90/registry.txt, p2_b90_merge.py (24 of 24 sampled rows match), p2_rerun_B90.log;
+% p2_grid_chain.log.gz (start 2026-10-12 17:59:58, P2_GRID_CHAIN_DONE 2026-11-01 03:07:21);
+% p2_rerun_A6.log.gz (A6_RERUN_DONE 2026-11-04 10:28:06); logs/p2_rerun_m1_B88.log (2026-11-04 17:16:30);
+% kaggle_b90/registry.txt, p2_b90_merge.py (24 of 24 sampled rows match), logs/p2_rerun_B90.log;
 % kaggle_e6/, p2_e6_merge.py (6 of 6); kaggle_e8/, p2_e8_merge.py (4 of 4; 8-9 November);
 % COMMIT_MAP.tsv (old -> new commit IDs);
-% requirements_p2_venv.txt.
+% requirements_p2.txt.
 
 \subsection*{Use of AI tools}
 During the preparation of this work the author used a generative AI assistant (Claude, Anthropic,

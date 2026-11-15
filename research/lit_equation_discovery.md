@@ -1,6 +1,6 @@
 # Literature: data-driven equation discovery for adsorption / breakthrough, and identifiability
 
-Compiled 2026-09-25 by a literature-research agent. Rule 8: a source counts only if FETCHED (abstract or
+Compiled 2026-09-25. Rule: a source counts only if FETCHED (abstract or
 full text actually opened). SEEN-ONLY entries are leads, not evidence. Authors are written exactly as the
 fetched record shows them (initials kept as initials).
 

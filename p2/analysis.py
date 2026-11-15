@@ -5,13 +5,12 @@ fit in log10(Da) (maximum likelihood on the replicate-level outcomes), with a
 percentile bootstrap CI that resamples replicates WITHIN each Da level (the design is
 fixed; only the stochastic replicates are resampled). Returns (None, None, None) when
 there is no crossing inside the tested range -- all successes or all failures, or a
-fitted slope with the wrong sign -- because extrapolating a boundary off the grid is
-exactly the unsupported number rule 10 forbids.
+fitted slope with the wrong sign -- because a boundary extrapolated off the grid is a
+number the data do not support.
 """
 from collections import defaultdict
 
 import numpy as np
-from scipy.optimize import minimize
 
 
 def _fit(x, y, rising=False):
@@ -160,12 +159,18 @@ def disc_vs_ident(da_disc, da_ident, mde_decades):
 
 
 def best_method_boundary(by_method, n_boot=2000, seed=0):
-    """H2a/H2b's 'best method' (PREREG_P2 §4.3): the method with the largest Da*_disc,
-    with an interval that CARRIES the selection: each bootstrap draw resamples replicate
-    indices per Da level ONCE and applies them to every method (replicate r is the same
-    observation draw for all methods), recomputes every method's boundary and takes the
+    """Superseded, and not used for any reported result: p2_analyze.py chooses the best
+    method with select_best on the selection replicates 0-14 (amendment A1) and estimates
+    its boundary on the estimation replicates. Kept for the tests (tests/test_p2.py).
+
+    H2a/H2b's 'best method' as first written (PREREG_P2 §4.3): the method with the largest
+    Da*_disc, with an interval that CARRIES the selection: each bootstrap draw resamples
+    replicate indices per Da level ONCE and applies them to every method (replicate r is the
+    same observation draw for all methods), recomputes every method's boundary and takes the
     largest. Returns (best_method, estimate, lo, hi), or (None, None, None, None) if no
-    method has a crossing on the grid."""
+    method has a crossing on the grid. The point estimates below pass n_boot=0 or 1, which
+    Python evaluates to 1: each makes one bootstrap draw that is never used, and the
+    estimate does not depend on it."""
     pts = {m: boundary(s, n_boot=0 or 1, seed=seed)[0] for m, s in by_method.items()}
     pts = {m: v for m, v in pts.items() if v is not None}
     if not pts:

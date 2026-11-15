@@ -15,8 +15,8 @@ computed from a macropore-diffusion correlation, or measured independently by fr
 and converted with the factor 15 of Glueckauf. The values are therefore order-of-magnitude
 estimates.
 % source: data/practical_da_sources.csv (every input with its location in the paper);
-% p2_practical_da.py -> results/p2_practical_da.json. Sources compiled by the Claude Science
-% literature task T3 (AgentHub, 2026-11-10); every input checked by the author against the papers
+% p2_practical_da.py -> results/p2_practical_da.json. Sources compiled in an independent
+% literature check (2026-11-10); every input checked by the author against the papers
 % (Lassitter author PDF Sec. 3.6 and Figs. 4, 10; Dantas SciELO PDF Tables 1, 2, 5, 7 and p. 534;
 % Krishnamurthy and Stampi-Bombelli Europe PMC full text, Tables 2, 6 and 6, 8); Crossref 2026-11-10.
 
@@ -416,7 +416,7 @@ both boundaries existed, by at least 1.25 decades. The LDF law was chosen in eve
 $\Da = 31.6$ at 0.5\,\% noise with 400 samples, but in none at $\Da = 100$ at either rate, so
 the time resolution explains the failure of the choice at $\Da = 31.6$ but not above it.
 % source: results/p2_e8_summary.json, results/p2_e8_sampling.json (kaggle_e8/, p2_e8_merge.py,
-% p2_e8_merge.log: 4 of 4 sampled rows match); p2_e8_sampling.py; EXPLORATORY_P2 E8. A crossing
+% logs/p2_e8_merge.log: 4 of 4 sampled rows match); p2_e8_sampling.py; EXPLORATORY_P2 E8. A crossing
 % between two levels with all-to-none success (e.g. 56.6 between 31.6 and 100) is interval-censored.
 
 \subsection*{E9: noise in the forcing of the choice among laws (post hoc)}
@@ -781,8 +781,8 @@ test and its fit exceeded the declared cost gate on this machine (M8, below).
 % source: p2/run_o1.py choose_support (WEAK_SUPPORTS[1] when no held-out probe, WEAK_SUPPORTS[0] when
 % none admissible); p2/methods.py best_subset (floor 2e-3 x std(y)); p2/eiv.py eiv_best_subset (mean SD);
 % p2_grid_extra.py:112 (maxfun = maxiter + 10); p2_grid_o23.py:80-81, 123-124 (true field range);
-% p2_analyze.py positive control (Pe pooled); PREREG_P2 s.3, s.4.3, s.5, A1.5, A4; methods review
-% 2026-11-11 (paper2/REVISION_PLAN_2026-11-11.md, A).
+% p2_analyze.py positive control (Pe pooled); PREREG_P2 s.3, s.4.3, s.5, A1.5, A4; independent
+% review of the Methods against the code and PREREG_P2, 2026-11-11.
 
 \subsection*{Observation models}
 Every method and every profile likelihood read data only through one function. O1 gives
@@ -1169,5 +1169,5 @@ leaves an uncapped solve unchanged.
 % tests/test_solve_cap.py (A5).
 % NOTE: the A5 and A6 tests were written during and after the grid, not before the freeze.
 % Test suite re-run after B90 on 2026-11-09 (python -m pytest tests -v): 91 passed, 2 xfailed (the
-% documented M8 known-answer failure and the ODR-BINDy coefficient tolerance), 4,586 s; log pytest_p2.log.
+% documented M8 known-answer failure and the ODR-BINDy coefficient tolerance), 4,586 s; log logs/pytest_p2.log.
 

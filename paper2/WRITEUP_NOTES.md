@@ -20,7 +20,7 @@ pre-registered rule, estimand or verdict.
 ## Provenance
 
 - B85: the O2/O3 driver verifies the freeze but writes no `freeze_commit`; the chain log is the
-  record and is committed at the end of the grid.
+  record and is committed at the end of the grid (`p2_grid_chain.log.gz`).
 
 ## E3 first pass (2026-10-29, O3 incomplete at 197/216)
 
@@ -154,18 +154,10 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
   failed torch.linalg.lstsq with a bare except, prints 'lstsq failed', then returns an unset local
   'coef' (UnboundLocalError). Counted as a failure (A2). Not our code; report the library version.
 
-## Journal research (2026-11-05, live; agent report)
-- Primary: Nature Computational Science (IF 20.3 2025; Article format matches; desk decision median
-  13 d; Crossref-measured received->accepted median 276 d, IQR 228-352; free on subscription route).
-- Fallback 1: AIChE Journal (Crossref median 87 d; free closed access, Wiley deal also funds OA; JCR Q2
-  per TUBITAK list, Scopus Q1 unverified). Fallback 2: Computers & Chemical Engineering (closest
-  topic: ~10 SINDy/SR/KAN/identifiability papers 2025-26; free subscription route; JCR Q2 third-party).
-- Nature Chemical Engineering: Crossref median 356 d (near the 1-year limit); Communications
-  Chemistry/Engineering excluded (fully OA; Springer Nature TUBITAK quota exhausted 2026).
-- Digital Discovery: JCR Q2 per EKUAL; Paper 1 already going there.
-- Open: SJR (Scopus) quartiles blocked by Cloudflare; check with library access if needed.
-
-## Practical Da (literature agent, 2026-11-05; numbers partly read from figures, +-30-50 %)
+## Practical Da (first estimate, 2026-11-05; numbers partly read from figures, +-30-50 %)
+Superseded by results/p2_practical_da.json (p2_practical_da.py, every input checked against the
+papers on 2026-11-10; Supplementary Table 1). Kept as the record of the first estimate; its
+coated-layer remark is contradicted by Lassitter et al. Sec. 3.6 and is not used.
 - Lassitter et al. 2024, Chem. Eng. Sci. 285, 119430 (doi:10.1016/j.ces.2023.119430): MOF-303/water;
   frequency-response D/r^2 ~ 4e-4 1/s at the step (~12 % RH) to ~1.4e-2 at 30-40 % RH (figure);
   k = 15 D/r^2 = 6e-3 to 0.21 1/s; packed bed 3.11 g in a 1.5 in tube, ~32 % RH; t_stoich ~ 1.5-1.8e4 s
@@ -175,4 +167,5 @@ stated reason it is not a deviation. Source comments marked `% DIFF:` in paper2/
   k reported 0.065-0.226 1/s; t_stoich computed 2.4e3-2.4e4 s -> Da ~ 200 to 5,400.
 - Coated layers (Lassitter, 0.21 mm coating): Da ~ 100 or lower (macropore-limited; rough).
 - Not found below Da ~ 10 for any real system. Abu-El-Maaty 2024 is Energy Convers. Manag. X 24,
-  100694 (doi:10.1016/j.ecmx.2024.100694) -- the bib entry abuelmaaty2024 must be checked against this.
+  100694 (doi:10.1016/j.ecmx.2024.100694); resolved: the entry abuelmaaty2024 in paper2/bib_p2.tex
+  gives these details.

@@ -3,7 +3,7 @@ most MAX_MINE E8 kernels run at once; a push Kaggle refuses is retried at the ne
 recorded in registry.txt and never repeated. Only the part file and the log are downloaded
 (--file-pattern). Poll results other than an explicit 'not found' count as unknown, never absent.
 
-    python kaggle_e8/queue.py
+    python kaggle_e8/queue.py        # the Kaggle CLI is "kaggle" on the PATH, or the path in KAGGLE_EXE
 """
 import os
 import re
@@ -11,7 +11,7 @@ import subprocess
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KAGGLE = r"C:\Users\abdulhamid batayhi\AppData\Local\Programs\Python\Python313\Scripts\kaggle.exe"
+KAGGLE = os.environ.get("KAGGLE_EXE", "kaggle")
 SLUG = "abdulhamidbatayhi/p2-e8-sampling-{}"
 REG = os.path.join(HERE, "registry.txt")
 PARTS = range(5)

@@ -3,8 +3,8 @@
 REFUSES TO RUN until the pre-registration is frozen: git history must contain a commit
 whose subject starts "FREEZE PREREG_P2", and PREREG_P2_discoverability.md must be
 unchanged since that commit (an unfrozen edit after the freeze is an amendment and
-must be committed as one). A gate that can be bypassed is not a gate (rule 6), so
-there is no --force.
+must be committed as one). A gate that can be bypassed is not a gate, so there is no
+--force.
 
 For every ground-truth cell x sigma x eps x replicate x solver x form, records
 success (primary), k accuracy (secondary) and the selected support. Resumable:

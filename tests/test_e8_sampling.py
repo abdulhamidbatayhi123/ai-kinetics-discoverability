@@ -1,6 +1,17 @@
 """E8: the 200-sample observation is the grid's own (p2_observe.observe), and 400 samples keep the
-probes and the noise SD rule."""
+probes and the noise SD rule. Both tests read ground-truth fields (data/p2/*.npz), which are not
+tracked; they are skipped when the fields are absent (python p2_generate.py writes them)."""
+from pathlib import Path
+
 import numpy as np
+import pytest
+
+FIELDS = Path(__file__).resolve().parents[1] / "data" / "p2"
+CELLS = ("step_L1_pe1_da31.6", "langmuir_L1_pe1_da1")
+MISSING = [f"data/p2/{c}.npz" for c in CELLS if not (FIELDS / f"{c}.npz").is_file()]
+pytestmark = pytest.mark.skipif(
+    bool(MISSING), reason=f"needs ground-truth fields that are not tracked ({', '.join(MISSING)}); "
+                          "python p2_generate.py regenerates them from data/p2/manifest.json")
 
 
 def test_nt200_is_observe():

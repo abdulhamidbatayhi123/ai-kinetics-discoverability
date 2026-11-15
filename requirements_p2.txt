@@ -1,0 +1,39 @@
+# Python packages this repository imports, pinned to the versions used for the paper.
+# Python 3.12.10 on Windows (platform win32 in logs/pytest_p2.log).
+#
+# The PyTorch CPU wheel (torch==...+cpu) is on the PyTorch index, so install with
+#   pip install -r requirements_p2.txt --extra-index-url https://download.pytorch.org/whl/cpu
+#
+# Only the packages the code imports are listed, plus three it needs without importing them:
+# XlsxWriter (the Excel writer of pandas) and PyYAML and tqdm (imported by pykan, which does not
+# declare them). pip resolves the rest, including jaxlib and juliacall, which jax and pysr pin exactly.
+# Not installed by pip: Tectonic, the LaTeX engine paper2/build_p2.py calls (0.17.0 was used).
+
+# Harness, analysis, figures, Source Data and tests
+numpy==2.4.6
+scipy==1.17.1
+scikit-learn==1.8.0
+sympy==1.14.0
+matplotlib==3.10.9
+pandas==3.0.3
+XlsxWriter==3.2.9       # the Excel writer pandas used for paper2/source_data/*.xlsx
+pytest==9.0.3
+
+# M1, the universal differential equation (p2/jaxcol.py, p2_grid_extra.py)
+jax==0.11.2             # requires jaxlib==0.11.2
+diffrax==0.7.2
+
+# M7, symbolic regression (p2/pysr_method.py). On first use PySR installs Julia and
+# SymbolicRegression.jl through juliapkg; the runs used Julia 1.11.9 and SymbolicRegression.jl 2.6.0.
+pysr==2.6.1             # requires juliacall==0.9.36
+
+# M8, the KAN (p2/methods.py; exploratory analysis E2). pykan 0.2.8 declares no dependencies:
+# it imports torch, PyYAML and tqdm, and the numerical packages above.
+pykan==0.2.8
+torch==2.12.0+cpu       # CPU wheel: needs --extra-index-url https://download.pytorch.org/whl/cpu
+PyYAML==6.0.3
+tqdm==4.68.2
+
+# Used only by a pre-freeze pilot (p2_pilot_m7.py) and the Stage 1 table (make_stage1_table_docx.py)
+psutil==7.2.2
+python-docx==1.2.0

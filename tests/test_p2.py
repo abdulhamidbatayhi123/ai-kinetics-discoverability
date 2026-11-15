@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from p2.synthetic import ldf_series
 
@@ -60,6 +61,7 @@ def test_stlsq_and_ensemble_recover_ldf_at_zero_noise():
         assert success_L1(coefs), (fit.__name__, coefs)
 
 
+@pytest.mark.slow   # 66 s in logs/pytest_p2.log
 def test_profile_interval_brackets_truth_and_is_narrow_at_low_noise():
     s = ldf_series(k=0.02)
     rng = np.random.default_rng(1)
@@ -174,6 +176,7 @@ def test_jax_column_matches_verified_solver():
     assert np.max(np.abs(exit_ref - exit_jax)) < 5e-3, np.max(np.abs(exit_ref - exit_jax))
 
 
+@pytest.mark.slow   # 506 s in logs/pytest_p2.log
 def test_outlet_profile_likelihood_brackets_k_in_kinetic_regime():
     """O3 identifiability: the whole column refitted to outlet c(t), T(t) per k.
     Fresh run (not a grid cell) at a low Da, where k must be identifiable."""
@@ -195,6 +198,7 @@ def test_outlet_profile_likelihood_brackets_k_in_kinetic_regime():
 from p2.analysis import boundary
 
 
+@pytest.mark.slow   # 68 s in logs/pytest_p2.log
 def test_boundary_ci_has_nominal_coverage_and_no_bias():
     """A single 95 % CI misses one time in twenty, so one seed cannot test it:
     coverage over 60 simulated datasets must be near nominal, and the estimate
@@ -315,6 +319,7 @@ def test_disc_vs_ident_uses_the_declared_mde():
     assert disc_vs_ident(None, 10.0, mde)["words"].startswith("no boundary")
 
 
+@pytest.mark.slow   # 1,862 s in logs/pytest_p2.log
 def test_ode_profile_with_temperature_brackets_k_on_nonisothermal_probe():
     """O1 identifiability on a fresh non-isothermal solver run (not a grid cell)."""
     from solver_fd import AdsorptionPhysicsConfig, generate_breakthrough_data
@@ -364,6 +369,7 @@ def test_lib_a_fidelity_is_relative_rms_on_held_out_probes():
     assert abs(heldout_fidelity(y + 0.1 * np.sqrt(np.mean(y ** 2)), y) - 0.1) < 1e-12
 
 
+@pytest.mark.slow   # 601 s in logs/pytest_p2.log
 def test_probe_profile_likelihood_brackets_k_in_kinetic_regime():
     """O2 identifiability (PREREG_P2 §3 table): the whole column refitted to INTERIOR
     c(t), T(t) at a few probes, q latent. Same fresh low-Da run as the outlet test."""
@@ -463,6 +469,7 @@ def _logistic_successes(levels, b_log10, slope, n_rep, rng):
     return out
 
 
+@pytest.mark.slow   # 84 s in logs/pytest_p2.log
 def test_r_collapse_handles_success_rising_with_R():
     """H2a: success RISES with R = delta / eps_eff. A first version reused the Da boundary,
     which only accepts a falling curve, and would have returned 'no crossing' for every
@@ -835,6 +842,7 @@ def test_positive_control_without_discovery_rows_is_not_evaluated():
     out, failed = positive_controls(cells, {}, ident)
     assert out["langmuir"]["passed"] is None and not failed
 
+@pytest.mark.slow   # 314 s in logs/pytest_p2.log
 def test_m1_demo_trains_and_reads_out_on_a_fresh_known_answer_column():
     """M1 (the S1 pipeline as a demonstration): on a fresh column that is NOT a grid cell
     (default physics, k = 0.002 s^-1), two L-BFGS steps run through the differentiable

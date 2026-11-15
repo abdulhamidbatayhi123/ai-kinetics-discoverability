@@ -2,7 +2,7 @@
 # E7 --ident-only (B90) in three parallel parts (rows are independent), then --merge-parts.
 # Resumable: OUT keeps rows already flagged b90; each part file keeps its own finished rows.
 cd "$(dirname "$0")" || exit 1
-PY="${P2_PY:-C:/Users/abdulhamid batayhi/Desktop/ai-mof-cof-dynamics/.venv/Scripts/python.exe}"
+PY="${P2_PY:-python}"
 export PYTHONIOENCODING=utf-8 OMP_NUM_THREADS=1
 echo "[$(date '+%F %T')] START e7-ident (3 parallel parts)"
 for i in 0 1 2; do "$PY" -X utf8 -W ignore p2_e7_stepshift.py --ident-only --part $i 3 results/.e7_part$i.json & eval p$i=\$!; done

@@ -96,11 +96,22 @@ def _sha(path):
     """SHA-256 of a file. Text files (no NUL byte in the first 8 kB) are hashed with CRLF line endings
     normalised to LF, so a hash does not depend on how a clone was checked out; binary files are hashed
     as they are."""
+    h = hashlib.sha256()
     with open(path, "rb") as f:
-        data = f.read()
-    if b"\0" not in data[:8192]:
-        data = data.replace(b"\r\n", b"\n")
-    return hashlib.sha256(data).hexdigest()
+        chunk = f.read(1 << 20)
+        text = b"\0" not in chunk[:8192]
+        carry = b""                       # a CR at a chunk's end may pair with an LF in the next chunk
+        while chunk:
+            data = carry + chunk
+            carry = b""
+            if text:
+                if data.endswith(b"\r"):
+                    data, carry = data[:-1], b"\r"
+                data = data.replace(b"\r\n", b"\n")
+            h.update(data)
+            chunk = f.read(1 << 20)
+        h.update(carry)
+    return h.hexdigest()
 
 
 def check_prov(prov_path):

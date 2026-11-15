@@ -1,8 +1,8 @@
 #!/bin/bash
 # E4 in three parallel parts (each variant is independent), merged, then e7 --ident-only.
-# Replaces the tail of p2_rerun_B90.sh after the 2026-11-09 interruption. Log: p2_rerun_B90.log.
+# Replaces the tail of p2_rerun_B90.sh after the 2026-11-09 interruption. Log: logs/p2_rerun_B90.log.
 cd "$(dirname "$0")" || exit 1
-PY="${P2_PY:-C:/Users/abdulhamid batayhi/Desktop/ai-mof-cof-dynamics/.venv/Scripts/python.exe}"
+PY="${P2_PY:-python}"
 export PYTHONIOENCODING=utf-8 OMP_NUM_THREADS=1
 echo "[$(date '+%F %T')] START e4 (parallel parts pre,a | b,c | d)"
 "$PY" -X utf8 -W ignore p2_e4_criteria.py --only pre,a results/.e4_p1.json & p1=$!

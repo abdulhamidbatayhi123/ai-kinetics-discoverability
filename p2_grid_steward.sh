@@ -1,10 +1,9 @@
 #!/bin/bash
-# Copy kept in the repository so it survives scratch cleanups. Run: bash p2_grid_steward.sh
 # Watch the Paper 2 grid chain. On each finished step: summarise every new or changed results
-# file, commit it with its marker, push. Exit (waking Claude) on any failure, on an error row,
-# when a step in WAKE_ON finishes, or when the chain ends.
-cd "/c/Users/abdulhamid batayhi/Desktop/ai-kinetics-discoverability" || exit 1
-PY="C:/Users/abdulhamid batayhi/AppData/Local/Programs/Python/Python312/python.exe"
+# file, commit it with its marker, push. Exit on any failure, on an error row, when a step in
+# WAKE_ON finishes, or when the chain ends. Run: bash p2_grid_steward.sh
+cd "$(dirname "$0")" || exit 1
+PY="${P2_PY:-python}"
 CHK="p2_check_results.py"
 WAKE_ON=" ${WAKE_ON:-o2ident m7 m1 refinelevels generate_ref analyze} "
 declare -A FILE=([o1]=p2_o1 [o1_ref]=p2_o1 [m5]=p2_extra_m5 [m5_ref]=p2_extra_m5 [m9]=p2_extra_m9
@@ -27,8 +26,7 @@ while true; do
     git add "$f"; git add -f "results/.p2_grid_done/$step"
     git commit -q -m "Grid step $step done
 
-$summary
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && git push -q origin main 2>&1 | grep -v "^remote:"
+$summary" && git push -q origin main 2>&1 | grep -v "^remote:"
     echo "[$(date '+%F %T')] committed step $step: $(git log --oneline -1)"
     echo "$summary"
     echo "$s" | grep -q "errors 0" || { echo "ERROR ROWS or bad file in $f"; exit 0; }

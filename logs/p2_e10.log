@@ -1,0 +1,28 @@
+langmuir_L1_pe1_da100|200 qdf {'ldf': -14368.7, 'qdf': 0.0, 'pso': -1630917.3} 1.0542
+langmuir_L1_pe1_da100|400 ldf {'ldf': 0.0, 'qdf': -55440.3, 'pso': -4860766.5} 1.0469
+langmuir_L1_pe1_da100|1996 ldf {'ldf': 0.0, 'qdf': -2218770.6, 'pso': -35033425.1} 1.0136
+langmuir_L1_pe1_da100|3991 ldf {'ldf': 0.0, 'qdf': -5554317.8, 'pso': -74094010.4} 1.0078
+step_L1_pe1_da100|200 qdf {'ldf': -472348.4, 'qdf': 0.0, 'pso': -2178286.7} 1.154
+step_L1_pe1_da100|400 qdf {'ldf': -664461.6, 'qdf': 0.0, 'pso': -6136195.8} 1.0804
+step_L1_pe1_da100|1996 ldf {'ldf': 0.0, 'qdf': -1895253.4, 'pso': -41302964.3} 1.0146
+step_L1_pe1_da100|3991 ldf {'ldf': 0.0, 'qdf': -5621086.8, 'pso': -86904525.4} 1.0075
+langmuir_L1_pe1_da1e+03|200 ldf {'ldf': 0.0, 'qdf': -38.1, 'pso': -15141.2} 0.9507
+langmuir_L1_pe1_da1e+03|400 ldf {'ldf': 0.0, 'qdf': -359.1, 'pso': -38201.0} 0.9571
+langmuir_L1_pe1_da1e+03|1996 ldf {'ldf': 0.0, 'qdf': -10411.4, 'pso': -480426.0} 1.0165
+langmuir_L1_pe1_da1e+03|3991 ldf {'ldf': 0.0, 'qdf': -10126.9, 'pso': -1186652.3} 1.0366
+step_L1_pe1_da1e+03|200 qdf {'ldf': -177.5, 'qdf': 0.0, 'pso': -26365.5} 1.0414
+step_L1_pe1_da1e+03|400 qdf {'ldf': -2309.7, 'qdf': 0.0, 'pso': -64765.0} 1.122
+step_L1_pe1_da1e+03|1996 qdf {'ldf': -47457.9, 'qdf': 0.0, 'pso': -604478.1} 1.0827
+step_L1_pe1_da1e+03|3991 qdf {'ldf': -43273.0, 'qdf': 0.0, 'pso': -1346530.5} 1.0352
+checks {'langmuir_L1_pe1_da100': {'c': 0.0, 'q': 0.0, 'T': 0.0}, 'step_L1_pe1_da100': {'c': 0.0, 'q': 0.0, 'T': 0.0}, 'langmuir_L1_pe1_da1e+03': {'c': 0.0, 'q': 0.0, 'T': 0.0}, 'step_L1_pe1_da1e+03': {'c': 0.0, 'q': 0.0, 'T': 0.0}}
+E10 done: 16 rows
+langmuir_L1_pe1_da100|grid200 qdf {'ldf': -121818.2, 'qdf': 0.0, 'pso': -1475551.7} 0.9838
+langmuir_L1_pe1_da100|grid400 ldf {'ldf': 0.0, 'qdf': -55440.3, 'pso': -4860766.5} 1.0469
+step_L1_pe1_da100|grid200 qdf {'ldf': -806335.3, 'qdf': 0.0, 'pso': -2307823.0} 1.0066
+step_L1_pe1_da100|grid400 qdf {'ldf': -664461.6, 'qdf': 0.0, 'pso': -6136195.8} 1.0804
+langmuir_L1_pe1_da1e+03|grid200 pso {'ldf': -30565.6, 'qdf': -29065.9, 'pso': 0.0} 0.5094
+langmuir_L1_pe1_da1e+03|grid400 ldf {'ldf': 0.0, 'qdf': -359.1, 'pso': -38201.0} 0.9571
+step_L1_pe1_da1e+03|grid200 qdf {'ldf': -17917.7, 'qdf': 0.0, 'pso': -34668.0} 0.455
+step_L1_pe1_da1e+03|grid400 qdf {'ldf': -2309.7, 'qdf': 0.0, 'pso': -64765.0} 1.122
+checks {'langmuir_L1_pe1_da100': {'c': 0.0, 'q': 0.0, 'T': 0.0}, 'step_L1_pe1_da100': {'c': 0.0, 'q': 0.0, 'T': 0.0}, 'langmuir_L1_pe1_da1e+03': {'c': 0.0, 'q': 0.0, 'T': 0.0}, 'step_L1_pe1_da1e+03': {'c': 0.0, 'q': 0.0, 'T': 0.0}}
+E10 done: 24 rows

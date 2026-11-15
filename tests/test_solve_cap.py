@@ -6,6 +6,7 @@ the result is unchanged."""
 import time
 
 import numpy as np
+import pytest
 
 
 def _column(k_true=2e-4):
@@ -44,6 +45,7 @@ def test_cap_leaves_an_uncapped_solve_unchanged():
     assert a == b and stats["capped"] == []
 
 
+@pytest.mark.slow   # 101 s in logs/pytest_p2.log
 def test_profile_passes_the_cap_through():
     from p2.identifiability import profile_interval_outlet
     p, t, c_obs, T_obs = _column()

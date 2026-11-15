@@ -1,0 +1,6 @@
+check {'c': 0.0, 'q': 0.0, 'T': 0.0} solve 16 s, row 119 s
+{'best_subset|weak': True, 'stlsq|weak': True, 'ensemble|weak': True} {'best_subset|weak': True, 'stlsq|weak': True, 'ensemble|weak': True} {'lo': 0.0010262425089274552, 'hi': 0.0010315730794395123, 'success': True} ldf
+
+real	2m16.798s
+user	0m0.000s
+sys	0m0.077s

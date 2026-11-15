@@ -11,7 +11,6 @@ The merged file carries the freeze commit the local drivers would write (p2_grid
     python p2_b90_merge.py [n_check]
 """
 import json
-import os
 import random
 import sys
 

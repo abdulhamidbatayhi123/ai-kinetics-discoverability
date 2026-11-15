@@ -1,0 +1,34 @@
+# Line endings: text files are stored with LF (files committed earlier with CRLF keep CRLF
+# until the repository is renormalised); binary files are never converted.
+* text=auto eol=lf
+
+# Shell scripts always LF; Windows batch files CRLF in the working tree.
+*.sh text eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Byte-exact files, never converted: the pre-registration is compared byte for byte with its
+# freeze commit, and check_stage1_p2.py requires CRLF line endings in the Stage 1 manuscript.
+PREREG_P2_discoverability.md -text
+paper2/stage1.tex -text
+
+# Records kept byte for byte as they were written (results, ground-truth manifest, run logs, audits):
+# git never converts their line endings.
+results/** -text
+data/** -text
+logs/** -text
+audit_*/** -text
+*.log -text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+*.xlsx binary
+*.docx binary
+*.npz binary
+*.npy binary
+*.gz binary
+*.zip binary
+*.pkl binary

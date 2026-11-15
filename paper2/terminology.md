@@ -1,7 +1,7 @@
 # Paper 2 terminology (each term defined once; use it only with the evidence named)
 
-Pattern taken from pinn-machining `revision_eaai/manuscript/terminology.md`. `paper2/build_p2.py`
-enforces the banned-phrase table on the article and the Supplementary Information.
+`paper2/build_p2.py` enforces the banned-phrase table on the article and the Supplementary
+Information.
 
 | Term | Meaning in this paper | Evidence required before using it |
 |---|---|---|
@@ -16,7 +16,7 @@ enforces the banned-phrase table on the article and the Supplementary Informatio
 | exploratory | declared before running in EXPLORATORY_P2.md (E1-E3), or H2d | that file |
 | descriptive check (post-verdict) | analyses decided after the verdicts were seen (p2_ident_robustness.py) | must be labelled as such wherever used |
 | measured isotherm | q*(c, T)[1 + eps g(c/c_in)], the isotherm every method and the identifiability test receive | - |
-| Peclet number | u L / D_L, about 470, 94, 19 for the three dispersion levels (the code's x0.2 is the HIGHEST Pe) | Supplementary Table 1 |
+| Peclet number | u L / D_L, about 470, 94, 19 for the three dispersion levels (the code's x0.2 is the HIGHEST Pe) | Supplementary Table 2 |
 
 ## Banned phrases (with replacements)
 
@@ -29,7 +29,7 @@ enforces the banned-phrase table on the article and the Supplementary Informatio
 | significantly (without a test) | give the size of the effect |
 | proves, demonstrates conclusively | shows, in this design |
 | seamless, leverage, utilize, delve, crucial, pivotal | plain verbs: use, need, important, ... |
-| AI discovers / AI fails (as agent) | the methods tested / equation-discovery methods |
+| AI discovers / AI fails (AI as the actor) | the methods tested / equation-discovery methods |
 | well identified / calibrated interval | practically identifiable (as defined) |
 | state-of-the-art (unqualified) | name the methods |
 | it is worth noting that, interestingly, notably | delete; state the point |
