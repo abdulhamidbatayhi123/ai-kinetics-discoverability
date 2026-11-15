@@ -65,6 +65,31 @@ def rendered_words(t):
     return len([w for w in t.split() if re.search(r"[A-Za-z0-9]", w)])
 
 
+def strict_words(t):
+    """Words as a word processor or a PDF reader counts them (found 2026-11-15: a count of the rendered PDF
+    gave about 40 more words than rendered_words): every number, name and relation sign inside inline math
+    is a word of its own ('Da ~ 4' is three), and a percent sign set off by a thin space ('5 %') is one."""
+    t = re.sub(re.escape(BS) + r"cite[pt]?\{[^}]*\}", "", t)
+
+    def expand(m):
+        s = m.group(1)
+        s = re.sub(re.escape(BS) + r"mathrm\{([^}]*)\}", r" \1 ", s)
+        s = re.sub(re.escape(BS) + r"(approx|le|ge|leq|geq|times|pm|to|rightleftharpoons)(?![A-Za-z])", " = ", s)
+        s = re.sub(re.escape(BS) + r"([A-Za-z]+)", r" \1 ", s)      # \Da -> Da, \qs -> qs: one word each
+        s = s.replace(BS + ",", " ")
+        s = re.sub(r"[{}^_*]", "", s)
+        s = re.sub(r"([=<>+])", r" \1 ", s)
+        return " " + s + " "
+
+    t = re.sub(r"\$([^$]*)\$", expand, t)
+    t = t.replace(BS + "," + BS + "%", " %")
+    t = re.sub(re.escape(BS) + r"(sub)*section\*?", " ", t)
+    t = re.sub(re.escape(BS) + r"[A-Za-z]+\*?", " ", t)
+    t = t.replace(BS + ",", " ").replace("~", " ").replace("{", " ").replace("}", " ")
+    t = re.sub(re.escape(BS) + r"[^A-Za-z\s]", "", t)
+    return len([w for w in t.split() if re.search(r"[A-Za-z0-9%=<>+]", w)])
+
+
 def words_between(tex, a, b):
     t = tex[tex.index(a):tex.index(b)]
     t = re.sub(re.escape(BS) + r"cite[pt]?\{[^}]*\}", "", t)
@@ -142,8 +167,9 @@ def bindings():
     only_id = sum(n for k, n in cls.items() if k.startswith("discovery present"))
     out += [("no-verdict: discovery missing", f"The {miss} slices without a verdict lack a discovery boundary"
              if only_id == 0 else f"missing in {miss}"),
-            ("never 50 %", f"in {never}, discovery"), ("never below 50 %", f"in {always}, all"),
-            ("straddles", f"in the other {strad} the observed")]
+            ("never 50 %", f"never reached 50{BS},{BS}%\nin {never} (including"),
+            ("never below 50 %", f"never fell below it in {always} (all without noise)"),
+            ("straddles", f"without a fitted crossing in range in {strad}.")]
     if only_id:
         out += [("only identifiability missing", f"remaining {only_id} slices")]
     m1 = load("results/p2_extra_m1.json")["rows"]
@@ -254,14 +280,14 @@ def bindings():
     fig = load("results/p2_figdata.json")["h2b"]
     held = [k for k, s in fig.items() if h2b[k]["gap_decades"] is None and min(a / n for _, a, n in s["disc"]) >= 0.5]
     out.append(("no-noise slices: discovery held",
-                f"in {len(held)}, all without noise, it never fell below 50" + BS + "," + BS + "%"
+                f"never fell below it in {len(held)} (all without noise)"
                 if all(k.startswith("sigma=0.0|") for k in held) else "held slices with noise"))
     # (M3) at 2 % isotherm error, weak-form best subset succeeds more often as noise grows (not monotone downward)
     meth = load("results/p2_figdata.json")["methods"]
     bsw = [max(max(a for _, a, n in d["best_subset|weak"]) for k, d in meth.items()
                if k.startswith(f"sigma={sg}|eps=0.02|") and "best_subset|weak" in d) for sg in ("0.0", "0.005", "0.02", "0.05")]
-    out.append(("best subset weak vs noise at 2 % isotherm error",
-                f"succeeded in at most {bsw[0]}, {bsw[1]}, {bsw[2]} and {bsw[3]}\nof 45 replicates" if bsw == sorted(bsw)
+    out.append(("best subset weak vs noise at 2 % isotherm error (counts in SI Note 3)",
+                "noise even helped weak-form best-subset selection" if bsw == sorted(bsw) and bsw[0] < bsw[-1]
                 else "not monotone"))
     # (M4) 0.5 % noise and 0.5 % isotherm error: slices with a boundary and its largest value
     b55 = [s["da_disc"] for k, s in h2b.items() if k.startswith("sigma=0.005|eps=0.005|") and s["da_disc"]]
@@ -272,10 +298,11 @@ def bindings():
     kh = load("results/p2_kh.json")
     out += [("kh at Da 316", f"($kh = {kh['kh_by_level']['316.227766']:.1f}$,"),
             ("kh at Da 1000", f"($kh = {kh['kh_by_level']['1000.0']:.0f}$)")]
-    ns = load("results/p2_noise_support.json")["summary_da_le_10"]["eps0.02|sigma0.0"]
-    out += [("support size without noise at 2 % isotherm error",
-             f"kept on average {math.floor(ns['mean_support_size_min'] * 10) / 10:.1f} to "
-             f"{math.ceil(ns['mean_support_size_max'] * 10) / 10:.1f} terms (four is")]
+    se = load("results/p2_strong_exact.json")
+    on = [d for m in ("stlsq|strong", "ensemble|strong") for d in se["onset_from_da"][m].values()]
+    out += [("strong forms on exact data", f"only from $" + BS + f"Da {BS}approx {round(min(on)):.0f}$ to {round(max(on)):.0f}"
+             f" upward" if all(on) and all(v is None for v in se["onset_from_da"]["best_subset|strong"].values())
+             else "strong forms on exact data changed")]
     m6 = load("results/p2_m6_summary.json")
     out += [("M6 grid", f"recovered it in none of {m6['n_rows']:,} fits".replace(",", "{,}", 1) if m6["n_success"] == 0
              else "M6 succeeded"),
@@ -320,7 +347,7 @@ def bindings():
     nf = load("results/p2_e12_noisefree.json")
     out += [("E12 max discovery", f"discovery reached at most\n{round(mxd * 100):.0f}" + BS + "," + BS + "% of replicates"),
             ("E12 identifiability range", f"up to\n${BS}Da {BS}approx {math.floor(min(ids) / 10) * 10:.0f}$ to {math.ceil(max(ids) / 10) * 10:.0f}."),
-            ("E12 controls failed", "therefore failed, and no gap was read"
+            ("E12 controls failed", "therefore failed and no gap was read"
              if not e12a["positive_control"]["passed"] and not e12b["positive_control"]["passed"] else "E12 control passed"),
             ("E12 exact data", "recovered the law at every" if nf["E12"]["best_subset_weak_succeeds_at_every_da"]
              and nf["E12b"]["best_subset_weak_succeeds_at_every_da"] else "E12 noise-free fails")]
@@ -533,6 +560,29 @@ def si_bindings():
     out.append(("Lib-A with noise, largest difference", f"differed by at most {math.ceil(dmax * 100) / 100:.2f} in median"))
     out.append(("Lib-A 2 % noise", f"{t('A', '0.02', 'Da<=10', 'median_fid_obs'):.2f} against "
                 f"{t('B', '0.02', 'Da<=10', 'median_fid_obs'):.2f})"))
+    # sparse solvers on the exact column data, and noise at 2 % isotherm error (SI Note 3, post hoc)
+    se = load("results/p2_strong_exact.json")
+    bs = se["best_subset_strong"]
+    weak_all = all(v == 0.1 for m in ("stlsq|weak", "ensemble|weak", "best_subset|weak")
+                   for v in se["onset_from_da"][m].values())
+    on = [d for m in ("stlsq|strong", "ensemble|strong") for d in se["onset_from_da"][m].values()]
+    out.append(("exact data rows", f"{bs['rows']:,}".replace(",", "{,}") + " rows of estimation replicates in each"))
+    out.append(("exact data: weak forms always, strong from", "the weak forms recovered the law in every row, while the strong\n"
+                f"forms recovered it only from ${BS}Da {BS}approx {round(min(on)):.0f}$ to {round(max(on)):.0f} upward"
+                if weak_all else "weak forms on exact data changed"))
+    out.append(("exact data: best-subset strong supports", "returned three\nor four terms in every row"
+                if set(bs["support_size_counts"]) == {"3", "4"} else "support sizes changed"))
+    out.append(("exact data: true pair", f"in {bs['rows_with_true_pair']:,}".replace(",", "{,}") + " of them"))
+    ns = load("results/p2_noise_support.json")["summary_da_le_10"]["eps0.02|sigma0.0"]
+    out.append(("support size without noise at 2 % isotherm error",
+                f"kept on average {math.floor(ns['mean_support_size_min'] * 10) / 10:.1f} to "
+                f"{math.ceil(ns['mean_support_size_max'] * 10) / 10:.1f} terms\n(four is the maximum)"))
+    meth = load("results/p2_figdata.json")["methods"]
+    bsw = [max(max(a for _, a, n in d["best_subset|weak"]) for k, d in meth.items()
+               if k.startswith(f"sigma={sg}|eps=0.02|") and "best_subset|weak" in d) for sg in ("0.0", "0.005", "0.02", "0.05")]
+    out.append(("best subset weak vs noise at 2 % isotherm error",
+                f"succeeded in at most {bsw[0]}, {bsw[1]}, {bsw[2]} and {bsw[3]}\nof 45 replicates" if bsw == sorted(bsw)
+                else "not monotone"))
     return out
 
 
@@ -574,17 +624,19 @@ def main():
         if norm(lit) not in si_flat:
             fail("G3", f"SI {desc}: expected {lit!r}")
     abst = body[body.index(BS + "begin{abstract}") + 16:body.index(BS + "end{abstract}")]
-    if len(abst.split()) > 150:
-        fail("G4", f"abstract {len(abst.split())} words > 150")
+    abs_words, abs_strict = len(abst.split()), strict_words(abst)
+    if max(abs_words, abs_strict) > 150:
+        fail("G4", f"abstract {abs_words} words ({abs_strict} counted as a word processor counts) > 150")
     # main text as the journal counts it: Introduction + Results + Discussion (the display items,
     # their legends, Methods, references and the abstract are excluded); comments already stripped
     a, b = tex.index("---- Introduction"), tex.index("% ---- Display items")
     main_words = rendered_words(strip_comments(tex[a:b]))
+    main_strict = strict_words(strip_comments(tex[a:b]))
     main_part = body.split(BS + "renewcommand{" + BS + "figurename}{Extended Data Fig.}")[0]   # ED are not display items
     assert main_part != body, "Extended Data marker not found"
     disp = len(re.findall(re.escape(BS) + r"begin\{(figure|table)\}", main_part))
-    if main_words > 3500:
-        fail("G4", f"main text {main_words} words > 3,500")
+    if max(main_words, main_strict) > 3500:
+        fail("G4", f"main text {main_words} words ({main_strict} counted as a word processor counts) > 3,500")
     if disp > 6:
         fail("G5", f"{disp} display items > 6")
     nd = tex.count("\u2014") + body.count("---")
@@ -606,7 +658,7 @@ def main():
     # every Extended Data figure file must be cited in the main part ("Extended Data Fig.~3",
     # "Extended Data Figs.~1 and~2"); the Extended Data section's own legends do not count
     cited = set()
-    for grp in re.findall(r"Extended Data Figs?\.~([0-9~, and\-]+)", main_part):
+    for grp in re.findall(r"Extended\s+Data\s+Figs?\.~([0-9~, and\-]+)", main_part):
         cited |= {int(n) for n in re.findall(r"\d+", grp)}
     ed_files = [f for f in sorted(os.listdir(HERE)) if re.match(r"fig_ed\d+(_[^.]*)?\.pdf$", f)]
     for f in ed_files:
@@ -618,7 +670,7 @@ def main():
     # G9b: Extended Data figures are numbered in the order of first citation, and the Extended Data
     # section places them in that order (file fig_edN is the N-th figure there)
     first = []
-    for grp in re.findall(r"Extended Data Figs?\.~([0-9~, and\-]+)", main_part):
+    for grp in re.findall(r"Extended\s+Data\s+Figs?\.~([0-9~, and\-]+)", main_part):
         for n in (int(x) for x in re.findall(r"\d+", grp)):
             if n not in first:
                 first.append(n)
@@ -649,8 +701,8 @@ def main():
                 fail("G10", f"{inc} has no provenance file {stem}.prov.json")
     finally:
         os.chdir(HERE)
-    print(f"main text (Introduction + Results + Discussion): {main_words} words; "
-          f"display items {disp}; em dashes {nd}; abstract {len(abst.split())} words")
+    print(f"main text (Introduction + Results + Discussion): {main_words} words ({main_strict} as a word "
+          f"processor counts); display items {disp}; em dashes {nd}; abstract {abs_words} words ({abs_strict})")
     if FAIL:
         print("BUILD FAILED")
         for f in FAIL:

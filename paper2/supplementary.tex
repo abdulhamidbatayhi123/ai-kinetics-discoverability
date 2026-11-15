@@ -905,6 +905,23 @@ residual floor $2\times10^{-3}$ was the smallest of $\{1, 2, 5\}\times10^{-3}$ t
 % test_discover_o1_recovers_law_in_both_forms_and_all_solvers; p2/methods.py:best_subset docstring;
 % PREREG_P2 s.3 Phase A item (i).
 
+\paragraph{On the column data (post hoc).} The known-answer tests above use a separate system. On the
+grid's exact column data (no noise and no isotherm error; 2{,}430 rows of estimation replicates in each
+solver and form over the six exact slices), the weak forms recovered the law in every row, while the strong
+forms recovered it only from $\Da \approx 32$ to 316 upward (thresholding and the ensemble,
+depending on the slice) or never (best-subset selection). Strong-form best-subset selection returned three
+or four terms in every row, the true pair $\{\qsm, q\}$ in 1{,}485 of them, with a
+constant, temperature or other terms beside it. Because the data are exact, the residual of the true law
+there comes from the derivative estimate alone, and that a larger support won shows that this residual
+exceeds the selection floor on the column data, which the calibration on the known-answer system did not
+anticipate. The errors-in-variables estimator of H2c builds on the same strong-form selection. With
+2\,\% isotherm error and no noise, weak-form best-subset selection kept on average 3.6 to 4.0 terms
+(four is the maximum) at $\Da \le 10$, absorbing the isotherm error into extra terms, so its
+success rose with noise, which lifts the residual above the floor: it succeeded in at most 1, 11, 22 and 26
+of 45 replicates at 0, 0.5, 2 and 5\,\% noise.
+% source: results/p2_strong_exact.json (p2_strong_exact.py from results/p2_o1.json, sigma = eps = 0,
+% replicates 15..59); results/p2_noise_support.json (p2_noise_support.py); results/p2_figdata.json methods.
+
 \subsection*{M1b: uptake from the gas balance (O2)}
 On O2, $q$ is recovered from the gas-phase balance of the solver,
 $\partial q/\partial t = (D_L c_{zz} - u c_z - c_t)/S$ with $u = v/\varepsilon_t$ and
