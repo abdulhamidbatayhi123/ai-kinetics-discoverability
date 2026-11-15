@@ -41,7 +41,7 @@ verdict word.
 
 Post hoc checks, each declared before it ran (`EXPLORATORY_P2.md`), leave the H2b word unchanged
 under four alternative success rules (E4, `results/p2_e4_criteria.json`: gaps 0.89 to 3.75 decades)
-and at twice the sampling rate (E8, `results/p2_e8_summary.json`: every boundary moves up, the gap
+and at twice the sampling rate (E8, `results/p2_e8_summary.json`: every boundary moves up or stays, the gap
 stays at least 1.25 decades), and at about ten times the sampling rate (E11, declared before it ran,
 `results/p2_e11_summary.json`: discovery rises 0.7 to 1.9 decades, the gap stays 0.72 to 2.01 decades
 where both boundaries exist). Choosing among three candidate laws by likelihood (E6) finds the
@@ -89,7 +89,8 @@ python paper2/build_p2.py        # both PDFs; recomputes the key numbers in the 
                                  # word and display-item limits, banned phrases and figure provenance (needs Tectonic)
 python p2_check_prov.py          # every figure was drawn from the current style file, script and inputs (exit 1 if not)
 python fig_p2_results.py         # Figs 3, 4 and Extended Data Fig. 4 (about a minute)
-python -m pytest -m "not slow"   # the test suite without its ten slowest tests
+python -m pytest -m "not slow"   # the test suite without its ten slowest tests (about 4 to 5 min of CPU:
+                                 # it solves a few small columns and trains the neural model briefly)
 ```
 
 The other figure scripts that need no fields run the same way: `fig_p2_overview.py`,
@@ -114,7 +115,8 @@ marked `slow` took 72 of the 76 minutes.
 ## Where each figure and number comes from
 
 Every figure, Source Data file and file that `paper2/build_p2.py` reads, with the script that writes
-it. Figures are `paper2/<name>.{pdf,png,prov.json}`; each provenance file records the SHA-256 of the
+it. Figures are `paper2/<name>.{pdf,png,prov.json}` (the Stage 1 design figure has no provenance file);
+each provenance file records the SHA-256 of the
 style file, the script and every input. Results files are in `results/`; "fields" are the untracked
 `data/p2/*.npz`. Run times are wall-clock times (CPU times where marked) from the logs named or from
 earlier measurements; "not timed" means no record exists. Rows that ran on Kaggle were merged locally
@@ -159,6 +161,7 @@ by the script named.
 | `p2_kh.json` | `p2_kh.py` | `p2_verdicts.json`, fields | not timed |
 | `p2_noise_support.json` | `p2_noise_support.py` | `p2_o1.json` | not timed |
 | `p2_m6_summary.json` | `p2_m6_summary.py` | `p2_extra_m6.json` | not timed |
+| `p2_strong_exact.json` | `p2_strong_exact.py` | `p2_o1.json`, manifest | not timed |
 | `p2_referee_checks.json` | `p2_referee_checks.py` | `p2_verdicts.json`, `p2_figdata.json`, `p2_e8_summary.json`, `p2_e11_summary.json`, `p2_kh.json` | not timed |
 
 The row files (`p2_o1.json`, `p2_o2.json`, `p2_o2_ident.json`, `p2_o3_ident.json`,
@@ -186,7 +189,7 @@ Corrections after the grid started (`RETRACTIONS_P2.md`): B86 (a solve that coul
 fixed by A5), B87 (the O1 k range excluded three step cells; caught by the positive control;
 fixed by A6), B88 (M1 now keeps its best parameters when a solve fails), B89 (the O1 profile now
 refines with the pre-registered 41 points per pass), B90 (the O1 likelihood's "exact" LDF update had a
-wrong coefficient, found by an independent review; fixed and tested against an ODE solver). All O1
+wrong coefficient, found by an independent AI-assisted review; fixed and tested against an ODE solver). All O1
 identifiability rows were recomputed with A6 and B89 together, and again after B90 (on Kaggle, merged and
 validated locally, `kaggle_b90/`, `p2_b90_merge.py`); the four failed M1 fits were rerun with B88.
 B91 (the exploratory model-selection check E6 read each law's rate constant off a coarse grid; now
@@ -225,7 +228,7 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `p2_e13_infomatched.py`, `kaggle_e13/` | E13, declared in `EXPLORATORY_P2.md` on 2026-11-15 before it ran; it runs on Kaggle and its results are not yet in `results/` |
 | `p2_practical_da.py`, `data/practical_da_sources.csv` | Da of published laboratory columns (Supplementary Table 1), from inputs printed in four studies, each with its location in the paper |
 | `p2_s1_anchor.py` | the closest prior study on the Da map (PREREG_P2 s.5) |
-| `p2_ident_robustness.py`, `p2_kh.py`, `p2_noise_support.py`, `p2_m6_summary.py`, `p2_referee_checks.py`, `p2_liba_fidelity.py`, `p2_liba_summary.py` | descriptive checks made after the verdicts were seen (labelled so in the paper) |
+| `p2_ident_robustness.py`, `p2_kh.py`, `p2_noise_support.py`, `p2_m6_summary.py`, `p2_referee_checks.py`, `p2_strong_exact.py`, `p2_liba_fidelity.py`, `p2_liba_summary.py` | descriptive checks made after the verdicts were seen (labelled so in the paper) |
 | `p2_freeze_evidence.py` | GitHub's server-side record that the frozen pre-registration was public before the grid ran (`results/freeze_push_evidence.json`) |
 | `p2_figstyle.py` | one figure style built to Nature Portfolio's artwork rules; the save step asserts them and writes each figure's provenance file |
 | `fig_p2_overview.py`, `fig_p2_examples.py`, `fig_p2_results.py`, `fig_p2_guide.py` | Fig. 1; Fig. 2; Figs 3, 4 and Extended Data Fig. 4; Fig. 5 |
@@ -239,7 +242,7 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `p2_diag_step_*.py`, `p2_e2_diag.py` | diagnostics behind correction B87 and the E2 check |
 | `tests/`, `pytest.ini` | unit and known-answer tests (`python -m pytest`; `-m "not slow"` leaves out the ten slowest) |
 | `requirements_p2.txt` | the Python packages, pinned to the versions used |
-| `requirements_p2_venv.txt` | the full freeze of the shared environment the runs used, kept as the record the Stage 1 manuscript cites; not installable as it stands (it names a local package unrelated to this study), so install from `requirements_p2.txt` |
+| `requirements_p2_venv.txt` | the full freeze of the shared environment the runs used, kept as the record the Stage 1 manuscript cites (one line naming a local package unrelated to this study is redacted); install from `requirements_p2.txt` |
 | `logs/` | run logs: field generation, the B88 and B90 reruns, E4, E6, E7, the E8 merge, Lib-A, the pre-freeze pilots and power simulations, and the test suite; the logs of the grid chain, the A6 rerun and E2 are compressed at the root (`*.log.gz`) |
 | `RETRACTIONS_P2.md` | every defect found, its cause, its fix and how it was found |
 
@@ -273,7 +276,10 @@ python p2_source_data.py           # Source Data for Figs 2 to 5
 python paper2/build_p2.py          # article and SI, with every gate
 ```
 
-E6, E8 and E11 ran on Kaggle (`kaggle_e6/`, `kaggle_e8/`, `kaggle_e11/`); `p2_e6_merge.py`,
+E6, E8, E11 and E13 ran on Kaggle (`kaggle_e6/`, `kaggle_e8/`, `kaggle_e11/`, `kaggle_e13/`). The kernels and
+kit datasets are private to the author's Kaggle account: to rerun them, replace the `abdulhamidbatayhi/` prefix
+in the kernel metadata with your own user name and upload the kit; the merged results in `results/` are the
+record. `p2_e6_merge.py`,
 `p2_e8_merge.py` and `python p2_e11_fine.py summary` merge the downloaded parts into `results/`.
 
 ## Notes on result files

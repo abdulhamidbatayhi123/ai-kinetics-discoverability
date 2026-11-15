@@ -380,8 +380,8 @@ well as its size.
 
 \subsection*{E8: sampling rate (post hoc)}
 E6 chose the wrong law at $\Da \ge 100$ with an exact isotherm at both noise levels, and at
-$\Da = 31.6$ in every case but the Langmuir sorbent at 0.5\,\% noise. E8 asks
-whether the time resolution is the cause. On O1 ($\Pe \approx 94$, both isotherms, all nine
+$\Da = 31.6$ in every case but the Langmuir sorbent at 0.5\,\% noise. E8 asks whether the time resolution is the cause; a six-replicate pilot, run before the declaration and
+not reported as a result, had suggested it. On O1 ($\Pe \approx 94$, both isotherms, all nine
 $\Da$, $\sigma \in \{0.5, 2\}\,\%$, $\varepsilon = 0$, replicates 0 to 59), every quantity was
 computed at the grid's 200 observation times and at 400 (every stored time of the ground-truth
 fields, with the same noise per sample): discovery by the six sparse solvers in both forms, the
@@ -494,7 +494,7 @@ sampling rate did not restore the choice at $\Da = 100$ (E8).
 % source: results/p2_e10_resolution.json (24 rows: 4 cells x {200, 400, 1996, 3991, grid200, grid400});
 % p2_e10_resolution.py (fields in scratch_e10/, not tracked); EXPLORATORY_P2 E10.
 
-\subsection*{E11: about 2,000 observation times per run (declared before it ran)}
+\subsection*{E11: about 2,000 observation times per run (post hoc, declared before it ran)}
 Declared after an independent review asked whether the gap survives much finer sampling, and
 before any row ran. The $\Pe \approx 94$ cells of both isotherms (L1, all nine $\Da$ levels) were
 re-solved with the unchanged solver at 3,991 stored times; observations used every second stored
@@ -537,8 +537,8 @@ succeeded at $\Da = 0.1$.
 % source: results/p2_e11_summary.json (pools both, disc, disc_tm), results/p2_e11_fine.json (rows, checks),
 % results/p2_e8_summary.json (n_t=200); p2_e11_fine.py; kaggle_e11/ (kit 00cb4c1, 9 kernels); EXPLORATORY_P2 E11.
 
-\subsection*{E12 and E12b: a second system (declared before each ran)}
-Declared after a simulated pre-submission review asked whether the asymmetry is particular to
+\subsection*{E12 and E12b: a second system (post hoc, declared before each ran)}
+Declared after an AI-assisted simulated pre-submission review asked whether the asymmetry is particular to
 adsorption. A continuously stirred tank, residence time $\tau$, empty at $t = 0$ and fed with A and B,
 carries the reversible reaction A + B $\rightleftharpoons$ C at rate $r = k(AB - C/K(T))$, with the
 temperature imposed to rise from 300 to 340\,K over eight residence times and
@@ -558,10 +558,13 @@ and with equal feeds the thresholding and ensemble solvers, did not even on exac
 feeds the best-subset success reflects the order of two identical library columns. For weak-form
 best-subset selection with unequal feeds, then, the failure is caused by the noise and the error in
 $K$. The design has no regime where discovery succeeds under noise: at $\Da = 0.1$ the reverse term
-$C/K$ is about 8\,\% of the forward term on average while the success rule asks for its coefficient to
+$C/K$ is small against the forward term while the success rule asks for its coefficient to within
 10\,\%, and at high $\Da$ the two terms become collinear; the noise is also scaled to each channel's own
 range, so the small concentration C carries relatively less noise than A and B. By the reading fixed in
-advance no gap is read; no further variant was run.
+advance no gap is read; no further variant was run. One departure from the declaration: the noise draw
+is seeded by ($\Da$, $\sigma$, replicate) and the error in $K$ by ($\Da$, replicate), not by every key the
+declaration lists, so the slices with and without an error in $K$ share their noise draws (common
+random numbers); this changes no rule.
 % source: results/p2_e12_summary.json, p2_e12b_summary.json, p2_e12_rows.json, p2_e12b_rows.json,
 % p2_e12_noisefree.json; p2_e12_reaction.py, p2_e12_noisefree.py; EXPLORATORY_P2 E12, E12b.
 
@@ -766,7 +769,10 @@ the grid's noise is relative to the channel range.
 cells; the pre-registration names one easiest cell.
 \item \emph{Order of reporting.} The pre-registration says O3 is reported first; the paper leads
 with O1, where the confirmatory test lives.
-\item \emph{Analyses run late or not run.} The held-out fidelity of the isotherm-free library
+\item \emph{Analyses run late or not run.} The pre-registered mechanistic predictors (the
+conditioning of the library per cell) were computed only after the verdicts, as E5 (Supplementary Note 1),
+as the singular values of the standardised pair $\{q, \qsm\}$ and the condition number of the whole library.
+The held-out fidelity of the isotherm-free library
 (Lib-A) was declared but computed only after the verdicts (reported below in this Note). Placing the closest prior
 study on the map was done only after the verdicts (Discussion; its Damk\"ohler number from its
 published equations). Applying the best method to measured MOF-303 data (declared exploratory)

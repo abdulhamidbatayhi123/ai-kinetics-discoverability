@@ -8,7 +8,7 @@ verbatim with their original numbers; new Paper 2 entries continue from B85. Com
 the copied entries are the original ones: `COMMIT_MAP.tsv` maps each to its commit here. The
 run log `p2_generate.log` that B79 cites is now `logs/p2_generate.log`.
 
-B76 to B85 were caught before any grid result existed, so none reached a reported result. B86 to B91 were found while the grid ran or after its first verdicts; each is corrected by a dated amendment or a code fix, and the earlier results are kept beside the corrected ones (`*_asrun`, `*_preB90`, `p2_e6_modelselect_v1`).
+B76 to B84 were caught before any grid result existed, and B85 (a provenance field missing from three results files) was found while the grid ran; none reached a reported result. B86 to B91 were found while the grid ran or after its first verdicts; each is corrected by a dated amendment or a code fix, and the earlier results are kept beside the corrected ones (`*_asrun`, `*_preB90`, `p2_e6_modelselect_v1`).
 
 | # | Defect | How it was caught |
 |---|---|---|

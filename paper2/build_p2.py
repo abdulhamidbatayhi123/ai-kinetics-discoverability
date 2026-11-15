@@ -249,23 +249,7 @@ def bindings():
     lo10, hi10 = [x for x in b10 if x < 1], [x for x in b10 if x > 1]
     out += [("E7 bias at Da 10", f"to {min(lo10):.2f} and {min(hi10):.2f} to {max(hi10):.2f} times its true value at $"
              + BS + "Da = 10$" if f"{min(lo10):.2f}" == f"{max(lo10):.2f}" else "E7 low bias differs between noise levels")]
-    e8 = load("results/p2_e8_summary.json")
-    sh = {"disc": [], "select": [], "ident": []}
-    gap400 = []
-    for key in {k.rsplit("|", 1)[0] for k in e8}:
-        a, b = e8[key + "|n_t=200"], e8[key + "|n_t=400"]
-        for q in ("disc", "select"):
-            sh[q].append(math.log10(b["da_" + q] / a["da_" + q]))
-        if b["da_ident"] is not None:   # the slice beyond the grid at 400 is printed in the SI (si_bindings)
-            sh["ident"].append(math.log10(b["da_ident"] / a["da_ident"]))
-            gap400.append(math.log10(b["da_ident"] / b["da_disc"]))
-    out += [("E8 every boundary up or unchanged", "moved to higher $" + BS + "Da$ or stayed"
-             if min(min(v) for v in sh.values()) >= 0 and min(min(v) for v in sh.values()) == 0
-             else "E8 a boundary moved down, or none stayed"),
-            ("E8 smallest gap at 400", f"still failed at least {math.floor(min(gap400) * 10) / 10:.1f} decades"),
-            ("E8 verdict words at 400", "discovery still failed" if all(
-                v["words"] == "discovery fails before identifiability" for k, v in e8.items()
-                if v["da_ident"] is not None) else "E8 words differ")]
+    # E8 (400 times) is reported in the Supplementary only since 2026-11-16 (si_bindings: its table and words)
     # E9 and E10 are reported in the Supplementary only (si_bindings)
     e3 = load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
     out += [("E3 coverage", f"only about {round(e3 * 100)}{BS},{BS}%")]
@@ -293,7 +277,7 @@ def bindings():
     b55 = [s["da_disc"] for k, s in h2b.items() if k.startswith("sigma=0.005|eps=0.005|") and s["da_disc"]]
     out.append(("0.5/0.5 boundary range", f"to about {min(b55):.1f} to {max(b55):.1f} (in the"))
     out.append(("0.5/0.5 slices with a boundary", f"in the {({3: 'three'}).get(len(b55), len(b55))} slices that kept a boundary"))
-    out.append(("0.5/0.5 largest boundary", f"every discovery boundary on the grid fell to ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
+    out.append(("0.5/0.5 largest boundary", f"every fitted discovery boundary fell to ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
     # pre-submission revision 2026-11-11: new descriptive checks, M6, S1 on the map, corrections counts
     kh = load("results/p2_kh.json")
     out += [("kh at Da 316", f"($kh = {kh['kh_by_level']['316.227766']:.1f}$,"),
@@ -323,7 +307,7 @@ def bindings():
     dsh = [math.log10(b["da_disc"] / a["da_disc"]) for b, a in pairs]
     ish = [math.log10(b["da_ident"] / a["da_ident"]) for b, a in pairs if b["da_ident"] and a["da_ident"]]
     no_id = [b for b, _ in pairs if b["da_ident"] is None]
-    out += [("E11 gaps (abstract)", f"and {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} with 2,000 (three of four\nconditions re-run)"
+    out += [("E11 gaps (abstract)", f"and by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} where both were found again with\n2,000."
              if min(g11) >= 0.25 and len(g11) == 3 and len(pairs) == 4 else "E11 gap below threshold"),
             ("E11 slices with both (Introduction)", "in all\nthree slices that kept both boundaries when re-run"
              if len(g11) == 3 else "E11 slices with both differ"),
