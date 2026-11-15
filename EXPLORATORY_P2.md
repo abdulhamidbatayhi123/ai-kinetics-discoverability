@@ -344,3 +344,11 @@ so. Otherwise the paper reports, per slice, how far PSE's last level with at lea
 Da*_ident, as it does for M7. Descriptive, no verdict; it changes no confirmatory result.
 **Pilot.** Up to three rows may be run first to time the job and check the expression parsing; they are not
 reported and are recomputed with the rest.
+**E14 implementation, fixed before the pilot (2026-11-16, kaggle_e14/make_kernels.py).** PSE commit 7105cab (2026-05-17).
+Feature columns are passed under placeholder names x0..x6 (PSE refuses names such as c). The target is multiplied by
+t_stoich so that the coefficients are of order Da; a constant factor changes neither the terms nor the coefficient
+ratio that success_L1 checks. Constants are pruned to 6 digits (prun_ndigit = 6; PSE's custom-data example uses 2,
+which would round coefficients of order 1e-4 away). The expression scored is the first by PSE's reward ranking
+(display_expr_table(sort_by="reward")). One departure from the declaration above: the time limit is 30 s per fit, not
+60 s, because 1,080 fits at 60 s (about 18 GPU-hours) exceed the weekly Kaggle GPU allowance shared with other work;
+the pilot checks that 30 s recovers the law where M7 does. Six GPU kernels of twelve groups each.

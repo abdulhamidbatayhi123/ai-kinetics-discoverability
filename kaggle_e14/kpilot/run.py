@@ -1,0 +1,98 @@
+import glob, json, os, random, shutil, subprocess, sys, time, zipfile
+GROUPS = ['langmuir_L1_pe1_da1|0.005|0.0', 'langmuir_L1_pe1_da31.6|0.02|0.02', 'step_L1_pe1_da3.16|0.005|0.0']
+REPS = [15]
+PART = 'pilot'
+PSE_COMMIT = "7105caba63e754150dd3b160443984456ec99cd7"
+TIME_LIMIT = 30
+W = "/kaggle/working"
+kit = W + "/kit"
+if not os.path.exists(kit):
+    zips = glob.glob("/kaggle/input/**/kite8.zip", recursive=True)
+    if zips:
+        zipfile.ZipFile(zips[0]).extractall(kit)
+    else:
+        src = [os.path.dirname(p) for p in glob.glob("/kaggle/input/**/p2_e8_sampling.py", recursive=True)][0]
+        shutil.copytree(src, kit)
+subprocess.run([sys.executable, "-m", "pip", "install", "-q", "deap==1.3.3", "symengine==0.11.0", "click", "pyyaml"],
+               check=True)
+pse = W + "/PSE"
+if not os.path.exists(pse):
+    subprocess.run(["git", "clone", "-q", "https://github.com/intell-sci-comput/PSE.git", pse], check=True)
+    subprocess.run(["git", "-C", pse, "checkout", "-q", PSE_COMMIT], check=True)
+OPS = ["Add", "Mul", "Sub", "Identity"]
+os.chdir(pse)
+mask = "dr_mask/3_5_[" + "_".join(OPS) + "]_mask.npy"
+if not os.path.exists(mask):
+    subprocess.run([sys.executable, "utils/gen_dr_mask.py", "--n_symbol_layers=3", "--n_inputs=5",
+                    "--ops=" + str(OPS).replace(" ", "")], check=True)
+sys.path.insert(0, pse)
+sys.path.insert(1, kit)
+import numpy as np
+import sympy as sp
+import torch
+from model.regressor import PSRN_Regressor
+os.chdir(kit)
+from p2_observe import observe
+from p2.features import derivative, lib_b
+from p2.metric import success_L1
+cells = json.load(open("data/p2/manifest.json"))["cells"]
+NAMES = ["c", "q", "T", "c*q", "q^2", "c^2", "qstar"]
+PH = [f"x{i}" for i in range(len(NAMES))]
+dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print("device", dev, flush=True)
+
+def bridge(expr_str):
+    expr = sp.expand(sp.sympify(expr_str))
+    syms = {sp.Symbol(p): n for p, n in zip(PH, NAMES)}
+    back = {sp.Symbol(p): sp.Symbol(n) for p, n in zip(PH, NAMES)}
+    co = {n: 0.0 for n in NAMES}
+    for term in sp.Add.make_args(expr):
+        c, rest = term.as_coeff_Mul()
+        if rest in syms and rest.is_Symbol:
+            co[syms[rest]] += float(c)
+        else:
+            key = str((term if rest == 1 else rest).xreplace(back))
+            co[key] = co.get(key, 0.0) + float(c if rest != 1 else term)
+    return co, str(expr.xreplace(back))
+
+def one(name, sigma, eps, rep):
+    obs = observe(name, rep, sigma, eps, "O1")
+    ch = obs["channels"]
+    rows = []
+    for j in range(ch["q"].shape[0]):
+        c, q, T = ch["c"][j], ch["q"][j], ch["T"][j]
+        F = lib_b(c, q, T, obs["qstar_meas"](c, T))
+        rows.append((np.column_stack([F[n] for n in NAMES]), derivative(q, obs["t"])))
+    X = np.concatenate([r[0] for r in rows])
+    y = np.concatenate([r[1] for r in rows]) * cells[name]["t_stoich_s"]
+    random.seed(rep); np.random.seed(rep); torch.manual_seed(rep)
+    reg = PSRN_Regressor(variables=PH, dr_mask_dir=pse + "/dr_mask", use_const=True, device=str(dev),
+                         token_generator="GP", token_generator_config=pse + "/token_generator_config.yaml",
+                         stage_config={"default": {"operators": OPS, "time_limit": TIME_LIMIT, "n_psrn_inputs": 5,
+                                                   "n_sample_variables": 3}, "stages": [{}]})
+    Xt = torch.from_numpy(X).to(dev).to(torch.float32)
+    yt = torch.from_numpy(y.reshape(-1, 1)).to(dev).to(torch.float32)
+    t0 = time.time()
+    reg.fit(Xt, yt, n_down_sample=100, use_threshold=False, threshold=1e-20, probe=None, prun_const=True,
+            prun_ndigit=6, top_k=10)
+    top = reg.display_expr_table(sort_by="reward")[0]
+    co, expr = bridge(top[0])
+    return {"success": bool(success_L1(co)), "support": sorted(k for k, v in co.items() if v != 0.0),
+            "expr": expr, "sec": time.time() - t0}
+
+out = W + f"/e14_part{PART}.json"
+res = {"rows": {}, "pse_commit": PSE_COMMIT, "time_limit": TIME_LIMIT, "groups": GROUPS}
+for g in GROUPS:
+    name, s, e = g.split("|")
+    for rep in REPS:
+        key = f"{name}|{s}|{e}|{rep}|pse|strong"
+        os.chdir(pse)
+        try:
+            res["rows"][key] = one(name, float(s), float(e), rep)
+        except Exception as ex:          # a failure, never dropped (A2)
+            res["rows"][key] = {"success": False, "error": f"{type(ex).__name__}: {ex}"}
+        os.chdir(kit)
+        json.dump(res, open(out, "w"))
+        print(key, res["rows"][key].get("success"), res["rows"][key].get("expr", res["rows"][key].get("error", ""))[:120],
+              round(res["rows"][key].get("sec", 0), 1), flush=True)
+print("DONE", len(res["rows"]), flush=True)
