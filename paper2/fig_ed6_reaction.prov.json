@@ -1,5 +1,5 @@
 {
- "figure": "fig_ed9_reaction",
+ "figure": "fig_ed6_reaction",
  "size_mm": [
   183.0,
   58.0
@@ -8,12 +8,12 @@
   5.5,
   8.0
  ],
- "made": "2026-11-15 13:31:39",
- "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
- "script": "fig_p2_ed9_reaction.py",
- "script_sha256": "de215c8729b7f6d1e00b1ff8190e191dfb0d350da320b815122e2682804a9113",
+ "made": "2026-11-15 21:41:40",
+ "style_sha256": "14bbcd3706613ddae9db512d0459f282b547c29aaf2cd39783eb90dbbfddce4e",
+ "script": "fig_p2_ed6_reaction.py",
+ "script_sha256": "c01a9a69161da3fa8805db0c64021b9dc08cf455712f6939f75ac02f0f4b75f6",
  "inputs": {
-  "results/p2_e12b_summary.json": "1f9a72dab2a856ed5b3c93cc76cc2540a82fba921112762ec2298cd0760a5c5a",
-  "results/p2_e12_noisefree.json": "368bc89b79cdaa2242dd713f1f4f8cf9970e4952cc50679434994ba81a894927"
+  "results/p2_e12b_summary.json": "e2c28d3dfc17d33fd85ee7f3612b61dc345a2b43b412bf3945f72a4b618512db",
+  "results/p2_e12_noisefree.json": "eb39ca2478dd273d4e482169aa1f90378ffc0a8c54d5f780740fd1a1a45d20e8"
  }
 }

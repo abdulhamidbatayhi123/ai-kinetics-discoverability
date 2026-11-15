@@ -1,5 +1,5 @@
 {
- "figure": "fig_ed7_coverage",
+ "figure": "fig_ed8_coverage",
  "size_mm": [
   183.0,
   70.0
@@ -8,11 +8,11 @@
   5.5,
   8.0
  ],
- "made": "2026-11-12 19:00:48",
- "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
+ "made": "2026-11-15 21:44:44",
+ "style_sha256": "14bbcd3706613ddae9db512d0459f282b547c29aaf2cd39783eb90dbbfddce4e",
  "script": "fig_p2_extended.py",
- "script_sha256": "1519c89d5f4b832b73d99fbf17a76715bedf51344cbbe546614d0dc3ffa3dfcc",
+ "script_sha256": "cadd75432175dbe206a1012e62a06d4fbbc5116aaf01994a03e12ce1404c7b9d",
  "inputs": {
-  "results/p2_e3_coverage.json": "8ac415654ca842ed37eb6df9365413a3a62c61d6cfa69eaa29fa9379622772d7"
+  "results/p2_e3_coverage.json": "47d8cc02e01e7dc330b4fcbfb3a5b1b2b7dd65185932414f6370b5422bf2aaac"
  }
 }

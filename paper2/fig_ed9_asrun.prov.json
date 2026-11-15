@@ -1,5 +1,5 @@
 {
- "figure": "fig_ed8_asrun",
+ "figure": "fig_ed9_asrun",
  "size_mm": [
   183.0,
   70.0
@@ -8,13 +8,13 @@
   5.5,
   8.0
  ],
- "made": "2026-11-12 19:00:58",
- "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
+ "made": "2026-11-15 21:45:20",
+ "style_sha256": "14bbcd3706613ddae9db512d0459f282b547c29aaf2cd39783eb90dbbfddce4e",
  "script": "fig_p2_extended.py",
- "script_sha256": "1519c89d5f4b832b73d99fbf17a76715bedf51344cbbe546614d0dc3ffa3dfcc",
+ "script_sha256": "cadd75432175dbe206a1012e62a06d4fbbc5116aaf01994a03e12ce1404c7b9d",
  "inputs": {
-  "results/p2_verdicts_asrun.json": "fefa4335465305a175778aa5642d77d5c4595adc01da9993d1d25ec057f3fa04",
-  "results/p2_verdicts.json": "04bc6f4aa4be68549480c76809071d4ba51191bba0d6a261f857a7ed915eaea7",
-  "results/p2_verdicts_preB90.json": "05e9cc5faa98649b759245b06feeaabb8567fe3386fc90b385d3a1c96a7e86f3"
+  "results/p2_verdicts_asrun.json": "5034eabf073f304d8520e65eb8676051c16167e29cc42a165efd1a9fd6348c0b",
+  "results/p2_verdicts.json": "2952af38f89385b6418b6ad5b96f5efb0f10e22099657133e8fef40172837636",
+  "results/p2_verdicts_preB90.json": "10015e6f97e00f7ee7027873ee50e27fa735b9b95468a435c338ee5c09419dab"
  }
 }

@@ -8,14 +8,14 @@
   5.8,
   8.0
  ],
- "made": "2026-11-12 19:15:36",
- "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
+ "made": "2026-11-15 21:43:08",
+ "style_sha256": "14bbcd3706613ddae9db512d0459f282b547c29aaf2cd39783eb90dbbfddce4e",
  "script": "fig_p2_results.py",
- "script_sha256": "d1df516c20c9cc62cc90615d1542a2f49788686a0283458f57ccd2ef78ab47a3",
+ "script_sha256": "dc91809f44c2068c9882d42ed935820cc304fd0b8589b83136d094c0489f6e77",
  "inputs": {
-  "results/p2_verdicts.json": "04bc6f4aa4be68549480c76809071d4ba51191bba0d6a261f857a7ed915eaea7",
-  "results/p2_figdata.json": "2af9c6d321a3dd7e157a0fc9a970ce21d29504db38ca50ca92e0d1fbfd449d1b",
-  "data/p2/manifest.json": "2742ff22b55f0fa6302e0707a2bfcef9949a809104c853755b3dd4bb325bf270",
-  "results/p2_e6_modelselect.json": "c231345222f311f6bd5676debbc945516528d84155cea3620c8916eebc68f54c"
+  "results/p2_verdicts.json": "2952af38f89385b6418b6ad5b96f5efb0f10e22099657133e8fef40172837636",
+  "results/p2_figdata.json": "a3704bd598a2a0d083d5b2d5e61e39764e8f32c231e0a4a809f2207c7e6a44aa",
+  "data/p2/manifest.json": "1b0f61179eaab5582c93f0846d231d15e241792214ce509ff2a145e8bfe206d0",
+  "results/p2_e6_modelselect.json": "baa83fa2b6976e8bb593ff19267650ea7ebb22e465f0dcb227982b920c70d222"
  }
 }

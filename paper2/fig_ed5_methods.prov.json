@@ -8,15 +8,15 @@
   5.5,
   8.0
  ],
- "made": "2026-11-12 19:00:56",
- "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
+ "made": "2026-11-15 21:45:12",
+ "style_sha256": "14bbcd3706613ddae9db512d0459f282b547c29aaf2cd39783eb90dbbfddce4e",
  "script": "fig_p2_extended.py",
- "script_sha256": "1519c89d5f4b832b73d99fbf17a76715bedf51344cbbe546614d0dc3ffa3dfcc",
+ "script_sha256": "cadd75432175dbe206a1012e62a06d4fbbc5116aaf01994a03e12ce1404c7b9d",
  "inputs": {
-  "results/p2_figdata.json": "2af9c6d321a3dd7e157a0fc9a970ce21d29504db38ca50ca92e0d1fbfd449d1b",
-  "results/p2_extra_m9.json": "eb0fd3c763f58f84d250b838b8b534ab789d713447e25d6153772d1258a5cbab",
-  "results/p2_e2_m8.json": "424165ac25f2dca7604ae04bcc62257d50f5ef06f38c3eda55d714f75e938bd5",
-  "results/p2_extra_m1.json": "b75620a45061eab7845f5964317e33f48d1ded2fb752701b25704331aa6c75a4",
-  "data/p2/manifest.json": "2742ff22b55f0fa6302e0707a2bfcef9949a809104c853755b3dd4bb325bf270"
+  "results/p2_figdata.json": "a3704bd598a2a0d083d5b2d5e61e39764e8f32c231e0a4a809f2207c7e6a44aa",
+  "results/p2_extra_m9.json": "faf9df02620f6ccc2c57788dc017740432724aa36898188d9e61325863b712cd",
+  "results/p2_e2_m8.json": "27d2c3e5bcbc3d3dd63db15b2e934cb90d84061caf61d2a57aab5bb0af2317a8",
+  "results/p2_extra_m1.json": "49d302344f8af4c969ae3aaa1dd02202c660ea8961ab5b07891655b515b246a4",
+  "data/p2/manifest.json": "1b0f61179eaab5582c93f0846d231d15e241792214ce509ff2a145e8bfe206d0"
  }
 }

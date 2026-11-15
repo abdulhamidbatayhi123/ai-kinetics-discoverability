@@ -93,11 +93,38 @@ def coloured_text(fig):
 
 
 def _sha(path):
-    h = hashlib.sha256()
+    """SHA-256 of a file. Text files (no NUL byte in the first 8 kB) are hashed with CRLF line endings
+    normalised to LF, so a hash does not depend on how a clone was checked out; binary files are hashed
+    as they are."""
     with open(path, "rb") as f:
-        for b in iter(lambda: f.read(1 << 20), b""):
-            h.update(b)
-    return h.hexdigest()
+        data = f.read()
+    if b"\0" not in data[:8192]:
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
+
+
+def check_prov(prov_path):
+    """Compare one *.prov.json with the files it names. Returns a list of mismatches (empty when the
+    figure was drawn from the current style file, script and inputs)."""
+    with open(prov_path, encoding="utf-8") as f:
+        prov = json.load(f)
+    bad = []
+    if prov.get("style_sha256") != _sha(__file__):
+        bad.append("p2_figstyle.py changed")
+    script = prov.get("script")
+    if not script or not os.path.exists(script):
+        bad.append(f"script {script!r} not found")
+    elif prov.get("script_sha256") != _sha(script):
+        bad.append(f"{script} changed")
+    for p, h in (prov.get("inputs") or {}).items():
+        if not os.path.exists(p):
+            bad.append(f"input {p} missing")
+        elif _sha(p) != h:
+            bad.append(f"input {p} changed")
+    stem = prov_path[: -len(".prov.json")]
+    if prov.get("figure") != os.path.basename(stem):
+        bad.append(f"records figure {prov.get('figure')!r}, file is {os.path.basename(stem)!r}")
+    return bad
 
 
 def save(fig, stem, inputs=(), allow_coloured_text=()):

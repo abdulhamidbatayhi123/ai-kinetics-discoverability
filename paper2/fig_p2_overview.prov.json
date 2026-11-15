@@ -8,14 +8,14 @@
   5.4,
   8.0
  ],
- "made": "2026-11-15 15:05:36",
- "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
+ "made": "2026-11-15 21:40:40",
+ "style_sha256": "14bbcd3706613ddae9db512d0459f282b547c29aaf2cd39783eb90dbbfddce4e",
  "script": "fig_p2_overview.py",
  "script_sha256": "b4a726249b42f5b78befe5afb3d81ff4c1b7c2d8f60697d74b177059e5f9c7a1",
  "inputs": {
-  "PREREG_P2_discoverability.md": "24dc33ec317e14dfff8bc9d190118e70a283400f235ad5fd34387fbfda0c112a",
-  "data/p2/manifest.json": "2742ff22b55f0fa6302e0707a2bfcef9949a809104c853755b3dd4bb325bf270",
-  "p2_generate.py": "0e4c3a1da7d827b318ed859305fe9da6b4405b8b9caae0c9803e2e6e9abca296",
-  "isotherm.py": "48781be8651b3778f390bc9788598b1e12d895a1b0571477d1be01d68bc6cc71"
+  "PREREG_P2_discoverability.md": "2a1038ad68df7cde412444a2aca563f0b00a9ef0858a16325c16bd1b537fa9aa",
+  "data/p2/manifest.json": "1b0f61179eaab5582c93f0846d231d15e241792214ce509ff2a145e8bfe206d0",
+  "p2_generate.py": "ba4cae71ff7df64e6c4ac5e83dd3498a252dbc9ea183a874e0e0c3c046e7b818",
+  "isotherm.py": "083603fc5171dd20d5c864421fec575fafc0f9609b1274cbc9c95dc4de6023b3"
  }
 }

@@ -1,4 +1,4 @@
-"""Paper 2, Figure 3: what the data look like where discovery works, where only identifiability
+"""Paper 2, Figure 2: what the data look like where discovery works, where only identifiability
 works, and where neither does (real observations, no schematic).
 
 Langmuir sorbent, Pe ~94 (pe_mult 1.0), noise 2 %, exact isotherm, at Da = 0.316, 31.6 and 1000.

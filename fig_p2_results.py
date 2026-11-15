@@ -1,4 +1,4 @@
-"""Paper 2, Figures 2-4 (display items 2-4 of paper2/ARTICLE_PLAN.md), drawn from results only.
+"""Paper 2, Figures 3 and 4 and Extended Data Fig. 4, drawn from results only.
 
 Reads results/p2_verdicts.json (p2_analyze.py: boundaries, intervals, words), the Da levels of
 data/p2/manifest.json, and results/p2_figdata.json (p2_figdata.py: the per-level fractions the
@@ -186,7 +186,7 @@ def _da_axis(ax, da_levels):
     ax.set_xticks(np.arange(np.floor(x.min()), np.ceil(x.max()) + 1))
 
 
-# ---- Figure 2: the map -----------------------------------------------------------------
+# ---- the map: Fig. 3 of the paper (function fig2: the drafting number) -------------------
 def _h2b_curve_panel(ax, V, FD, iso, pe, noise, da_levels):
     x0, x1 = np.log10(da_levels[0]), np.log10(da_levels[-1])
     have_fd = bool(FD and FD.get("h2b"))
@@ -344,7 +344,7 @@ def fig2(V, FD, da_levels, stem, noise=DISPLAY_NOISE, pe=DISPLAY_PE):
     return _save(fig, stem)
 
 
-# ---- Figure 3: H2a collapse ------------------------------------------------------------
+# ---- H2a collapse: Extended Data Fig. 4 (function fig3: the drafting number) ------------
 def _cond_label(cond):
     obs, iso, pe, m = _parse_cond(cond)
     return f"{obs}, {ISO_LABEL.get(iso, iso).replace('MOF-303-like ', '')}, {pe_label(pe)}, {METHOD_LABEL.get(m, m)}"
@@ -456,7 +456,7 @@ def fig3(V, FD, stem):
     return _save(fig, stem)
 
 
-# ---- Figure 4: methods and H2c ---------------------------------------------------------
+# ---- methods and H2c: Fig. 4 of the paper ---------------------------------------------
 def _methods_panel(ax, FD, iso, s, e, pe, da_levels):
     k = _key(s, e, iso, pe)
     d = ((FD or {}).get("methods") or {}).get(k)
