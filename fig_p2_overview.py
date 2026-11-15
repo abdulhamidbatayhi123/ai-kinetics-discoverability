@@ -211,8 +211,8 @@ def main():
             ("H2c", "does errors-in-variables fitting move it?", "confirmatory"),
             ("", "which methods discover the law, and where", "descriptive"),
             ("", "choice among three candidate laws by likelihood", "post hoc"),
-            ("", "ten times more observations, three slices", "exploratory"),
-            ("", "second system: reversible reaction, stirred tank", "exploratory"),
+            ("", "ten times more observations, three slices", "post hoc"),
+            ("", "second system: reversible reaction, stirred tank", "post hoc"),
             ("", "O2 and O3: probes without uptake, outlet only", "descriptive"),
             ("H2d", "loading-dependent rate, step isotherm", "exploratory")]
     for i, (h, txt, kind) in enumerate(rows):

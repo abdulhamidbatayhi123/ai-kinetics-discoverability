@@ -307,7 +307,7 @@ def bindings():
     dsh = [math.log10(b["da_disc"] / a["da_disc"]) for b, a in pairs]
     ish = [math.log10(b["da_ident"] / a["da_ident"]) for b, a in pairs if b["da_ident"] and a["da_ident"]]
     no_id = [b for b, _ in pairs if b["da_ident"] is None]
-    out += [("E11 gaps (abstract)", f"and by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} where both were found again with\n2,000."
+    out += [("E11 gaps (abstract)", f"and by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} where both were found again with\n2,000 (post hoc)."
              if min(g11) >= 0.25 and len(g11) == 3 and len(pairs) == 4 else "E11 gap below threshold"),
             ("E11 slices with both (Introduction)", "in all\nthree slices that kept both boundaries when re-run"
              if len(g11) == 3 else "E11 slices with both differ"),

@@ -83,7 +83,7 @@ def main():
         ax.plot([np.log10(v["Da_low"]), np.log10(v["Da_high"])], [y, y], color=S.C["dark"], lw=3.0,
                 solid_capstyle="butt")
         yt.append(y)
-        yl.append(f"{src.replace(' et al.', ' et al.')}, {v['system'].split(' (')[0]}")
+        yl.append(f"{src}, {v['system'].split(' (')[0]}".replace("CO2", "CO$_2$"))
         y -= 0.62
     for da, lab, dy in ((S1["Da"], "Langmuir: fails", 0.13), (S1["sips_Da"], "Sips: succeeds", -0.13)):
         ax.plot(np.log10(da), y + dy, marker="D" if "Sips" in lab else "o", ms=4, color=S.C["dark"],
@@ -92,10 +92,22 @@ def main():
             va="center")
     yt.append(y)
     yl.append("Santana et al. 2023 (simulated; filled: Langmuir fails, open: Sips succeeds)")
+    # the Discussion's three steps at 2 % noise (exact isotherm), edges read from that row's plotted boundaries
+    d2, c2, i2 = ranges("0.02", "0.0", "da_disc"), choice_range("0.02"), ranges("0.02", "0.0", "da_ident")
+    edges = [LO, d2[1], c2[1], i2[1]]
+    assert edges == sorted(edges), edges
+    yb = 7.95
+    for (a, b), lab, shade in zip(zip(edges[:-1], edges[1:]),
+                                  ("discover", "choose a law", "assume it; estimate k"),
+                                  ("#d9e6f2", "#e3e3e3", "#f6dfd2")):
+        ax.add_patch(plt.Rectangle((np.log10(a), yb - 0.17), np.log10(b) - np.log10(a), 0.34, facecolor=shade,
+                                   edgecolor=S.C["dark"], lw=0.5, zorder=2))
+        ax.text((np.log10(a) + np.log10(b)) / 2, yb, lab, ha="center", va="center", fontsize=5.6, zorder=3)
+    ax.text(np.log10(LO) - 0.05, yb, "at 2 % noise:", ha="right", va="center", fontsize=6)
     ax.set_yticks(yt)
     ax.set_yticklabels(yl, fontsize=6)
     ax.set_xlim(X0, X1)
-    ax.set_ylim(y - 0.6, 7.75)
+    ax.set_ylim(y - 0.6, 8.25)
     ax.set_xticks(range(-1, 5))
     ax.set_xlabel(r"$\log_{10}$ Da (Da = $k\,t_{stoich}$)")
     ax.tick_params(axis="y", length=0)

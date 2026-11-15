@@ -49,9 +49,12 @@
 \maketitle
 
 \begin{abstract}
-How much harder discovering a law is than estimating its coefficient from the same data is rarely measured. In pre-registered simulations of adsorption columns, across four decades of the Damk\"ohler number (uptake rate over front passage),
+Equation-discovery methods promise to learn governing laws from data, but whether data that fix a law's
+coefficient also reveal the law is rarely measured. In pre-registered simulations of adsorption columns, across four decades of the Damk\"ohler number (uptake rate over front passage),
 dispersion, noise and isotherm error, we compared where the best sparse or symbolic regression stopped recovering the rate law from interior probes with where its rate constant became unidentifiable. Wherever both limits were found (37 of 96 conditions), discovery failed first, by 1.6 to 3.7 decades with 200 observations per run and by 0.7 to 2.0 where both were found again with
-2,000. A 5\,\% isotherm error kept discovery below 50\,\% at every rate. In a reversible reaction, discovery failed under noise at every rate, leaving no gap to measure (both post hoc). Column data can estimate an assumed law's rate constant long after they can no longer reveal the law.
+2,000 (post hoc). A 5\,\% isotherm error kept discovery below 50\,\% at every rate. Column data can
+estimate an assumed law's rate constant long after they can no longer reveal the law, so a discovered
+law needs its own test of discoverability.
 \end{abstract}
 % <= 150 words (Nature Computational Science / Nature Chemical Engineering Article format).
 % Numbers: results/p2_verdicts.json H2b; results/p2_ident_robustness.json; H2b_O2_O3_descriptive.
@@ -62,11 +65,12 @@ dispersion, noise and isotherm error, we compared where the best sparse or symbo
 % ---- Introduction (no heading in the Article format; target about 550 words) ----
 Equation-discovery methods aim to learn a governing law itself from data, not only its
 coefficients: sparse regression over a library of candidate terms \citep{brunton2016,rudy2016}
-and its weak-form \citep{messenger2021ode,reinbold2020}, ensemble \citep{fasel2022} and exact
-best-subset \citep{bertsimas2022} variants, symbolic regression
+and its weak-form \citep{messenger2021ode,reinbold2020}, ensemble \citep{fasel2022}, Bayesian \citep{fung2025} and exact best-subset
+\citep{bertsimas2022} variants, symbolic regression
 \citep{cranmer2023,udrescu2020,ruan2026,yu2026}, bi-level identification \citep{li2025bilevel} and
 neural networks embedded in the governing equations \citep{santana2023}. Discovering a law is a
-stricter task than estimating its coefficient, yet the two are rarely compared on the same data.
+stricter task than estimating its coefficient, yet how much more it demands of the same data has
+rarely been measured.
 Adsorption columns are a sharp test. A fixed-bed experiment reports concentrations and temperatures
 over time, most often at the outlet, and what an engineer needs from it is the uptake rate law,
 usually the linear driving force (LDF), $\partial q/\partial t = k\,(\qs(c,T) - q)$, with $q$ the
@@ -90,10 +94,10 @@ Equation discovery has limits of its own. On a single transient that settles ont
 manifold, as a breakthrough run does, the candidate terms become nearly collinear
 \citep{stanhope2014,gallo2026,delgado2025}. Noise induces phase transitions in what can be
 recovered \citep{klishin2024,fajardo2023}, some classes of dynamics cannot be discovered at all
-\citep{shumaylov2025}, and success maps against sampling and noise exist for biological data \citep{nardini2020}. Discovery has been coupled to identifiability by keeping
+\citep{shumaylov2025}, and success maps against sampling and noise exist for benchmark systems and biological data
+\citep{egan2024,nardini2020}. Discovery has been coupled to identifiability by keeping
 only identifiable models \citep{massonis2023}, identifiability has been extended from parameters
-to unknown functions \citep{loman2026}, and kinetic rate laws have been discovered in reaction
-engineering \citep{servia2024}. How much harder discovery is, where, for which methods, and from which measurements
+to unknown functions \citep{loman2026}, and kinetic rate laws have been discovered in reaction engineering \citep{hoffmann2019,servia2024}. How much harder discovery is, where, for which methods, and from which measurements
 has not, to our knowledge, been measured.
 
 The question matters most where the law is not the textbook one: in the water-harvesting framework MOF-303,
@@ -111,8 +115,8 @@ decades of $\Da$, three levels of axial dispersion (P\'eclet numbers), four nois
 levels of isotherm error. The column was observed in three ways (Fig.~1): interior probes of
 concentration, uptake and temperature (O1), the same probes without uptake (O2), and the outlet
 alone (O3). Methods from each family above were run in the
-strongest configuration we could verify within declared cost limits. Discovery succeeded when a method returned
-exactly the terms of the true law with the right signs and coefficient ratio. In each slice of the
+strongest configuration we could verify within declared cost limits. Discovery succeeded when a method returned exactly the terms of the true law with the right signs and
+coefficient ratio, the strictest of the usual benchmark criteria \citep{defranca2025}. In each slice of the
 design (one isotherm, P\'eclet number, noise level and isotherm error) we located two boundaries,
 the $\Da$ at which discovery and identifiability fall to 50\,\% success, and called their distance
 in decades the gap.
@@ -186,20 +190,20 @@ and 0.89 decade.
 % (counts 39/0/0); PREREG_P2 A1 (k-aware sensitivity).
 
 \subsection*{The two other confirmatory tests could not be decided}
-The second confirmatory test (H2a) asked whether one ratio, the realised driving force over the
-combined observation and isotherm error ($R = \delta/\varepsilon_{\mathrm{eff}}$), places the
-discovery boundary at the same $R^{*}$ in every condition. Only one of twelve conditions crossed 50\,\% in $R$, so the test has no verdict
-(Extended Data Fig.~4).
+Whether one value of the realised driving force over the combined observation and isotherm error,
+$R = \delta/\varepsilon_{\mathrm{eff}}$, places the discovery boundary (H2a) has no verdict: only one of
+twelve conditions crossed 50\,\% in $R$ (Extended Data Fig.~4).
 % results/p2_figdata.json h2a levels: O1 conditions max 0.51-0.71 (Langmuir and step, Pe 470/94/19,
 % except the one with a crossing); O2 conditions max 0.00-0.20.
 % results/p2_verdicts.json H2a (rstar: one condition, O1|step|pe=5.0|ensemble|weak,
 % 122.85 [112.60, 135.09]; no_crossing: 11 conditions; words "no verdict: fewer than two
 % conditions have a crossing"). pe=5.0 is the D_L x 5 level, Pe about 19.
 
-The third (H2c), whether an errors-in-variables estimator moves the discovery boundary upward
-(18 slices at 2\,\% noise; Methods), has no verdict at any isotherm error: no slice had a boundary
-for both estimators, and the errors-in-variables estimator reached at most 40\,\%. The test was uninformative: its estimator builds on strong-form best-subset selection, which never
-recovered the law even from exact data (next section).
+Whether an errors-in-variables
+estimator moves the boundary up (H2c; 18 slices at 2\,\% noise) has none either: no slice had a
+boundary for both estimators and the errors-in-variables estimator reached at most 40\,\%;
+the test was uninformative, because that estimator builds on strong-form best-subset selection,
+which never recovered the law even from exact data (next section).
 % results/p2_verdicts.json H2c: 18 slices; best_strong_method best_subset|strong in 16, m7|strong in
 % langmuir|pe=1.0|eps=0.02 and step|pe=1.0|eps=0.02 (M7 covers every design cell there, so the
 % coverage rule admits it, p2_analyze.py). results/p2_figdata.json methods, sigma = 0.02:
@@ -215,7 +219,7 @@ Exact best-subset selection in the weak form was the most reliable method, the b
 verdict slices (the weak-form ensemble in the other three): its success crossed 50\,\% within the
 grid in 36 of the 96 slices, against 8 for weak-form sequential
 thresholding and 7 for the weak-form ensemble (Fig.~4c). No strong-form sparse
-method had a crossing in any slice. These regress a smoothed numerical derivative of uptake, and
+method had a crossing in any slice. These regress a smoothed numerical derivative of uptake \citep{wentz2023}, and
 even on exact data they recovered the law only from $\Da \approx 32$ to 316 upward (thresholding,
 ensemble) or never (best-subset selection; post hoc), so their results reflect that derivative as
 well as the data. Symbolic
@@ -286,14 +290,13 @@ separate the two.
 % fig_p2_methods panels a, b and paper2/WRITEUP_NOTES.md "Discovery findings beyond the verdicts";
 % results/p2_extra_m1.json (1 of 9, Da 3.16).
 
-\subsection*{A second system: discovery failed throughout, estimation did not}
-We also compared the two on a
-reversible reaction A + B $\rightleftharpoons$ C in a stirred tank, whose temperature-dependent
-equilibrium constant plays the role of the isotherm (post hoc, declared before it ran; Extended Data Fig.~6). With unequal feeds and exact data,
-weak-form best-subset selection recovered the law at every $\Da$ (post hoc),
-but with 0.5 or 2\,\% noise discovery reached at most 40\,\% of replicates in two declared
-designs, while $k$ stayed identifiable up to $\Da \approx 110$ to 870. The declared positive
-control therefore failed and no gap was read: at low $\Da$ the reverse term is small against the forward term, and at high $\Da$ the two become collinear. The result is consistent with the asymmetry but does not test it.
+\subsection*{A second system}
+A post hoc second system, declared before it ran, replaced the column by a reversible reaction
+A + B $\rightleftharpoons$ C in a stirred tank, whose temperature-dependent equilibrium constant plays the
+role of the isotherm (Extended Data Fig.~6). With unequal feeds and exact data, weak-form best-subset
+selection recovered the law at every $\Da$, but with 0.5 or 2\,\% noise discovery reached at most
+40\,\% of replicates in two declared designs, while $k$ stayed identifiable up to $\Da \approx 110$ to 870.
+The declared positive control therefore failed and no gap was read.
 % results/p2_e12_summary.json, p2_e12b_summary.json (max disc 0.40 / 0.38; da_ident 139-865 / 114-775;
 % positive_control passed false), results/p2_e12_noisefree.json; EXPLORATORY_P2 E12, E12b.
 
@@ -316,7 +319,7 @@ from probes of $c$, $q$ and $T$ ($\Da = 3$ to 32; post hoc).
 % results/p2_verdicts.json H2b_O2_descriptive (96 slices, da_disc null in all);
 % H2b_O2_O3_descriptive (O2_da_ident 56.6 to 286, O3_da_ident 38.3 to 172 over the 8 subgrid slices).
 
-\subsection*{A loading-dependent rate passes the test mostly at $\Da = 1$}
+\subsection*{A loading-dependent rate is selected mostly at $\Da = 1$}
 For the step isotherm a rate falling to 20\,\% of its value across the isotherm step (L2), as
 measured in MOF-303, was also simulated (exploratory). By the pre-registered rule the state dependence
 was discovered mostly at $\Da = 1$ (46 to 60 of 60 replicates; elsewhere at most 58\,\%, above
@@ -367,8 +370,9 @@ check, the smaller singular value of the standardised pair $\{q, \qsm\}$ fell fr
 the larger at $\Da = 0.1$ to about 0.001 at $\Da = 1000$. Exact data still separate the two terms,
 which is why weak-form discovery never failed with exact data (no noise and no isotherm error), but noise and
 isotherm error soon exceed the shrinking direction that distinguishes them. A one-parameter fit
-needs no such direction: it uses the whole curve to place $k$. Whether the asymmetry extends to other laws discovered alongside an imperfectly known constitutive
-input is open: the reversible reaction failed its positive control.
+needs no such direction: it uses the whole curve to place $k$. The same two effects should arise wherever a rate relaxes towards an equilibrium set by a separately
+measured input, such as a reaction equilibrium constant or a solubility; we expect the asymmetry there
+too, untested: the reversible reaction meant to test it failed its positive control.
 % results/p2_e5_conditioning.json (q_qstar_min_over_max_sv 0.71-0.79 at Da 0.1; 0.00065-0.00125 at Da 1000);
 % p2_e5_conditioning.py (EXPLORATORY_P2 E5).
 
@@ -397,8 +401,8 @@ fails, but its Sips readout, $0.198\,\qs - 0.200\,q$, succeeds. That is one real
 
 
 
-All data were simulated by one verified column model with the LDF law as the truth, so the boundaries hold for that model, the two isotherms and the error models used; the second
-system was exploratory and failed its positive control. Real columns add errors in geometry, dispersion and heat transfer that were
+Scoring discovery requires the true law, so all data were simulated, by one verified column model with
+the LDF law as the truth; the boundaries hold for that model, the two isotherms and the error models used. Real columns add errors in geometry, dispersion and heat transfer that were
 held exact here, and real isotherms are rarely known to within 5\,\%, let alone 0.5\,\%; both would be expected to
 lower the discovery boundaries, as would a larger candidate library. Interior probes of uptake
 (O1) are a ceiling that experiments rarely reach. The identifiability criterion measures precision
@@ -424,7 +428,9 @@ MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,
 biased the fitted $k$ to 0.67 and 1.74 to 1.76 times its true value at $\Da = 10$ unseen by its intervals, and lowered the identifiability boundary to $\Da \approx 17$ to 57 (5.6 with a 2\,\% shift),
 so an isotherm whose step is placed to better than 1\,\% relative humidity is worth more than quieter
 sensors. Second, denser sampling, which raised discovery most. Third, the map should be tested on experimental breakthrough data with interior
-probes at moderate $\Da$, where it predicts that discovery first becomes possible.
+probes at moderate $\Da$, where it predicts that discovery first becomes possible. More generally,
+benchmarks and applications of equation discovery should report where a law is discoverable beside
+where its coefficients are identifiable: in these columns the two differed by orders of magnitude.
 % results/p2_e7_summary.json (EXPLORATORY_P2 E7; discovery part, unaffected by B90): best-method
 % success at any Da <= 0.31 (sigma 2 %, shift -1 % RH), 0.27 (+1 %), 0.00 otherwise.
 % Identifiability (B90-corrected, p2_e7_parallel.sh 2026-11-09): da_ident at |shift| 1 % 17.1 to 56.6,
@@ -439,13 +445,15 @@ probes at moderate $\Da$, where it predicts that discovery first becomes possibl
 % ---- Display items (Article format: up to 6) ----
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{fig_p2_overview.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_p2_overview.pdf}}
 \caption{\textbf{Study design.} \textbf{a}, Breakthrough data are simulated by a verified column
 model for a Langmuir sorbent and a MOF-303-like step isotherm (box 1; isotherm shapes drawn from
 the model), over the design grid (box 2), and observed through interior probes with uptake (O1),
 probes without uptake (O2) or the outlet alone (O3) (box 3). The same observations, with the same
 measured isotherm, go to the discovery methods (box 4) and to a profile-likelihood test of $k$
-with the true law given (box 5). Box 6 lists the analyses and their evidence type. \textbf{b}, What
+with the true law given (box 5). Box 6 lists the analyses and their evidence type: confirmatory, a pre-registered test; exploratory,
+declared before the verdicts; post hoc, declared or chosen after them; descriptive, reported without a
+decision rule. \textbf{b}, What
 the confirmatory test compares in each slice: the $\Da$ at which the best discovery method falls
 to 50\,\% success ($\Da^{*}_{\mathrm{disc}}$) and the $\Da$ at which $k$ stops being identifiable
 in half the replicates ($\Da^{*}_{\mathrm{ident}}$); illustrative curves.}
@@ -454,7 +462,7 @@ in half the replicates ($\Da^{*}_{\mathrm{ident}}$); illustrative curves.}
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{fig_p2_examples.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_p2_examples.pdf}}
 \caption{\textbf{What the data look like where discovery works, where only identifiability
 works, and where neither does.} Langmuir sorbent, $\Pe \approx 94$, 2\,\% noise and an exact
 isotherm, at $\Da = 0.32$, 31.6 and 1000 (columns). \textbf{a}--\textbf{c}, A mid-column probe as
@@ -470,7 +478,7 @@ stoichiometric times).}
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{fig_p2_map.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_p2_map.pdf}}
 \caption{\textbf{Discovery fails before identifiability.} \textbf{a},\textbf{b}, Fraction
 of the 45 estimation replicates in which the best discovery method recovered the LDF law
 (filled circles, blue, solid) and in which $k$ was practically identifiable (open squares,
@@ -492,7 +500,7 @@ discovery fails first. Light grey cells have no boundary on the grid for one of 
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{fig_p2_methods.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_p2_methods.pdf}}
 \caption{\textbf{Methods compared.} \textbf{a},\textbf{b}, Fraction of the 45 estimation
 replicates in which each method recovered the law, against $\Da$, at 2\,\% noise and 2\,\%
 isotherm error, $\Pe \approx 94$; \textbf{a}, Langmuir; \textbf{b}, step isotherm; sparse methods: solid lines, weak form; dashed, strong form; symbolic regression, reddish purple;
@@ -510,7 +518,7 @@ regression in this condition) or had an identifiable $k$ (vermilion, dashed), at
 
 \begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{fig_p2_guide.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_p2_guide.pdf}}
 \caption{\textbf{What column data allow, by Damk\"ohler number.} For each condition (probes with uptake, O1; exact isotherm unless stated), bars run from the bottom of the grid ($\Da = 0.1$) to the 50\,\% boundary, and the
 darker end spans that boundary over the isotherms and P\'eclet numbers: discovery by the best method
 (blue), practical identifiability of $k$ (vermilion), and choice of the LDF law among three
@@ -520,7 +528,8 @@ the slices with a boundary (numbers beside the bars, of six); the choice among l
 and 2\,\% noise.
 Below, the $\Da$ ranges of published packed beds (Supplementary Table~1) and the two simulated
 columns of the closest prior study \citep{santana2023}, computed from its published equations, with
-the outcome of its readout under this study's success rule. Shaded, outside the tested range.}
+the outcome of its readout under this study's success rule. Shaded, outside the tested range. Top band: the three steps of the Discussion at 2\,\% noise, with edges at
+that row's largest discovery, choice and identifiability boundaries.}
 \label{fig:guide}
 \end{figure}
 
@@ -890,7 +899,7 @@ The author declares no competing interests.
 \setcounter{figure}{0}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed1_h2b_langmuir.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed1_h2b_langmuir.pdf}}
 \caption{\textbf{Every slice of the confirmatory test, Langmuir sorbent.} Fraction of the 45
 estimation replicates in which the best method recovered the law (blue circles) and in which $k$
 was identifiable (vermilion open squares), against $\log_{10}\Da$; rows, noise $\sigma$ and
@@ -902,13 +911,13 @@ gives the gap in decades.}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed2_h2b_step.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed2_h2b_step.pdf}}
 \caption{\textbf{Every slice of the confirmatory test, MOF-303-like step isotherm.} As Extended
 Data Fig.~1.}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed3_ident.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed3_ident.pdf}}
 \caption{\textbf{Accuracy of the O1 identifiability estimator, and the confirmatory test without
 the top two levels (post hoc).} \textbf{a}, Median ratio of the
 estimated to the true $k$ with exact data ($\sigma = \varepsilon = 0$), against $\Da$, for both
@@ -919,7 +928,7 @@ $\Da = 316$ and 1000); dashed lines, the $-0.25$ decade threshold.}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed4_h2a.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed4_h2a.pdf}}
 \caption{\textbf{The error-ratio test (H2a) could not be decided.} \textbf{a}, Success of the best
 method in each condition against $R = \delta/\varepsilon_{\mathrm{eff}}$, the realised driving
 force over the combined observation and isotherm error, on probes with uptake (O1, dark blue) and
@@ -931,7 +940,7 @@ than two crossings, the test has no verdict.}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed5_methods.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed5_methods.pdf}}
 \caption{\textbf{Every method against $\Da$, and the methods outside the confirmatory pool.}
 \textbf{a}--\textbf{d}, Fraction of the 45 estimation replicates in which each method recovered
 the law, at $\Pe \approx 94$, with 2\,\% noise and an exact isotherm (\textbf{a}, Langmuir;
@@ -943,7 +952,7 @@ neural-network demonstration (one replicate per level).}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed6_reaction.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed6_reaction.pdf}}
 \caption{\textbf{A second system: a reversible reaction in a stirred tank (post hoc).} Fraction of
 the 45 estimation replicates in which the best discovery method recovered the law (blue circles)
 and in which $k$ was identifiable (vermilion open squares), against $\log_{10}\Da$ with $\Da = k\,
@@ -954,7 +963,7 @@ positive control failed, so no gap is read. Lines join the measured fractions.}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed7_h2d.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed7_h2d.pdf}}
 \caption{\textbf{Loading-dependent rate (H2d, exploratory).} MOF-303-like step isotherm, with a
 rate falling to 20\,\% of its value across the step. Best success over the six sparse
 methods and three P\'eclet numbers, an upper bound for any single method, for each noise and
@@ -963,7 +972,7 @@ cells.}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed8_coverage.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed8_coverage.pdf}}
 \caption{\textbf{Precision against coverage of the identifiability criterion (exploratory,
 declared before the verdicts).} Fraction of identifiability rows that meet the criterion (95\,\%
 interval inside $[k/2, 2k]$) and fraction whose interval contains the true $k$, by $\Da$ on O1
@@ -971,7 +980,7 @@ and in total on O2 and O3.}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=\textwidth]{fig_ed9_asrun.pdf}
+\makebox[\textwidth][c]{\includegraphics{fig_ed9_asrun.pdf}}
 \caption{\textbf{Results as first run, after intermediate corrections, and corrected.}
 \textbf{a}, Positive-control fractions as first run (hatched) and corrected; the step isotherm
 failed as first run because of the identifiability search range. \textbf{b}, Slices by verdict as

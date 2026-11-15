@@ -8,10 +8,10 @@
   5.4,
   8.0
  ],
- "made": "2026-11-15 22:55:18",
+ "made": "2026-11-16 01:41:28",
  "style_sha256": "a5aa98eb80fc2bfa01f2de6eb05585e2cc935b5ace342bf107160919e137de6c",
  "script": "fig_p2_overview.py",
- "script_sha256": "eddc5625fa44f08a3621d6b1a79efe7da3a0e9e19420f1396e4d7879d231d05e",
+ "script_sha256": "d960b89be0009a2cd71c988c721ca29dc0aa60b888db32c776f0582ac0f0747d",
  "inputs": {
   "PREREG_P2_discoverability.md": "2a1038ad68df7cde412444a2aca563f0b00a9ef0858a16325c16bd1b537fa9aa",
   "data/p2/manifest.json": "1b0f61179eaab5582c93f0846d231d15e241792214ce509ff2a145e8bfe206d0",

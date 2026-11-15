@@ -317,7 +317,8 @@ def _h2b_wordmap(ax, V):
                           label="withheld (positive control failed)")]
     ov = V.get("H2b_overall", {}).get("words")
     return patches, ("cell numbers: gap $\\log_{10}Da^{*}_{disc} - \\log_{10}Da^{*}_{ident}$ (decade)"
-                     + (f";  overall (two-thirds rule): {ov}" if ov else ""))
+                     + (f";  overall verdict: {ov} ({sum(1 for v in V['H2b'].values() if v.get('gap_decades') is not None)} of "
+                        f"{sum(1 for v in V['H2b'].values() if v.get('gap_decades') is not None)} slices with both boundaries)" if ov else ""))
 
 
 def fig2(V, FD, da_levels, stem, noise=DISPLAY_NOISE, pe=DISPLAY_PE):
@@ -578,7 +579,7 @@ def _h2c_panel(ax, V):
 E6_FILE = "results/p2_e6_modelselect.json"
 
 
-def _e6_panel(ax, FD, da_levels, sigma=0.02, eps=0.0, pe=DISPLAY_PE):
+def _e6_panel(ax, FD, da_levels, sigma=0.02, eps=0.0, pe=DISPLAY_PE, V=None):
     """E6 (post hoc, EXPLORATORY_P2): choosing among three candidate laws (LDF, quadratic driving
     force, pseudo-second order) by output-error likelihood, beside open discovery (best method) and
     identifiability of k, for one noise level and an exact isotherm, both isotherms."""
@@ -601,8 +602,9 @@ def _e6_panel(ax, FD, da_levels, sigma=0.02, eps=0.0, pe=DISPLAY_PE):
         fd = (FD or {}).get("h2b", {}).get(_key(sigma, eps, iso, pe), {})
         if fd.get("disc"):
             xx, p = _frac(fd["disc"])
-            ax.plot(xx, p, color=figstyle.ROLE["disc"], marker=mk, ms=3, lw=1.0,
-                    mfc="white" if iso == "step" else figstyle.ROLE["disc"])
+            bm = (V or {}).get("H2b", {}).get(_key(sigma, eps, iso, pe), {}).get("best_method") or ""
+            col = _method_colour(bm) if bm.startswith("m7") else figstyle.ROLE["disc"]
+            ax.plot(xx, p, color=col, marker=mk, ms=3, lw=1.0, mfc="white" if iso == "step" else col)
         if fd.get("ident"):
             xx, p = _frac(fd["ident"])
             ax.plot(xx, p, color=figstyle.ROLE["ident"], ls="--", marker=mk, ms=3, lw=1.0,
@@ -612,7 +614,8 @@ def _e6_panel(ax, FD, da_levels, sigma=0.02, eps=0.0, pe=DISPLAY_PE):
     ax.set_ylim(-0.03, 1.08)
     ax.set_xlabel(LOG_DA)
     ax.set_ylabel(P_LAB)
-    hd = [Line2D([], [], color=figstyle.ROLE["disc"], marker="o", ms=3, label="open discovery, best method"),
+    hd = [Line2D([], [], color=_method_colour("m7|strong"), marker="o", ms=3,
+                 label="open discovery, best method (symbolic regression here)"),
           Line2D([], [], color=OI["black"], ls="-.", marker="o", ms=3, label="choice among 3 laws (post hoc)"),
           Line2D([], [], color=figstyle.ROLE["ident"], ls="--", marker="o", ms=3, label="k identifiable"),
           Line2D([], [], color=figstyle.C["dark"], lw=0, marker="o", ms=3, label="Langmuir"),
@@ -641,7 +644,7 @@ def fig4(V, FD, da_levels, stem, noise=DISPLAY_METHODS_NOISE, pe=DISPLAY_PE):
     _by_method_strip(axc, V, da_levels)
     # H2c has no verdict and an empty panel says nothing; d shows the post-hoc comparator E6
     # instead (H2c stays in Table 1 and the text)
-    _e6_panel(axd, FD, da_levels, eps=0.02)   # 2 % isotherm error: where sparse regression fails at every Da
+    _e6_panel(axd, FD, da_levels, eps=0.02, V=V)   # 2 % isotherm error: where sparse regression fails at every Da
     _letter(axc, "c")
     _letter(axd, "d")
     return _save(fig, stem)
