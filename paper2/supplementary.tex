@@ -168,7 +168,7 @@ isotherm at $T_{\mathrm{in}}$ is the same as in the Langmuir cells and the bed s
 $T_{\mathrm{in}}$.
 % source: p2_generate.py:make_physics branch "langmuir_iso"; cells() (9 Da levels, Pe x1, L1).
 
-\section*{Supplementary Note 1: exploratory analyses E2 to E11}
+\section*{Supplementary Note 1: exploratory analyses E2 to E12}
 Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
 enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
 corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results; E9 after
@@ -534,6 +534,28 @@ its boundary of 107 comes from a curve that rises before it falls; weak-form bes
 succeeded at $\Da = 0.1$.
 % source: results/p2_e11_summary.json (pools both, disc, disc_tm), results/p2_e11_fine.json (rows, checks),
 % results/p2_e8_summary.json (n_t=200); p2_e11_fine.py; kaggle_e11/ (kit 00cb4c1, 9 kernels); EXPLORATORY_P2 E11.
+
+\subsection*{E12 and E12b: a second system (declared before each ran)}
+Declared after a simulated pre-submission review asked whether the asymmetry is particular to
+adsorption. A continuously stirred tank, residence time $\tau$, empty at $t = 0$ and fed with A and B,
+carries the reversible reaction A + B $\rightleftharpoons$ C at rate $r = k(AB - C/K(T))$, with the
+temperature imposed to rise from 300 to 340\,K over eight residence times and
+$K(T) = 5\exp[-(\Delta H/R)(1/T - 1/300)]$, $\Delta H = -50$\,kJ\,mol$^{-1}$; the equilibrium constant plays the role of the
+isotherm. $\Da = k\tau$ took the main study's nine levels. A, B and C were observed at 200 times with
+0.5 or 2\,\% noise, and the methods were given $K_{\mathrm{meas}}(T) = K(T)[1 + \varepsilon g(T)]$ with
+$\varepsilon = 0$ or 2\,\%. Discovery used the library \{1, A, B, C, AB, A$^2$, T, C/$K_{\mathrm{meas}}$\}, the main
+study's three solvers in both forms and the same kind of success rule (exactly \{AB, C/$K_{\mathrm{meas}}$\},
+ratio $-1$ within 10\,\%); identifiability used the likelihood of $k$ with the true law on a grid from
+$k/100$ to $100k$ and the main criterion. With equal feeds (E12) the positive control failed
+(discovery 40\,\% at $\Da = 0.1$, identifiability 100\,\%). E12b, declared after that failure,
+doubled the feed of B; its control failed too (38\,\% and 100\,\%). In both designs discovery
+never reached 50\,\% at any $\Da$ (at most 40\,\%), while $k$ stayed identifiable up to
+$\Da^{*}_{\mathrm{ident}} = 114$ to 865. On the noise-free trajectories with the exact equilibrium
+constant, weak-form best-subset selection recovered the law at every $\Da$ in both designs (a check
+made after both failures), so the failure with noise is caused by the noise. By the reading fixed in
+advance no gap is read; no further variant was run.
+% source: results/p2_e12_summary.json, p2_e12b_summary.json, p2_e12_rows.json, p2_e12b_rows.json,
+% p2_e12_noisefree.json; p2_e12_reaction.py, p2_e12_noisefree.py; EXPLORATORY_P2 E12, E12b.
 
 
 \section*{Supplementary Note 2: corrections made during the study}

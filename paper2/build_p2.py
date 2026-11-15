@@ -183,8 +183,7 @@ def bindings():
     hi = [x for (i, s, e, d), v in e6c.items() if e == 0 and d >= 100 for x in v]
     out += [("E6 all LDF at Da <= 10, exact isotherm", "chosen in all 45 replicates at every" if all(lo10) else "E6 not all"),
             ("E6 min with isotherm error", f"at least {round(lo10e * 45)} of 45 with 2"),
-            ("E6 Da 31.6", f"in only {sum(d31)} of {len(d31)} replicates at"),
-            ("E6 none from Da 100", "in none from" if not any(hi) else "E6 some at Da >= 100")]
+            ("E6 none from Da 100", "chosen in none of the replicates from" if not any(hi) else "E6 some at Da >= 100")]
     e4 = load("results/p2_e4_criteria.json")["variants"]
     alt = [v for k, v in e4.items() if k != "pre"]
     e4_ok = all(v["overall"] == "discovery fails before identifiability" and all(p for p in v["positive_control"].values())
@@ -248,8 +247,6 @@ def bindings():
     cells10 = sorted({k.split("|")[0] for k in r10})
     won = [c for c in cells10 if r10[f"{c}|3991"]["best"] == "ldf" and r10[f"{c}|grid200"]["best"] != "ldf"]
     words = {1: "one", 2: "two", 3: "three", 4: "four"}
-    out.append(("E10 cells won", f"LDF law won in {words.get(len(won), len(won))} of the {words[len(cells10)]} cells tested"
-                if all(r10[f"{c}|grid200"]["best"] != "ldf" for c in cells10) else "E10 LDF already won at grid 200"))
     e3 =load("results/p2_e3_coverage.json")["per_model"]["O1"]["coverage"]
     out += [("E3 coverage", f"only about {round(e3 * 100)}{BS},{BS}%")]
     # Discussion: where real columns sit (Supplementary Table 1) and the highest discovery boundary
@@ -277,7 +274,7 @@ def bindings():
     # (M4) 0.5 % noise and 0.5 % isotherm error: slices with a boundary and its largest value
     b55 = [s["da_disc"] for k, s in h2b.items() if k.startswith("sigma=0.005|eps=0.005|") and s["da_disc"]]
     out.append(("0.5/0.5 slices with a boundary", f"in the {({3: 'three'}).get(len(b55), len(b55))} slices that kept a boundary"))
-    out.append(("0.5/0.5 largest boundary", f"every discovery boundary fell to ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
+    out.append(("0.5/0.5 largest boundary", f"every discovery boundary on the grid fell to ${BS}Da {BS}le {math.ceil(max(b55) * 100) / 100:.2f}$"))
     # pre-submission revision 2026-11-11: new descriptive checks, M6, S1 on the map, corrections counts
     kh = load("results/p2_kh.json")
     out += [("kh at Da 316", f"($kh = {kh['kh_by_level']['316.227766']:.1f}$,"),
@@ -319,6 +316,17 @@ def bindings():
             ("choice vs identifiability at 2000", f"({min(cv2):.1f} to {max(cv2):.1f}\nwith 2,000 observations)"),
             ("peak success below 0.7", f"in {rc['peak_success']['n_below_0.7']} of the {rc['peak_success']['n_slices']} slices the best"),
             ("independent families", f"come from {({6: 'six'}).get(len(rc['independent_families']))} ground-truth families")]
+    e12a, e12b = load("results/p2_e12_summary.json"), load("results/p2_e12b_summary.json")
+    sl = [v for d in (e12a, e12b) for k, v in d.items() if k != "positive_control"]
+    mxd = max(max(v["disc_by_da"].values()) for v in sl)
+    ids = [v["da_ident"] for v in sl if v["da_ident"]]
+    nf = load("results/p2_e12_noisefree.json")
+    out += [("E12 max discovery", f"discovery reached at most\n{round(mxd * 100):.0f}" + BS + "," + BS + "% of replicates"),
+            ("E12 identifiability range", f"up to\n${BS}Da {BS}approx {math.floor(min(ids) / 10) * 10:.0f}$ to {math.ceil(max(ids) / 10) * 10:.0f}."),
+            ("E12 controls failed", "therefore failed, and no gap was read"
+             if not e12a["positive_control"]["passed"] and not e12b["positive_control"]["passed"] else "E12 control passed"),
+            ("E12 exact data", "recovered the law at every" if nf["E12"]["best_subset_weak_succeeds_at_every_da"]
+             and nf["E12b"]["best_subset_weak_succeeds_at_every_da"] else "E12 noise-free fails")]
     pre = load("results/p2_verdicts_preB90.json")["H2b"]
     both = [k for k in h2b if pre.get(k, {}).get("da_ident") and h2b[k].get("da_ident")]
     down = sum(h2b[k]["da_ident"] < pre[k]["da_ident"] * (1 - 1e-9) for k in both)

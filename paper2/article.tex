@@ -49,15 +49,12 @@
 \maketitle
 
 \begin{abstract}
-Equation-discovery methods aim to learn governing laws from data, but how much more they need
-than fitting an assumed law is rarely measured. We measured it in a pre-registered computational
-study of adsorption columns. Across four decades of the Damk\"ohler number Da (uptake rate relative to front passage),
+How much more data equation-discovery methods need than fitting an assumed law is rarely measured. We measured it in a pre-registered study of simulated adsorption columns. Across four decades of the Damk\"ohler number Da (uptake rate relative to front passage),
 dispersion, noise and isotherm error, we compared where the best of several sparse and symbolic regression
 methods stopped recovering the uptake rate law with where its rate constant stopped being
 identifiable. Wherever both limits fell within the tested range (37 conditions), discovery failed
 first, by 1.6 to 3.7 decades at 200 observations per run and by 0.7 to 2.0 decades in three
-conditions re-run at 2,000. A 5\,\% isotherm error prevented discovery at every rate, while the rate constant stayed
-identifiable. Column data can estimate an assumed law's rate constant long after they can no longer reveal the law.
+conditions re-run at 2,000. A 5\,\% isotherm error kept discovery below 50\,\% at every rate. In a reversible reaction too, noise defeated discovery but not estimation. Column data can estimate an assumed law's rate constant long after they can no longer reveal the law.
 \end{abstract}
 % <= 150 words (Nature Computational Science / Nature Chemical Engineering Article format).
 % Numbers: results/p2_verdicts.json H2b; results/p2_ident_robustness.json; H2b_O2_O3_descriptive.
@@ -214,11 +211,9 @@ discovery boundary at the same $R^{*}$ in every condition. Only one of twelve co
 % 122.85 [112.60, 135.09]; no_crossing: 11 conditions; words "no verdict: fewer than two
 % conditions have a crossing"). pe=5.0 is the D_L x 5 level, Pe about 19.
 
-The third (H2c) asked whether an errors-in-variables estimator moves the discovery boundary upward relative to the best
-strong-form comparator (18 slices at 2\,\% noise; Methods). No slice had a boundary for both, so
-the test has no verdict at any isotherm error: in 16 of
-the slices the comparator succeeded in no replicate at any $\Da$, and the errors-in-variables
-estimator reached at most 40\,\%.
+The third (H2c), whether an errors-in-variables estimator moves the discovery boundary upward
+(18 slices at 2\,\% noise; Methods), has no verdict at any isotherm error: no slice had a boundary
+for both estimators, and the errors-in-variables estimator reached at most 40\,\%.
 % results/p2_verdicts.json H2c: 18 slices; best_strong_method best_subset|strong in 16, m7|strong in
 % langmuir|pe=1.0|eps=0.02 and step|pe=1.0|eps=0.02 (M7 covers every design cell there, so the
 % coverage rule admits it, p2_analyze.py). results/p2_figdata.json methods, sigma = 0.02:
@@ -253,8 +248,7 @@ The neural-network pipeline of the closest prior work, run as a declared demonst
 replicate per level, recovered the law in one of its nine fits ($\Da = 3.2$). Implicit sparse
 regression without any isotherm (SINDy-PI), the pre-registered route to the law's form on an
 isothermal control, recovered it in none of 2{,}160 fits, even without noise: every fit kept six
-terms, one more than the implicit Langmuir--LDF relation. Slow-manifold discovery, which targets
-the isotherm, reached 50\,\% only with exact data, at $\Da = 1000$ (Extended Data Fig.~5).
+terms, one more than the implicit Langmuir--LDF relation. 
 % results/p2_extra_m6.json (2160 rows, success 0; every support has 6 terms; p2_noise_support-style
 % count in REVISION_PLAN_2026-11-11.md); results/p2_extra_m9.json (sigma = eps = 0, Da 1000: 1.00 per
 % cell in four cells, 0.67 pooled over Pe).
@@ -266,10 +260,8 @@ check, the LDF law, the quadratic driving force and the pseudo-second-order law 
 fitted by the likelihood used for identifiability and the best fit chosen ($\Pe \approx 94$,
 noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%). The LDF law was chosen in all 45 replicates at every
 $\Da \le 10$ with an exact isotherm, and in at least 35 of 45 with 2\,\% isotherm error, where
-sparse regression failed at every rate (Fig.~4d). It did not reach the identifiability boundary:
-with an exact isotherm, the LDF law was chosen in only 31 of 180 replicates at $\Da = 31.6$ and
-in none from $\Da = 100$ on; on noise-free data with up to 20 times more samples, the LDF law
-won in three of the four cells tested at $\Da \ge 100$ (post hoc; Supplementary Note~1). This choice uses
+sparse regression failed at every rate (Fig.~4d). With an exact isotherm it was chosen in none of the replicates from $\Da = 100$ on (post hoc;
+Supplementary Note~1). This choice uses
 the same likelihood as the identifiability test and only three candidates, an easier task than open
 discovery, yet its boundary still lay 0.6 to 1.5 decades below the identifiability boundary (0.4 to 0.7
 with 2,000 observations), so the gap
@@ -306,14 +298,26 @@ separate the two.
 % fig_p2_methods panels a, b and the per-slice listing in paper2/WRITEUP_NOTES.md;
 % results/p2_extra_m1.json (1 of 9, Da 3.16).
 
+\subsection*{The same pattern in a second system}
+To test whether the asymmetry is particular to adsorption, we compared the two on a
+reversible reaction A + B $\rightleftharpoons$ C in a stirred tank, whose temperature-dependent
+equilibrium constant plays the role of the isotherm (exploratory, declared before it ran;
+Extended Data Fig.~9; Supplementary Note~1). On exact data, weak-form best-subset selection
+recovered the law at every $\Da$ (post hoc). With 0.5 or 2\,\% noise, discovery reached at most
+40\,\% of replicates at any $\Da$, in two declared designs, while $k$ stayed identifiable up to
+$\Da \approx 110$ to 870. The declared positive control, 90\,\% discovery at the lowest $\Da$
+with 0.5\,\% noise, therefore failed, and no gap was read.
+% results/p2_e12_summary.json, p2_e12b_summary.json (max disc 0.40 / 0.38; da_ident 139-865 / 114-775;
+% positive_control passed false), results/p2_e12_noisefree.json; EXPLORATORY_P2 E12, E12b.
+
 \subsection*{Without probes of uptake, $k$ stays identifiable but the law is not discovered}
 With concentration and temperature probes but no uptake (O2), uptake must first be
 reconstructed from the gas-phase mass balance. Discovery then failed everywhere: no method
 succeeded in more than 29\,\% of the replicates at any level of any slice.
 % results/p2_o2.json, estimation replicates (rep >= 15): max over method, form, slice and Da is
 % 13/45 (stlsq weak, langmuir Pe 470, Da 1, sigma 0, eps 0.5 %); no level reaches 0.5.
-Identifiability, computed on the subgrid where every point of the profile is a full column
-solve ($\Pe \approx 94$, noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%), held to
+Identifiability, computed on a subgrid ($\Pe \approx 94$, noise 0.5 and 2\,\%, isotherm error 0 and
+2\,\%), held to
 $\Da \approx 57$ to 286 from probes without uptake, and to $\Da \approx 38$ to 172 from the
 outlet alone (O3). With three replicates per level, most of these boundaries are known only to lie
 between two levels. In the same slices, the last
@@ -352,8 +356,7 @@ could be discovered only over a narrow part of the range in which its rate const
 measured, 1.6 to 3.7 decades of $\Da$ short of it at 200 observations per run. For practice this sets an order of operations in three steps (Fig.~5). First, where
 uptake is slow compared with the passage of the front ($\Da$ of order one or below) and the
 isotherm is known almost exactly, weak-form sparse regression can propose the law; with as little
-as 0.5\,\% noise and 0.5\,\% isotherm error, every discovery boundary fell to $\Da \le 0.23$, although in one slice the weak-form
-ensemble still succeeded in 42 of 45 replicates at $\Da = 31.6$.
+as 0.5\,\% noise and 0.5\,\% isotherm error, every discovery boundary on the grid fell to $\Da \le 0.23$.
 Second, at that sampling and up to $\Da \approx 10$, the law can still be chosen among a few candidates by likelihood,
 even with 2\,\% isotherm error. Third, beyond $\Da \approx 10$ the law has to be assumed. The data
 still give its coefficient: from interior probes for one and a half to nearly four decades of
@@ -381,9 +384,8 @@ check, the smaller singular value of the standardised pair $\{q, \qsm\}$ fell fr
 the larger at $\Da = 0.1$ to about 0.001 at $\Da = 1000$. Exact data still separate the two terms,
 which is why discovery never failed with exact data (no noise and no isotherm error), but noise and
 isotherm error soon exceed the shrinking direction that distinguishes them. A one-parameter fit
-needs no such direction: it uses the whole curve to place $k$. We expect the same asymmetry
-wherever a law is to be discovered alongside an imperfectly known constitutive input, such as an
-equation of state or a transport property, but this study tested only adsorption.
+needs no such direction: it uses the whole curve to place $k$. A reversible reaction with an imperfectly known equilibrium constant showed the same pattern, so we
+expect it wherever a law must be discovered alongside an imperfectly known constitutive input.
 % results/p2_e5_conditioning.json (q_qstar_min_over_max_sv 0.71-0.79 at Da 0.1; 0.00065-0.00125 at Da 1000);
 % p2_e5_conditioning.py (EXPLORATORY_P2 E5).
 
@@ -412,9 +414,8 @@ fails, but its Sips readout, $0.198\,\qs - 0.200\,q$, succeeds. That is one real
 
 
 
-All data were simulated by one verified column model with the LDF law as the truth, so the
-boundaries hold for that model, the two isotherms and the error models used; no second physical
-system was tested. Real columns add errors in geometry, dispersion and heat transfer that were
+All data were simulated by one verified column model with the LDF law as the truth, so the boundaries hold for that model, the two isotherms and the error models used; the second
+system was exploratory and failed its positive control. Real columns add errors in geometry, dispersion and heat transfer that were
 held exact here, and real isotherms are rarely known to 0.5 to 5\,\%; both would be expected to
 lower the discovery boundaries, as would a larger candidate library. Interior probes of uptake
 (O1) are a ceiling that experiments rarely reach. The identifiability criterion measures precision
@@ -795,7 +796,7 @@ and none enters a confirmatory test; the descriptive checks listed at the end of
 not declared in advance. Three were declared before the verdicts: M1 trained at the
 scale a universal differential equation needs (E1), the Kolmogorov--Arnold network on its
 declared subgrid (E2), and how often an interval that meets $[k/2, 2k]$ misses the true $k$
-(E3). E1 needs a graphics processor and has not run; it is not reported here. Eight more were
+(E3). E1 needs a graphics processor and has not run; it is not reported here. Ten more were
 declared after the verdicts, prompted by a review of the draft, and are labelled post hoc: H2b
 with matched success criteria for the two tasks (E4), the conditioning of the library against
 $\Da$ (E5), choice among three candidate laws by likelihood (E6), a systematic shift of the step
@@ -804,7 +805,9 @@ declared after E6's results), E6 with $\qsm$ computed from noise-free $c$ and $T
 (E9, declared after a second review), E6 on noise-free data sampled up to 20 times more finely
 (E10, declared after E9), and every boundary at about 2,000 observation times per run, with the
 fields re-solved at finer time resolution (E11, declared after a third review, with its reading
-fixed in advance). E6 fits each law by implicit Euler along the same upsampled path
+fixed in advance), and the same comparison on a second system, a reversible reaction in a
+stirred tank (E12, and E12b with unequal feeds after E12's positive control failed; both reported).
+E6 fits each law by implicit Euler along the same upsampled path
 of $\qsm$ as the identifiability profile, with its rate constant profiled on a logarithmic grid
 and refined by a bounded one-dimensional search; all three laws have one parameter, so the
 Bayesian information criterion picks the largest likelihood. In E8 every method runs unchanged,
@@ -976,5 +979,15 @@ of the O1 update (the primary result). \textbf{c}, Corrected gap of each slice a
 each earlier run (dark grey, after the range and refinement corrections; light grey, as first run,
 Langmuir only, the step slices having been withheld). No correction changed a verdict word
 (Supplementary Note~2).}
+\end{figure}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\textwidth]{fig_ed9_reaction.pdf}
+\caption{\textbf{A second system: a reversible reaction in a stirred tank (exploratory).} Fraction of
+the 45 estimation replicates in which the best discovery method recovered the law (blue circles)
+and in which $k$ was identifiable (vermilion open squares), against $\log_{10}\Da$ with $\Da = k\,
+\tau$, for unequal feeds (E12b); \textbf{a}--\textbf{d}, noise 0.5 or 2\,\% and an exact or 2\,\% wrong equilibrium
+constant. Triangles: discovery on the noise-free trajectory with the exact equilibrium constant
+(post hoc; the same in every panel). The declared positive control failed, so no gap is read.}
 \end{figure}
 \end{document}

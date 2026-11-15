@@ -1,0 +1,19 @@
+{
+ "figure": "fig_ed9_reaction",
+ "size_mm": [
+  183.0,
+  58.0
+ ],
+ "font_pt": [
+  6.0,
+  8.0
+ ],
+ "made": "2026-11-15 13:20:03",
+ "style_sha256": "ca03ca8de57cc95817a70909bfdb5bb9b72aef2630565da0325e78be60741630",
+ "script": "fig_p2_ed9_reaction.py",
+ "script_sha256": "ef9a9948ca3c2ca87f9f29d02130e7423ff1a8bca813f310fe6aaaa24b6e4a9c",
+ "inputs": {
+  "results/p2_e12b_summary.json": "1f9a72dab2a856ed5b3c93cc76cc2540a82fba921112762ec2298cd0760a5c5a",
+  "results/p2_e12_noisefree.json": "368bc89b79cdaa2242dd713f1f4f8cf9970e4952cc50679434994ba81a894927"
+ }
+}
