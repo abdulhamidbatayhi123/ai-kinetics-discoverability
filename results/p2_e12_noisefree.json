@@ -1,0 +1,161 @@
+{
+ "commit": "40c44d086767f60d19a5078494c157f546673333",
+ "E12": {
+  "B_in": 1.0,
+  "by_da": {
+   "0.1": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "0.316228": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "1": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "3.16228": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "10": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "31.6228": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "100": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "316.228": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "1000": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   }
+  },
+  "any_method_succeeds_at_every_da": true,
+  "best_subset_weak_succeeds_at_every_da": true
+ },
+ "E12b": {
+  "B_in": 2.0,
+  "by_da": {
+   "0.1": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": true,
+    "stlsq|weak": true,
+    "ensemble|strong": true,
+    "ensemble|weak": false
+   },
+   "0.316228": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": true,
+    "stlsq|weak": true,
+    "ensemble|strong": true,
+    "ensemble|weak": false
+   },
+   "1": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": true,
+    "stlsq|weak": true,
+    "ensemble|strong": true,
+    "ensemble|weak": false
+   },
+   "3.16228": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": true,
+    "ensemble|strong": false,
+    "ensemble|weak": false
+   },
+   "10": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": true,
+    "stlsq|weak": true,
+    "ensemble|strong": true,
+    "ensemble|weak": false
+   },
+   "31.6228": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": true,
+    "stlsq|weak": false,
+    "ensemble|strong": true,
+    "ensemble|weak": false
+   },
+   "100": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": false,
+    "stlsq|weak": false,
+    "ensemble|strong": true,
+    "ensemble|weak": false
+   },
+   "316.228": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": true,
+    "stlsq|weak": false,
+    "ensemble|strong": true,
+    "ensemble|weak": false
+   },
+   "1000": {
+    "best_subset|strong": false,
+    "best_subset|weak": true,
+    "stlsq|strong": true,
+    "stlsq|weak": false,
+    "ensemble|strong": true,
+    "ensemble|weak": false
+   }
+  },
+  "any_method_succeeds_at_every_da": true,
+  "best_subset_weak_succeeds_at_every_da": true
+ }
+}

@@ -266,3 +266,12 @@ Everything as declared for E12 except the feed of B: B_in = 2 (A_in = 1), so A a
 equal to A^2. Same grid, noise, K error, library, methods, success rule, identifiability criterion, analysis,
 positive control and reading. Rows to results/p2_e12b_rows.json, summary to results/p2_e12b_summary.json. Both E12
 and E12b are reported in the paper.
+
+**E12b outcome (2026-11-15, results/p2_e12b_summary.json, p2_e12b_rows.json).** The positive control FAILED again:
+at Da = 0.1, 0.5 % noise, exact K, discovery succeeded in 38 % of replicates (identifiability 100 %), so no gap is
+read. Discovery never reached 50 % at any Da in any slice (maximum 0.38), while k stayed identifiable up to
+Da*_ident = 114 to 775. **Diagnostic made after both failures (not declared in advance):** on the noise-free
+trajectories with the exact K, weak-form best-subset selection recovered the law at every Da, for both feeds
+(p2_e12_noisefree.py, results/p2_e12_noisefree.json). So the failure at 0.5 % noise is caused by the noise, as in the
+main study, and the twin-column explanation given for E12 above was at most part of it (the noise-free fits recover
+the law even with A = B). No further variant will be run: two declared designs, both reported.
