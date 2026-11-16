@@ -370,3 +370,12 @@ Final settings: raw variables c, q, T, q*; target dq/dt times t_stoich; operator
 constants off; 3 symbol layers, 5 input slots, down-sampling 100, top_k 10, 30 s per fit; selection by M7's knee on PSE's
 Pareto front; M7's strict bridge and success_L1. Without fitted constants PSE's coefficients are small integers, which
 the ratio test accepts whenever the two terms carry equal coefficients; this too favours PSE.
+
+**E13 outcome (2026-11-16, results/p2_e13_summary.json, p2_e13_rows.json; 5 Kaggle kernels, 2,160 rows, 0 errors).**
+By the reading fixed in advance: discovery 'information' (all four pairs within 0.25 decade of E11: -0.23, +0.04,
++0.23, -0.09 decade); identifiability matches E11 where both have a boundary (0.0, 0.0; step 0.5 % censored, E11
+beyond the grid); the gap is at least 0.25 decade in three pairs (0.95, 1.45, 2.11) and not in the fourth (step,
+sigma 0.16 %: 0.02 decade). That slice's selected method (ensemble, weak form) failed at Da 0.1 (0.00), succeeded
+at 0.96-1.00 from Da 0.32 to 100 and 0.04 at Da 316, where identifiability was 1.00; the falling logistic, pulled by
+the failure at the lowest level, crosses at 532. Both the fitted and the measured readings are reported. The
+choice among three laws stayed 0.40 to 1.00 decade below E11 (it needs resolution, as E10 found).

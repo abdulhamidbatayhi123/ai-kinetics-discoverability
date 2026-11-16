@@ -175,7 +175,7 @@ def bindings():
     m1 = load("results/p2_extra_m1.json")["rows"]
     n_ok = sum(bool(v.get("success")) for v in m1.values())
     names = {1: "one", 2: "two", 3: "three"}
-    out += [("M1 successes", f"{names.get(n_ok, n_ok)} of its nine fits" if len(m1) == 9 else "M1 rows != 9")]
+    out += [("M1 successes", f"{names.get(n_ok, n_ok)} of its nine demonstration fits" if len(m1) == 9 else "M1 rows != 9")]
     m8 = load("results/p2_e2_m8.json")["rows"]
     out += [("M8 (E2)", f"none of {len(m8)} fits" if not any(v.get("success") for v in m8.values())
              else "M8 has successes")]
@@ -288,7 +288,7 @@ def bindings():
              f" upward" if all(on) and all(v is None for v in se["onset_from_da"]["best_subset|strong"].values())
              else "strong forms on exact data changed")]
     m6 = load("results/p2_m6_summary.json")
-    out += [("M6 grid", f"recovered it in none of {m6['n_rows']:,} fits".replace(",", "{,}", 1) if m6["n_success"] == 0
+    out += [("M6 grid", f"in none of {m6['n_rows']:,} fits".replace(",", "{,}", 1) if m6["n_success"] == 0
              else "M6 succeeded"),
             # the implicit Langmuir-LDF relation has five terms; every M6 fit kept six
             ("M6 six terms", "each keeping one term too many" if list(m6["support_size_counts"]) == ["6"]
@@ -311,12 +311,25 @@ def bindings():
              if min(g11) >= 0.25 and len(g11) == 3 and len(pairs) == 4 else "E11 gap below threshold"),
             ("E11 slices with both (Introduction)", "in all\nthree slices that kept both boundaries when re-run"
              if len(g11) == 3 else "E11 slices with both differ"),
-            ("E11 gaps (Results)", f"by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f}\ndecades, above the 0.25-decade threshold"),
+            ("E11 gaps (Results)", f"by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} decades, and in\nthe fourth"),
             ("E11 slices with both", f"first in the {({3: 'three'}).get(len(g11), len(g11))} slices with both boundaries"),
             ("E11 discovery shift", f"discovery moved up by {math.floor(min(dsh) * 10) / 10:.1f} to {math.ceil(max(dsh) * 10) / 10:.1f} decades"),
             ("E11 identifiability shift", f"identifiability by {min(ish):.1f} to\n{max(ish):.1f} decade"),
             ("E11 fourth slice", f"reached ${BS}Da {BS}approx {round(no_id[0]['da_disc'], -1):.0f}$\nwhile"
              if len(no_id) == 1 else "E11 no-ident slices != 1")]
+    # E13 (declared 8c74426): information-matched sampling
+    e13 = load("results/p2_e13_summary.json")
+    rd = e13["reading"]
+    pr = rd["pairs"]
+    stp = e13["boundaries"]["step|sigma=0.0015811388300841897|n_t=200"]
+    out += [("E13 reading", "placed every discovery\nboundary within 0.25 decade of its 2,000-observation value"
+             if rd["discovery_reading"] == "information" else "E13 reading not 'information'"),
+            ("E13 lowest noise", f"lowest noise ({100 * e13['design']['sigmas'][0]:.2f}" + BS + "," + BS + "%)"),
+            ("E13 Langmuir gap", f"by {pr['langmuir|sigma=0.005']['gap_e13_decades']:.2f} decade for the Langmuir sorbent"),
+            ("E13 step gap", f"the fitted boundaries met ({pr['step|sigma=0.005']['gap_e13_decades']:.2f} decade)"),
+            ("E13 step at 316", f"{round(100 * stp['disc_by_da']['316.22776601683796']):.0f}" + BS + "," + BS
+             + f"% of replicates at ${BS}Da = 316$, where $k$ remained identifiable in all"
+             if stp["ident_by_da"]["316.22776601683796"] == 1.0 else "E13 step ident at 316 not 1")]
     rc = load("results/p2_referee_checks.json")
     cv = [d["gap_200"] for d in rc["choice_vs_ident"].values() if d["gap_200"] is not None]
     cv2 = [d["gap_2000"] for d in rc["choice_vs_ident"].values() if d["gap_2000"] is not None]

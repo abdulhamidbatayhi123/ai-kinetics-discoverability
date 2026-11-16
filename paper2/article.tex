@@ -87,8 +87,7 @@ poorly determined by column data \citep{valocchi1985}: finite rates then act onl
 apparent dispersion \citep{katsoulas2023,dejaco2024}, the LDF coefficient can be extracted wrongly
 from outlet breakthrough \citep{knox2016}, and most of the output variability belongs to the
 isotherm \citep{ward2022,taylor2026}. Yet lumped rate coefficients are routinely estimated from
-breakthrough curves \citep{miyabe2000,dejaco2025}. Batch studies warn that data near equilibrium cannot tell kinetic laws apart
-\citep{canzano2012,simonin2016}.
+breakthrough curves \citep{miyabe2000,dejaco2025}. 
 
 Equation discovery has limits of its own. On a single transient that settles onto a slow
 manifold, as a breakthrough run does, the candidate terms become nearly collinear
@@ -170,9 +169,7 @@ absorbed the error into extra terms (post hoc).
 % step 562-740; (0.005, 0.005) disc 0.13-0.23 (3 slices), ident langmuir 299-324, step 692-870;
 % (0.02, 0) disc 0.85-1.41, ident 57-172; (0.05, 0) disc 0.12-0.30, ident 57.
 
-The 59 slices without a verdict lack a discovery boundary (post hoc): discovery never reached 50\,\%
-in 40 (including all 24 with 5\,\% isotherm error), never fell below it in 8 (all without noise),
-and crossed it without a fitted crossing in range in 11.
+
 % results/p2_ident_robustness.json h2b_no_verdict_classes: discovery missing 59 (always < 50 %: 40;
 % always >= 50 %: 5 + 3 = 8, all sigma = 0; straddles: 11); identifiability missing only in the 3
 % "always >= 50 %" slices.
@@ -239,10 +236,9 @@ slices with a verdict, that level lay 1.0 to 1.4 decades below the identifiabili
 % M7's falling-logistic crossings on the estimation set are 0.12 and 0.39 (da_disc_by_method) or absent;
 % select_best (largest crossing on replicates 0-14) chose best_subset|weak in all four slices.
 
-The neural-network pipeline of the closest prior work, run as a declared demonstration with one
-replicate per level, recovered the law in one of its nine fits ($\Da = 3.2$). Implicit sparse
-regression without any isotherm (SINDy-PI), on an isothermal control, recovered it in none of
-2{,}160 fits, even without noise, each keeping one term too many.
+The neural pipeline of the closest prior work recovered the law in one of its nine demonstration fits
+($\Da = 3.2$), and implicit sparse regression without an isotherm (SINDy-PI) in none of 2{,}160 fits,
+even without noise, each keeping one term too many.
 % results/p2_extra_m6.json (2160 rows, success 0; every support has 6 terms: results/p2_m6_summary.json
 % support_size_counts, p2_m6_summary.py); results/p2_extra_m9.json (sigma = eps = 0, Da 1000: 1.00 per
 % cell in four cells, 0.67 pooled over Pe).
@@ -267,12 +263,16 @@ is not an artefact of comparing regression with likelihood.
 % the wrong law in all four cells; at 3,991 times LDF for Langmuir Da 100, 1000 and step Da 100; step Da 1000 qdf.
 
 \subsection*{Ten times more observations narrow the gap but do not close it}
-The boundaries above assume 200 observation times per run. With about 2,000, on the $\Pe \approx 94$ cells of both isotherms at 0.5 and 2\,\% noise (post hoc, declared before it ran; Supplementary Note~1), discovery moved up by 0.7 to 1.9 decades and identifiability by 0.2 to
-0.5 decade. Discovery still failed first in the three slices with both boundaries, by 0.7 to 2.0
-decades, above the 0.25-decade threshold; in the fourth (step isotherm, 0.5\,\% noise) discovery reached $\Da \approx 310$
-while $k$ stayed identifiable beyond the grid. At fixed noise per
-sample, the extra observations add information as well as resolution, and this check does not
-separate the two. 
+The boundaries above assume 200 observation times per run. With about 2,000, on the $\Pe \approx 94$ slices of both isotherms at 0.5 and 2\,\% noise (post hoc,
+declared before it ran; Supplementary Note~1), discovery moved up by 0.7 to 1.9 decades and identifiability by 0.2 to
+0.5 decade. Discovery still failed first in the three slices with both boundaries, by 0.7 to 2.0 decades, and in
+the fourth (step isotherm, 0.5\,\% noise) discovery reached $\Da \approx 310$
+while $k$ stayed identifiable beyond the grid. The gain came from information, not time resolution: 200 observations
+with the noise divided by $\sqrt{10}$, which carry about the same information, placed every discovery
+boundary within 0.25 decade of its 2,000-observation value (post hoc, declared before it ran). At that
+lowest noise (0.16\,\%) discovery still failed first by 0.95 decade for the Langmuir sorbent, but for
+the step isotherm the fitted boundaries met (0.02 decade), although discovery succeeded in only
+4\,\% of replicates at $\Da = 316$, where $k$ remained identifiable in all. 
 % results/p2_e11_summary.json (p2_e11_fine.py; EXPLORATORY_P2 E11, declared 45e6e77): pool "both",
 % gaps 0.72 (langmuir 0.5 %), 1.50 (langmuir 2 %), 2.01 (step 2 %); step 0.5 % da_disc 314, da_ident none;
 % shifts against E8's own 200-time run (results/p2_e8_summary.json n_t=200): disc 0.72-1.88, ident 0.20-0.52.
@@ -381,9 +381,7 @@ At 200 observations per run, real columns sit mostly beyond the discovery bounda
 \citep{krishnamurthy2025} place physisorbent packed beds between $\Da \approx 100$ and 23{,}000
 (Supplementary Table~1). An amine bed for
 direct air capture lay at $\Da \approx 8$ to 10 \citep{stampi2024}, within reach of the highest
-discovery boundaries at 200 observations per run ($\Da \approx 7$ with noise, 13 without). With 200 observations per run the
-law must be chosen or assumed for physisorbent beds; with 2,000 and 0.5\,\% noise, discovery
-reached the lower end of their range.
+discovery boundaries at 200 observations per run ($\Da \approx 7$ with noise, 13 without). With 2,000 observations and 0.5\,\% noise, discovery reached the lower end of their range.
 % source: results/p2_practical_da.json (p2_practical_da.py from data/practical_da_sources.csv; every
 % input checked against the papers 2026-11-10; sources from an independent literature check); highest Da*_disc:
 % results/p2_verdicts.json H2b (12.8). The earlier estimate (WRITEUP_NOTES "Practical Da",
@@ -427,7 +425,7 @@ Three directions follow. First, better isotherms: in a post hoc test, shifting t
 MOF-303-like isotherm by 1\,\% relative humidity kept discovery at or below 31\,\% at every rate,
 biased the fitted $k$ to 0.67 and 1.74 to 1.76 times its true value at $\Da = 10$ unseen by its intervals, and lowered the identifiability boundary to $\Da \approx 17$ to 57 (5.6 with a 2\,\% shift),
 so an isotherm whose step is placed to better than 1\,\% relative humidity is worth more than quieter
-sensors. Second, denser sampling, which raised discovery most. Third, the map should be tested on experimental breakthrough data with interior
+sensors. Second, more information per run, from more observations or less noise. Third, the map should be tested on experimental breakthrough data with interior
 probes at moderate $\Da$, where it predicts that discovery first becomes possible. More generally,
 benchmarks and applications of equation discovery should report where a law is discoverable beside
 where its coefficients are identifiable: in these columns the two differed by orders of magnitude.
@@ -709,7 +707,8 @@ For each slice the boundary $\Da^{*}$ was the 50\,\% crossing of an unpenalised 
 regression of replicate outcomes on $\log_{10}\Da$, with a percentile bootstrap interval
 (2000 resamples within each $\Da$ level). No boundary was reported, and no verdict issued,
 when the fitted curve did not cross 50\,\% inside the tested range or rose with $\Da$ instead
-of falling; the range was reported instead. The boundary is the crossing of the fitted curve, so
+of falling; the range was reported instead. The 59 slices without a verdict lack a discovery boundary (post hoc): discovery never reached 50\,\%
+in 40 (including all 24 with 5\,\% isotherm error), never fell below it in 8 (all without noise), and crossed it without a fitted crossing in range in 11. The boundary is the crossing of the fitted curve, so
 a slice whose observed success stays just below 50\,\% can still have one: in one slice
 (Langmuir, $\Pe \approx 19$, 2\,\% noise and isotherm error) success was 0.49 at the two lowest
 levels and the curve crosses 50\,\% at $\Da = 0.16$. In all, 10 of the 37 discovery boundaries lie

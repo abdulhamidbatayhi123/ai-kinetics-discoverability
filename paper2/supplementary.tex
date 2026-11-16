@@ -168,7 +168,7 @@ isotherm at $T_{\mathrm{in}}$ is the same as in the Langmuir cells and the bed s
 $T_{\mathrm{in}}$.
 % source: p2_generate.py:make_physics branch "langmuir_iso"; cells() (9 Da levels, Pe x1, L1).
 
-\section*{Supplementary Note 1: exploratory analyses E2 to E12}
+\section*{Supplementary Note 1: exploratory analyses E2 to E13}
 Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
 enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
 corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results; E9 after
@@ -536,6 +536,41 @@ its boundary of 107 comes from a curve that rises before it falls; weak-form bes
 succeeded at $\Da = 0.1$.
 % source: results/p2_e11_summary.json (pools both, disc, disc_tm), results/p2_e11_fine.json (rows, checks),
 % results/p2_e8_summary.json (n_t=200); p2_e11_fine.py; kaggle_e11/ (kit 00cb4c1, 9 kernels); EXPLORATORY_P2 E11.
+
+\subsection*{E13: information against time resolution (post hoc, declared before it ran)}
+Declared after a final review noted that E11 adds information as well as time resolution. E13 repeats E8's
+200-time run with the noise standard deviation per sample divided by $\sqrt{10}$ (0.16 and 0.63\,\%), so
+each run carries about the information of E11's 1,996 times at 0.5 and 2\,\% noise, at the grid's resolution
+(O1, $\Pe \approx 94$, both isotherms, all nine $\Da$, exact isotherm, replicates 0--59; 2,160 rows, no errors;
+E8's unchanged code on Kaggle). Boundaries as in E8 and E11.
+
+\begin{center}
+\small
+\begin{tabular}{llrrrrr}
+\toprule
+& & \multicolumn{3}{c}{E13: 200 times, noise$/\sqrt{10}$} & \multicolumn{2}{c}{E11: about 2,000 times} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-7}
+Isotherm & $\sigma$ (E11) & $\Da^{*}_{\mathrm{disc}}$ & $\Da^{*}_{\mathrm{ident}}$ & choice & $\Da^{*}_{\mathrm{disc}}$ & $\Da^{*}_{\mathrm{ident}}$ \\
+\midrule
+Langmuir & 0.5\,\% & 62.4 & 562 & 56.6 & 107 & 562 \\
+Langmuir & 2\,\% & 6.07 & 172 & 29.5 & 5.47 & 172 \\
+step & 0.5\,\% & 532 & 562 & 17.1 & 314 & -- \\
+step & 2\,\% & 4.40 & 562 & 17.1 & 5.47 & 562 \\
+\bottomrule
+\end{tabular}
+\end{center}
+By the reading fixed in advance, the gain in discovery at 2,000 times is explained by information: in all four
+pairs the discovery boundary at matched information lies within 0.25 decade of E11's ($-0.23$ to $+0.23$
+decade), against 0.71 to 2.10 decades above E8's 200-time run at the original noise. Identifiability matched E11
+where both have a boundary. The choice among three laws, by contrast, stayed 0.40 to 1.00 decade below its
+2,000-time boundary: it needs time resolution, as E10 found. Discovery still failed first by at least
+0.25 decade in three pairs (0.95, 1.45 and 2.11 decades). In the fourth (step isotherm, 0.16\,\% noise) the
+fitted boundaries met (0.02 decade): the selected method (the weak-form ensemble) failed at $\Da = 0.1$,
+succeeded in 96 to 100\,\% of replicates from 0.32 to 100, and in 4\,\% at 316, where $k$ was identifiable in
+all 45; the falling logistic, pulled by the failure at the lowest level, crosses 50\,\% at 532. On the
+measured fractions discovery is lost between $\Da = 100$ and 316 while $k$ remains identifiable to 316.
+% source: results/p2_e13_summary.json, results/p2_e13_rows.json (p2_e13_infomatched.py); kaggle_e13/ (5 kernels,
+% declaration 8c74426, kernels stamped 2f662bf); EXPLORATORY_P2 E13.
 
 \subsection*{E12 and E12b: a second system (post hoc, declared before each ran)}
 Declared after an AI-assisted simulated pre-submission review asked whether the asymmetry is particular to
