@@ -177,7 +177,8 @@ pre-submission review (E12b also after E12's result); E13 after a final pre-subm
 review of what the target journal asks for, with its inputs, operators, constants and expression selection
 then fixed in pilots before the main run. E4 to E14 are post hoc and are labelled so
 wherever they are used. E1 (M1 at full scale) needs a graphics
-processor for up to 36 hours and has not run.
+processor or many-core machine, about 36\,h for its first replicate (up to 27 fits of up to 4\,h if its
+cost cap allows), and has not run.
 
 \subsection*{E2: the Kolmogorov--Arnold network on its declared subgrid}
 M8 ran in exactly the configuration declared before the freeze (raw variables $c$, $q$, $T$, $\qs$;
@@ -588,10 +589,13 @@ and the Savitzky--Golay derivative of $q$ times $t_{\mathrm{stoich}}$; operators
 constants (PSE's default); the expression was chosen from PSE's Pareto front by M7's rule (PySR's
 score-based knee) and scored by M7's strict rule. These settings were fixed in five three-row pilots,
 not reported, before the main run; the pilots were declared only to time the job and check the parsing,
-used replicate 15 (in the reported set) and each of their changes made PSE more able to succeed
-(EXPLORATORY\_P2 E14). One change did not: the declared time limit of 60\,s per fit was halved to 30\,s
-before the pilots, because 1,080 fits at 60\,s exceeded the weekly GPU allowance. PSE's pinned symengine
-0.11.0 had no wheel for Python 3.13, so current releases were used (symengine 0.15.0, deap 1.4.4).
+ran 15 rows in all (three were declared), used replicate 15 (in the reported set) and replaced three
+declared settings: Lib-B features by raw variables, constants allowed by constants off, and PSE's
+first-ranked expression by M7's knee. Each of these changes made PSE more able to succeed
+(EXPLORATORY\_P2 E14). A change made before the pilots works the other way: the declared limit of 60\,s
+per fit was halved to 30\,s, because 1,080 fits at 60\,s (about 18 GPU-hours) exceeded the weekly GPU
+allowance left after other work. PSE's pinned deap 1.3.3 and symengine 0.11.0 had no wheels for
+Python 3.13, so current releases were used (deap 1.4.4, symengine 0.15.0).
 Bi-level identification (Li et al., Nat. Comput. Sci. 5, 456--466, 2025) was not run (Methods).
 
 \begin{center}

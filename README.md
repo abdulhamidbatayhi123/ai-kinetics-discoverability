@@ -58,11 +58,14 @@ any Da in both declared designs while k stayed identifiable up to Da of about 11
 positive control failed and no gap is read; on exact data, weak-form best-subset selection recovered
 the law at every Da (post hoc, `results/p2_e12_noisefree.json`). At the grid's 200 observation times with the noise divided by sqrt(10), which carries
 about the information of 2,000 observations (E13, `results/p2_e13_summary.json`), every discovery boundary
-lies within 0.25 decade of its 2,000-observation value, so the gain from denser sampling is information, not
-time resolution; discovery still fails first in three of four slices, and in the fourth (step isotherm, 0.16 %
-noise) the fitted boundaries meet while the measured success at Da = 316 is 4 % with k identifiable in all
-replicates. Parallel symbolic enumeration (E14, `results/p2_e14_summary.json`) closes the gap in no slice: its
-last level with at least 50 % success lies 1.25 to 2.08 decades below the identifiability boundary.
+lies within 0.25 decade of its 2,000-observation value, so the gain in discovery from denser sampling is
+information, not time resolution (the choice among three laws needs the resolution); discovery still fails
+first in three of four slices, and in the fourth (step isotherm, 0.16 % noise) the fitted boundaries meet
+(0.02 decade) while the measured success at Da = 316 is 4 % with k identifiable in all replicates. In both
+0.16 % slices identifiability is capped by the estimator's low bias at Da = 1000, so those gaps are lower
+bounds. Parallel symbolic enumeration (E14, `results/p2_e14_summary.json`; 30 s per fit, not the declared
+60 s, with settings fixed in pilots, all disclosed) closes the gap in no slice: its last level with at least
+50 % success lies 1.25 to 2.08 decades below the identifiability boundary, never closer than PySR's.
 
 ## Quick check for reviewers
 

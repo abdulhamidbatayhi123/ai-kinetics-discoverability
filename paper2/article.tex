@@ -228,8 +228,8 @@ where no sparse method reached 50\,\% (Fig.~4a,b; Extended Data Fig.~5). The pre
 boundary, a falling logistic curve, cannot describe such a window. If the boundary is instead taken
 as the last level with at least 50\,\% success (post hoc), H2b is unchanged: in the four such
 slices with a verdict, that level lay 1.0 to 1.4 decades below the identifiability boundary.
-Parallel symbolic enumeration \citep{ruan2026} on the same subgrid (15 replicates, 30\,s per fit; post
-hoc, declared before it ran, settings then fixed in pilots) did no better: its last level with at least
+Parallel symbolic enumeration \citep{ruan2026} on the same subgrid (15 replicates, 30\,s per fit, not
+the declared 60\,s; post hoc, declared before it ran, settings then fixed in pilots) did no better: its last level with at least
 50\,\% success lay 1.2 to 2.1 decades below
 the identifiability boundary in every slice, never closer than symbolic regression's on the same
 replicates (1.0 to 1.6).
@@ -271,13 +271,14 @@ declared before it ran; Supplementary Note~1), discovery moved up by 0.7 to 1.9 
 0.5 decade. Discovery still failed first in the three slices with both boundaries, by 0.7 to 2.0 decades, and in
 the fourth (step isotherm, 0.5\,\% noise) discovery reached $\Da \approx 310$
 while $k$ stayed identifiable beyond the grid. By the reading fixed in advance, the gain in discovery came
-from information, whereas the choice among laws needed the finer resolution: 200 observations
+from information: 200 observations
 with the noise divided by $\sqrt{10}$, which carry about the same information, placed every discovery
-boundary within 0.25 decade of its 2,000-observation value (post hoc, declared before it ran). At that
+boundary within 0.25 decade of its 2,000-observation value (post hoc, declared before it ran); the choice
+among laws stayed 0.4 to 1.0 decade lower, needing the finer resolution. At that
 lowest noise (0.16\,\%) discovery still failed first by 0.95 decade for the Langmuir sorbent. For
 the step isotherm the fitted boundaries met (0.02 decade), yet discovery fell to
-4\,\% of replicates at $\Da = 316$, where $k$ remained identifiable in all; there the identifiability
-boundary is capped by the estimator's low bias at $\Da = 1000$ (with 2,000 observations $k$ stayed identifiable beyond the grid).
+4\,\% of replicates at $\Da = 316$, where $k$ remained identifiable in all. In both 0.16\,\% slices the identifiability
+boundary is capped by the estimator's low bias at $\Da = 1000$, so these gaps are lower bounds.
 % results/p2_e11_summary.json (p2_e11_fine.py; EXPLORATORY_P2 E11, declared 45e6e77): pool "both",
 % gaps 0.72 (langmuir 0.5 %), 1.50 (langmuir 2 %), 2.01 (step 2 %); step 0.5 % da_disc 314, da_ident none;
 % shifts against E8's own 200-time run (results/p2_e8_summary.json n_t=200): disc 0.72-1.88, ident 0.20-0.52.
@@ -344,7 +345,7 @@ discoverability (Methods).
 % Da 0.1 and 0.316 at sigma 0: 0.00. NOTE: "best over methods and Pe" selects upward; say so.
 
 \section*{Discussion}
-With 0.5\,\% noise or more, or with isotherm error, the law could be discovered only over a narrow part of the range in which its rate constant could be
+On the pre-registered grid, with 0.5\,\% noise or more or with isotherm error, the law could be discovered only over a narrow part of the range in which its rate constant could be
 estimated, ending 1.6 to 3.7 decades of $\Da$ short of it at 200 observations per run. For practice this sets an order of operations in three steps (Fig.~5). First, where
 uptake is slow compared with the passage of the front ($\Da$ of order one or below) and the
 isotherm is known almost exactly, weak-form sparse regression on interior probes of uptake can propose the law; with 0.5\,\% noise and 0.5\,\% isotherm error, every fitted discovery boundary fell to $\Da \le 0.23$.
@@ -360,7 +361,7 @@ value. Discovery asks the data to choose that law among many and to return the c
 $\qsm$ and $q$ in the ratio $-1$ within 10\,\%. An isotherm
 error enters discovery as an error in a regressor, which biases exactly that ratio. In the
 identifiability fit the same smooth error is absorbed into $k$, and the estimate stays within a
-factor of two of the truth. The response to a 0.5\,\% isotherm error fits this reading, though it was not a designed test.
+factor of two of the truth.
 The asymmetry of the two success rules does not make the gap: dropping the ratio test, requiring
 the interval to lie within 10\,\% of $k$, or judging by the point estimate alone kept every verdict,
 with gaps of 0.89 to 3.75 decades (post hoc).
@@ -790,8 +791,8 @@ and none enters a confirmatory test; the descriptive checks listed at the end of
 not declared in advance. Three were declared before the verdicts: M1 trained at the
 scale a universal differential equation needs (E1), the Kolmogorov--Arnold network on its
 declared subgrid (E2), and how often an interval that meets $[k/2, 2k]$ misses the true $k$
-(E3). E1 needs a graphics processor for up to 36 hours (nine fits of up to 4\,h each) and has not
-run; it is not reported here. Twelve more were declared after the verdicts, prompted by AI-assisted reviews of the draft, and are labelled post hoc: H2b
+(E3). E1 needs a graphics processor or many-core machine, about 36\,h for its first replicate (nine
+fits of up to 4\,h; up to 27 fits if its cost cap allows), and has not run; it is not reported here. Twelve more were declared after the verdicts, prompted by AI-assisted reviews of the draft, and are labelled post hoc: H2b
 with matched success criteria for the two tasks (E4), the conditioning of the library against
 $\Da$ (E5), choice among three candidate laws by likelihood (E6), a systematic shift of the step
 of the measured isotherm (E7), the sampling rate, 200 against 400 observation times (E8,
@@ -803,9 +804,10 @@ fixed in advance), and the same comparison on a second system, a reversible reac
 stirred tank (E12, and E12b with unequal feeds after E12's positive control failed; both reported),
 200 observation times with the noise divided by $\sqrt{10}$, which matches E11's information at the
 grid's resolution (E13), and parallel symbolic enumeration \citep{ruan2026} on the
-symbolic-regression subgrid with 15 replicates, its inputs, operators, constants and expression selection
-fixed in five unreported three-row pilots before the main run and its time limit halved from the declared
-60\,s to 30\,s per fit to fit the available GPU time (E14). Bi-level identification
+symbolic-regression subgrid with 15 replicates (E14); its declared inputs, constants and expression
+selection were replaced, and its operators restricted to the declared ones, in five unreported three-row
+pilots before the main run, and its time limit was halved from the declared 60\,s to 30\,s per fit to fit
+the available GPU time. Bi-level identification
 \citep{li2025bilevel} was not run: the repository its article cites was unavailable when checked
 (16 November 2026), and its released demonstration selects terms from a user-supplied library, which here
 would reduce to the sparse regression already tested.
