@@ -56,7 +56,13 @@ stays at or below 31 % at every rate. A second system, a reversible reaction in 
 this but does not test it: with 0.5 or 2 % noise, discovery reached at most 40 % of replicates at
 any Da in both declared designs while k stayed identifiable up to Da of about 110 to 870, so the
 positive control failed and no gap is read; on exact data, weak-form best-subset selection recovered
-the law at every Da (post hoc, `results/p2_e12_noisefree.json`).
+the law at every Da (post hoc, `results/p2_e12_noisefree.json`). At the grid's 200 observation times with the noise divided by sqrt(10), which carries
+about the information of 2,000 observations (E13, `results/p2_e13_summary.json`), every discovery boundary
+lies within 0.25 decade of its 2,000-observation value, so the gain from denser sampling is information, not
+time resolution; discovery still fails first in three of four slices, and in the fourth (step isotherm, 0.16 %
+noise) the fitted boundaries meet while the measured success at Da = 316 is 4 % with k identifiable in all
+replicates. Parallel symbolic enumeration (E14, `results/p2_e14_summary.json`) closes the gap in no slice: its
+last level with at least 50 % success lies 1.25 to 2.08 decades below the identifiability boundary.
 
 ## Quick check for reviewers
 
@@ -72,7 +78,7 @@ pip install -r requirements_p2.txt --extra-index-url https://download.pytorch.or
 
 `requirements_p2.txt` pins every package the code imports; the extra index serves the CPU wheel
 of PyTorch. The study was developed and run on Windows 11 with Python 3.12.10; the Kaggle runs (B90, E6,
-E8, E11, E13) used Kaggle's Linux images, so the analysis code has run on both. No graphics processor is
+E8, E11, E13, E14) used Kaggle's Linux images, so the analysis code has run on both. No graphics processor is
 needed. The install time was not measured; the largest downloads are PyTorch (CPU) and JAX. These
 environment variables are read:
 
@@ -225,7 +231,8 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `p2_e4_criteria.py`, `p2_e5_conditioning.py`, `p2_e6_modelselect.py`, `p2_e7_stepshift.py`, `p2_e8_sampling.py`, `p2_e9_cleanforcing.py`, `p2_e10_resolution.py`, `p2_e11_fine.py`, `p2_e12_reaction.py` | post-verdict analyses E4 to E12, each declared in `EXPLORATORY_P2.md` before it ran |
 | `p2_e12_noisefree.py`, `p2_diag_e9_noisefree.py` | the diagnostics made after E12/E12b and after E9, not declared in advance (labelled so) |
 | `kaggle_e6/`, `p2_e6_merge.py`, `kaggle_e8/`, `p2_e8_merge.py`, `kaggle_e11/` | E6, E8 and E11 on Kaggle: kits, kernels, queues and merges (E6 and E8 with local spot checks) |
-| `p2_e13_infomatched.py`, `kaggle_e13/` | E13, declared in `EXPLORATORY_P2.md` on 2026-11-15 before it ran; it runs on Kaggle and its results are not yet in `results/` |
+| `p2_e13_infomatched.py`, `kaggle_e13/` | E13: information-matched sampling, declared in `EXPLORATORY_P2.md` before it ran (Kaggle; `results/p2_e13_summary.json`) |
+| `p2_e14_pse.py`, `kaggle_e14/` | E14: parallel symbolic enumeration on the symbolic-regression subgrid, declared before it ran (Kaggle GPUs; `results/p2_e14_summary.json`) |
 | `p2_practical_da.py`, `data/practical_da_sources.csv` | Da of published laboratory columns (Supplementary Table 1), from inputs printed in four studies, each with its location in the paper |
 | `p2_s1_anchor.py` | the closest prior study on the Da map (PREREG_P2 s.5) |
 | `p2_ident_robustness.py`, `p2_kh.py`, `p2_noise_support.py`, `p2_m6_summary.py`, `p2_referee_checks.py`, `p2_strong_exact.py`, `p2_liba_fidelity.py`, `p2_liba_summary.py` | descriptive checks made after the verdicts were seen (labelled so in the paper) |
@@ -276,7 +283,7 @@ python p2_source_data.py           # Source Data for Figs 2 to 5
 python paper2/build_p2.py          # article and SI, with every gate
 ```
 
-E6, E8, E11 and E13 ran on Kaggle (`kaggle_e6/`, `kaggle_e8/`, `kaggle_e11/`, `kaggle_e13/`). The kernels and
+E6, E8, E11, E13 and E14 ran on Kaggle (`kaggle_e6/`, `kaggle_e8/`, `kaggle_e11/`, `kaggle_e13/`, `kaggle_e14/`). The kernels and
 kit datasets are private to the author's Kaggle account: to rerun them, replace the `abdulhamidbatayhi/` prefix
 in the kernel metadata with your own user name and upload the kit; the merged results in `results/` are the
 record. `p2_e6_merge.py`,
@@ -287,9 +294,9 @@ record. `p2_e6_merge.py`,
 - `results/p2_verdicts.json` `positive_control.<isotherm>.n_success` and `.n_ident` are the NUMBERS OF ROWS
   evaluated (estimation replicates at the lowest Da, sigma = eps = 0), not the numbers that succeeded; the
   fractions are `success_fraction` and `identifiable_fraction`.
-- The exploratory and post-verdict analyses E1 to E13 are declared in `EXPLORATORY_P2.md`. E2 to E12
+- The exploratory and post-verdict analyses E1 to E14 are declared in `EXPLORATORY_P2.md`. E2 to E14
   ran after their declarations and their results are in `results/`; E1 needs a graphics processor and
-  has not run; E13 (declared 2026-11-15) has no results yet.
+  has not run.
 
 ## Licence and citation
 
