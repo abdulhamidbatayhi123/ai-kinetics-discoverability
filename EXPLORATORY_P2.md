@@ -352,3 +352,21 @@ which would round coefficients of order 1e-4 away). The expression scored is the
 (display_expr_table(sort_by="reward")). One departure from the declaration above: the time limit is 30 s per fit, not
 60 s, because 1,080 fits at 60 s (about 18 GPU-hours) exceed the weekly Kaggle GPU allowance shared with other work;
 the pilot checks that 30 s recovers the law where M7 does. Six GPU kernels of twelve groups each.
+**E14 pilots and final settings, fixed before the main run (2026-11-16, 02:00-03:30).** Five three-row pilots (Langmuir
+Da 1, sigma 0.5 %, eps 0; Langmuir Da 31.6, sigma 2 %, eps 2 %; step Da 3.16, sigma 0.5 %, eps 0; replicate 15), none
+reported as a result. (1) Failed to install: PSE's pinned symengine 0.11.0 has no wheel for Kaggle's Python 3.13; current
+deap and symengine are installed instead and their versions recorded in every output. (2) A working-folder bug of ours
+(observations not found). (3) With M7's seven Lib-B columns, PSE returned a least-squares combination of every column plus
+a constant at all three rows, including the easy one where M7 succeeds: it is built to compose expressions from raw
+variables, so the inputs are changed to the raw variables c, q, T and q* (the same span; PSE forms the products itself).
+(4) With raw variables and PSE's reward ranking, the first expression was again the full combination; M7 selects with
+PySR's score-based knee, so the same knee is applied to PSE's Pareto front (among expressions with loss within 1.5 times
+the smallest, the largest -d ln(loss)/d complexity), and the whole front is stored per row. Every expression then carried
+an added constant, because constants were on. (5) Constants off (PSE's own default) recovered the law at the step row,
+but PSE's token generator was still using its own default operators (Exp, Div, Log, Sin, Cos); it is restricted to the
+declared Add, Sub and Mul. With these final settings the law was recovered at the two easy rows (-q + q*, -3q + 3q*) and
+not at the hard row. Every change made PSE more able to succeed, the conservative direction for the paper's claim.
+Final settings: raw variables c, q, T, q*; target dq/dt times t_stoich; operators Add, Sub, Mul (PSRN also Identity);
+constants off; 3 symbol layers, 5 input slots, down-sampling 100, top_k 10, 30 s per fit; selection by M7's knee on PSE's
+Pareto front; M7's strict bridge and success_L1. Without fitted constants PSE's coefficients are small integers, which
+the ratio test accepts whenever the two terms carry equal coefficients; this too favours PSE.
