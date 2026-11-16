@@ -195,7 +195,7 @@ def fig_ident(R, V, da, stem):
     b.set_aspect("equal", adjustable="box")
     b.set_xlabel("H2b gap, all Da levels (decade)")
     b.set_ylabel("gap bound without Da 316 and 1000 (decade)\n"
-                 r"$\log_{10}Da^{*}_{disc} - \log_{10}$(highest Da $\leq$ 100 with $P_{ident} \geq$ 0.5)")
+                 r"$\log_{10}\mathrm{Da}^{*}_{\mathrm{disc}} - \log_{10}$(highest Da $\leq$ 100 with $P_{ident} \geq$ 0.5)")
     b.text(-2.6, -MDE + 0.06, f"−{MDE} decade threshold", fontsize=5.5, ha="left", va="bottom")
     s = R["h2b_without_da_316_1000_summary"]
     b.text(lo + 0.08, lo + 0.08, f"{s['n_slices']} verdict slices;\nmin $P_{{ident}}$ at Da ≤ 31.6: "

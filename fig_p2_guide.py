@@ -98,7 +98,7 @@ def main():
     assert edges == sorted(edges), edges
     yb = 7.95
     for (a, b), lab, shade in zip(zip(edges[:-1], edges[1:]),
-                                  ("discover", "choose a law", "assume it; estimate k"),
+                                  ("discover", "choose a law", "assume it, fit k"),
                                   ("#d9e6f2", "#e3e3e3", "#f6dfd2")):
         ax.add_patch(plt.Rectangle((np.log10(a), yb - 0.17), np.log10(b) - np.log10(a), 0.34, facecolor=shade,
                                    edgecolor=S.C["dark"], lw=0.5, zorder=2))

@@ -385,3 +385,15 @@ choice among three laws stayed 0.40 to 1.00 decade below E11 (it needs resolutio
 50 % success lies 1.25 to 2.08 decades below Da*_ident (M7 on the same replicates: last levels 3.16 to 31.6).
 PSE failed at Da <= 0.32 in every slice and succeeded in a window between Da 1 and 10 (to 31.6 in two slices),
 never wider than M7's.
+
+**Corrections after the final check (2026-11-16; the entries above are left as written).** (a) E14 outcome: 'to 31.6
+in two slices' is wrong. At least 50 % success reached Da 31.6 in one slice (step, sigma 0.5 %, eps 0); three slices had
+some success there (0.33, 0.53, 0.13). PSE's last level was never closer to Da*_ident than M7's on the same replicates
+(M7 1.05 to 1.59 decades below). (b) 'Every change made PSE more able to succeed' holds for the pilot changes only;
+the 30 s time limit (declared 60 s), set before the pilots, can only disadvantage PSE. Both are disclosed in the SI and
+Methods. (c) The pilots, declared to time the job and check the parsing, were also used to fix the settings, on
+replicate 15, which is in the reported set (the pilot rows were recomputed in the main run). (d) The pilot window
+'02:00-03:30' is approximate: the pilot kernel was written at 02:02 and the implementation committed (eb3c8ee) at
+02:03, before the pilot was pushed. (e) E13: the step slice at sigma 0.16 % agrees with E11 on the fitted crossing
+(532 against 314) but less clearly on the measured fractions (lost between Da 100 and 316); its identifiability
+boundary is held at 562 by the estimator's low bias at Da 1000 (kh = 20), so the 0.02-decade gap is a lower bound.

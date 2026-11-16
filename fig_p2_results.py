@@ -267,8 +267,8 @@ def _h2b_scatter(ax, V, da_levels):
     ax.set_xlim(lo, hi)
     ax.set_ylim(lo, hi)
     ax.set_aspect("equal", adjustable="box")
-    ax.set_xlabel(r"$\log_{10} Da^{*}_{ident}$")
-    ax.set_ylabel(r"$\log_{10} Da^{*}_{disc}$, best method")
+    ax.set_xlabel(r"$\log_{10} \mathrm{Da}^{*}_{\mathrm{ident}}$")
+    ax.set_ylabel(r"$\log_{10} \mathrm{Da}^{*}_{\mathrm{disc}}$, best method")
     ax.text(0.03, 0.90, f"not shown: {n_missing} of {len(V['H2b'])} slices\nwith no boundary for one of the two",
             transform=ax.transAxes, ha="left", va="top", fontsize=6.0, color=figstyle.C["dark"])
     ax.text(0.03, 0.97, f"band: $\\pm${MDE} decade (decision threshold)", transform=ax.transAxes, ha="left",
@@ -316,7 +316,7 @@ def _h2b_wordmap(ax, V):
         patches += [Patch(facecolor=WITHHELD_FACE, edgecolor=figstyle.C["dark"], hatch="////",
                           label="withheld (positive control failed)")]
     ov = V.get("H2b_overall", {}).get("words")
-    return patches, ("cell numbers: gap $\\log_{10}Da^{*}_{disc} - \\log_{10}Da^{*}_{ident}$ (decade)"
+    return patches, ("cell numbers: gap $\\log_{10}\\mathrm{Da}^{*}_{\\mathrm{disc}} - \\log_{10}\\mathrm{Da}^{*}_{\\mathrm{ident}}$ (decade)"
                      + (f";  overall verdict: {ov} ({sum(1 for v in V['H2b'].values() if v.get('gap_decades') is not None)} of "
                         f"{sum(1 for v in V['H2b'].values() if v.get('gap_decades') is not None)} slices with both boundaries)" if ov else ""))
 
@@ -512,7 +512,7 @@ def _by_method_strip(ax, V, da_levels):
     ax.set_xlim(-0.6, len(ms) - 0.4)
     ax.set_ylim(lo, np.log10(da_levels[-1]) + 1.0)          # head room for the legend
     ax.set_xlabel("sparse method (grey numbers: slices without a crossing, of 96)")
-    ax.set_ylabel(r"$\log_{10} Da^{*}_{disc}$ per slice")
+    ax.set_ylabel(r"$\log_{10} \mathrm{Da}^{*}_{\mathrm{disc}}$ per slice")
     isos = sorted({iso for v in per.values() for _, iso in v})
     ax.legend(handles=[Line2D([], [], lw=0, marker=ISO_MARKER.get(i, "o"), ms=3.5, mec=figstyle.C["dark"],
                               mfc="white" if i == "step" else figstyle.C["dark"], label=ISO_LABEL.get(i, i))
@@ -559,7 +559,7 @@ def _h2c_panel(ax, V):
     ax.set_xlim(-0.6, len(eps) - 0.4)
     ax.grid(axis="x", visible=False)
     ax.set_xlabel(r"isotherm error $\varepsilon$ (% of $q^{*}$), $\sigma$ = 2 %")
-    ax.set_ylabel(r"EIV shift, $\Delta\log_{10} Da^{*}_{disc}$" + "\n(M5 minus best non-EIV, decade)")
+    ax.set_ylabel(r"EIV shift, $\Delta\log_{10} \mathrm{Da}^{*}_{\mathrm{disc}}$" + "\n(M5 minus best non-EIV, decade)")
     hd = [Line2D([], [], lw=0, marker="o", color=OI["blue"], label="Langmuir"),
           Line2D([], [], lw=0, marker="o", color=OI["orange"], label="MOF-303-like step")]
     hd += [Line2D([], [], lw=0, marker=m, color=figstyle.C["dark"], ms=3.5, label=f"{pe_label(p)}")

@@ -2,8 +2,8 @@
 
 Each kernel copies the E8 kit (dataset p2-e8-sampling-kit: the fields, p2_observe.py and the p2 package), clones
 PSE (github.com/intell-sci-comput/PSE) at the pinned commit, generates PSE's mask for the declared operators, and fits
-its groups row by row. Inputs and scoring are M7's: Lib-B without its constant at the observed values, stacked over the
-20 probes; target the Savitzky-Golay derivative of q (p2.features.derivative), multiplied by t_stoich so that the
+its groups row by row. Final settings (ledger E14, pilots 3 to 5): inputs are the raw variables c, q, T and q* at the
+observed values, stacked over the 20 probes (pilot 3: with M7's Lib-B columns PSE returned a full linear combination); target the Savitzky-Golay derivative of q (p2.features.derivative), multiplied by t_stoich so that the
 coefficients are of order Da (a constant factor, which changes neither the law's terms nor the coefficient ratio the
 success rule checks); M7's strict bridge (SymPy expansion, any monomial that is not a single feature is extra support)
 and p2.metric.success_L1.
@@ -21,7 +21,8 @@ PSE_COMMIT = "7105caba63e754150dd3b160443984456ec99cd7"
 SIGMAS, EPSS, REPS = (0.005, 0.02), (0.0, 0.02), range(15, 30)
 TIME_LIMIT = 30
 FEATS = ["c", "q", "T", "qstar"]
-USE_CONST = False   # PSE's default; with constants every expression carries an intercept (pilot 3)   # raw variables: PSE builds products itself (pilot 2, ledger E14)
+USE_CONST = False   # PSE's default; with constants every expression carried an intercept (ledger E14, pilot 5)
+# FEATS: raw variables; PSE builds products itself (ledger E14, pilot 3)
 cells = sorted(n for n, c in json.load(open(os.path.join(ROOT, "data", "p2", "manifest.json")))["cells"].items()
                if c["law"] == "L1" and c["iso"] in ("langmuir", "step") and c["pe_mult"] == 1.0 and not c.get("refined"))
 assert len(cells) == 18, len(cells)

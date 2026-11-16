@@ -307,7 +307,7 @@ def bindings():
     dsh = [math.log10(b["da_disc"] / a["da_disc"]) for b, a in pairs]
     ish = [math.log10(b["da_ident"] / a["da_ident"]) for b, a in pairs if b["da_ident"] and a["da_ident"]]
     no_id = [b for b, _ in pairs if b["da_ident"] is None]
-    out += [("E11 gaps (abstract)", f"and by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f} where both were found again with\n2,000 (post hoc)."
+    out += [("E11 gaps (abstract)", f"where both were found again with\n2,000 (post hoc), by {math.floor(min(g11) * 10) / 10:.1f} to {max(g11):.1f}."
              if min(g11) >= 0.25 and len(g11) == 3 and len(pairs) == 4 else "E11 gap below threshold"),
             ("E11 slices with both (Introduction)", "in all\nthree slices that kept both boundaries when re-run"
              if len(g11) == 3 else "E11 slices with both differ"),
@@ -338,6 +338,15 @@ def bindings():
              "identifiability boundary in every slice"
              if not e14["reading"]["gap_closes_in_any_slice"] and all(b is not None for b in below)
              else "E14: the gap closes somewhere")]
+    # PySR (M7) on the same replicates 15..29: last level with >= 50 % success against Da*_ident
+    m7b, closer = [], False
+    for v in e14["slices"].values():
+        last = max(float(d) for d, f in v["m7_by_da"].items() if f >= 0.5)
+        m7b.append(math.log10(v["da_ident"] / last))
+        closer |= v["decades_below_ident"] < m7b[-1] - 1e-9
+    out += [("E14 PySR on the same replicates",
+             f"never closer than symbolic regression's on the same\nreplicates ({math.floor(min(m7b) * 10) / 10:.1f} "
+             f"to {math.ceil(max(m7b) * 10) / 10:.1f})" if not closer else "E14: PSE closer than PySR somewhere")]
     rc = load("results/p2_referee_checks.json")
     cv = [d["gap_200"] for d in rc["choice_vs_ident"].values() if d["gap_200"] is not None]
     cv2 = [d["gap_2000"] for d in rc["choice_vs_ident"].values() if d["gap_2000"] is not None]
