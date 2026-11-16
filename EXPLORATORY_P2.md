@@ -379,3 +379,9 @@ sigma 0.16 %: 0.02 decade). That slice's selected method (ensemble, weak form) f
 at 0.96-1.00 from Da 0.32 to 100 and 0.04 at Da 316, where identifiability was 1.00; the falling logistic, pulled by
 the failure at the lowest level, crosses at 532. Both the fitted and the measured readings are reported. The
 choice among three laws stayed 0.40 to 1.00 decade below E11 (it needs resolution, as E10 found).
+
+**E14 outcome (2026-11-16, results/p2_e14_summary.json, p2_e14_rows.json; 6 Kaggle GPU kernels, 1,080 rows,
+0 errors; PSE 7105cab).** By the reading fixed in advance the gap closes in no slice: PSE's last level with at least
+50 % success lies 1.25 to 2.08 decades below Da*_ident (M7 on the same replicates: last levels 3.16 to 31.6).
+PSE failed at Da <= 0.32 in every slice and succeeded in a window between Da 1 and 10 (to 31.6 in two slices),
+never wider than M7's.

@@ -330,6 +330,14 @@ def bindings():
             ("E13 step at 316", f"{round(100 * stp['disc_by_da']['316.22776601683796']):.0f}" + BS + "," + BS
              + f"% of replicates at ${BS}Da = 316$, where $k$ remained identifiable in all"
              if stp["ident_by_da"]["316.22776601683796"] == 1.0 else "E13 step ident at 316 not 1")]
+    # E14 (declared 228360e): parallel symbolic enumeration on M7's subgrid
+    e14 = load("results/p2_e14_summary.json")
+    below = [v["decades_below_ident"] for v in e14["slices"].values()]
+    out += [("E14 distance below identifiability",
+             f"lay {math.floor(min(below) * 10) / 10:.1f} to {round(max(below), 1):.1f} decades below\nthe "
+             "identifiability boundary in every slice"
+             if not e14["reading"]["gap_closes_in_any_slice"] and all(b is not None for b in below)
+             else "E14: the gap closes somewhere")]
     rc = load("results/p2_referee_checks.json")
     cv = [d["gap_200"] for d in rc["choice_vs_ident"].values() if d["gap_200"] is not None]
     cv2 = [d["gap_2000"] for d in rc["choice_vs_ident"].values() if d["gap_2000"] is not None]

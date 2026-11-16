@@ -168,7 +168,7 @@ isotherm at $T_{\mathrm{in}}$ is the same as in the Langmuir cells and the bed s
 $T_{\mathrm{in}}$.
 % source: p2_generate.py:make_physics branch "langmuir_iso"; cells() (9 Da levels, Pe x1, L1).
 
-\section*{Supplementary Note 1: exploratory analyses E2 to E13}
+\section*{Supplementary Note 1: exploratory analyses E2 to E14}
 Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
 enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
 corrected verdicts, prompted by a review of the draft; E8 after E6's corrected results; E9 after
@@ -571,6 +571,40 @@ all 45; the falling logistic, pulled by the failure at the lowest level, crosses
 measured fractions discovery is lost between $\Da = 100$ and 316 while $k$ remains identifiable to 316.
 % source: results/p2_e13_summary.json, results/p2_e13_rows.json (p2_e13_infomatched.py); kaggle_e13/ (5 kernels,
 % declaration 8c74426, kernels stamped 2f662bf); EXPLORATORY_P2 E13.
+
+\subsection*{E14: parallel symbolic enumeration (post hoc, declared before it ran)}
+Declared after a review of the target journal's editorials, which name missing recent methods as the most
+frequent referee request. PSE (Ruan et al., Nat. Comput. Sci. 6, 53--66, 2026; official code, commit 7105cab) ran on M7's subgrid
+($\Pe \approx 94$, both isotherms, noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%, all nine $\Da$) on replicates
+15--29 (1,080 fits on Kaggle GPUs, 30\,s each, no errors). It received the raw variables $c$, $q$, $T$ and $\qsm$
+and the Savitzky--Golay derivative of $q$ times $t_{\mathrm{stoich}}$; operators $+$, $-$ and $\times$; no fitted
+constants (PSE's default); the expression was chosen from PSE's Pareto front by M7's rule (PySR's
+score-based knee) and scored by M7's strict rule. These settings were fixed in five three-row pilots,
+not reported, before the main run (each change made PSE more able to succeed; EXPLORATORY\_P2 E14).
+Bi-level identification (Li et al., Nat. Comput. Sci. 5, 456--466, 2025) was not run (Methods).
+
+\begin{center}
+\small
+\begin{tabular}{lllrrrr}
+\toprule
+Isotherm & $\sigma$ & $\varepsilon$ & PSE & PySR & $\Da^{*}_{\mathrm{ident}}$ & PSE below $\Da^{*}_{\mathrm{ident}}$ \\
+\midrule
+Langmuir & 0.5\,\% & 0\,\% & 10 & 31.6 & 356 & 1.55 \\
+Langmuir & 0.5\,\% & 2\,\% & 3.16 & 10 & 298 & 1.97 \\
+Langmuir & 2\,\% & 0\,\% & 3.16 & 3.16 & 73.5 & 1.37 \\
+Langmuir & 2\,\% & 2\,\% & 3.16 & 3.16 & 101 & 1.50 \\
+step & 0.5\,\% & 0\,\% & 31.6 & 31.6 & 562 & 1.25 \\
+step & 0.5\,\% & 2\,\% & 3.16 & 10 & 385 & 2.08 \\
+step & 2\,\% & 0\,\% & 3.16 & 10 & 172 & 1.73 \\
+step & 2\,\% & 2\,\% & 3.16 & 10 & 262 & 1.92 \\
+\bottomrule
+\end{tabular}
+\end{center}
+PSE and PySR: the last $\Da$ with at least 50\,\% success on replicates 15--29; the last column, in decades.
+PSE failed at $\Da \le 0.32$ in every slice and succeeded in a window between $\Da = 1$ and 10 (to 31.6 in
+two slices), never wider than PySR's. By the reading fixed in advance the gap closes in no slice.
+% source: results/p2_e14_summary.json, results/p2_e14_rows.json (p2_e14_pse.py); kaggle_e14/ (6 GPU kernels,
+% declaration 228360e, implementation eb3c8ee, pilots and final settings ce8f108); EXPLORATORY_P2 E14.
 
 \subsection*{E12 and E12b: a second system (post hoc, declared before each ran)}
 Declared after an AI-assisted simulated pre-submission review asked whether the asymmetry is particular to

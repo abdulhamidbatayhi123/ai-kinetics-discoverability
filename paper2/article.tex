@@ -229,6 +229,9 @@ where no sparse method reached 50\,\% (Fig.~4a,b; Extended Data Fig.~5). The pre
 boundary, a falling logistic curve, cannot describe such a window. If the boundary is instead taken
 as the last level with at least 50\,\% success (post hoc), H2b is unchanged: in the four such
 slices with a verdict, that level lay 1.0 to 1.4 decades below the identifiability boundary.
+Parallel symbolic enumeration \citep{ruan2026} on the same subgrid (15 replicates; post hoc, declared
+before it ran) behaved alike: its last level with at least 50\,\% success lay 1.2 to 2.1 decades below
+the identifiability boundary in every slice.
 
 % M7 last level >= 0.5 vs da_ident (results/p2_figdata.json methods, results/p2_verdicts.json H2b):
 % langmuir s0.5 e0 31.6 vs 356 (1.05); step s0.5 e0 31.6 vs 562 (1.25); langmuir s2 e0 3.16 vs 73.5
@@ -410,10 +413,9 @@ verdict holds. Laboratory rigs log far more densely than 200 observations per ru
 boundaries understate what such rigs can discover.
 Symbolic regression ran on a subgrid, the neural pipeline only as a demonstration, and a
 Kolmogorov--Arnold network, which had failed its known-answer test, only in an exploratory run (none
-of 216 fits); each limit was declared before the grid ran, and the larger neural pipeline declared for a graphics processor was not run.
+of 216 fits); each limit was declared before the grid ran.
 Combining method families was not tested, nor were errors-in-variables fitting in the weak form or
-recent methods such as parallel symbolic enumeration \citep{ruan2026} and bi-level identification
-\citep{li2025bilevel}.
+bi-level identification \citep{li2025bilevel} (Methods).
 
 % results/p2_e2_m8.json (216 rows, 0 success, 1 pykan-internal error counted as a failure).
 % results/p2_ident_robustness.json accuracy_median_khat_over_k_sigma0_eps0 min 0.393 (step, Pe 470, Da 1000).
@@ -790,8 +792,7 @@ and none enters a confirmatory test; the descriptive checks listed at the end of
 not declared in advance. Three were declared before the verdicts: M1 trained at the
 scale a universal differential equation needs (E1), the Kolmogorov--Arnold network on its
 declared subgrid (E2), and how often an interval that meets $[k/2, 2k]$ misses the true $k$
-(E3). E1 needs a graphics processor and has not run; it is not reported here. Ten more were
-declared after the verdicts, prompted by AI-assisted reviews of the draft, and are labelled post hoc: H2b
+(E3). E1 needs a graphics processor and has not run; it is not reported here. Twelve more were declared after the verdicts, prompted by AI-assisted reviews of the draft, and are labelled post hoc: H2b
 with matched success criteria for the two tasks (E4), the conditioning of the library against
 $\Da$ (E5), choice among three candidate laws by likelihood (E6), a systematic shift of the step
 of the measured isotherm (E7), the sampling rate, 200 against 400 observation times (E8,
@@ -800,7 +801,14 @@ declared after E6's results), E6 with $\qsm$ computed from noise-free $c$ and $T
 (E10, declared after E9), and every boundary at about 2,000 observation times per run, with the
 fields re-solved at finer time resolution (E11, declared after a third review, with its reading
 fixed in advance), and the same comparison on a second system, a reversible reaction in a
-stirred tank (E12, and E12b with unequal feeds after E12's positive control failed; both reported).
+stirred tank (E12, and E12b with unequal feeds after E12's positive control failed; both reported),
+200 observation times with the noise divided by $\sqrt{10}$, which matches E11's information at the
+grid's resolution (E13), and parallel symbolic enumeration \citep{ruan2026} on the
+symbolic-regression subgrid with 15 replicates, its inputs, operators, constants and expression selection
+fixed in five unreported three-row pilots before the main run (E14). Bi-level identification
+\citep{li2025bilevel} was not run: the repository its article cites was unavailable when checked
+(16 November 2026), and its released demonstration selects terms from a user-supplied library, which here
+would reduce to the sparse regression already tested.
 E6 fits each law by implicit Euler along the same upsampled path
 of $\qsm$ as the identifiability profile, with its rate constant profiled on a logarithmic grid
 and refined by a bounded one-dimensional search; all three laws have one parameter, so the
