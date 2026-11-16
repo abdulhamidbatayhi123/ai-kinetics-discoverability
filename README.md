@@ -14,9 +14,10 @@ the state of the submitted manuscript, is
 which adds the table of published columns (now Supplementary Table 1), is [doi:10.5281/zenodo.24101317](https://doi.org/10.5281/zenodo.24101317); release v1.0.2-submitted, an earlier submission candidate
 (with E11, Figure 5 and Source Data), is [doi:10.5281/zenodo.24149951](https://doi.org/10.5281/zenodo.24149951); release v1.0.3-submitted, a
 later candidate (title without "long", the information-matched comparison and the second system
-E12/E12b), is [doi:10.5281/zenodo.24244392](https://doi.org/10.5281/zenodo.24244392); release v1.0.4-submitted, which supersedes it as the
-version for submission (journal-fit revision, E13, E14 and the final verification fixes), is
-[doi:10.5281/zenodo.24271824](https://doi.org/10.5281/zenodo.24271824).
+E12/E12b), is [doi:10.5281/zenodo.24244392](https://doi.org/10.5281/zenodo.24244392); release v1.0.4-submitted (journal-fit revision, E13, E14 and the final verification fixes) is
+[doi:10.5281/zenodo.24271824](https://doi.org/10.5281/zenodo.24271824); release v1.0.5-submitted, which
+supersedes it as the version for submission (fixes from a fresh referee read of the final PDF), is archived
+under the all-versions DOI above.
 
 ## The question and the answer in brief
 
