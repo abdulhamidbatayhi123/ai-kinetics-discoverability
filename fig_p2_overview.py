@@ -170,7 +170,7 @@ def main():
     gt = c.titled(L, y1, 57, h1, "Ground truth", "Verified non-isothermal\ncolumn model\n"
                   "(companion study)\nRate law: LDF (L1) or\nloading-dependent k(q) (L2)", TINT["truth"], "1")
     isotherm_inset(c.inset(L + 37.5, y1 + 3.5, 17.5, 15.5))
-    dg = c.titled(67, y1, 50, h1, "Design grid", "Damköhler number Da: 0.1 to 1000,\nnine levels\n"
+    dg = c.titled(67, y1, 50, h1, "Design grid", "Damköhler number Da: 0.1 to 1,000,\nnine levels\n"
                   "Péclet number: about 470, 94, 19\nNoise σ and isotherm error ε:\n"
                   "0, 0.5, 2 and 5 % each\n60 replicates (15 select, 45 estimate)", TINT["truth"], "2")
     ob = c.titled(123, y1, R - 123, h1, "Observation models", "O1  probes of c, q, T\n"
@@ -211,7 +211,7 @@ def main():
             ("H2c", "does errors-in-variables fitting move it?", "confirmatory"),
             ("", "which methods discover the law, and where", "descriptive"),
             ("", "choice among three candidate laws by likelihood", "post hoc"),
-            ("", "ten times more observations, three slices", "post hoc"),
+            ("", "ten times more observations, four slices", "post hoc"),
             ("", "second system: reversible reaction, stirred tank", "post hoc"),
             ("", "O2 and O3: probes without uptake, outlet only", "descriptive"),
             ("H2d", "loading-dependent rate, step isotherm", "exploratory")]

@@ -397,3 +397,11 @@ replicate 15, which is in the reported set (the pilot rows were recomputed in th
 02:03, before the pilot was pushed. (e) E13: the step slice at sigma 0.16 % agrees with E11 on the fitted crossing
 (532 against 314) but less clearly on the measured fractions (lost between Da 100 and 316); its identifiability
 boundary is held at 562 by the estimator's low bias at Da 1000 (kh = 20), so the 0.02-decade gap is a lower bound.
+
+**How the symbolic methods fail at the lowest rates (2026-11-16, post hoc, descriptive; p2_lowda_diag.py ->
+results/p2_lowda_diag.json).** Prompted by a fresh referee read asking why symbolic regression fails at Da <= 0.32,
+where sparse regression works best. No fit was rerun; the stored supports were tallied. M7 rows store every library
+feature (zero coefficients included) plus any monomial outside the library, so only the added monomials can be read:
+at Da 0.1 and 0.316, 953 of 960 M7 fits added a constant term (the M7 library leaves out the constant feature), against
+at most 17 % of fits at any higher level (80 of 480 at Da 1). PSE failed differently: 159 of its 240 fits at those
+levels returned no term in qstar, while M7 on the same replicates (15-29) added a constant in 238 of 240. Reported in the Results (M7) and Supplementary E14 (both); no verdict is affected.

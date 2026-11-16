@@ -1,0 +1,65 @@
+{
+ "description": "Stored supports of the two symbolic methods; M7 constant terms by Da and E14 fits without qstar at Da 0.1 and 0.316 (post hoc, descriptive).",
+ "m7_by_da": {
+  "0.1": {
+   "n": 480,
+   "n_success": 1,
+   "n_constant": 476
+  },
+  "0.316": {
+   "n": 480,
+   "n_success": 1,
+   "n_constant": 477
+  },
+  "1": {
+   "n": 480,
+   "n_success": 369,
+   "n_constant": 80
+  },
+  "3.16": {
+   "n": 480,
+   "n_success": 447,
+   "n_constant": 16
+  },
+  "10": {
+   "n": 480,
+   "n_success": 301,
+   "n_constant": 39
+  },
+  "31.6": {
+   "n": 480,
+   "n_success": 156,
+   "n_constant": 44
+  },
+  "100": {
+   "n": 480,
+   "n_success": 7,
+   "n_constant": 25
+  },
+  "316": {
+   "n": 480,
+   "n_success": 0,
+   "n_constant": 4
+  },
+  "1e+03": {
+   "n": 480,
+   "n_success": 0,
+   "n_constant": 2
+  }
+ },
+ "m7_low": {
+  "n": 960,
+  "n_success": 2,
+  "n_constant": 953
+ },
+ "m7_low_reps_15_29": {
+  "n": 240,
+  "n_constant": 238
+ },
+ "m7_higher_max_constant_fraction": 0.16666666666666666,
+ "pse_low": {
+  "n": 240,
+  "n_success": 0,
+  "n_without_qstar": 159
+ }
+}

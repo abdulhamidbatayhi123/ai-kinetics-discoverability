@@ -194,12 +194,12 @@ def fig_ident(R, V, da, stem):
     b.set_ylim(lo, hi)
     b.set_aspect("equal", adjustable="box")
     b.set_xlabel("H2b gap, all Da levels (decade)")
-    b.set_ylabel("gap bound without Da 316 and 1000 (decade)\n"
+    b.set_ylabel("gap bound without Da 316 and 1,000 (decade)\n"
                  r"$\log_{10}\mathrm{Da}^{*}_{\mathrm{disc}} - \log_{10}$(highest Da $\leq$ 100 with $P_{ident} \geq$ 0.5)")
     b.text(-2.6, -MDE + 0.06, f"−{MDE} decade threshold", fontsize=5.5, ha="left", va="bottom")
     s = R["h2b_without_da_316_1000_summary"]
-    b.text(lo + 0.08, lo + 0.08, f"{s['n_slices']} verdict slices;\nmin $P_{{ident}}$ at Da ≤ 31.6: "
-           f"{s['min_p_ident_da_le_31.6']:.2f}", fontsize=5.5, va="bottom")
+    b.text(lo + 0.08, -MDE - 0.15, f"{s['n_slices']} verdict slices;\nmin $P_{{ident}}$ at Da ≤ 31.6: "
+           f"{s['min_p_ident_da_le_31.6']:.2f}", fontsize=5.5, va="top")
     b.legend(handles=[Line2D([], [], lw=0, marker=ISO_MARKER[i], ms=3.4, color=S.ROLE["ident"],
                              mfc="white" if i == "step" else S.ROLE["ident"], label=ISO_LABEL[i])
                       for i in ISOS] + [Line2D([], [], color=GREY, lw=0.6, label="identity")],
@@ -231,7 +231,7 @@ def fig_coverage(Cv, stem):
     a.set_ylabel("fraction of O1 rows, all σ, ε, Pe")
     a.legend(loc="upper right", fontsize=5.8, bbox_to_anchor=(1.0, 1.04))
     n = pd[das[0]]["n"]
-    a.text(0.02, 0.38, f"n = {n} rows per Da level", transform=a.transAxes, fontsize=5.5)
+    a.text(0.02, 0.38, f"n = {n:,} rows per Da level", transform=a.transAxes, fontsize=5.5)
     # b: totals
     obs = ("O1", "O2", "O3")
     pm = Cv["per_model"]
@@ -245,7 +245,7 @@ def fig_coverage(Cv, stem):
         b.text(xi[j] - w / 2, vi[j] + 0.02, f"{vi[j]:.2f}", ha="center", fontsize=5.5)
         b.text(xi[j] + w / 2, vc[j] + 0.02, f"{vc[j]:.2f}", ha="center", fontsize=5.5)
     b.set_xticks(xi)
-    b.set_xticklabels([f"{o}\nn = {pm[o]['n']}" for o in obs])
+    b.set_xticklabels([f"{o}\nn = {pm[o]['n']:,}" for o in obs])
     b.tick_params(axis="x", length=0)
     b.set_ylim(0, 1.12)
     b.set_ylabel("fraction of rows")
@@ -331,7 +331,7 @@ def fig_methods(FD, m9, m8, m8reps, m1, da, stem):
     _da_ticks(ax, da)
     ax.set_xlabel(LOG_DA)
     ax.set_ylabel("probability, slow manifold\nagainst its own target")
-    ax.text(0.02, 0.62, f"pooled over σ, ε, Pe;\nn = {n9[0]} estimation replicates\nper point",
+    ax.text(0.02, 0.62, f"pooled over σ, ε, Pe;\nn = {n9[0]:,} estimation replicates\nper point",
             transform=ax.transAxes, fontsize=5.5, va="top")
     ax.legend(loc="upper left", fontsize=5.8)
     S.letter(ax, "e")
@@ -509,7 +509,7 @@ def fig_asrun(A, V, stem, P=None):
                       Line2D([], [], lw=0, marker="o", ms=3.4, color="#B5B5B5", label="vs as run (Langmuir only)"),
                       Line2D([], [], lw=0, marker="s", ms=3.4, mfc="white", color=DARK, label="step isotherm"),
                       Line2D([], [], color=GREY, lw=0.6, label="identity")],
-             loc="lower right", fontsize=5.5)
+             loc="lower right", fontsize=5.5, frameon=True, facecolor="white", edgecolor="none", framealpha=1.0)
     for ax, s_ in zip((a, b, c), "abc"):
         S.letter(ax, s_, y=1.12)
     return S.save(fig, stem, inputs=[F_ASRUN, F_V] + ([F_PRE] if P else []))

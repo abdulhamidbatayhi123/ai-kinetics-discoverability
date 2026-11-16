@@ -1,5 +1,5 @@
 {
- "description": "Where real columns sit on the Da map: Da = k * t_stoich from published inputs (Supplementary Table 2).",
+ "description": "Where real columns sit on the Da map: Da = k * t_stoich from published inputs (Supplementary Table 1).",
  "rows": [
   {
    "source": "Lassitter et al. 2024",

@@ -85,15 +85,15 @@ Residence time $L/u$ & 0.40 & 0.35 & s \\
 \midrule
 \multicolumn{4}{@{}l}{\textit{Bed and solid}}\\
 Total porosity $\varepsilon_t$ & 0.40 & 0.35 & -- \\
-Particle density $\rho_p$ & 1200 & 1100 & kg\,m$^{-3}$ \\
-Solid heat capacity $C_{ps}$ & 1000 & 1000 & J\,kg$^{-1}$\,K$^{-1}$ \\
+Particle density $\rho_p$ & 1,200 & 1,100 & kg\,m$^{-3}$ \\
+Solid heat capacity $C_{ps}$ & 1,000 & 1,000 & J\,kg$^{-1}$\,K$^{-1}$ \\
 Axial thermal conductivity $k_z$ & 0.10 & 0.10 & W\,m$^{-1}$\,K$^{-1}$ \\
 % source: solver_fd.py:AdsorptionPhysicsConfig.__init__; fetch_real_mof_data.py:get_mof303_physics
 % (rho_p and eps_t are marked UNCITED packing values there).
 \midrule
 \multicolumn{4}{@{}l}{\textit{Gas and thermal boundary}}\\
 Gas density $\rho_g$ & 1.2 & 1.2 & kg\,m$^{-3}$ \\
-Gas heat capacity $C_{pg}$ & 1000 & 1000 & J\,kg$^{-1}$\,K$^{-1}$ \\
+Gas heat capacity $C_{pg}$ & 1,000 & 1,000 & J\,kg$^{-1}$\,K$^{-1}$ \\
 Wall heat transfer coefficient $h_w$ & 10 & 10 & W\,m$^{-2}$\,K$^{-1}$ \\
 Feed and wall temperature $T_{\mathrm{in}} = T_w$ & 298.0 & 303.15 & K \\
 % source: solver_fd.py:AdsorptionPhysicsConfig.__init__; fetch_real_mof_data.py:get_mof303_physics
@@ -123,7 +123,7 @@ Step midpoint loading $\theta$ (L2 only) & -- & 0.3552 & -- \\
 % data/p2/manifest.json keys c_in (1.0, 0.5042852611085497), q_max, theta_step (0.35522387404378003).
 \midrule
 \multicolumn{4}{@{}l}{\textit{Kinetics, dispersion and design}}\\
-Stoichiometric time $t_{\mathrm{stoich}}$ & 7200.4 & 31\,050.4 & s \\
+Stoichiometric time $t_{\mathrm{stoich}}$ & 7,200.4 & 31,050.4 & s \\
 $\Da = k\,t_{\mathrm{stoich}}$, 9 levels & \multicolumn{2}{l}{$10^{-1}$ to $10^{3}$, half-decade spacing} & -- \\
 LDF coefficient $k$ & $1.389\times10^{-5}$ to $0.1389$ & $3.221\times10^{-6}$ to $0.03221$ & s$^{-1}$ \\
 Residence-time form $k L/u$ & $5.56\times10^{-6}$ to $0.0556$ & $1.13\times10^{-6}$ to $0.0113$ & -- \\
@@ -168,6 +168,7 @@ isotherm at $T_{\mathrm{in}}$ is the same as in the Langmuir cells and the bed s
 $T_{\mathrm{in}}$.
 % source: p2_generate.py:make_physics branch "langmuir_iso"; cells() (9 Da levels, Pe x1, L1).
 
+\clearpage
 \section*{Supplementary Note 1: exploratory analyses E2 to E14}
 Every analysis here was declared in writing before it ran (\texttt{EXPLORATORY\_P2.md}) and
 enters no confirmatory test. E2 and E3 were declared before the verdicts; E4 to E7 after the
@@ -212,8 +213,8 @@ refit, \texttt{kan/spline.py}, \texttt{curve2coef}); it is counted as a failure.
 \subsection*{E3: precision against coverage of the identifiability criterion}
 The pre-registered criterion calls $k$ practically identifiable when the 95\,\% profile interval lies
 inside $[k/2, 2k]$. It measures precision and accuracy within a factor of two, not whether the
-interval contains the true value. On O1, 39\,973 of 51\,840 rows met the criterion, but only
-5\,042 intervals (10\,\%) contained the true $k$; 87\,\% of the rows called identifiable had an
+interval contains the true value. On O1, 39,973 of 51,840 rows met the criterion, but only
+5,042 intervals (10\,\%) contained the true $k$; 87\,\% of the rows called identifiable had an
 interval that missed it. The same held on O2 (coverage 9\,\%; 157 of 216 rows identifiable) and,
 less strongly, on O3 (coverage 23\,\%; 150 of 216). The intervals are narrow because the
 likelihood treats the measured isotherm and the observed $c$ and $T$ that enter $\qsm$ as exact,
@@ -222,17 +223,17 @@ while the estimate carries small biases from them and from the time resolution.
 \small
 \begin{tabular}{@{}rrrr@{}}
 \toprule
-$\Da$ & identifiable (of 5\,760) & interval contains $k$ & identifiable but misses $k$ \\
+$\Da$ & identifiable (of 5,760) & interval contains $k$ & identifiable but misses $k$ \\
 \midrule
-0.1 & 5\,760 & 425 & 92.6\,\% \\
-0.316 & 5\,760 & 454 & 92.1\,\% \\
-1 & 5\,760 & 645 & 88.8\,\% \\
-3.16 & 5\,760 & 1\,042 & 81.9\,\% \\
-10 & 5\,760 & 1\,509 & 73.8\,\% \\
-31.6 & 5\,564 & 661 & 88.1\,\% \\
-100 & 3\,318 & 226 & 93.2\,\% \\
-316 & 1\,843 & 47 & 97.4\,\% \\
-1000 & 448 & 33 & 94.0\,\% \\
+0.1 & 5,760 & 425 & 92.6\,\% \\
+0.316 & 5,760 & 454 & 92.1\,\% \\
+1 & 5,760 & 645 & 88.8\,\% \\
+3.16 & 5,760 & 1,042 & 81.9\,\% \\
+10 & 5,760 & 1,509 & 73.8\,\% \\
+31.6 & 5,564 & 661 & 88.1\,\% \\
+100 & 3,318 & 226 & 93.2\,\% \\
+316 & 1,843 & 47 & 97.4\,\% \\
+1,000 & 448 & 33 & 94.0\,\% \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -280,9 +281,9 @@ standardised and the singular values of the pair $\{q, \qsm\}$, the two terms of
 computed for every cell. The smaller singular value relative to the larger fell steadily with
 $\Da$, by a factor of about two to three per half decade: from 0.73 (Langmuir) and 0.78 to 0.79 (step) at
 $\Da = 0.1$, through 0.21 to 0.25 at $\Da = 1$ and 0.051 to 0.060 at $\Da = 10$, to 0.0007 to 0.0013
-at $\Da = 1000$, nearly the same for the three P\'eclet numbers. The condition number of the whole
-library was between about 230 and 5\,700 and was not monotone in $\Da$: it was smallest near
-$\Da = 1$ to 10 and largest at $\Da = 1000$. As $\Da$ grows the uptake follows the measured
+at $\Da = 1{,}000$, nearly the same for the three P\'eclet numbers. The condition number of the whole
+library was between about 230 and 5,700 and was not monotone in $\Da$: it was smallest near
+$\Da = 1$ to 10 and largest at $\Da = 1{,}000$. As $\Da$ grows the uptake follows the measured
 isotherm ever more closely, so the direction that distinguishes $q$ from $\qsm$, the one the law
 needs, carries ever less of the signal.
 % source: results/p2_e5_conditioning.json (cells: q_qstar_min_over_max_sv, cond_library; 54 cells);
@@ -299,7 +300,7 @@ procedure read $k$ off the grid and took one implicit step per upsampled interva
 added after the first rows (B91, Supplementary Note~2), and every row was recomputed. With one
 parameter each, the Bayesian information criterion chooses the largest likelihood. The subgrid
 was $\Pe \approx 94$, both isotherms, all nine $\Da$, $\sigma \in \{0.5, 2\}\,\%$,
-$\varepsilon \in \{0, 2\}\,\%$, estimation replicates 15 to 59 (3\,240 fits of each law). The
+$\varepsilon \in \{0, 2\}\,\%$, estimation replicates 15 to 59 (3,240 fits of each law). The
 table gives the fraction of replicates in which the LDF law was chosen. Wherever it was chosen at
 $\Da \le 31.6$, its $k$ lay within $[k/2, 2k]$; at $\Da \ge 100$ this held in 22 of the 32
 replicates that chose it.
@@ -308,7 +309,7 @@ replicates that chose it.
 \begin{tabular}{@{}llrrrrrrrrr@{}}
 \toprule
 & & \multicolumn{9}{c}{$\Da$} \\
-Isotherm & $\sigma$, $\varepsilon$ & 0.1 & 0.32 & 1 & 3.2 & 10 & 32 & 100 & 316 & 1000 \\
+Isotherm & $\sigma$, $\varepsilon$ & 0.1 & 0.32 & 1 & 3.2 & 10 & 32 & 100 & 316 & 1,000 \\
 \midrule
 Langmuir & 0.5\,\%, 0 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 0.69 & 0 & 0 & 0 \\
 Langmuir & 0.5\,\%, 2\,\% & 1.00 & 1.00 & 0.98 & 0.96 & 0.80 & 0.47 & 0.51 & 0.04 & 0.09 \\
@@ -326,7 +327,7 @@ $\Da = 10$, the quadratic driving force at $\Da = 31.6$ (except 31 of 45 replica
 Langmuir sorbent at 0.5\,\% noise, which chose the LDF law), the quadratic driving force or the
 pseudo-second-order law at 100 (for the Langmuir sorbent at 2\,\% noise, 41 replicates the
 pseudo-second-order law and 4 the quadratic driving force), and the pseudo-second-order law at 316
-and 1000. Except for the Langmuir sorbent at
+and 1,000. Except for the Langmuir sorbent at
 $\Da = 31.6$, the choice did not depend on the noise level; E9 tests whether noise in the forcing
 $\qsm(t)$ is nevertheless the cause, and E8 whether the sampling rate is. With 2\,\% isotherm
 error the LDF law was chosen in some replicates where the exact isotherm gave none, most often
@@ -391,7 +392,7 @@ fields, with the same noise per sample): discovery by the six sparse solvers in 
 best method chosen on replicates 0 to 14, O1 identifiability with the pre-registered criterion,
 and E6's choice among three laws on replicates 15 to 59. Every method ran unchanged, so windows
 defined in samples (the 21-sample derivative filter, the weak-form supports) span half the time at
-400 samples. The 4\,320 rows ran on Kaggle; four sampled rows recomputed locally agreed exactly on
+400 samples. The 4,320 rows ran on Kaggle; four sampled rows recomputed locally agreed exactly on
 discovery and to a relative $10^{-6}$ on identifiability and model choice. No row had an error.
 The table gives the 50\,\% crossings ($\Da^{*}$) and the gap $\log_{10}(\Da^{*}_{\mathrm{ident}} /
 \Da^{*}_{\mathrm{disc}})$.
@@ -425,7 +426,7 @@ the time resolution explains the failure of the choice at $\Da = 31.6$ but not a
 \subsection*{E9: noise in the forcing of the choice among laws (post hoc)}
 E6 drives each law with $\qsm(t)$ computed from the noisy observed $c$ and $T$, so its likelihood
 carries errors in the variables. E9 repeated E6 unchanged on its exact-isotherm rows at
-$\Da = 31.6$ to 1000 ($\Pe \approx 94$, both isotherms, $\sigma \in \{0.5, 2\}\,\%$, estimation
+$\Da = 31.6$ to 1,000 ($\Pe \approx 94$, both isotherms, $\sigma \in \{0.5, 2\}\,\%$, estimation
 replicates 15 to 59; 720 fits of each law), with $\qsm(t)$ computed from the noise-free $c$ and $T$
 at the same probes and times and $q$ observed with noise as before. One row was run to time the
 check before it was declared; it is recomputed here. The reading was fixed in advance: where the
@@ -437,7 +438,7 @@ error. The table gives the fraction with noise-free forcing and, in brackets, E6
 \begin{tabular}{@{}llllll@{}}
 \toprule
 & & \multicolumn{4}{c}{$\Da$} \\
-Isotherm & $\sigma$ & 31.6 & 100 & 316 & 1000 \\
+Isotherm & $\sigma$ & 31.6 & 100 & 316 & 1,000 \\
 \midrule
 Langmuir & 0.5\,\% & 1.00 (0.69) & 0 (0) & 0 (0) & 0 (0) \\
 Langmuir & 2\,\% & 0.69 (0) & 0.11 (0) & 0.22 (0) & 0.20 (0) \\
@@ -450,7 +451,7 @@ Noise in the forcing explains the failure only for the Langmuir sorbent at $\Da 
 twice the sampling rate also restored the choice at 0.5\,\% noise (E8). For the step isotherm at
 every level, and for both isotherms from $\Da = 100$ on, the wrong law was still chosen. A
 diagnostic made after E9 and not declared (\texttt{p2\_diag\_e9\_noisefree.py}, replicate 15) removed
-the noise from $q$ as well: the LDF law was still not chosen at $\Da = 100$ or 1000, although its
+the noise from $q$ as well: the LDF law was still not chosen at $\Da = 100$ or 1,000, although its
 fitted $k$ lay within 2\,\% of the true value at $\Da = 100$ for both isotherms. The failure from
 $\Da = 100$ on is therefore a deterministic misfit between the integrated laws and the sampled data, not an effect
 of noise; E10 asks whether finer sampling removes it.
@@ -459,37 +460,37 @@ of noise; E10 asks whether finer sampling removes it.
 % chosen law langmuir Da 31.6 ldf, Da 100 qdf (LDF k_hat/k 0.984), step Da 100 qdf (1.007), langmuir Da 1000 pso.
 
 \subsection*{E10: time resolution behind the misfit (post hoc)}
-At the grid's 200 observation times $k h$ is about 2 at $\Da = 100$ and 20 at $\Da = 1000$, so $q$
+At the grid's 200 observation times $k h$ is about 2 at $\Da = 100$ and 20 at $\Da = 1{,}000$, so $q$
 lags $\qsm$ by less than one sampling interval, and every law is driven by $\qsm(t)$ reconstructed
-between samples. Four cells ($\Pe \approx 94$; both isotherms; $\Da = 100$ and 1000) were solved
-again with the same solver and settings but 3\,991 stored times, every tenth of which is one of the
+between samples. Four cells ($\Pe \approx 94$; both isotherms; $\Da = 100$ and 1,000) were solved
+again with the same solver and settings but 3,991 stored times, every tenth of which is one of the
 grid's 400; at those times the fields agreed exactly with the stored fields. E6's choice
 (unchanged, as in the diagnostic above) was then made on noise-free data at the 20 probes at
 increasing time resolution. The reading was fixed in advance: where the LDF law is chosen at
-3\,991 times but not at 200, the misfit is attributed to the reconstruction of $\qsm$ between
+3,991 times but not at 200, the misfit is attributed to the reconstruction of $\qsm$ between
 samples. The table gives the chosen law and, in brackets, the LDF law's fitted $k$ over the true
 value.
 \begin{center}
 \small
 \begin{tabular}{@{}llllll@{}}
 \toprule
-Isotherm & $\Da$ & 200 (grid) & 400 (grid) & 1\,996 & 3\,991 \\
+Isotherm & $\Da$ & 200 (grid) & 400 (grid) & 1,996 & 3,991 \\
 \midrule
 Langmuir & 100 & QDF (0.98) & LDF (1.05) & LDF (1.01) & LDF (1.01) \\
 step & 100 & QDF (1.01) & QDF (1.08) & LDF (1.01) & LDF (1.01) \\
-Langmuir & 1000 & PSO (0.51) & LDF (0.96) & LDF (1.02) & LDF (1.04) \\
-step & 1000 & QDF (0.45) & QDF (1.12) & QDF (1.08) & QDF (1.04) \\
+Langmuir & 1,000 & PSO (0.51) & LDF (0.96) & LDF (1.02) & LDF (1.04) \\
+step & 1,000 & QDF (0.45) & QDF (1.12) & QDF (1.08) & QDF (1.04) \\
 \bottomrule
 \end{tabular}
 \end{center}
 At $\Da = 100$ the LDF law won once sampling was fine enough, from 400 times for the Langmuir
-sorbent and from 1\,996 for the step isotherm; for the Langmuir sorbent at $\Da = 1000$ it won
+sorbent and from 1,996 for the step isotherm; for the Langmuir sorbent at $\Da = 1{,}000$ it won
 from 400 times. In these three cells the misfit is a matter of sampling. For the step isotherm at
-$\Da = 1000$ the quadratic driving force was still chosen at 3\,991 times, where $k h$ is still
+$\Da = 1{,}000$ the quadratic driving force was still chosen at 3,991 times, where $k h$ is still
 about 1; there the cause is unresolved. The declared design spaced 200 and 400 times evenly on the
 finer grid, which shifts them by up to half a grid interval from the grid's own times, so the
 grid's exact times were added after the first rows. The evenly spaced rows agree with the grid's
-except for the Langmuir sorbent at $\Da = 1000$ and 200 times, where the evenly spaced times chose
+except for the Langmuir sorbent at $\Da = 1{,}000$ and 200 times, where the evenly spaced times chose
 the LDF law, 38 log-likelihood units ahead of the quadratic driving force, while the grid's own
 times chose the pseudo-second-order law: at that resolution the choice turns on where the samples
 fall. These are noise-free data; with noise, twice the
@@ -573,7 +574,7 @@ succeeded in 96 to 100\,\% of replicates from 0.32 to 100, and in 4\,\% at 316, 
 all 45; the falling logistic, pulled by the failure at the lowest level, crosses 50\,\% at 532. On the
 measured fractions discovery is lost between $\Da = 100$ and 316 while $k$ remains identifiable to 316, so
 this pair's agreement with E11 (314) rests on the fitted crossing and is less clear on the measured fractions.
-In both slices at 0.16\,\% noise identifiability fell from 100\,\% at $\Da = 316$ to 0\,\% at 1000, where the
+In both slices at 0.16\,\% noise identifiability fell from 100\,\% at $\Da = 316$ to 0\,\% at 1,000, where the
 estimator is biased low even on exact data ($kh = 20$; Extended Data Fig.~3); with about 2,000 times ($kh \approx 2$)
 $k$ stayed identifiable beyond the grid in the step slice. The meeting of the boundaries in the step slice
 therefore gives only a lower bound on the size of the gap and is not evidence that it closed.
@@ -616,7 +617,9 @@ step & 2\,\% & 2\,\% & 3.16 & 10 & 262 & 1.92 \\
 \end{tabular}
 \end{center}
 PSE and PySR: the last $\Da$ with at least 50\,\% success on replicates 15--29; the last column, in decades.
-PSE failed at $\Da \le 0.32$ in every slice and reached at least 50\,\% success only between $\Da = 1$ and
+PSE failed at $\Da \le 0.32$ in every slice, but not as PySR did: 159 of its 240 fits there
+returned no term in $\qs$ at all, whereas PySR added a constant term in 238 of its 240 fits there on the same replicates
+(953 of 960 on all 60; at most 17\,\% of fits at any higher level; \texttt{results/p2\_lowda\_diag.json}). PSE reached at least 50\,\% success only between $\Da = 1$ and
 10, and at 31.6 in one slice (step isotherm, 0.5\,\% noise, exact isotherm), never over a wider range than
 PySR's; its last such level was never closer to $\Da^{*}_{\mathrm{ident}}$ than PySR's (PySR 1.05 to 1.59
 decades below). By the reading fixed in advance the gap closes in no slice. Success fractions per $\Da$, as
@@ -629,7 +632,7 @@ declared, beside PySR and the slice's best method from the main analysis on the 
 \toprule
 & & \multicolumn{9}{c}{$\Da$} \\
 \cmidrule(lr){3-11}
-Slice & Method & 0.1 & 0.32 & 1 & 3.16 & 10 & 31.6 & 100 & 316 & 1000 \\
+Slice & Method & 0.1 & 0.32 & 1 & 3.16 & 10 & 31.6 & 100 & 316 & 1,000 \\
 \midrule
 L 0.5/0 & PSE & 0.00 & 0.00 & 0.40 & 1.00 & 0.93 & 0.33 & 0.00 & 0.00 & 0.00 \\
  & PySR & 0.00 & 0.00 & 0.67 & 1.00 & 1.00 & 1.00 & 0.00 & 0.00 & 0.00 \\
@@ -737,7 +740,7 @@ likelihood peak was cut at the range's edge and every interval sat at $3.1\,k$. 
 fields obey the LDF law exactly there, and with a range that contains $k$ the interval is
 $[1.0034, 1.0038]\,k$. Amendment A6, made after the first verdicts were seen, widened the range
 to $10^{-7}$ to $10$\,s$^{-1}$ at the same density, made a peak on either edge an error, and
-recomputed all 51\,840 O1 identifiability rows; the analysis was then rerun unchanged. A6
+recomputed all 51,840 O1 identifiability rows; the analysis was then rerun unchanged. A6
 changes the range of a numerical search, chosen to contain every $k$ of the design, and no
 criterion, threshold, estimand or verdict word.
 % source: PREREG_P2 A6; RETRACTIONS_P2 B87; results/p2_verdicts_asrun.json positive_control;
@@ -748,7 +751,7 @@ While drafting Supplementary Note~3, the O1 profile was found to refine with 21 
 where the pre-registration declares 41 for this profile (21 is declared for the O2 and O3
 profiles). Because the reported ends are the outside neighbours of the last points inside the
 interval, fewer points can widen an interval by up to one fine step, about 10\,\% instead of
-about 5\,\% for an interval of 0.6 decade. In the first run, 1\,464 of the 13\,849
+about 5\,\% for an interval of 0.6 decade. In the first run, 1,464 of the 13,849
 non-identifiable O1 rows lay within 15\,\% of the $[k/2, 2k]$ limits with the other end
 inside. The A6 recomputation was 12 of 54 cells in when this was found; it was stopped, the
 refinement was set to 41, and the recomputation was restarted from the beginning, so every
@@ -776,11 +779,11 @@ to the time resolution of the data. The error was found in a later review of the
 and confirmed against an ODE solver. The update was corrected and is now tested against
 \texttt{solve\_ivp} for $kh$ from $10^{-4}$ to 100. Because the pre-registration states that the
 O1 likelihood is integrated exactly, the correction brings the code into line with it;
-amendment A7 records it. All 51\,840 O1 identifiability rows were recomputed with the corrected
+amendment A7 records it. All 51,840 O1 identifiability rows were recomputed with the corrected
 code (on cloud CPU sessions; 24 rows drawn at random were recomputed locally and agreed to a
-relative $10^{-6}$), and the analysis was rerun unchanged. 916 rows became identifiable and 1\,834
+relative $10^{-6}$), and the analysis was rerun unchanged. 916 rows became identifiable and 1,834
 non-identifiable, all at $\Da \ge 31.6$. With exact data the estimate is now within 5\,\% of $k$
-up to $\Da = 100$ and 0.39 to 0.91 times $k$ at $\Da = 316$ and 1000; that remaining bias is the
+up to $\Da = 100$ and 0.39 to 0.91 times $k$ at $\Da = 316$ and 1,000; that remaining bias is the
 time resolution. Of the 71 identifiability boundaries present in both runs, 36 moved to lower
 $\Da$ and none to higher; 22 more came onto the grid. Seven more slices gained both boundaries,
 and every verdict word was unchanged (table below).
@@ -805,7 +808,7 @@ with four implicit-Euler substeps per interval. E6 was rerun; its first rows are
 
 \subsection*{M1 kept its best parameters (B88)}
 Amendment A4 says the M1 demonstration keeps the best parameters seen during training. In four
-of its nine fits ($\Da = 31.6$, 100, 316 and 1000), a solve of the differentiable column
+of its nine fits ($\Da = 31.6$, 100, 316 and 1,000), a solve of the differentiable column
 exhausted its step budget after one to two hours of training; only the time budget was handled,
 so the error ended the fit with no readout, and it was recorded as a failure. The training loop
 now stops on such a failure and keeps the best parameters seen; a failure on the first
@@ -840,7 +843,7 @@ integrated likelihood, for every cell.
 \midrule
 Positive control, Langmuir & passed & passed & passed \\
 Positive control, step & failed (0/135 identifiable) & passed & passed \\
-O1 rows identifiable (of 51\,840) & 37\,991 & 40\,891 & 39\,973 \\
+O1 rows identifiable (of 51,840) & 37,991 & 40,891 & 39,973 \\
 H2b slices with a verdict & 20 (Langmuir only) & 30 (20 + 10 step) & 37 (23 + 14 step) \\
 H2b overall & fails before & fails before & fails before \\
 H2b gap, Langmuir (decade) & $-1.60$ to $-3.43$ & $-1.60$ to $-3.43$ & $-1.60$ to $-3.36$ \\
@@ -852,7 +855,7 @@ H2c & no verdict & no verdict & no verdict \\
 \end{center}
 
 \noindent Neither correction changed what was found. A6 and B89 changed which isotherm could be
-judged: the 2\,900 O1 rows that became identifiable are step rows, nearly all in the cells A6
+judged: the 2,900 O1 rows that became identifiable are step rows, nearly all in the cells A6
 corrected; among the Langmuir rows, the 41-point refinement (B89) turned 24 rows identifiable and
 17 non-identifiable, and the Langmuir H2b gaps moved by at most 0.11 decade (in one slice, where
 the identifiability boundary moved from $\Da \approx 57$ to 74), with every verdict unchanged.
@@ -862,7 +865,7 @@ and none to higher; the gaps of the 30 slices judged before shrank by at most 0.
 slices that already had a discovery boundary gained an identifiability boundary, because $k$ was
 no longer identifiable at the highest levels (three without noise and with 0.5\,\% isotherm
 error, three at 0.5\,\% noise with an exact isotherm, one at 0.5\,\% noise and isotherm error);
-these boundaries lie between $\Da = 316$ and 1000, where the estimate is biased by the time
+these boundaries lie between $\Da = 316$ and 1,000, where the estimate is biased by the time
 resolution, and the check without those levels (main text) covers them. Every slice judged
 before kept its verdict, and every new slice has the same verdict.
 % boundary shifts: log10(da_ident corr / preB90) min -0.81 (sigma 0, eps 0.05, langmuir, Pe 94),
@@ -1103,7 +1106,7 @@ control, and is used in H2c only.
 % (p2_observe.py:observe).
 
 \paragraph{Known-answer tests.} With $y = 2x + 1$ and noise of standard deviation 0.15 on
-$x$ (20\,000 points), ordinary least squares is attenuated by more than 0.2 in the slope and
+$x$ (20,000 points), ordinary least squares is attenuated by more than 0.2 in the slope and
 mixed least squares and total least squares recovers slope and intercept within 0.05. At
 near-zero declared error ($10^{-6}$ of each column's standard deviation) on the known-answer
 system, M5 recovers L1 and selects the same support as M4. Through the grid wrapper at zero
@@ -1150,7 +1153,7 @@ floor that passes the five-probe known-answer test admits a sixth term on the co
 \subsection*{M7: symbolic regression (PySR)}
 M7 runs PySR with binary operators $+$, $-$ and $\times$, no unary operators, 40 iterations,
 maximum expression size 12, a fixed random state equal to the replicate index, deterministic
-serial search, PySR's ``best'' model selection and a time limit of 1800\,s per search. The
+serial search, PySR's ``best'' model selection and a time limit of 1,800\,s per search. The
 features are Lib-B without the constant, since PySR fits constants itself, and the target is
 the strong-form derivative. Feature names are passed as placeholders $f_0, f_1, \dots$ and
 mapped back. The chosen expression is expanded by SymPy. A monomial that is a single feature
@@ -1170,7 +1173,7 @@ O1, with 60 replicates.
 \paragraph{Inclusion gate.} Before any M7 search on the grid, PySR with these settings ran on
 the known-answer system with 0.5\,\% relative noise on $q$ and on $\qsm$, for 3 seeds. The
 rule was to include M7 if L1 was recovered in at least 2 of 3 seeds, every search finished
-within 1800\,s and peak memory stayed under 3\,GB. All three seeds returned $k(\qsm - q)$ with
+within 1,800\,s and peak memory stayed under 3\,GB. All three seeds returned $k(\qsm - q)$ with
 $\hat k = 0.019994$, $0.019992$ and $0.019943$ (relative errors $3.1\times10^{-4}$,
 $4.2\times10^{-4}$ and $2.9\times10^{-3}$), in 35, 5 and 5\,s, at a peak of 0.97\,GB. M7 was
 included.
@@ -1193,7 +1196,7 @@ every configuration tried: a polynomial library at three sparsity penalties
 ($10^{-3}$, $10^{-2}$, $10^{-1}$), and raw variables on one and on three trajectories. It routed
 the law through $q^2$, used $q$ alone, or returned $\{1, \qsm, (\qsm)^2\}$. The test is kept as an
 expected failure. Its grid run was gated on one fit at the grid's size (20 probes, 200 times)
-taking at most 300\,s. The measured fit took 1144\,s, which projects to 68.7\,h for the 216
+taking at most 300\,s. The measured fit took 1,144\,s, which projects to 68.7\,h for the 216
 subgrid fits, and returned only a constant. M8 was therefore not run on the grid.
 % source: tests/test_p2.py:test_kan_symbolic_recovers_ldf_at_zero_noise (xfail, strict = True);
 % results/p2_cost_gates.json (limit_s 300.0, sec_per_fit 1144.44, projected_h 68.67,
@@ -1221,9 +1224,9 @@ and $\qsm/q_{\max}$, and its output is multiplied by $q_{\max}/t_{\mathrm{stoich
 no knowledge of $k$. Weights start as $0.3$ times standard normal draws from a seed equal to
 the replicate index, and biases start at zero. The network is trained through a
 differentiable column ($N_z = 50$, Kvaerno5, PID step control with rtol $10^{-6}$ and atol
-$10^{-9}$, initial step $10^{-3}$\,s, at most 200\,000 steps). The loss is the mean squared
+$10^{-9}$, initial step $10^{-3}$\,s, at most 200,000 steps). The loss is the mean squared
 error of the outlet $c(t)$ and $T(t)$, each divided by its observed range. The optimiser is
-SciPy's L-BFGS-B with at most 50 iterations, 60 function evaluations and 7200\,s, keeping the
+SciPy's L-BFGS-B with at most 50 iterations, 60 function evaluations and 7,200\,s, keeping the
 best parameters seen. If a column solve exhausts its step budget after the first evaluation,
 training stops and keeps the best parameters (correction B88). The trained rate over all
 solved states is read out by M4 on Lib-B and by PySR with M7's settings; success on either

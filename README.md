@@ -168,6 +168,7 @@ by the script named.
 | `p2_e12_noisefree.json` | `p2_e12_noisefree.py` | none | not timed |
 | `p2_liba_summary.json` | `p2_liba_summary.py` | `p2_liba_fidelity.json`, from `p2_liba_fidelity.py` (fields; 39 CPU min, `logs/p2_liba.log`) | not timed |
 | `p2_practical_da.json` | `p2_practical_da.py` | `data/practical_da_sources.csv` | not timed |
+| `p2_lowda_diag.json` | `p2_lowda_diag.py` | `p2_extra_m7.json`, `p2_e14_rows.json` | seconds |
 | `p2_s1_anchor.json` | `p2_s1_anchor.py` | published inputs written in the script | not timed |
 | `p2_kh.json` | `p2_kh.py` | `p2_verdicts.json`, fields | not timed |
 | `p2_noise_support.json` | `p2_noise_support.py` | `p2_o1.json` | not timed |
@@ -238,6 +239,7 @@ written before the move record the original freeze commit (`fafed1b` for A4, her
 | `kaggle_e6/`, `p2_e6_merge.py`, `kaggle_e8/`, `p2_e8_merge.py`, `kaggle_e11/` | E6, E8 and E11 on Kaggle: kits, kernels, queues and merges (E6 and E8 with local spot checks) |
 | `p2_e13_infomatched.py`, `kaggle_e13/` | E13: information-matched sampling, declared in `EXPLORATORY_P2.md` before it ran (Kaggle; `results/p2_e13_summary.json`) |
 | `p2_e14_pse.py`, `kaggle_e14/` | E14: parallel symbolic enumeration on the symbolic-regression subgrid, declared before it ran (Kaggle GPUs; `results/p2_e14_summary.json`) |
+| `p2_lowda_diag.py` | How symbolic regression and PSE fail at Da 0.1 and 0.316, tallied from the stored supports (post hoc, descriptive) |
 | `p2_practical_da.py`, `data/practical_da_sources.csv` | Da of published laboratory columns (Supplementary Table 1), from inputs printed in four studies, each with its location in the paper |
 | `p2_s1_anchor.py` | the closest prior study on the Da map (PREREG_P2 s.5) |
 | `p2_ident_robustness.py`, `p2_kh.py`, `p2_noise_support.py`, `p2_m6_summary.py`, `p2_referee_checks.py`, `p2_strong_exact.py`, `p2_liba_fidelity.py`, `p2_liba_summary.py` | descriptive checks made after the verdicts were seen (labelled so in the paper) |
@@ -311,6 +313,6 @@ MIT (see `LICENSE`). Citation metadata is in `CITATION.cff`.
 
 The author used a generative AI assistant (Claude, Anthropic; through the Claude Code and Claude desktop
 applications, September to November 2026) as a tool to assist with
-drafting and language editing, with writing and checking code, and with checking
-bibliographic records. The author designed the study, made every scientific decision,
+drafting and language editing, with writing and checking code, with critical review of drafts
+and code, and with checking bibliographic records. The author designed the study, made every scientific decision,
 reviewed and edited all content, and takes full responsibility for it.

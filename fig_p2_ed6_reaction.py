@@ -36,7 +36,7 @@ def main():
             ok = r[best]
             ax.plot(np.log10(float(d)), 1.04 if ok else -0.04, lw=0, marker="v", ms=3, color=S.C["dark"],
                     mfc=S.C["dark"] if ok else "white")
-        ax.text(0.47, 0.2, best.replace("_", " ").replace("|", ", "), transform=ax.transAxes, ha="center",
+        ax.text(0.47, 0.62, best.replace("_", " ").replace("|", ", "), transform=ax.transAxes, ha="center",
                 fontsize=5.5, color=S.C["dark"])
         ax.axhline(0.5, color=S.C["grey"], lw=0.5)
         ax.set_title(title, fontsize=6.5)

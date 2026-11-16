@@ -8,10 +8,10 @@
   5.6,
   8.0
  ],
- "made": "2026-11-15 23:05:38",
+ "made": "2026-11-16 11:48:35",
  "style_sha256": "a5aa98eb80fc2bfa01f2de6eb05585e2cc935b5ace342bf107160919e137de6c",
  "script": "fig_p2_examples.py",
- "script_sha256": "0b6d1dd10e8a2b92dcd87498c748ade56d3a9f37394fb99242bee78753e7aaed",
+ "script_sha256": "3b603d87e5e2b1fe7536dbc37adec27b3a62cbad9f307c4a0cdf642dd00575fd",
  "inputs": {
   "results/p2_figdata.json": "a3704bd598a2a0d083d5b2d5e61e39764e8f32c231e0a4a809f2207c7e6a44aa",
   "results/p2_o1.json": "50b7a9943b367ff0afab5209e3c740ace0af9186abbf171421fff7ab41374cdc",

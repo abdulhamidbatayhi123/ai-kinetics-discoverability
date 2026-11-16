@@ -174,8 +174,8 @@ absorbed the error into extra terms (post hoc).
 % "always >= 50 %" slices.
 
 Two checks support the verdict. First, with exact data the identifiability estimator recovered $k$
-to within 5\,\% at every $\Da$ up to 100 but was biased low at $\Da = 316$ ($kh = 6.4$, with $h$ the interval between observations) and 1000
-($kh = 20$), with median estimates of 0.39 to 0.91 times $k$, a bias that can only shorten the gaps; without those two levels every slice
+to within 5\,\% at every $\Da$ up to 100 but was biased low at $\Da = 316$ ($kh = 6.4$, with $h$ the interval between observations) and 1,000
+($kh = 20$), with medians of 0.39 to 0.91 times $k$, a time-resolution bias that can only shorten the gaps; without those two levels every slice
 still has a gap of at least 0.89 decade (post hoc; Extended Data Fig.~3). Second, when success
 also required the fitted $k$ within a factor of two of the truth (a pre-registered sensitivity
 analysis), all 37 verdicts held and two more slices without noise gained the same verdict, with gaps of only 0.35
@@ -186,8 +186,8 @@ and 0.89 decade.
 % (counts 39/0/0); PREREG_P2 A1 (k-aware sensitivity).
 
 \subsection*{The two other confirmatory tests could not be decided}
-Whether one value of the realised driving force over the combined observation and isotherm error,
-$R = \delta/\varepsilon_{\mathrm{eff}}$, places the discovery boundary (H2a) has no verdict: only one of
+Whether one value of $R = \delta/\varepsilon_{\mathrm{eff}}$, the realised driving force over the
+combined observation and isotherm error, places the discovery boundary (H2a) has no verdict: only one of
 twelve conditions crossed 50\,\% in $R$ (Extended Data Fig.~4).
 % results/p2_figdata.json h2a levels: O1 conditions max 0.51-0.71 (Langmuir and step, Pe 470/94/19,
 % except the one with a crossing); O2 conditions max 0.00-0.20.
@@ -217,13 +217,13 @@ grid in 36 of the 96 slices, against 8 for weak-form sequential
 thresholding and 7 for the weak-form ensemble (Fig.~4c). No strong-form sparse
 method had a crossing in any slice. These regress a smoothed numerical derivative of uptake \citep{wentz2023}, and
 even on exact data they recovered the law only from $\Da \approx 32$ to 316 upward (thresholding,
-ensemble) or never (best-subset selection; post hoc), so their results reflect that derivative as
-well as the data. Symbolic
+ensemble, depending on the slice) or never (best-subset selection; post hoc), so their results
+also reflect that derivative. Symbolic
 regression, run only at $\Pe \approx 94$ with noise of 0.5 or 2\,\% and isotherm error
-of 0 or 2\,\%, behaved unlike the sparse methods. It failed at the lowest rates,
-where weak-form sparse regression worked best, and succeeded at intermediate rates: up to
-$\Da \approx 32$ at 0.5\,\% noise and 3 to 10 at 2\,\% without isotherm error, and between
-$\Da = 1$ and 10 with 2\,\% isotherm error (narrower for the Langmuir sorbent),
+of 0 or 2\,\%, failed at the lowest rates, where weak-form sparse regression worked best
+(symbolic regression added a constant term in 953 of its 960 fits there; post hoc), and succeeded at intermediate rates,
+from $\Da = 1$: up to about 32 at 0.5\,\% noise and 3 to 10 at 2\,\% without isotherm error, and up to
+10 with 2\,\% isotherm error (narrower for the Langmuir sorbent),
 where no sparse method reached 50\,\% (Fig.~4a,b; Extended Data Fig.~5). The pre-registered
 boundary, a falling logistic curve, cannot describe such a window. If the boundary is instead taken
 as the last level with at least 50\,\% success (post hoc), H2b is unchanged: in the four such
@@ -234,6 +234,8 @@ the declared 60\,s; post hoc, declared before it ran, settings then fixed in pil
 the identifiability boundary in every slice, never closer than symbolic regression's on the same
 replicates (1.0 to 1.6).
 
+% M7 constant term at Da 0.1, 0.316: results/p2_lowda_diag.json m7_low (953 of 960; at most 17 % at
+% higher Da); p2_lowda_diag.py.
 % M7 last level >= 0.5 vs da_ident (results/p2_figdata.json methods, results/p2_verdicts.json H2b):
 % langmuir s0.5 e0 31.6 vs 356 (1.05); step s0.5 e0 31.6 vs 562 (1.25); langmuir s2 e0 3.16 vs 73.5
 % (1.37); step s2 e0 10 vs 172 (1.23).
@@ -278,7 +280,7 @@ among laws stayed 0.4 to 1.0 decade lower, needing the finer resolution. At that
 lowest noise (0.16\,\%) discovery still failed first by 0.95 decade for the Langmuir sorbent. For
 the step isotherm the fitted boundaries met (0.02 decade), yet discovery fell to
 4\,\% of replicates at $\Da = 316$, where $k$ remained identifiable in all. In both 0.16\,\% slices the identifiability
-boundary is capped by the estimator's low bias at $\Da = 1000$, so these gaps are lower bounds.
+boundary is capped by the estimator's low bias at $\Da = 1{,}000$, so these gaps are lower bounds.
 % results/p2_e11_summary.json (p2_e11_fine.py; EXPLORATORY_P2 E11, declared 45e6e77): pool "both",
 % gaps 0.72 (langmuir 0.5 %), 1.50 (langmuir 2 %), 2.01 (step 2 %); step 0.5 % da_disc 314, da_ident none;
 % shifts against E8's own 200-time run (results/p2_e8_summary.json n_t=200): disc 0.72-1.88, ident 0.20-0.52.
@@ -315,7 +317,7 @@ of any slice.
 Identifiability, computed on a subgrid with three replicates per level ($\Pe \approx 94$,
 noise 0.5 and 2\,\%, isotherm error 0 and 2\,\%), held to $\Da \approx 57$ to 286
 from these probes and to $\Da \approx 38$ to 172 from the outlet alone (O3). In every slice the
-outlet curve alone determined $k$ at least as far as the last level at which any method discovered the law
+outlet curve alone determined $k$ beyond the last level at which any method discovered the law
 from probes of $c$, $q$ and $T$ ($\Da = 3$ to 32; post hoc).
 % Per subgrid slice (Pe 94): highest O1 Da where any rate-law method (M2-M4 both forms, M7; not M5,
 % M9) had success >= 0.5, against O3 da_ident: langmuir s0.5 e0 31.6 vs 172 (0.73); s0.5 e2 10 vs
@@ -329,7 +331,7 @@ from probes of $c$, $q$ and $T$ ($\Da = 3$ to 32; post hoc).
 For the step isotherm a rate falling to 20\,\% of its value across the isotherm step (L2), as
 measured in MOF-303, was also simulated (exploratory). By the pre-registered rule the state dependence
 was discovered mostly at $\Da = 1$ (46 to 60 of 60 replicates; elsewhere at most 58\,\%, above
-50\,\% once,
+50\,\% twice,
 best over methods and P\'eclet numbers; Extended Data Fig.~7). Because the library cannot
 represent a sigmoidal fall across the step, this measures which polynomial terms are selected more than
 discoverability (Methods).
@@ -352,8 +354,8 @@ isotherm is known almost exactly, weak-form sparse regression on interior probes
 Second, at that sampling and up to $\Da \approx 10$, the law can still be chosen among a few candidates by likelihood,
 even with 2\,\% isotherm error. Third, at that sampling and beyond $\Da \approx 10$ to 30, the law has to be assumed. The data
 still give its coefficient: from interior probes for one and a half to nearly four decades of
-$\Da$ beyond the discovery boundary, and, in the few conditions tested, at least as far from the
-outlet alone.
+$\Da$ beyond the discovery boundary, and, in the few conditions tested, from the outlet alone,
+beyond the last level with discovery.
 
 Discovery is more fragile because the two tasks ask different things of the same data.
 Identifiability asks whether a known law with one free coefficient fits well only near the true
@@ -371,7 +373,7 @@ with gaps of 0.89 to 3.75 decades (post hoc).
 A second effect is classical: as $\Da$ grows, uptake approaches equilibrium and the law's two
 terms become nearly collinear on the slow manifold \citep{delgado2025,gallo2026}. In a post hoc
 check, the smaller singular value of the standardised pair $\{q, \qsm\}$ fell from about 0.75 of
-the larger at $\Da = 0.1$ to about 0.001 at $\Da = 1000$. Exact data still separate the two terms,
+the larger at $\Da = 0.1$ to about 0.001 at $\Da = 1{,}000$. Exact data still separate the two terms,
 which is why weak-form discovery never failed with exact data (no noise and no isotherm error), but noise and
 isotherm error soon exceed the shrinking direction that distinguishes them; with less noise per sample the
 fitted gap shrank. A one-parameter fit
@@ -386,7 +388,7 @@ At 200 observations per run, real columns sit mostly beyond the discovery bounda
 \citep{krishnamurthy2025} place physisorbent packed beds between $\Da \approx 100$ and 23{,}000
 (Supplementary Table~1). An amine bed for
 direct air capture lay at $\Da \approx 8$ to 10 \citep{stampi2024}, within reach of the highest
-discovery boundaries at 200 observations per run ($\Da \approx 7$ with noise, 13 without). With 2,000 observations and 0.5\,\% noise, discovery reached the lower end of their range.
+discovery boundaries at 200 observations ($\Da \approx 7$ with noise, 13 without). With 2,000 observations and 0.5\,\% noise, discovery reached the lower end of the physisorbent range.
 % source: results/p2_practical_da.json (p2_practical_da.py from data/practical_da_sources.csv; every
 % input checked against the papers 2026-11-10; sources from an independent literature check); highest Da*_disc:
 % results/p2_verdicts.json H2b (12.8). The earlier estimate (WRITEUP_NOTES "Practical Da",
@@ -394,7 +396,7 @@ discovery boundaries at 200 observations per run ($\Da \approx 7$ with noise, 13
 % Lassitter et al. Sec. 3.6 contradicts.
 
 The closest prior work \citep{santana2023} is one point against this map. From its published
-equations (pre-registered, computed after the verdicts), its columns ran at $\Da \approx 8.8$
+equations (as pre-registered, after the verdicts), its columns ran at $\Da \approx 8.8$
 (Langmuir) and 9.2 (Sips) with 5\,\% outlet noise and an exact isotherm, above every discovery
 boundary we found with noise at 200 observations per run (it used 55). Under our rule its Langmuir readout (the LDF terms plus a constant)
 fails, but its Sips readout, $0.198\,\qs - 0.200\,q$, succeeds, in one unreplicated realisation of a different model.
@@ -466,11 +468,11 @@ in half the replicates ($\Da^{*}_{\mathrm{ident}}$); illustrative curves.}
 \makebox[\textwidth][c]{\includegraphics{fig_p2_examples.pdf}}
 \caption{\textbf{What the data look like where discovery works, where only identifiability
 works, and where neither does.} Langmuir sorbent, $\Pe \approx 94$, 2\,\% noise and an exact
-isotherm, at $\Da = 0.32$, 31.6 and 1000 (columns). \textbf{a}--\textbf{c}, A mid-column probe as
+isotherm, at $\Da = 0.32$, 31.6 and 1,000 (columns). \textbf{a}--\textbf{c}, A mid-column probe as
 the methods see it: observed uptake (points, every fourth time shown), simulated uptake (line)
 and the measured isotherm evaluated on the observed $c$ and $T$ (dashed); the shaded band is the
 driving force $\qs - q$, which shrinks below the noise as $\Da$ grows. Each panel gives the
-number of the 45 estimation replicates in which the law was discovered and $k$ was identifiable,
+numbers of the 45 estimation replicates in which the law was discovered and in which $k$ was identifiable,
 and the law the best method returned for one replicate. \textbf{d}--\textbf{f}, The outlet
 breakthrough curve of the same replicate. Time axes span each run's solved horizon (8 or 4
 stoichiometric times).}
@@ -510,7 +512,7 @@ without a crossing, of 96. Symbolic regression is not shown: its success rises a
 $\Da$, which the pre-registered falling logistic cannot describe (Results). \textbf{d}, Fraction
 of the 45 estimation replicates in which the LDF law was chosen among three candidate laws by
 likelihood (black, dash-dotted; post hoc), recovered by the best discovery method (reddish purple, solid;
-symbolic regression in this condition) or had an identifiable $k$ (vermilion, dashed), at $\Pe \approx 94$,
+symbolic regression, chosen on replicates 0--14) or had an identifiable $k$ (vermilion, dashed), at $\Pe \approx 94$,
 2\,\% noise and 2\,\% isotherm error; circles, Langmuir; open squares, step isotherm.}
 \label{fig:methods}
 \end{figure}
@@ -539,7 +541,7 @@ that row's largest discovery, choice and identifiability boundaries.}
 the pre-registered verdict words, except the two ``no verdict'' entries, which are the analysis
 code's words where no pre-registered rule applies. The gap is
 $\log_{10}\Da^{*}_{\mathrm{disc}} - \log_{10}\Da^{*}_{\mathrm{ident}}$, negative when discovery
-fails first. Intervals are 95\,\% bootstrap intervals over the estimation replicates.}
+fails first (the text gives its size). Intervals are 95\,\% bootstrap intervals over the estimation replicates.}
 \label{tab:verdicts}
 \begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
 \toprule
@@ -572,6 +574,7 @@ $\Da = 1$ in 46 to 60 of 60 replicates (best method); at most 58\,\% elsewhere &
 % H2d_descriptive); medians of the H2b gaps by isotherm (n 23 and 14), computed in paper2/build_p2.py G3.
 \end{table}
 
+\clearpage
 \section*{Methods}
 
 \subsection*{Ground truth}
@@ -592,14 +595,14 @@ Table~2): the companion study's favourable Langmuir sorbent, and water on a MOF-
 framework, a cooperative (Type V) isotherm with its step at $P/P_0 = 0.15$, fed at 30\,\%
 relative humidity and 30\,$^\circ$C. The Damk\"ohler number $\Da = k\,t_{\mathrm{stoich}}$
 counts kinetic time constants per passage of the adsorption front, with
-$t_{\mathrm{stoich}}$ the stoichiometric time of the column (7200\,s for Langmuir and
-31\,050\,s for the step isotherm). Nine levels from $10^{-1}$ to $10^{3}$ at half-decade
+$t_{\mathrm{stoich}}$ the stoichiometric time of the column (7,200\,s for Langmuir and
+31,050\,s for the step isotherm). Nine levels from $10^{-1}$ to $10^{3}$ at half-decade
 spacing therefore span $k$ from $1.39\times10^{-5}$ to $0.139$\,s$^{-1}$ for Langmuir and
 from $3.22\times10^{-6}$ to $0.0322$\,s$^{-1}$ for the step isotherm. Three axial-dispersion
 coefficients, $D_L \times 0.2$, $\times 1$ and $\times 5$ of the default, completed the grid.
 They give column P\'eclet numbers $\Pe = uL/D_L$ of about 470, 94 and 19, and the levels are
 named by these values below (the code and the pre-registration label them by the $D_L$
-multiplier, so its ``$\times 0.2$'' level is the highest $\Pe$). The grid has 81 solves on 400 spatial cells with 400 stored times, each run until the outlet reached 95\,\%
+multiplier, so the ``$\times 0.2$'' level is the highest $\Pe$). The grid has 81 solves on 400 spatial cells with 400 stored times, each run until the outlet reached 95\,\%
 breakthrough, plus 9 isothermal solves for a control described below. The manifest that
 records every parameter is public.
 % data/p2/manifest.json (t_stoich_s 7200.4 and 31050.4; k_LDF 1.3888e-05..0.13888 and
@@ -696,7 +699,7 @@ Third, a later review of the code found that the O1 update, meant to be exact, c
 coefficient: it differed from the exact solution only by a term of order $(kh)^2$ ($h$ the
 interval between observations), so a check made at small $kh$ had passed, but it misfit the data when $kh$ was of
 order one or larger, that is, at high $\Da$. The update was corrected and tested against a
-numerical ODE solver for $kh$ from $10^{-4}$ to 100, and all 51\,840 O1 rows were recomputed with
+numerical ODE solver for $kh$ from $10^{-4}$ to 100, and all 51,840 O1 rows were recomputed with
 the analysis unchanged (amendment A7 records this correction and the refinement setting).
 % PREREG_P2 s.4.3; p2/identifiability.py (profile_interval_o1, O1_K_GRID, _profile, _ldf_exact,
 % SOLVE cap); p2_grid_o23.py SOLVE_CAP_S 600; results/p2_o3_ident.json (n_capped);
@@ -798,13 +801,13 @@ $\Da$ (E5), choice among three candidate laws by likelihood (E6), a systematic s
 of the measured isotherm (E7), the sampling rate, 200 against 400 observation times (E8,
 declared after E6's results), E6 with $\qsm$ computed from noise-free $c$ and $T$
 (E9, declared after a second review), E6 on noise-free data sampled up to 20 times more finely
-(E10, declared after E9), and every boundary at about 2,000 observation times per run, with the
+(E10, declared after E9), every boundary at about 2,000 observation times per run, with the
 fields re-solved at finer time resolution (E11, declared after a third review, with its reading
-fixed in advance), and the same comparison on a second system, a reversible reaction in a
+fixed in advance); the same comparison on a second system, a reversible reaction in a
 stirred tank (E12, and E12b with unequal feeds after E12's positive control failed; both reported),
 200 observation times with the noise divided by $\sqrt{10}$, which matches E11's information at the
 grid's resolution (E13), and parallel symbolic enumeration \citep{ruan2026} on the
-symbolic-regression subgrid with 15 replicates (E14); its declared inputs, constants and expression
+symbolic-regression subgrid with 15 replicates (E14). The enumeration's declared inputs, constants and expression
 selection were replaced, and its operators restricted to the declared ones, in five unreported three-row
 pilots before the main run, and its time limit was halved from the declared 60\,s to 30\,s per fit to fit
 the available GPU time. Bi-level identification
@@ -872,7 +875,7 @@ Package versions are pinned in the repository.
 During the preparation of this work the author used a generative AI assistant (Claude, Anthropic,
 used through the Claude Code and Claude desktop applications from September to November 2026, most
 recently the Claude Opus 5.5 model) as a tool to assist with drafting and language editing, with
-writing and checking code, and with checking bibliographic records. The solver, metrics, identifiability and analysis
+writing and checking code, with critical review of drafts and code, and with checking bibliographic records. The solver, metrics, identifiability and analysis
 code are covered by unit and known-answer tests, the build script checks the numbers in the text against the results files,
 and the bibliographic records were checked against Crossref or the publisher. The author designed the
 study, made every scientific decision, reviewed and edited all content, and takes full
@@ -934,7 +937,7 @@ estimated to the true $k$ with exact data ($\sigma = \varepsilon = 0$), against 
 isotherms and three P\'eclet numbers; dark band, 0.9 to 1.1; light band, the criterion's
 $[0.5, 2]$. \textbf{b}, For the 37 slices with a verdict, the gap against the gap computed from the
 highest level up to $\Da = 100$ at which $k$ was identifiable in half the replicates (so without
-$\Da = 316$ and 1000); dashed lines, the $-0.25$ decade threshold.}
+$\Da = 316$ and 1,000); dashed lines, the $-0.25$ decade threshold.}
 \end{figure}
 
 \begin{figure}[p]\centering
@@ -997,8 +1000,8 @@ failed as first run because of the identifiability search range. \textbf{b}, Sli
 first run, after the search range and refinement were corrected, and after the final correction
 of the O1 update (the primary result). \textbf{c}, Corrected gap of each slice against its gap in
 each earlier run (dark grey, after the range and refinement corrections; light grey, as first run,
-Langmuir only, the step slices having been withheld; squares, step isotherm). Dashed in a, the 0.9 pass
-level; hatched in b, the step slices withheld because its control failed. No correction changed a verdict word
+Langmuir only, the step slices having been withheld; squares, step isotherm). Dashed: a, the 0.9 pass
+level; c, the $-0.25$ decade threshold; hatched in b, the step slices withheld because its control failed. No correction changed a verdict word
 (Supplementary Note~2).}
 \end{figure}
 \end{document}

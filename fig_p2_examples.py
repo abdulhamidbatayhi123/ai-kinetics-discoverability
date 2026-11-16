@@ -24,7 +24,7 @@ import p2_figstyle as S  # noqa: E402
 from p2_observe import load_cell, observe  # noqa: E402
 
 SLICE = "sigma=0.02|eps=0.0|langmuir|pe=1.0"
-DAS = (("0.316", "0.32"), ("31.6", "31.6"), ("1e+03", "1000"))
+DAS = (("0.316", "0.32"), ("31.6", "31.6"), ("1e+03", "1,000"))
 REP, PROBE, SIGMA = 15, 10, 0.02
 TERM = {"1": "1", "c": "c", "q": "q", "T": "T", "c*q": "cq", "q^2": "q²", "c^2": "c²", "qstar": "q*"}
 

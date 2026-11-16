@@ -258,7 +258,7 @@ def _h2b_scatter(ax, V, da_levels):
             continue
         wc = _word_class(v)
         col = WORD_COLOUR.get(wc, figstyle.C["grey"])
-        face = "white" if wc == "withheld" else col
+        face = "white" if (wc == "withheld" or iso == "step") else col
         ax.errorbar(_log(v["da_ident"]), _log(v["da_disc"]),
                     xerr=_xerr(v["da_ident"], *v["da_ident_ci"]),
                     yerr=_xerr(v["da_disc"], *v["da_disc_ci"]),
@@ -274,7 +274,7 @@ def _h2b_scatter(ax, V, da_levels):
     ax.text(0.03, 0.97, f"band: $\\pm${MDE} decade (decision threshold)", transform=ax.transAxes, ha="left",
             va="top", fontsize=6.3, color=figstyle.C["dark"])
     isos = sorted({_parse_slice(k)[2] for k in V["H2b"]})
-    ax.legend(handles=[Line2D([], [], lw=0, marker=ISO_MARKER.get(i, "o"), mfc="white",
+    ax.legend(handles=[Line2D([], [], lw=0, marker=ISO_MARKER.get(i, "o"), mfc="white" if i == "step" else figstyle.C["dark"],
                               mec=figstyle.C["dark"], ms=4, label=ISO_LABEL.get(i, i)) for i in isos],
               loc="upper left", bbox_to_anchor=(0.0, 0.78), fontsize=6.3)
 
@@ -448,7 +448,8 @@ def fig3(V, FD, stem):
     else:
         # between the region labels, so it never sits on one of them
         c.text(0.5, (SPREAD_OK + SPREAD_FAIL) / 2 - 0.16, "H2a: no verdict\n(fewer than\n2 crossings)",
-               ha="center", va="top", fontsize=6, fontweight="bold", color=figstyle.C["dark"])
+               ha="center", va="top", fontsize=6, fontweight="bold", color=figstyle.C["dark"],
+               bbox=dict(facecolor="white", edgecolor=figstyle.C["dark"], lw=0.5, pad=1.5))
     c.set_xlim(0, 1)
     c.set_ylim(0, top)
     c.set_xticks([])
@@ -510,7 +511,7 @@ def _by_method_strip(ax, V, da_levels):
     ax.set_xticks(range(len(ms)))
     ax.set_xticklabels([METHOD_SHORT.get(m, m) for m in ms], fontsize=6.5)
     ax.set_xlim(-0.6, len(ms) - 0.4)
-    ax.set_ylim(lo, np.log10(da_levels[-1]) + 1.0)          # head room for the legend
+    ax.set_ylim(lo, max(_log(d) for v in per.values() for d, _ in v if d is not None) + 0.9)   # head room for the legend
     ax.set_xlabel("sparse method (grey numbers: slices without a crossing, of 96)")
     ax.set_ylabel(r"$\log_{10} \mathrm{Da}^{*}_{\mathrm{disc}}$ per slice")
     isos = sorted({iso for v in per.values() for _, iso in v})
@@ -615,7 +616,7 @@ def _e6_panel(ax, FD, da_levels, sigma=0.02, eps=0.0, pe=DISPLAY_PE, V=None):
     ax.set_xlabel(LOG_DA)
     ax.set_ylabel(P_LAB)
     hd = [Line2D([], [], color=_method_colour("m7|strong"), marker="o", ms=3,
-                 label="open discovery, best method (symbolic regression here)"),
+                 label="open discovery, best method (symbolic regression, chosen on replicates 0-14)"),
           Line2D([], [], color=OI["black"], ls="-.", marker="o", ms=3, label="choice among 3 laws (post hoc)"),
           Line2D([], [], color=figstyle.ROLE["ident"], ls="--", marker="o", ms=3, label="k identifiable"),
           Line2D([], [], color=figstyle.C["dark"], lw=0, marker="o", ms=3, label="Langmuir"),

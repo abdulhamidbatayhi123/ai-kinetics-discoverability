@@ -1,4 +1,4 @@
-"""Where real columns sit on the Da map: Da = k * t_stoich from published inputs (Supplementary Table 2).
+"""Where real columns sit on the Da map: Da = k * t_stoich from published inputs (Supplementary Table 1).
 
 Inputs: data/practical_da_sources.csv, one row per source and condition, with the rate constant, its
 basis and location in the paper, and either a stated time (t_stoich or t50) or the bed mass W, the

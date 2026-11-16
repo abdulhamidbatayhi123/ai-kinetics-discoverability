@@ -347,6 +347,8 @@ def bindings():
     out += [("E14 PySR on the same replicates",
              f"never closer than symbolic regression's on the same\nreplicates ({math.floor(min(m7b) * 10) / 10:.1f} "
              f"to {math.ceil(max(m7b) * 10) / 10:.1f})" if not closer else "E14: PSE closer than PySR somewhere")]
+    ld = load("results/p2_lowda_diag.json")["m7_low"]
+    out += [("M7 constant term at the lowest rates", f"constant term in {ld['n_constant']} of its {ld['n']} fits there")]
     rc = load("results/p2_referee_checks.json")
     cv = [d["gap_200"] for d in rc["choice_vs_ident"].values() if d["gap_200"] is not None]
     cv2 = [d["gap_2000"] for d in rc["choice_vs_ident"].values() if d["gap_2000"] is not None]
@@ -381,7 +383,7 @@ def bindings():
 
 def _thou(n):
     s = f"{n:,}"
-    return s.replace(",", BS + ",") if n >= 10000 else s.replace(",", BS + ",") if n >= 1000 else s
+    return s
 
 
 def e7_bias(da, shifts=("-0.01", "0.01")):
@@ -418,7 +420,7 @@ def e10_rows():
     lab = {"ldf": "LDF", "qdf": "QDF", "pso": "PSO"}
     rows = []
     for c in ("langmuir_L1_pe1_da100", "step_L1_pe1_da100", "langmuir_L1_pe1_da1e+03", "step_L1_pe1_da1e+03"):
-        iso, da = c.split("_")[0], c.split("_da")[1].replace("1e+03", "1000")
+        iso, da = c.split("_")[0], c.split("_da")[1].replace("1e+03", "1,000")
         cells_txt = " & ".join(f"{lab[r10[f'{c}|{n}']['best']]} ({r10[f'{c}|{n}']['k_ldf_over_k']:.2f})"
                                for n in ("grid200", "grid400", "1996", "3991"))
         rows.append(f"{'Langmuir' if iso == 'langmuir' else 'step'} & {da} & {cells_txt} " + BS + BS)
@@ -487,7 +489,7 @@ def si_bindings():
                 if set(lang31) <= {"ldf", "qdf"} and all(set(v) == {"qdf"} for v in ch31.values())
                 else "E6 choices at Da 31.6 differ"))
     cov = load("results/p2_e3_coverage.json")["per_model"]["O1"]
-    out.append(("E3 O1 identifiable and covering", f"On O1, {_thou(cov['identifiable'])} of 51" + BS + ",840 rows met the "
+    out.append(("E3 O1 identifiable and covering", f"On O1, {_thou(cov['identifiable'])} of 51,840 rows met the "
                 f"criterion, but only {_thou(cov['covers'])} intervals"))
     pre = load("results/p2_extra_o1ident_preB90.json")["rows"]
     cor = load("results/p2_extra_o1ident.json")["rows"]
@@ -597,6 +599,11 @@ def si_bindings():
     out.append(("best subset weak vs noise at 2 % isotherm error",
                 f"succeeded in at most {bsw[0]}, {bsw[1]}, {bsw[2]} and {bsw[3]}\nof 45 replicates" if bsw == sorted(bsw)
                 else "not monotone"))
+    ld = load("results/p2_lowda_diag.json")
+    out.append(("E14 PSE fits without qstar", f"{ld['pse_low']['n_without_qstar']} of its {ld['pse_low']['n']} fits there"))
+    out.append(("E14 PySR constant term", f"added a constant term in {ld['m7_low_reps_15_29']['n_constant']} of its "
+                f"{ld['m7_low_reps_15_29']['n']} fits there on the same replicates\n({ld['m7_low']['n_constant']} of {ld['m7_low']['n']} on all 60"))
+    out.append(("E14 PySR constant term elsewhere", f"at most {round(ld['m7_higher_max_constant_fraction'] * 100)}" + BS + "," + BS + "% of fits at any higher level"))
     return out
 
 
